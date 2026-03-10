@@ -3,196 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA-CONSULT | AI & Strategic Intelligence</title>
+    <title>MBA-CONSULT | Strategic Intelligence System</title>
     <style>
-        :root { --gold: #c5a021; --navy: #0a1128; --bg: #f4f7f6; --white: #ffffff; }
-        body { font-family: 'Inter', 'Segoe UI', sans-serif; background: var(--bg); margin: 0; color: var(--navy); }
-        header { background: var(--navy); color: var(--gold); padding: 25px; border-bottom: 5px solid var(--gold); text-align: center; }
-        .lang-bar { margin: 10px 0; }
-        .btn-l { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 5px 12px; cursor: pointer; border-radius: 4px; margin: 0 4px; font-weight: bold; }
-        .active-l { background: var(--gold); color: var(--navy); }
-        .container { padding: 30px; max-width: 1300px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
-        .card { background: var(--white); padding: 10px; border-radius: 6px; cursor: pointer; border-left: 4px solid var(--gold); box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-weight: 600; font-size: 0.75em; display: flex; align-items: center; justify-content: center; text-align: center; height: 45px; transition: 0.2s; }
-        .card:hover { background: var(--navy); color: var(--gold); transform: scale(1.03); }
-        #exam-ui, #id-final, #certificat { display: none; max-width: 850px; margin: 30px auto; background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        .opt { display: block; width: 100%; padding: 18px; margin: 12px 0; text-align: left; border: 2px solid #eee; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 500; transition: 0.2s; background: var(--white); }
-        .opt:hover { border-color: var(--gold); background: #fdfaf0; }
-        .expert-zone { background: #f0f4f8; padding: 20px; border-radius: 8px; margin-top: 20px; border-top: 4px solid var(--navy); }
-        .signature-box { margin-top: 40px; display: flex; justify-content: space-around; align-items: center; }
-        .sig-item { text-align: center; font-style: italic; border-top: 1px solid #333; min-width: 180px; padding-top: 10px; }
-        .blockchain-id { font-family: monospace; font-size: 10px; color: #888; margin-top: 30px; text-align: center; }
+        :root { --gold: #c5a021; --navy: #0a1128; --bg: #f0f2f5; --white: #ffffff; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); transition: all 0.3s ease; }
+        
+        /* Navigation & Header */
+        header { background: var(--navy); color: var(--gold); padding: 40px 20px; border-bottom: 6px solid var(--gold); text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        .lang-selector { margin-bottom: 20px; display: flex; justify-content: center; gap: 10px; }
+        .btn-l { background: transparent; border: 2px solid var(--gold); color: var(--gold); padding: 8px 20px; cursor: pointer; border-radius: 5px; font-weight: bold; transition: 0.3s; }
+        .btn-l:hover, .active-l { background: var(--gold); color: var(--navy); }
+
+        /* Welcome & Selection */
+        .welcome-box { text-align: center; padding: 40px 20px; max-width: 900px; margin: auto; }
+        .sector-title { grid-column: 1 / -1; color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-top: 30px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
+        .container { padding: 20px; max-width: 1300px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .card { background: var(--white); padding: 15px; border-radius: 8px; cursor: pointer; border-left: 5px solid var(--gold); box-shadow: 0 4px 6px rgba(0,0,0,0.05); font-weight: 600; font-size: 0.85em; display: flex; align-items: center; justify-content: center; text-align: center; height: 60px; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); background: var(--navy); color: var(--gold); border-left-color: var(--white); }
+
+        /* Exam UI */
+        #exam-ui, #id-final, #certificat { display: none; max-width: 850px; margin: 40px auto; background: var(--white); padding: 50px; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        .progress-bar { width: 100%; height: 8px; background: #eee; border-radius: 10px; margin-bottom: 30px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: 0.4s; }
+        .opt { display: block; width: 100%; padding: 20px; margin: 15px 0; text-align: left; border: 2px solid #edf2f7; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: 500; background: #fff; transition: 0.2s; }
+        .opt:hover { border-color: var(--gold); background: #fffcf0; transform: translateX(5px); }
+        
+        /* Expert Analysis Zone */
+        .expert-zone { background: #f8fafc; padding: 25px; border-radius: 12px; margin-top: 30px; border: 1px solid #e2e8f0; }
+        textarea { width: 100%; height: 100px; border: 2px solid #cbd5e1; border-radius: 8px; padding: 15px; margin: 15px 0; font-family: inherit; resize: none; }
+        
+        /* Certificate Elements */
+        .signature-area { margin-top: 50px; display: flex; justify-content: space-around; }
+        .sig-line { border-top: 2px solid var(--navy); width: 200px; padding-top: 10px; text-align: center; font-family: 'Cursive', serif; }
+        
+        /* RTL for Arabic */
         .rtl { direction: rtl; text-align: right; }
         .rtl .opt { text-align: right; }
-        .rtl .card { border-left: none; border-right: 4px solid var(--gold); }
-        @media print { header, button, .lang-bar, textarea, .expert-zone { display: none !important; } #certificat { display: block !important; border: 10px double var(--gold); box-shadow: none; margin: 0; width: 100%; } }
+        .rtl .card { border-left: none; border-right: 5px solid var(--gold); }
+        .rtl .opt:hover { transform: translateX(-5px); }
+
+        @media print {
+            header, button, .progress-bar, textarea, .expert-zone { display: none !important; }
+            #certificat { display: block !important; border: 15px double var(--gold); box-shadow: none; margin: 0; width: 100%; }
+        }
     </style>
 </head>
 <body id="body">
 
 <header>
-    <h1 id="main-title">MBA-CONSULTING | AI & TECH ELITE</h1>
-    <div class="lang-bar">
-        <button class="btn-l active-l" id="l-fr" onclick="setL('fr')">FR</button>
-        <button class="btn-l" id="l-ar" onclick="setL('ar')">AR</button>
-        <button class="btn-l" id="l-en" onclick="setL('en')">EN</button>
+    <div class="lang-selector">
+        <button class="btn-l active-l" id="l-fr" onclick="changeLang('fr')">FRANÇAIS</button>
+        <button class="btn-l" id="l-ar" onclick="changeLang('ar')">العربية</button>
+        <button class="btn-l" id="l-en" onclick="changeLang('en')">ENGLISH</button>
     </div>
+    <h1 id="txt-title">MBA-CONSULTING INTERNATIONAL</h1>
+    <p id="txt-subtitle" style="color: white; opacity: 0.8;">Système d'Accréditation Stratégique de Haute Technologie</p>
 </header>
+
+<div class="welcome-box" id="welcome-area">
+    <h2 id="txt-select-msg">Veuillez sélectionner votre domaine d'expertise pour débuter l'audit (20 étapes)</h2>
+</div>
 
 <div class="container" id="menu"></div>
 
 <div id="exam-ui">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <span id="q-step" style="color: var(--gold); font-weight: bold; letter-spacing: 1px;"></span>
-        <span id="score-live" style="font-size: 12px; font-weight: bold;"></span>
+    <div class="progress-bar"><div class="progress-fill" id="p-fill"></div></div>
+    <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
+        <span id="txt-step-count"></span>
+        <span id="live-score" style="color: var(--gold);"></span>
     </div>
-    <h2 id="q-text" style="line-height: 1.5; font-size: 1.3em; margin-top: 15px; color: var(--navy);"></h2>
+    <h2 id="q-text" style="line-height: 1.4; color: var(--navy); margin-bottom: 30px;"></h2>
     <div id="options"></div>
     
     <div class="expert-zone">
-        <label id="label-expert" style="font-weight: bold;"></label>
-        <textarea id="expert-box" placeholder="Décrivez votre stratégie d'implémentation..." style="width: 100%; height: 80px; margin-top: 10px; border: 1px solid #ccc; padding: 10px; border-radius: 5px;"></textarea>
-        <p style="font-size: 10px; color: #555;">[SYSTEM] Analyse sémantique et vérification via Scraping API 2026...</p>
-        <button onclick="checkExpert()" style="width: 100%; padding: 15px; background: var(--navy); color: var(--gold); border: none; cursor: pointer; font-weight: bold; border-radius: 5px; margin-top: 10px;">VALIDER L'ARBITRAGE TECHNIQUE</button>
+        <strong id="txt-expert-label"></strong>
+        <textarea id="expert-box"></textarea>
+        <button onclick="submitStep()" id="txt-btn-validate" style="width: 100%; padding: 20px; background: var(--navy); color: var(--gold); border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1em;"></button>
     </div>
 </div>
 
 <div id="id-final">
-    <h2 id="win-title">ACCESSION AU TITRE D'EXPERT HAUTE TECHNOLOGIE</h2>
-    <p id="win-txt">Analyse du profil complétée. Score suffisant pour l'accréditation.</p>
-    <input type="text" id="final-name" placeholder="Nom Complet pour signature" style="width: 90%; padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; font-size: 1.1em;">
-    <button onclick="generateCert()" style="width: 100%; padding: 18px; background: var(--gold); color: var(--navy); border: none; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 1.2em;">ÉMETTRE LE DIPLÔME OFFICIEL</button>
+    <h2 id="txt-final-title" style="color: var(--navy);"></h2>
+    <p id="txt-final-msg"></p>
+    <input type="text" id="user-name" style="width: 100%; padding: 20px; margin-bottom: 25px; border-radius: 10px; border: 2px solid var(--gold); font-size: 1.2em; text-align: center;" placeholder="...">
+    <button onclick="showCertificate()" id="txt-btn-cert" style="width: 100%; padding: 20px; background: var(--gold); color: var(--navy); border: none; border-radius: 10px; font-weight: 800; cursor: pointer; font-size: 1.2em;"></button>
 </div>
 
 <div id="certificat">
-    <div style="text-align: right; font-size: 10px; color: #999;">DOCUMENT OFFICIEL MBA-CONSULTING V19</div>
-    <h1 style="color: var(--navy); font-size: 34px; margin-bottom: 5px; text-align: center;">CERTIFICAT D'ACCRÉDITATION SUPÉRIEURE</h1>
-    <p style="letter-spacing: 6px; font-weight: bold; color: var(--gold); text-align: center; margin-top: 0;">GLOBAL TECH ADVISORY BOARD</p>
-    <hr style="width: 80%; border: 0.5px solid var(--gold); margin: 30px auto;">
-    <p style="text-align: center;" id="c-awarded">Par la présente, le titre d'expert est décerné à :</p>
-    <h2 id="cert-name" style="font-size: 38px; color: #111; margin: 20px 0; text-align: center; font-family: 'Times New Roman', serif;"></h2>
-    <p style="text-align: center;" id="c-for">Spécialisation stratégique certifiée :</p>
-    <h2 id="c-job" style="color: var(--gold); font-size: 28px; text-transform: uppercase; text-align: center;"></h2>
-    <div style="text-align: center;">
-        <div style="background: var(--navy); color: white; padding: 10px 30px; border-radius: 4px; display: inline-block; font-weight: bold; margin: 20px 0;" id="c-rank"></div>
-    </div>
-    <h3 id="c-score" style="text-align: center;"></h3>
-
-    <div class="signature-box">
-        <div class="sig-item">
-            <div style="font-family: 'Brush Script MT', cursive; font-size: 1.6em; color: #222;" id="user-sig"></div>
-            <div style="font-size: 10px; font-family: sans-serif; color: #555;">Signature électronique du Titulaire</div>
-        </div>
-        <div class="sig-item">
-            <div style="font-family: 'Brush Script MT', cursive; font-size: 1.6em; color: var(--gold);">MBA Tech Director</div>
-            <div style="font-size: 10px; font-family: sans-serif; color: #555;">Sceau de l'Autorité MBA</div>
-        </div>
+    <div style="text-align: right; font-size: 10px; color: #aaa;">OFFICIAL ACCREDITATION KMS-V20</div>
+    <h1 style="text-align: center; color: var(--navy); font-size: 36px; margin-bottom: 5px;" id="txt-cert-head"></h1>
+    <p style="text-align: center; letter-spacing: 6px; font-weight: bold; color: var(--gold); margin-top: 0;">GLOBAL STRATEGIC BOARD</p>
+    <hr style="width: 80%; border: 1px solid var(--gold); margin: 30px auto;">
+    <p style="text-align: center; font-size: 18px;" id="txt-cert-awarded"></p>
+    <h2 id="display-name" style="text-align: center; font-size: 40px; color: #111; font-family: 'serif'; margin: 20px 0;"></h2>
+    <p style="text-align: center; font-size: 18px;" id="txt-cert-for"></p>
+    <h2 id="display-job" style="text-align: center; color: var(--gold); text-transform: uppercase; font-size: 28px;"></h2>
+    
+    <div style="text-align: center; margin: 30px 0;">
+        <div style="background: var(--navy); color: white; padding: 15px 40px; border-radius: 5px; display: inline-block; font-weight: bold; font-size: 20px;" id="display-rank"></div>
     </div>
     
-    <div class="blockchain-id">
-        VERIFIED ON BLOCKCHAIN ID: <span id="cert-id"></span> | DATE: <span id="cert-date"></span><br>
-        PROTOCOL: KMS-STRATEGIC-INTELLIGENCE-2026
+    <div class="signature-area">
+        <div class="sig-line">
+            <span id="sig-user" style="font-size: 24px; font-family: 'Brush Script MT', cursive;"></span><br>
+            <small id="txt-sig-holder"></small>
+        </div>
+        <div class="sig-line">
+            <span style="font-size: 24px; font-family: 'Brush Script MT', cursive; color: var(--gold);">MBA Board Alpha</span><br>
+            <small id="txt-sig-auth"></small>
+        </div>
     </div>
-    <div style="text-align: center; margin-top: 30px;">
-        <button onclick="window.print()" style="padding: 15px 40px; cursor: pointer; background: var(--navy); color: white; border: none; font-weight: bold; border-radius: 5px;">IMPRIMER LE CERTIFICAT (PDF)</button>
+
+    <div style="margin-top: 40px; text-align: center; font-family: monospace; font-size: 11px; color: #777;">
+        SECURE ID: <span id="cert-id"></span> | DATE: <span id="cert-date"></span><br>
+        VERIFIED VIA SCRAPING & IA ANALYSIS PROTOCOL
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px;">
+        <button onclick="window.print()" style="padding: 15px 50px; background: var(--navy); color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">DOWNLOAD PDF</button>
     </div>
 </div>
 
 <script>
     const SECTEURS = {
-        "Informatique & IA": ["Ingénieur Prompt Senior", "Architecte RAG Systems", "Spécialiste Éthique IA", "Data Scientist NLP", "Expert Machine Learning Ops", "Architecte Cloud Souverain", "Ingénieur Vision par Ordinateur", "Manager Transformation IA", "Consultant Stratégie Data", "Analyste Cybersécurité IA", "Développeur Fullstack NextGen", "Manager Infrastructure GPU", "Expert LLM Fine-tuning", "Chef de Produit IA", "Audit Algorithmique Senior"],
-        "Finance": ["Auditeur", "Analyste Risques", "M&A Analyst", "CFO", "Quant Analyst"],
-        "Énergie": ["Forage HPHT", "Manager Offshore", "Expert Solaire", "Directeur Exploration"],
-        "Agroalimentaire": ["Directeur Usine", "R&D Food Tech", "Supply Chain Manager"]
+        "Informatique & IA / الذكاء الاصطناعي": ["Ingénieur Prompt Senior", "Architecte RAG", "Spécialiste Éthique IA", "Data Scientist NLP", "ML Ops Manager", "Cloud Architect", "Expert Vision IA", "IA Transformation Manager", "Consultant Strategy Data", "Cyber IA Analyst", "Fullstack NextGen", "GPU Infra Manager", "LLM Fine-tuner", "AI Product Manager", "Audit Algorithmique", "Expert IA Générative", "Ingénieur Robotique", "Data Privacy Officer", "Architecte IA Distribuée", "Expert IA Santé"],
+        "Finance / المالية": ["Auditeur Senior", "Analyste Risques", "M&A Analyst", "CFO", "Quant Analyst", "Trésorier", "ESG Specialist", "Asset Manager", "Contrôleur Industriel", "Expert Crédit", "Banquier Privé", "Expert Fiscaliste", "Compliance Officer", "Risk Manager", "Broker", "Analyste Equity", "Financial Modeler", "Directeur Financier", "Auditeur Fraude", "Banquier Investissement"],
+        "Agroalimentaire / الصناعات الغذائية": ["Directeur Usine", "R&D Food Tech", "Supply Chain Manager", "Expert Sécurité Sanitaire", "Production Manager", "Acheteur Matières", "Packaging Engineer", "Directeur Industriel", "Expert Nutrition", "Chef Export", "Lab Manager", "Process Engineer", "Agro-Écologie Expert", "QHSE Manager", "Category Manager", "Maintenance Food", "Brand Manager Food", "Logistique Manager", "Auditeur Certification", "Directeur Qualité"]
     };
 
-    const Q_POOL = [
-        {
-            q: { fr: "L'hallucination d'un modèle LLM menace votre projet [X]. Quelle est la mesure technique prioritaire ?", ar: "يهدد هلوسة نموذج LLM مشروعك [X]. ما هو الإجراء الفني ذو الأولوية؟", en: "LLM hallucination threatens your [X] project. What is the priority technical measure?" },
-            o: { fr: ["Implémenter une architecture RAG avec vérification factuelle.", "Augmenter la température du modèle.", "Réduire le nombre de tokens d'entrée."], ar: ["تنفيذ بنية RAG مع التحقق من الحقائق.", "زيادة درجة حرارة النموذج (Temperature).", "تقليل عدد الرموز المدخلة (Tokens)."], en: ["Implement RAG architecture with factual verification.", "Increase model temperature.", "Reduce input tokens."] },
-            c: 0
+    const DICT = {
+        fr: {
+            title: "MBA-CONSULTING INTERNATIONAL", sub: "Système d'Accréditation Stratégique de Haute Technologie",
+            select: "Veuillez sélectionner votre domaine d'expertise (20 étapes)",
+            expert: "AVIS D'EXPERT (ANALYSE LIBRE COMPLIANCE)",
+            validate: "VALIDER L'ÉTAPE", finalT: "AUDIT TERMINÉ", finalM: "Entrez votre nom pour l'émission du diplôme :",
+            btnCert: "GÉNÉRER MON CERTIFICAT", certHead: "CERTIFICAT D'ACCRÉDITATION",
+            awarded: "Le présent titre est décerné à :", for: "Pour la maîtrise stratégique certifiée du métier de :",
+            sigH: "Titulaire", sigA: "Autorité MBA"
         },
-        {
-            q: { fr: "La scalabilité de votre infrastructure [X] atteint ses limites lors d'un pic de charge. Quel arbitrage ?", ar: "تصل قابلية التوسع في بنيتك التحتية [X] إلى حدودها أثناء ذروة الحمل. ما هو القرار؟", en: "Your [X] infrastructure scalability reaches its limits during a load peak. What trade-off?" },
-            o: { fr: ["Déploiement auto-scaling et load balancing élastique.", "Migration immédiate vers un serveur physique unique.", "Limitation du trafic utilisateur (Throttle)."], ar: ["نشر التوسع التلقائي وموازنة الحمل المرن.", "الهجرة الفورية إلى خادم فيزيائي واحد.", "تحديد حركة مرور المستخدم (Throttle)."], en: ["Deploy auto-scaling and elastic load balancing.", "Immediate migration to a single physical server.", "Limit user traffic (Throttling)."] },
-            c: 0
+        ar: {
+            title: "MBA الدولية للاستشارات", sub: "نظام الاعتماد الاستراتيجي عالي التقنية",
+            select: "يرجى اختيار مجال خبرتك لبدء التدقيق (20 خطوة)",
+            expert: "رأي الخبير (التحليل الاستراتيجي الحر)",
+            validate: "تأكيد الخطوة", finalT: "اكتمل التدقيق", finalM: "أدخل اسمك الكامل لإصدار الشهادة:",
+            btnCert: "إصدار الشهادة الخاصة بي", certHead: "شهادة اعتماد دولية",
+            awarded: "تمنح هذه الشهادة رسمياً لـ:", for: "لإتقان المهارات الاستراتيجية المعتمدة في مهنة:",
+            sigH: "صاحب الشهادة", sigA: "سلطة الاعتماد"
+        },
+        en: {
+            title: "MBA-CONSULTING INTERNATIONAL", sub: "High-Tech Strategic Accreditation System",
+            select: "Please select your field of expertise (20 steps)",
+            expert: "EXPERT OPINION (FREE STRATEGIC ANALYSIS)",
+            validate: "VALIDATE STEP", finalT: "AUDIT COMPLETE", finalM: "Enter your full name for certificate issuance:",
+            btnCert: "GENERATE MY CERTIFICATE", certHead: "CERTIFICATE OF ACCREDITATION",
+            awarded: "This official title is awarded to:", for: "For the certified strategic mastery of the profession of:",
+            sigH: "Holder", sigA: "MBA Authority"
         }
-    ];
+    };
 
     let lang = 'fr', curJob = "", step = 0, score = 0;
-    const texts = {
-        fr: { expert: "D) ANALYSE STRATÉGIQUE IA (Vérification Scraping)", win: "EXAMEN RÉUSSI", title: "MBA-CONSULTING | AI ELITE" },
-        ar: { expert: "د) التحليل الاستراتيجي للذكاء الاصطناعي", win: "نجاح في الاختبار", title: "MBA الدولية للذكاء الاصطناعي" },
-        en: { expert: "D) AI STRATEGIC ANALYSIS (Scraping Verified)", win: "EXAM PASSED", title: "MBA-CONSULTING | AI ELITE" }
-    };
 
-    function setL(l) {
+    function changeLang(l) {
         lang = l;
         document.querySelectorAll('.btn-l').forEach(b => b.classList.remove('active-l'));
         document.getElementById('l-'+l).classList.add('active-l');
         document.getElementById('body').className = (l==='ar' ? 'rtl' : '');
+        
+        // Update Static Text
+        document.getElementById('txt-title').innerText = DICT[lang].title;
+        document.getElementById('txt-subtitle').innerText = DICT[lang].sub;
+        document.getElementById('txt-select-msg').innerText = DICT[lang].select;
+        document.getElementById('txt-expert-label').innerText = DICT[lang].expert;
+        document.getElementById('txt-btn-validate').innerText = DICT[lang].validate;
+        document.getElementById('txt-final-title').innerText = DICT[lang].finalT;
+        document.getElementById('txt-final-msg').innerText = DICT[lang].finalM;
+        document.getElementById('txt-btn-cert').innerText = DICT[lang].btnCert;
+        
         renderMenu();
     }
 
     function renderMenu() {
         const m = document.getElementById('menu'); m.innerHTML = '';
         for(let s in SECTEURS) {
-            SECTEURS[s].forEach(j => { m.innerHTML += `<div class="card" onclick="startExam('${j}')">${j}</div>`; });
+            m.innerHTML += `<div class="sector-title">${s}</div>`;
+            SECTEURS[s].forEach(j => {
+                m.innerHTML += `<div class="card" onclick="startExam('${j}')">${j}</div>`;
+            });
         }
     }
 
     function startExam(j) {
         curJob = j; step = 0; score = 0;
         document.getElementById('menu').style.display = 'none';
+        document.getElementById('welcome-area').style.display = 'none';
         document.getElementById('exam-ui').style.display = 'block';
-        next();
+        loadStep();
     }
 
-    function next() {
-        if(step >= 20) { showForm(); return; }
-        document.getElementById('q-step').innerText = "TECH-EVALUATION " + (step+1) + "/20";
-        document.getElementById('score-live').innerText = "KPI: " + Math.round((score/20)*100) + "%";
+    function loadStep() {
+        if(step >= 20) { showFinal(); return; }
         
-        let qData = Q_POOL[step % Q_POOL.length];
-        document.getElementById('q-text').innerText = qData.q[lang].replace('[X]', curJob);
+        // Progress
+        let pct = (step / 20) * 100;
+        document.getElementById('p-fill').style.width = pct + "%";
+        document.getElementById('txt-step-count').innerText = "STEP " + (step+1) + " / 20";
+        document.getElementById('live-score').innerText = "KPI: " + Math.round((score/20)*100) + "%";
+        
+        // Dynamic Question Logic (Simulated complex pooling)
+        const Q_TEXTS = {
+            fr: "En tant que [X], comment optimisez-vous l'arbitrage entre investissement long terme et agilité immédiate ?",
+            ar: "بصفتك [X]، كيف يمكنك تحسين التوازن بين الاستثمار طويل الأجل والمرونة الفورية؟",
+            en: "As a [X], how do you optimize the trade-off between long-term investment and immediate agility?"
+        };
+        
+        document.getElementById('q-text').innerText = Q_TEXTS[lang].replace('[X]', curJob);
         
         let h = "";
-        qData.o[lang].forEach((opt, i) => {
-            h += `<button class="opt" onclick="ans(${i === qData.c})">${String.fromCharCode(65+i)}) ${opt}</button>`;
+        const opts = (lang === 'ar') ? ["الابتكار المستمر", "تقليل التكاليف", "إدارة المخاطر"] : ["Innovation Disruprive", "Optimisation Opex", "Gestion des Risques"];
+        opts.forEach((o, i) => {
+            h += `<button class="opt" onclick="ans(${i===0})">${String.fromCharCode(65+i)}) ${o}</button>`;
         });
         document.getElementById('options').innerHTML = h;
-        document.getElementById('label-expert').innerText = texts[lang].expert;
         document.getElementById('expert-box').value = "";
     }
 
-    function ans(c) { if(c) score++; step++; next(); }
-    
-    function checkExpert() {
-        const val = document.getElementById('expert-box').value;
-        if(val.length > 25) score += 1;
+    function ans(isCorrect) {
+        if(isCorrect) score++;
         step++;
-        next();
+        loadStep();
     }
 
-    function showForm() {
+    function submitStep() {
+        if(document.getElementById('expert-box').value.length > 10) score += 0.5; // Bonus analysis
+        step++;
+        loadStep();
+    }
+
+    function showFinal() {
         document.getElementById('exam-ui').style.display = 'none';
         document.getElementById('id-final').style.display = 'block';
     }
 
-    function generateCert() {
-        const name = document.getElementById('final-name').value || "EXPERT ANONYME";
+    function showCertificate() {
+        const name = document.getElementById('user-name').value || "EXPERT";
         document.getElementById('id-final').style.display = 'none';
         document.getElementById('certificat').style.display = 'block';
-        document.getElementById('cert-name').innerText = name.toUpperCase();
-        document.getElementById('user-sig').innerText = name;
-        document.getElementById('c-job').innerText = curJob;
+        
+        document.getElementById('display-name').innerText = name.toUpperCase();
+        document.getElementById('sig-user').innerText = name;
+        document.getElementById('display-job').innerText = curJob;
+        
         let finalScore = Math.min(100, Math.round((score/20)*100));
-        document.getElementById('c-score').innerText = "SCORE D'ACCRÉDITATION : " + finalScore + "%";
-        document.getElementById('c-rank').innerText = (finalScore >= 90) ? "WORLD CLASS AI EXPERT (TOP 1%)" : "SENIOR TECH STRATEGIST (TOP 10%)";
-        document.getElementById('cert-id').innerText = "AI-MBA-" + Math.random().toString(36).substr(2, 12).toUpperCase();
+        document.getElementById('txt-cert-head').innerText = DICT[lang].certHead;
+        document.getElementById('txt-cert-awarded').innerText = DICT[lang].awarded;
+        document.getElementById('txt-cert-for').innerText = DICT[lang].for;
+        document.getElementById('txt-sig-holder').innerText = DICT[lang].sigH;
+        document.getElementById('txt-sig-auth').innerText = DICT[lang].sigA;
+        
+        document.getElementById('display-rank').innerText = (finalScore >= 90) ? "WORLD CLASS EXPERT" : "SENIOR STRATEGIST";
+        document.getElementById('cert-id').innerText = "KMS-" + Math.random().toString(36).substr(2, 10).toUpperCase();
         document.getElementById('cert-date').innerText = new Date().toLocaleDateString();
     }
 
-    setL('fr');
+    changeLang('fr');
 </script>
 </body>
 </html>
