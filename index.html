@@ -2,49 +2,56 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>MBA-CONSULT | Système d'Accréditation Stratégique</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <title>MBA-CONSULT | KMS Global System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #c5a021; --navy: #0a1128; --bg: #ffffff; }
         * { box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); transition: 0.3s; }
+        .rtl { direction: rtl; font-family: 'Amiri', serif; }
         
-        header { background: var(--navy); color: var(--gold); padding: 20px; text-align: center; border-bottom: 4px solid var(--gold); }
-        .brand { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 3px; }
+        /* Navigation & Langues */
+        header { background: var(--navy); color: var(--gold); padding: 15px; text-align: center; border-bottom: 4px solid var(--gold); position: relative; }
+        .lang-switch { position: absolute; top: 15px; right: 20px; display: flex; gap: 10px; }
+        .lang-btn { background: var(--gold); color: var(--navy); border: none; padding: 5px 10px; cursor: pointer; font-weight: bold; border-radius: 3px; font-size: 12px; }
 
-        .container { padding: 30px; max-width: 1200px; margin: auto; }
-        .sector-title { font-family: 'Cinzel', serif; color: var(--navy); border-bottom: 2px solid var(--gold); margin: 35px 0 15px 0; padding-bottom: 5px; font-size: 1.1em; text-transform: uppercase; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
-        .card { background: #fff; padding: 15px; border: 1px solid #ddd; cursor: pointer; font-weight: bold; font-size: 0.85em; text-align: center; height: 45px; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        /* Grille Secteurs & Métiers */
+        .container { padding: 30px; max-width: 1400px; margin: auto; }
+        .sector-title { font-family: 'Cinzel', serif; color: var(--navy); border-bottom: 2px solid var(--gold); margin: 30px 0 15px 0; padding-bottom: 5px; font-size: 1.1em; text-transform: uppercase; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+        .card { background: #fff; padding: 10px; border: 1px solid #ddd; cursor: pointer; font-weight: bold; font-size: 0.8em; text-align: center; height: 40px; display: flex; align-items: center; justify-content: center; }
         .card:hover { border-color: var(--gold); background: var(--navy); color: var(--gold); }
 
-        #exam-ui, #id-final, #certificat, #fail-ui { display: none; max-width: 950px; margin: 40px auto; padding: 40px; }
-        #exam-ui { border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.05); background: #fdfdfd; }
-        
-        .opt-btn { display: block; width: 100%; padding: 18px; margin: 12px 0; text-align: left; border: 2px solid #eee; cursor: pointer; background: #fff; font-size: 15px; font-weight: 500; transition: 0.3s; }
-        .opt-btn:hover { border-color: var(--gold); background: #fdfaf0; transform: translateX(5px); }
-        
-        textarea { width: 100%; height: 100px; margin-top: 15px; border: 1px solid #ccc; padding: 10px; font-family: inherit; resize: none; }
+        /* Interface Audit */
+        #exam-ui, #id-final, #certificat, #fail-ui { display: none; max-width: 1100px; margin: 30px auto; padding: 30px; border: 1px solid #eee; }
+        .opt-btn { display: block; width: 100%; padding: 15px; margin: 8px 0; text-align: left; border: 2px solid #eee; cursor: pointer; background: #fff; font-size: 14px; font-weight: 500; }
+        .opt-btn:hover { border-color: var(--gold); background: #fdfaf0; }
+        textarea { width: 100%; height: 80px; margin-top: 10px; border: 1px solid #ccc; padding: 10px; font-family: inherit; }
 
-        /* CERTIFICAT PAYSAGE */
-        #certificat { border: 12px double var(--gold); position: relative; padding: 60px 80px; text-align: center; background: white; width: 1000px; margin: auto; }
-        .top-signature { position: absolute; top: 40px; right: 60px; text-align: center; }
-        .sig-img { font-family: 'Playfair Display', serif; font-style: italic; font-size: 24px; color: var(--gold); border-bottom: 1px solid var(--navy); padding: 0 15px; }
-        .cert-title { font-family: 'Cinzel', serif; font-size: 38px; margin: 80px 0 10px 0; letter-spacing: 3px; }
-        .cert-name { font-family: 'Playfair Display', serif; font-size: 45px; margin: 20px 0; text-decoration: underline; font-weight: bold; }
-        .score-badge { display: inline-block; background: var(--navy); color: white; padding: 12px 35px; font-weight: bold; margin: 25px 0; border: 2px solid var(--gold); }
+        /* CERTIFICAT PAYSAGE ÉLARGI */
+        #certificat { border: 15px double var(--gold); position: relative; padding: 40px 80px; text-align: center; background: white; width: 100%; max-width: 1150px; margin: auto; }
+        .top-signature { position: absolute; top: 30px; right: 50px; text-align: center; }
+        .sig-box { font-family: 'Cinzel', serif; font-size: 18px; color: var(--gold); border-bottom: 1px solid var(--navy); padding: 0 10px; }
+        .cert-title { font-family: 'Cinzel', serif; font-size: 34px; margin: 60px 0 10px 0; letter-spacing: 3px; }
+        .cert-name { font-family: 'Amiri', serif; font-size: 40px; margin: 15px 0; text-decoration: underline; font-weight: bold; }
+        .score-badge { display: inline-block; background: var(--navy); color: white; padding: 10px 30px; font-weight: bold; margin: 20px 0; border: 2px solid var(--gold); }
 
         @media print {
             @page { size: A4 landscape; margin: 0; }
-            header, footer, .no-print, #menu-area, #exam-ui, #id-final, #fail-ui { display: none !important; }
-            #certificat { display: block !important; width: 100vw; height: 100vh; border: 15px double var(--gold) !important; margin: 0 !important; position: absolute; top: 0; left: 0; padding: 80px 100px !important; box-sizing: border-box; }
+            header, .lang-switch, .no-print, #menu-area, #exam-ui, #id-final, #fail-ui { display: none !important; }
+            #certificat { display: block !important; width: 100vw; height: 100vh; border: 20px double var(--gold) !important; margin: 0 !important; position: absolute; top: 0; left: 0; padding: 60px 100px !important; box-sizing: border-box; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="brand">MBA-CONSULTING</div>
+    <div class="lang-switch no-print">
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('ar')">AR</button>
+    </div>
+    <div class="brand" id="main-title">MBA-CONSULTING | GLOBAL STRATEGIC INTELLIGENCE</div>
 </header>
 
 <div class="container" id="menu-area">
@@ -52,78 +59,79 @@
 </div>
 
 <div id="exam-ui">
-    <div id="q-count" style="font-weight: bold; color: var(--gold); margin-bottom: 20px; font-size: 1.2em;"></div>
-    <h2 id="q-text" style="font-size: 1.4em; color: var(--navy); margin-bottom: 30px;"></h2>
+    <div id="q-count" style="font-weight: bold; color: var(--gold); margin-bottom: 15px; font-size: 1.1em;"></div>
+    <h2 id="q-text" style="color: var(--navy);"></h2>
     <div id="options-container"></div>
-    <div style="margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px;">
-        <label><b>ANALYSE DE L'EXPERT (SAUVEGARDÉE) :</b></label>
-        <textarea id="user-analysis" placeholder="Saisissez votre justification stratégique ici..."></textarea>
+    <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+        <label><b id="label-analysis">ANALYSE STRATÉGIQUE DE L'EXPERT :</b></label>
+        <textarea id="user-analysis" placeholder="..."></textarea>
     </div>
 </div>
 
-<div id="fail-ui" style="text-align: center; padding: 50px; border: 3px solid #ff4d4d; background: #fff5f5;">
-    <h2 style="color: #d32f2f; font-family: 'Cinzel';">SCORE INSUFFISANT</h2>
-    <p>Vous n'avez pas atteint les 80% requis pour l'accréditation MBA-Consult.</p>
-    <button onclick="location.reload()" style="padding: 15px 30px; cursor: pointer; background: var(--navy); color: white; border: none;">RÉESSAYER</button>
-</div>
-
-<div id="id-final" style="text-align: center; border: 3px solid var(--gold); padding: 50px;">
-    <h2 style="font-family: 'Cinzel';">AUDIT TERMINÉ</h2>
-    <input type="text" id="u-name" placeholder="NOM COMPLET POUR LE DIPLÔME" style="width:80%; padding:20px; border:2px solid var(--gold); font-size: 1.3em; text-align: center;">
-    <button onclick="generateCert()" style="width:80%; padding:20px; background:var(--gold); color:var(--navy); border:none; font-weight:bold; cursor:pointer; margin-top:20px;">ÉMETTRE LE CERTIFICAT</button>
+<div id="id-final" style="text-align: center; border: 3px solid var(--gold); padding: 40px;">
+    <h2 id="msg-success" style="font-family: 'Cinzel';">AUDIT RÉUSSI</h2>
+    <input type="text" id="u-name" placeholder="NOM COMPLET / FULL NAME / الاسم بالكامل" style="width:80%; padding:15px; border:2px solid var(--gold); font-size: 1.3em; text-align: center;">
+    <button onclick="generateCert()" id="btn-cert" style="width:80%; padding:20px; background:var(--gold); color:var(--navy); border:none; font-weight:bold; cursor:pointer; margin-top:20px; font-size:1.1em;"></button>
 </div>
 
 <div id="certificat">
     <div class="top-signature">
-        <div class="sig-img">MBA Board Alpha</div>
-        <div style="font-size: 10px; letter-spacing: 1px;">SIGNATURE ÉLECTRONIQUE CERTIFIÉE</div>
+        <div class="sig-box">MBA BOARD ALPHA</div>
+        <div style="font-size: 9px; letter-spacing: 1px;">DIGITAL ACCREDITATION SEAL</div>
     </div>
-    <div class="cert-title">CERTIFICATE OF STRATEGIC EXCELLENCE</div>
-    <p style="letter-spacing: 5px; font-weight: bold; color: var(--gold);">GLOBAL ACCREDITATION UNIT</p>
-    <p>This officially certifies that</p>
+    <div class="cert-title" id="cert-title-text">CERTIFICATE OF STRATEGIC EXCELLENCE</div>
+    <p style="letter-spacing: 5px; font-weight: bold; color: var(--gold);" id="cert-subtitle">GLOBAL ACCREDITATION UNIT</p>
+    <p id="cert-intro">This officially certifies that</p>
     <div class="cert-name" id="disp-name"></div>
-    <p>demonstrated high-level expertise in</p>
-    <div id="disp-job" style="font-size: 28px; font-weight: bold; color: var(--gold); text-transform: uppercase;"></div>
+    <p id="cert-expertise">has demonstrated high-level expertise in</p>
+    <div id="disp-job" style="font-size: 24px; font-weight: bold; color: var(--gold); text-transform: uppercase;"></div>
     <div class="score-badge" id="disp-score"></div>
-    <div style="margin-top: 50px; display: flex; justify-content: space-between;">
-        <div style="border-top: 1px solid #333; width: 250px; padding-top: 10px;"><span id="sig-user" style="font-style: italic;"></span></div>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=MBA-VERIFIED" style="width: 80px;">
+    <div style="margin-top: 40px; display: flex; justify-content: space-between;">
+        <div style="border-top: 1px solid #333; width: 280px; padding-top: 10px;"><span id="sig-user" style="font-style: italic; font-family: 'Playfair Display', serif; font-size: 22px;"></span></div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=MBA-CERT-VERIFIED" style="width: 80px;">
     </div>
-    <button onclick="window.print()" class="no-print" style="margin-top:40px; padding:15px 40px; background:var(--navy); color:var(--gold); border:2px solid var(--gold); cursor:pointer;">IMPRIMER PDF (PAYSAGE)</button>
+    <div style="margin-top: 30px; font-family: monospace; font-size: 9px; text-align: left; color: #888;">
+        ID: <span id="cert-id"></span> | DATE: <span id="cert-date"></span> | MBA-CONSULT KMS V2026
+    </div>
+    <button onclick="window.print()" class="no-print" style="margin-top:20px; padding:12px 30px; background:var(--navy); color:var(--gold); border:2px solid var(--gold); cursor:pointer; font-weight:bold;">DOWNLOAD PDF (PAYSAGE)</button>
 </div>
 
+
+
 <script>
+    const TRANSLATIONS = {
+        fr: { title: "MBA-CONSULTING | INTELLIGENCE STRATÉGIQUE", audit: "AUDIT", analysis: "ANALYSE STRATÉGIQUE :", btnCert: "ÉMETTRE LE CERTIFICAT", intro: "Ceci certifie officiellement que", expertise: "a démontré une expertise de haut niveau en", certTitle: "CERTIFICAT D'EXCELLENCE STRATÉGIQUE" },
+        en: { title: "MBA-CONSULTING | STRATEGIC INTELLIGENCE", audit: "AUDIT", analysis: "STRATEGIC ANALYSIS:", btnCert: "ISSUE CERTIFICATE", intro: "This officially certifies that", expertise: "has demonstrated high-level expertise in", certTitle: "CERTIFICATE OF STRATEGIC EXCELLENCE" },
+        ar: { title: "MBA-CONSULTING | الذكاء الاستراتيجي العالمي", audit: "تدقيق", analysis: "التحليل الاستراتيجي:", btnCert: "إصدار الشهادة", intro: "نشهد رسمياً بأن", expertise: "قد أظهر خبرة عالية في", certTitle: "شهادة التميز الاستراتيجي" }
+    };
+
     const SECTEURS = {
-        "Finance": ["CFO", "M&A Expert", "Risk Manager"],
-        "Informatique & IA": ["AI Architect", "Cyber Analyst", "Data Scientist"],
-        "Énergie": ["Solar Engineer", "Nuclear Expert", "Energy Trader"]
+        "Finance": ["CFO", "M&A Lead", "Risk Manager", "ESG Analyst", "Trader", "Asset Manager", "Tax Advisor", "Credit Manager", "Trésorier", "Quant", "Bank Director", "Actuaire", "Controller", "Equity Analyst", "FinTech Expert", "Compliance", "Auditeur", "Wealth Manager", "Crypto Advisor", "Budget Director"],
+        "IA & IT": ["AI Architect", "Prompt Engineer", "Data Scientist", "Cyber Security", "Cloud Manager", "RAG Expert", "ML Ops", "IT Director", "DevOps", "AI Ethics", "Vision Eng", "NLP Specialist", "Fullstack", "GPU Infra", "Blockchain Lead", "Solutions Arch", "Product Owner", "UX Strategist", "Network Admin", "Innovation Manager"],
+        "Énergie": ["Exploration Dir", "Solar Eng", "Nuclear Expert", "Offshore Manager", "Energy Analyst", "HSE Lead", "Smart Grid", "Carbon Lead", "Wind Project", "Raffinerie", "Hydrogen Expert", "Geologue", "Network Manager", "Biomasse", "Pipeline Eng", "Geothermie", "Energy Trader", "Maintenance", "Market Analyst", "Thermal Eng"],
+        "Tourisme": ["Hôtel Director", "Yield Manager", "Resort Manager", "Destination Lead", "Cruise Director", "Luxe Hospitality", "Patrimoine", "Event Planner", "Guide National", "Ecotourisme", "Revenue Manager", "Spa Manager", "Luxe Hotelier", "F&B Director", "Travel Product", "Digital Nomad", "Promotion", "Leisure Dir", "Hospitality Audit", "Consultant"],
+        "Agroalimentaire": ["Usine Dir", "R&D Manager", "Qualité Lead", "Supply Chain", "Sanitaire", "Packaging", "Production", "Acheteur MP", "Industriel Dir", "Innovation Food", "Labo Chief", "Export Manager", "Process Eng", "QHSE", "Logistique", "Maintenance", "Category Manager", "Brand Lead", "Bio Auditor", "Nutrition Expert"],
+        "Éducation": ["Campus Dir", "Doyen Académique", "EdTech Arch", "MBA Consultant", "Innov Pedago", "Admissions", "Research Lead", "Career Coach", "International Dir", "Recteur", "School Admin", "Orientation", "Formation", "Inclusion", "Alumni Lead", "Partnership", "Digital Librarian", "Project Chief", "E-learning", "Academic Advisor"]
     };
 
-    // VRAIES RÉPONSES STRATÉGIQUES
-    const QUESTIONS_DB = {
-        "Finance": [
-            { q: "Comment optimisez-vous le WACC en période de forte inflation ?", 
-              o: ["A) Par un levier d'endettement à taux fixe", "B) Par la réévaluation des actifs immatériels", "C) Par l'ajustement du risk-premium actions"] },
-            { q: "Quelle stratégie face à une volatilité de change sur marchés émergents ?", 
-              o: ["A) Hedging par contrats à terme", "B) Externalisation des coûts en devise locale", "C) Swap de devises inter-filiales"] }
-        ],
-        "Informatique & IA": [
-            { q: "Comment réduire les hallucinations dans un système RAG ?", 
-              o: ["A) En augmentant la température du modèle", "B) En optimisant le chunking et le filtrage des vecteurs", "C) En utilisant uniquement du Few-shot prompting"] },
-            { q: "Quelle architecture pour une IA souveraine sécurisée ?", 
-              o: ["A) Cloud public multi-tenant", "B) On-premise avec isolation air-gapped", "C) Hybrid Cloud avec chiffrement homomorphe"] }
-        ],
-        "Énergie": [
-            { q: "Comment stabiliser un Smart Grid avec 40% d'énergies intermittentes ?", 
-              o: ["A) Par le stockage massif hydrogène", "B) Par le pilotage de la demande (Demand Response)", "C) Par l'augmentation de l'inertie thermique"] }
-        ]
-    };
-
+    let currentLang = 'fr';
     let currentJob = "", currentSector = "", step = 0, score = 0;
-    let userNotes = []; // Stockage des analyses
+
+    function setLang(lang) {
+        currentLang = lang;
+        document.body.className = (lang === 'ar') ? 'rtl' : '';
+        document.getElementById('main-title').innerText = TRANSLATIONS[lang].title;
+        document.getElementById('label-analysis').innerText = TRANSLATIONS[lang].analysis;
+        document.getElementById('btn-cert').innerText = TRANSLATIONS[lang].btnCert;
+        document.getElementById('cert-title-text').innerText = TRANSLATIONS[lang].certTitle;
+        document.getElementById('cert-intro').innerText = TRANSLATIONS[lang].intro;
+        document.getElementById('cert-expertise').innerText = TRANSLATIONS[lang].expertise;
+        renderMenu();
+    }
 
     function renderMenu() {
         const container = document.getElementById('sectors-container');
+        container.innerHTML = "";
         for (let s in SECTEURS) {
             let html = `<div class="sector-title">${s}</div><div class="grid">`;
             SECTEURS[s].forEach(j => { html += `<div class="card" onclick="startAudit('${j}', '${s}')">${j}</div>`; });
@@ -132,58 +140,44 @@
     }
 
     function startAudit(job, sector) {
-        currentJob = job; currentSector = sector; step = 0; score = 0; userNotes = [];
+        currentJob = job; currentSector = sector; step = 0; score = 0;
         document.getElementById('menu-area').style.display = 'none';
         document.getElementById('exam-ui').style.display = 'block';
         loadStep();
     }
 
     function loadStep() {
-        const db = QUESTIONS_DB[currentSector] || QUESTIONS_DB["Finance"];
-        if (step >= db.length) {
-            finish(); return;
-        }
-        
-        // Sauvegarder l'analyse précédente si elle existe
-        if(step > 0) userNotes.push(document.getElementById('user-analysis').value);
-        document.getElementById('user-analysis').value = ""; // Reset pour la nouvelle question
-
-        document.getElementById('q-count').innerText = `QUESTION ${step + 1} / ${db.length}`;
-        document.getElementById('q-text').innerText = db[step].q;
-        
-        const container = document.getElementById('options-container');
-        container.innerHTML = "";
-        db[step].o.forEach((opt, i) => {
-            container.innerHTML += `<button class="opt-btn" onclick="next(true)">${opt}</button>`;
-        });
+        if (step >= 10) { finish(); return; }
+        document.getElementById('q-count').innerText = `${TRANSLATIONS[currentLang].audit} ${step + 1} / 10`;
+        document.getElementById('q-text').innerText = `Question Stratégique ${step + 1} pour ${currentJob} (Secteur ${currentSector})`;
+        document.getElementById('options-container').innerHTML = `
+            <button class="opt-btn" onclick="next(true)">A) Optimisation de l'efficience systémique</button>
+            <button class="opt-btn" onclick="next(true)">B) Agilité opérationnelle et ROI</button>
+            <button class="opt-btn" onclick="next(true)">C) Gouvernance et mitigation des risques</button>
+        `;
     }
 
-    function next(isOk) {
-        if(isOk) score++;
-        step++;
-        loadStep();
-    }
+    function next(ok) { if(ok) score++; step++; loadStep(); }
 
     function finish() {
         document.getElementById('exam-ui').style.display = 'none';
-        const finalScore = (score / step) * 100;
-        if(finalScore < 80) document.getElementById('fail-ui').style.display = 'block';
-        else document.getElementById('id-final').style.display = 'block';
+        document.getElementById('id-final').style.display = 'block';
     }
 
     function generateCert() {
-        const name = document.getElementById('u-name').value || "EXPERT MBA-CONSULT";
+        const name = document.getElementById('u-name').value || "EXPERT";
         document.getElementById('id-final').style.display = 'none';
         document.getElementById('certificat').style.display = 'block';
         document.getElementById('disp-name').innerText = name.toUpperCase();
         document.getElementById('sig-user').innerText = name;
         document.getElementById('disp-job').innerText = currentJob;
-        document.getElementById('disp-score').innerText = `SCORE D'EXPERTISE : ${Math.round((score/step)*100)}%`;
+        document.getElementById('disp-score').innerText = `SCORE: ${Math.round((score/10)*100)}%`;
         document.getElementById('cert-id').innerText = "MBA-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-        document.getElementById('cert-date').innerText = new Date().toLocaleDateString('fr-FR');
+        document.getElementById('cert-date').innerText = new Date().toLocaleDateString();
+        window.scrollTo(0,0);
     }
 
-    renderMenu();
+    setLang('fr');
 </script>
 </body>
 </html>
