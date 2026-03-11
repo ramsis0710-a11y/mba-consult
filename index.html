@@ -1,32 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBA-CONSULT | Système d'Accréditation International</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #c5a021; --navy: #0a1128; --bg: #ffffff; }
+        
+        /* Reset & Base */
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); overflow-x: hidden; }
+        
+        /* Header & Footer MBA-Consult */
+        header { background: var(--navy); color: var(--gold); padding: 25px; text-align: center; border-bottom: 4px solid var(--gold); }
+        .brand { font-family: 'Cinzel', serif; font-size: 24px; letter-spacing: 4px; }
+        footer { padding: 30px; text-align: center; font-size: 11px; color: #555; border-top: 1px solid #eee; margin-top: 50px; background: #f9f9f9; }
+
+        /* Layout */
+        .container { padding: 40px; max-width: 1200px; margin: auto; }
+        .sector-title { font-family: 'Cinzel', serif; color: var(--navy); border-bottom: 2px solid var(--gold); margin: 45px 0 20px 0; padding-bottom: 8px; font-size: 1.3em; text-transform: uppercase; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+        .card { background: #fff; padding: 20px; border: 1px solid #ddd; cursor: pointer; font-weight: bold; font-size: 0.9em; text-align: center; height: 50px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .card:hover { border-color: var(--gold); background: var(--navy); color: var(--gold); transform: translateY(-2px); }
+
+        /* UI Components */
+        #exam-ui, #id-final, #certificat, #fail-ui { display: none; max-width: 850px; margin: 40px auto; padding: 40px; border-radius: 4px; }
+        #exam-ui { border: 1px solid #eee; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+        .opt { display: block; width: 100%; padding: 18px; margin: 12px 0; text-align: left; border: 1px solid #eee; cursor: pointer; background: #fff; font-size: 16px; transition: 0.2s; }
+        .opt:hover { background: #fdfaf0; border-color: var(--gold); padding-left: 25px; }
+
+        /* Certificat - Design International Centré */
+        #certificat { 
+            border: 12px double var(--gold); 
+            position: relative; 
+            padding: 70px; 
+            text-align: center; 
+            background: white; 
+            color: var(--navy);
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .top-signature { position: absolute; top: 40px; right: 60px; text-align: center; }
+        .sig-img { font-family: 'Playfair Display', serif; font-style: italic; font-size: 24px; color: var(--gold); border-bottom: 1px solid var(--navy); padding: 0 15px; }
+        .cert-title { font-family: 'Cinzel', serif; font-size: 34px; margin: 90px 0 10px 0; letter-spacing: 3px; }
+        .cert-name { font-family: 'Playfair Display', serif; font-size: 42px; margin: 25px 0; text-decoration: underline; font-weight: bold; color: #000; }
+        .score-badge { display: inline-block; background: var(--navy); color: white; padding: 12px 30px; font-weight: bold; margin: 25px 0; border: 2px solid var(--gold); letter-spacing: 1px; }
+        
+        /* Correction Impression PDF */
+        @media print {
+            @page { size: A4 portrait; margin: 0; }
+            body { margin: 0; padding: 0; background: white; }
+            header, footer, .no-print, #menu-area, #exam-ui, #id-final, #fail-ui { display: none !important; }
+            #certificat { 
+                display: block !important; 
+                width: 100%; 
+                height: 100vh; 
+                border: 15px double var(--gold) !important; 
+                margin: 0 !important; 
+                padding: 100px 60px !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="brand">MBA-CONSULTING</div>
+    <div style="font-size: 11px; opacity: 0.8; margin-top: 5px; letter-spacing: 1px;">GLOBAL STRATEGIC INTELLIGENCE REFERENTIAL</div>
+</header>
+
+<div class="container" id="menu-area">
+    <div id="sectors-container"></div>
+</div>
+
+<div id="exam-ui">
+    <div id="q-count" style="font-weight: bold; color: var(--gold); margin-bottom: 20px; font-size: 1.1em;"></div>
+    <h2 id="q-text" style="line-height: 1.5; min-height: 80px;"></h2>
+    <div id="options"></div>
+    <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 25px;">
+        <label style="font-size: 12px; font-weight: bold;">ANALYSE DÉCISIONNELLE (OPTIONNEL) :</label>
+        <textarea id="exp-box" style="width:100%; height:70px; margin-top:10px; border:1px solid #ccc; padding:10px; font-family: inherit;"></textarea>
+        <button onclick="processStep(true)" style="width:100%; padding:18px; background:var(--navy); color:var(--gold); border:none; font-weight:bold; cursor:pointer; margin-top:15px; border-radius: 2px;">VALIDER L'ARBITRAGE STRATÉGIQUE</button>
+    </div>
+</div>
+
+<div id="fail-ui" style="text-align: center; border: 2px solid #ff4d4d; background: #fff5f5;">
+    <h2 style="color: #d32f2f; font-family: 'Cinzel';">ACCRÉDITATION REFUSÉE</h2>
+    <p style="font-size: 1.1em;">Votre score est inférieur au seuil de <b>80%</b> requis par MBA-Consult.<br>L'expertise stratégique n'est pas suffisamment démontrée pour ce secteur.</p>
+    <button onclick="location.reload()" style="padding: 15px 30px; background: #d32f2f; color: white; border: none; cursor: pointer; font-weight: bold; margin-top: 20px;">REPASSER L'AUDIT</button>
+</div>
+
+<div id="id-final" style="text-align: center; border: 2px solid var(--gold);">
+    <h2 style="font-family: 'Cinzel'; color: var(--navy);">AUDIT STRATÉGIQUE RÉUSSI</h2>
+    <p>Votre profil répond aux exigences de MBA-Consult. Saisissez votre identité pour le certificat.</p>
+    <input type="text" id="u-name" placeholder="NOM ET PRÉNOM" style="width:85%; padding:20px; border:2px solid var(--gold); font-size:1.3em; text-align:center; margin: 25px 0;">
+    <button onclick="generateCert()" style="width:85%; padding:22px; background:var(--gold); color:var(--navy); border:none; font-weight:bold; cursor:pointer; font-size: 1.1em; letter-spacing: 1px;">ÉMETTRE MON CERTIFICAT OFFICIEL</button>
+</div>
+
+<div id="certificat">
+    <div class="top-signature">
+        <div class="sig-img">MBA Board Alpha</div>
+        <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #555;">Signature Électronique Certifiée</div>
+    </div>
+
+    <div class="cert-title">CERTIFICATE OF STRATEGIC EXCELLENCE</div>
+    <p style="letter-spacing: 6px; font-weight: bold; color: var(--gold); font-size: 13px; margin-bottom: 45px;">GLOBAL ACCREDITATION UNIT</p>
+    
+    <p style="font-size: 1.1em;">This document officially certifies that</p>
+    <div class="cert-name" id="disp-name"></div>
+    <p style="font-size: 1.1em;">has demonstrated high-level expertise in the field of</p>
+    <div id="disp-job" style="font-size: 26px; font-weight: bold; color: var(--gold); text-transform: uppercase; margin: 15px 0;"></div>
+    
+    <div class="score-badge" id="disp-score"></div>
+    
+    <div style="margin-top: 60px; display: flex; justify-content: space-around; align-items: flex-end;">
+        <div style="border-top: 1px solid #333; width: 220px; padding-top: 8px;">
+            <span id="sig-user" style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px;"></span><br>
+            <small>Holder's Digital Signature</small>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=MBA-CERT-VERIFIED" style="width: 80px; border: 1px solid #eee;">
+            <br><small style="font-size: 9px; color: #777;">SECURE VERIFICATION</small>
+        </div>
+    </div>
+
+    <div style="margin-top: 60px; font-family: monospace; font-size: 10px; text-align: left; color: #888; border-top: 1px solid #eee; padding-top: 15px;">
+        REF NO: <span id="cert-id" style="font-weight: bold; color: #444;"></span> | DATE OF ISSUE: <span id="cert-date" style="font-weight: bold; color: #444;"></span><br>
+        MBA-CONSULT REFERENTIAL | ISO/KMS-STRATEGIC-2026 | VERIFIED STATUS
+    </div>
+    
+    <button onclick="window.print()" class="no-print" style="margin-top:40px; padding:18px 50px; background:var(--navy); color:var(--gold); border:2px solid var(--gold); cursor:pointer; font-weight:bold; font-size: 1em;">TÉLÉCHARGER LE PDF OFFICIEL</button>
+</div>
+
+<footer>
+    MBA-CONSULTING | Strategic Intelligence Systems<br>
+    Professional Accreditation Entity | Ref ID: 2026-GLOBAL-KMS-SYSTEM
+</footer>
+
 <script>
     const SECTEURS = {
-        "Finance": ["CFO", "Auditeur Global", "Expert M&A", "Risk Manager", "Analyste ESG", "Trader", "Asset Manager", "Tax Advisor", "Credit Manager", "Trésorier", "Quant Analyst", "Financial Modeler", "Directeur de Banque", "Actuaire", "Contrôleur de Gestion", "Analyste Equity", "Expert FinTech", "Compliance Officer", "Auditeur Fraude", "Gestionnaire de Patrimoine"],
-        "Énergie": ["Directeur Exploration", "Ingénieur Solaire", "Nuclear Expert", "Offshore Manager", "Energy Analyst", "HSE Global", "Smart Grid Eng", "Carbon Lead", "Wind Project Dir", "Raffinerie Dir", "Ingénieur Hydrogène", "Géologue", "Manager Réseau", "Consultant Biomasse", "Pipeline Engineer", "Expert Géothermie", "Energy Trader", "Directeur Maintenance", "Analyste Marchés", "Ingénieur Thermique"],
-        "Informatique & IA": ["AI Architect", "Prompt Engineer", "Data Scientist", "Cyber Analyst", "Cloud Expert", "RAG Systems", "ML Ops", "IT Director", "DevOps", "Ethicien IA", "Vision Eng", "NLP Specialist", "Fullstack", "GPU Infra", "Blockchain Lead", "Solutions Architect", "Product Owner", "UX Strategist", "Network Admin", "Innovation Manager"],
-        "Tourisme": ["Directeur Hôtellerie", "Yield Manager", "Resort Director", "Destination Lead", "Cruise Director", "Luxe Hospitality", "Patrimoine Expert", "Event Planner", "Guide National", "Ecotourisme", "Revenue Manager", "Manager Spa", "Hôtelier Luxe", "Directeur Restauration", "Chef de Produit Voyage", "Digital Nomad Lead", "Responsable Promotion", "Directeur Loisirs", "Auditeur Hospitalité", "Consultant Tourisme"],
+        "Finance": ["CFO", "Auditeur Global", "Expert M&A", "Risk Manager", "Analyste ESG", "Trader", "Asset Manager", "Expert FinTech", "Contrôleur de Gestion", "Actuaire", "Directeur de Banque", "Tax Advisor", "Credit Analyst", "Financial Planner", "Audit Interne", "Trésorier", "Analyste Equity", "Financial Modeler", "Compliance Officer", "Portfolio Manager"],
+        "Informatique & IA": ["AI Architect", "Prompt Engineer", "Data Scientist", "Cyber Analyst", "Cloud Expert", "RAG Systems Specialist", "ML Ops", "IT Director", "DevOps", "Ethicien IA", "NLP Specialist", "Fullstack Developer", "GPU Infrastructure", "Blockchain Lead", "Solutions Architect", "Product Owner", "UX Strategist", "Network Admin", "System Engineer", "Innovation Manager"],
+        "Énergie": ["Directeur Exploration", "Ingénieur Solaire", "Nuclear Expert", "Offshore Manager", "Energy Analyst", "HSE Global", "Smart Grid Eng", "Carbon Lead", "Wind Project Dir", "Raffinerie Dir", "Hydrogène Expert", "Géologue", "Manager Réseau", "Consultant Biomasse", "Pipeline Manager", "Expert Géothermie", "Energy Trader", "Directeur Maintenance", "Analyste Marché", "Ingénieur Thermique"],
+        "Tourisme": ["Hôtel Director", "Yield Manager", "Resort Manager", "Destination Lead", "Cruise Director", "Luxe Hospitality", "Patrimoine Expert", "Event Planner", "Guide National", "Ecotourisme", "Revenue Manager", "Manager Spa", "Hôtelier Luxe", "Directeur Restauration", "Chef de Produit Voyage", "Digital Nomad Lead", "Responsable Promotion", "Directeur Loisirs", "Auditeur Hospitalité", "Consultant Tourisme"],
         "Agroalimentaire": ["Directeur Usine", "R&D Manager", "Qualité Lead", "Supply Chain", "Sanitaire Expert", "Packaging Eng", "Production Manager", "Acheteur MP", "Industriel Dir", "Innovation Food", "Chef Labo", "Responsable Export", "Process Engineer", "QHSE Manager", "Logistique Dir", "Maintenance Dir", "Category Manager", "Brand Lead Food", "Auditeur Bio", "Expert Nutrition"],
         "Éducation": ["Campus Director", "Doyen Académique", "EdTech Architect", "MBA Consultant", "Innov Pédagogique", "Admissions Dir", "Research Lead", "Career Coach", "International Dir", "Recteur", "Admin Scolaire", "Orientation Lead", "Formation Manager", "Inclusion Expert", "Alumni Lead", "Partnership Manager", "Librarian Digital", "Chef Projet Educatif", "E-learning Dir", "Academic Advisor"]
     };
 
     const QUESTIONS_DB = {
-        "Finance": [
-            "Optimisation du WACC en environnement volatil ?", "Hedging du risque de change marchés émergents ?", "Tests de résistance (Stress Tests) en ALM ?", "Évaluation M&A avec actifs immatériels ?", "Conformité IFRS 17 ou Bâle III/IV ?", "Restructuration de dette sous-performance ?", "Audit reporting extra-financier (ESG) ?", "Optimisation du BFR opérationnel ?", "Risque de liquidité en crise systémique ?", "Architecture contrôle interne anti-fraude ?", "Coût du capital projet haut risque ?", "Stratégie dividendes vs réinvestissement ?", "Fiscalité internationale multi-filiales ?", "Impact Tokenisation marchés capitaux ?", "Arbitrage profitabilité vs solvabilité ?", "Valorisation en période d'inflation ?", "Cybersécurité flux trésorerie ?", "Stratégie Green Bonds ?", "Risque crédit contreparties non notées ?", "Disruption FinTech modèle d'affaires ?"
-        ],
-        "Énergie": [
-            "Gestion intermittence mix EnR ?", "Décarbonation profonde actifs industriels ?", "Optimisation LCOE des projets ?", "Sécurité infrastructures critiques ?", "Impact taxe carbone rentabilité ?", "Stockage énergie grande échelle ?", "Conflits d'usage sols EnR ?", "Nucléaire SMR dans la transition ?", "Rendement via Smart Grid ?", "Maintenance prédictive Offshore ?", "Volatilité prix marché électricité ?", "Capture et séquestration carbone (CCUS) ?", "Approvisionnement métaux critiques ?", "Transformation en bio-raffinerie ?", "Acceptabilité sociale grands projets ?", "Audit efficacité parc immobilier ?", "IA et optimisation flux gaz/élec ?", "Démantèlement actifs fin de vie ?", "Hydrogène vert vs bleu ?", "Innovation transport d'énergie ?"
-        ],
-        "Informatique & IA": [
-            "Drift (dérive) données modèle LLM ?", "Architecture RAG sans hallucinations ?", "Coût inférence clusters GPU H100 ?", "Fine-Tuning vs SLM ?", "Sécurité API injections prompts ?", "Alignement éthique algorithmes ?", "Latence IA Edge Computing ?", "Souveraineté données Cloud hybride ?", "Human-in-the-loop pipelines ?", "Quantification taille modèles ?", "Open-Source vs Propriétaire ?", "IA Agentique et flux métiers ?", "Explicabilité (XAI) Black Box ?", "Cybersécurité DevSecOps ?", "Dette technique générée par IA ?", "Interopérabilité multi-agents ?", "Neutralité données (Bias Mitigation) ?", "Entraînement distribué grande échelle ?", "Impact informatique quantique ?", "Fiabilité systèmes autonomes ?"
-        ],
-        "Tourisme": [
-            "Yield Management en haute saison ?", "Stratégie résilience post-crise ?", "Digitalisation parcours client luxe ?", "Durabilité et écotourisme massif ?", "Impact IA sur réservations ?", "Marketing destination émergente ?", "Optimisation taux occupation resort ?", "Gestion crise sanitaire hospitalité ?", "Valorisation patrimoine immatériel ?", "Nouveaux business models hôteliers ?", "Gestion expérience client VIP ?", "Sécurisation données voyageurs ?", "Impact surtourisme sites classés ?", "Ressources Humaines et saisonnalité ?", "Partenariats plateformes (OTA) ?", "Développement tourisme d'affaires ?", "Standardisation vs Personnalisation ?", "Infrastructures transport touristique ?", "Analyse data comportement voyageur ?", "Innovation concept hôtelier 2026 ?"
-        ],
-        "Agroalimentaire": [
-            "Sécurité sanitaire et traçabilité ?", "Optimisation supply chain froid ?", "Innovation packaging durable ?", "Réduction gaspillage industriel ?", "Impact Nutri-score sur R&D ?", "Gestion volatilité matières premières ?", "Certification Bio et labels qualité ?", "Automatisation lignes production ?", "Stratégie export marchés Asie ?", "Développement protéines végétales ?", "Audit conformité hygiène ?", "Efficacité énergétique usines ?", "Gestion déchets organiques ?", "Relation producteur et grande distrib ?", "Analyse sensorielle et marketing ?", "Intelligence artificielle et recettes ?", "Logistique dernier kilomètre ?", "Nouveaux modes conservation ?", "Résilience face aux aléas climatiques ?", "Tendances consommation saine ?"
-        ],
-        "Éducation": [
-            "Hybrid learning et engagement ?", "IA générative dans les cursus ?", "Stratégie recrutement international ?", "Certification et accréditation MBA ?", "Financement recherche académique ?", "Digitalisation services étudiants ?", "Adéquation formation et emploi ?", "Gestion réputation campus ?", "Inclusion et diversité académique ?", "Apprentissage tout au long de la vie ?", "Gouvernance établissements privés ?", "Innovation pédagogique active ?", "Partenariats entreprises et écoles ?", "Analyse data réussite étudiante ?", "Sécurité campus et cyber-risques ?", "Développement soft skills ?", "Modernisation infrastructures ?", "E-learning et taux d'abandon ?", "Orientation et coaching carrière ?", "Impact EdTech sur le marché mondial ?"
-        ]
+        "Finance": ["Optimisation WACC en volatilité ?", "Hedging change marchés émergents ?", "Stress Tests en ALM ?", "Évaluation M&A actifs immatériels ?", "Conformité IFRS 17 / Bâle IV ?", "Restructuration dette sous-performance ?", "Audit reporting ESG ?", "Optimisation BFR opérationnel ?", "Risque liquidité crise systémique ?", "Contrôle interne anti-fraude ?", "Coût capital projet haut risque ?", "Dividendes vs Réinvestissement ?", "Fiscalité internationale multi-filiales ?", "Tokenisation marchés capitaux ?", "Profitabilité vs Solvabilité ?", "Valorisation période inflation ?", "Cybersécurité flux trésorerie ?", "Stratégie Green Bonds ?", "Risque crédit non noté ?", "Disruption FinTech modèle d'affaires ?"],
+        "Informatique & IA": ["Drift données modèle LLM ?", "Architecture RAG sans hallucinations ?", "Coût inférence clusters H100 ?", "Fine-Tuning vs SLM ?", "Sécurité API injections prompts ?", "Alignement éthique algorithmes ?", "Latence IA Edge Computing ?", "Souveraineté données Cloud hybride ?", "Human-in-the-loop pipelines ?", "Quantification taille modèles ?", "Open-Source vs Propriétaire ?", "IA Agentique et flux métiers ?", "Explicabilité (XAI) Black Box ?", "Cybersécurité DevSecOps ?", "Dette technique générée par IA ?", "Interopérabilité multi-agents ?", "Neutralité données (Bias) ?", "Entraînement distribué grande échelle ?", "Impact informatique quantique ?", "Fiabilité systèmes autonomes ?"],
+        "Énergie": ["Intermittence mix EnR ?", "Décarbonation actifs industriels ?", "Optimisation LCOE projets ?", "Sécurité infrastructures critiques ?", "Impact taxe carbone rentabilité ?", "Stockage énergie grande échelle ?", "Conflits d'usage sols EnR ?", "Nucléaire SMR transition ?", "Rendement via Smart Grid ?", "Maintenance prédictive Offshore ?", "Volatilité prix marché élec ?", "Capture et séquestration carbone ?", "Approvisionnement métaux critiques ?", "Transformation en bio-raffinerie ?", "Acceptabilité sociale projets ?", "Audit efficacité parc immobilier ?", "IA et optimisation flux ?", "Démantèlement actifs fin de vie ?", "Hydrogène vert vs bleu ?", "Innovation transport d'énergie ?"],
+        "Tourisme": ["Yield Management haute saison ?", "Stratégie résilience post-crise ?", "Digitalisation parcours luxe ?", "Durabilité écotourisme massif ?", "Impact IA sur réservations ?", "Marketing destination émergente ?", "Optimisation occupation resort ?", "Gestion crise sanitaire ?", "Valorisation patrimoine immatériel ?", "Nouveaux business models hôteliers ?", "Gestion expérience client VIP ?", "Sécurisation données voyageurs ?", "Impact surtourisme sites classés ?", "RH et saisonnalité ?", "Partenariats plateformes (OTA) ?", "Développement tourisme d'affaires ?", "Standardisation vs Personnalisation ?", "Infrastructures transport ?", "Analyse data comportement ?", "Innovation concept hôtelier 2026 ?"],
+        "Agroalimentaire": ["Sécurité sanitaire et traçabilité ?", "Optimisation supply chain froid ?", "Innovation packaging durable ?", "Réduction gaspillage industriel ?", "Impact Nutri-score sur R&D ?", "Gestion volatilité matières premières ?", "Certification Bio et labels ?", "Automatisation lignes production ?", "Stratégie export marchés Asie ?", "Développement protéines végétales ?", "Audit conformité hygiène ?", "Efficacité énergétique usines ?", "Gestion déchets organiques ?", "Relation producteur / distrib ?", "Analyse sensorielle marketing ?", "IA et recettes alimentaires ?", "Logistique dernier kilomètre ?", "Nouveaux modes conservation ?", "Résilience aléas climatiques ?", "Tendances consommation saine ?"],
+        "Éducation": ["Hybrid learning et engagement ?", "IA générative dans les cursus ?", "Recrutement international ?", "Accréditation MBA ?", "Financement recherche académique ?", "Digitalisation services étudiants ?", "Adéquation formation / emploi ?", "Gestion réputation campus ?", "Inclusion et diversité ?", "Apprentissage long de la vie ?", "Gouvernance établissements ?", "Innovation pédagogique active ?", "Partenariats entreprises ?", "Analyse data réussite étudiante ?", "Sécurité campus et cyber ?", "Développement soft skills ?", "Modernisation infrastructures ?", "E-learning et taux d'abandon ?", "Orientation et coaching ?", "Impact EdTech marché mondial ?"]
     };
 
     let currentJob = "", currentSector = "", step = 0, score = 0;
@@ -47,6 +179,7 @@
         currentJob = job; currentSector = sector; step = 0; score = 0;
         document.getElementById('menu-area').style.display = 'none';
         document.getElementById('exam-ui').style.display = 'block';
+        window.scrollTo(0,0);
         loadStep();
     }
 
@@ -81,7 +214,11 @@
         document.getElementById('disp-job').innerText = currentJob;
         document.getElementById('disp-score').innerText = "EXPERTISE SCORE: " + Math.round((score/20)*100) + "%";
         document.getElementById('cert-id').innerText = "MBA-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-        document.getElementById('cert-date').innerText = new Date().toLocaleDateString();
+        document.getElementById('cert-date').innerText = new Date().toLocaleDateString('fr-FR');
+        window.scrollTo(0,0);
     }
+
     renderMenu();
 </script>
+</body>
+</html>
