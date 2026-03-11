@@ -1,167 +1,87 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA-CONSULT | Global Strategic Accreditation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <style>
-        :root { --gold: #c5a021; --navy: #0a1128; --bg: #f4f7f6; --white: #ffffff; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); transition: 0.3s; }
-        header { background: var(--navy); color: var(--gold); padding: 30px; border-bottom: 5px solid var(--gold); text-align: center; }
-        .lang-bar { margin: 15px 0; display: flex; justify-content: center; gap: 10px; }
-        .btn-l { background: transparent; border: 1.5px solid var(--gold); color: var(--gold); padding: 8px 18px; cursor: pointer; border-radius: 4px; font-weight: bold; }
-        .active-l { background: var(--gold); color: var(--navy); }
-        .container { padding: 40px; max-width: 1300px; margin: auto; }
-        .sector-title { font-family: 'Cinzel', serif; background: var(--navy); color: var(--gold); padding: 10px 25px; border-radius: 2px; display: inline-block; margin: 30px 0 15px 0; letter-spacing: 2px; font-size: 0.9em; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-        .card { background: var(--white); padding: 15px; border-radius: 4px; cursor: pointer; border-left: 5px solid var(--gold); box-shadow: 0 4px 6px rgba(0,0,0,0.05); font-weight: bold; font-size: 0.8em; display: flex; align-items: center; justify-content: center; text-align: center; height: 50px; transition: 0.2s; }
-        .card:hover { background: var(--navy); color: var(--gold); transform: translateY(-3px); }
-        
-        #exam-ui, #id-final, #certificat { display: none; max-width: 850px; margin: 40px auto; background: var(--white); padding: 50px; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .opt { display: block; width: 100%; padding: 18px; margin: 10px 0; text-align: left; border: 2px solid #eee; border-radius: 6px; cursor: pointer; font-size: 15px; background: white; transition: 0.2s; }
-        .opt:hover { border-color: var(--gold); background: #fdfaf0; }
-        
-        /* Certificat International */
-        #certificat { border: 12px double var(--gold); text-align: center; position: relative; padding: 60px; }
-        .cert-name { font-family: 'Playfair Display', serif; font-size: 42px; color: #111; margin: 20px 0; font-style: italic; border-bottom: 1px solid #ddd; display: inline-block; padding: 0 40px; }
-        .sig-box { display: flex; justify-content: space-between; margin-top: 60px; }
-        .sig-line { border-top: 1px solid #333; width: 220px; padding-top: 10px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2em; }
-        .qr-code { position: absolute; bottom: 40px; right: 40px; width: 90px; }
-        
-        .rtl { direction: rtl; text-align: right; }
-        .rtl .opt { text-align: right; }
-        .rtl .card { border-left: none; border-right: 5px solid var(--gold); }
-        @media print { .no-print { display: none !important; } #certificat { display: block !important; border: 10px double var(--gold); margin: 0; position: absolute; top:0; left:0; width: 100%; } }
-    </style>
-</head>
-<body id="body">
-
-<header>
-    <div class="lang-bar">
-        <button class="btn-l active-l" id="l-fr" onclick="setL('fr')">FRANÇAIS</button>
-        <button class="btn-l" id="l-ar" onclick="setL('ar')">العربية</button>
-        <button class="btn-l" id="l-en" onclick="setL('en')">ENGLISH</button>
-    </div>
-    <h1 id="txt-header">MBA-CONSULTING INTERNATIONAL</h1>
-</header>
-
-<div class="container" id="menu-area"></div>
-
-<div id="exam-ui">
-    <div style="margin-bottom: 20px;"><div style="height:6px; background:#eee;"><div id="p-bar" style="height:100%; background:var(--gold); width:0%;"></div></div></div>
-    <h3 id="txt-step" style="color:var(--gold);"></h3>
-    <h2 id="q-text"></h2>
-    <div id="options"></div>
-    <div style="margin-top: 25px; background:#f9f9f9; padding:20px; border-radius:5px;">
-        <strong id="txt-exp-lab"></strong>
-        <textarea id="exp-box" style="width:100%; height:60px; margin-top:10px; border:1px solid #ccc;"></textarea>
-        <button onclick="nextStep(true)" id="txt-btn-val" style="width:100%; padding:15px; background:var(--navy); color:var(--gold); border:none; font-weight:bold; cursor:pointer; margin-top:10px;"></button>
-    </div>
-</div>
-
-<div id="id-final" style="text-align:center;">
-    <h2 id="txt-final-t"></h2>
-    <input type="text" id="u-name" placeholder="..." style="width:80%; padding:15px; margin:20px 0; border:2px solid var(--gold); font-size:1.2em; text-align:center;">
-    <button onclick="showCert()" id="txt-btn-gen" style="width:80%; padding:18px; background:var(--gold); color:var(--navy); border:none; font-weight:bold; cursor:pointer;"></button>
-</div>
-
-<div id="certificat">
-    <h1 style="font-family:'Cinzel'; color:var(--navy); margin-bottom:5px;" id="txt-cert-head"></h1>
-    <p style="letter-spacing:4px; font-weight:bold; color:var(--gold); font-size:12px;">GLOBAL STRATEGIC ADVISORY BOARD</p>
-    <p style="margin-top:40px;" id="txt-awarded"></p>
-    <div class="cert-name" id="c-name"></div>
-    <p id="txt-for"></p>
-    <div id="c-job" style="color:var(--gold); font-weight:bold; font-size:24px; text-transform:uppercase;"></div>
-    <div style="margin:30px 0;"><span style="background:var(--navy); color:white; padding:10px 20px; font-weight:bold;" id="c-score"></span></div>
-    
-    <div class="sig-box">
-        <div class="sig-line"><span id="sig-n"></span><br><small id="txt-sig-h"></small></div>
-        <div class="sig-line" style="color:var(--gold);">MBA Board Alpha<br><small id="txt-sig-a"></small></div>
-    </div>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=MBA-VERIFIED" class="qr-code">
-    <div style="margin-top:40px; font-family:monospace; font-size:10px; color:#777; text-align:left;">
-        ID: <span id="cert-id"></span> | DATE: <span id="cert-date"></span> | STATUS: ENCRYPTED
-    </div>
-    <button onclick="window.print()" class="no-print" style="margin-top:20px; padding:10px 30px; cursor:pointer;">PRINT PDF</button>
-</div>
-
 <script>
     const SECTEURS = {
-        "Finance": ["Auditeur Global", "CFO", "Analyste Risques", "M&A Expert", "Trader", "Asset Manager", "Tax Advisor", "Compliance Officer", "Risk Manager", "Portfolio Lead", "Comptable", "Financial Planner", "Audit Interne", "Directeur Banque", "Credit Analyst", "ESG Lead", "Trésorier", "Banquier Privé", "Analyste Equity", "Financial Modeler"],
-        "Informatique & IA": ["AI Architect", "Prompt Engineer", "RAG Expert", "Data Scientist", "Cyber Security", "Cloud Manager", "DevOps", "Ethicien IA", "Fullstack", "IT Director", "ML Ops", "Data Engineer", "Blockchain Lead", "Solutions Architect", "Product Owner", "UX Strategist", "Network Admin", "System Engineer", "Support Lead", "Innovation Manager"],
-        "Énergie": ["Forage Manager", "Expert Solaire", "Offshore Lead", "Ingénieur Nucléaire", "HSE Global", "Energy Analyst", "Eolien Pro", "Géologue", "Gaz Expert", "Smart Grid", "Raffinerie Dir", "Maintenance", "Carbone Lead", "Pipeline Dir", "Biomasse", "Energy Trader", "Réseau Dir", "Hydrogène Expert", "Géo-Énergie", "Exploration Dir"],
-        "Tourisme": ["Hôtel Dir", "Yield Manager", "Voyage Pro", "Resort Dir", "Destination Lead", "Croisière Dir", "Hospitalité Luxe", "Patrimoine", "Event Planner", "Guide National", "Resto Dir", "Agence Dir", "Revenue Manager", "Ecotourisme", "Concierge Lead", "Spa Manager", "Digital Nomad", "Promotion Dir", "Loisirs Dir", "Hospitalité Audit"],
-        "Agroalimentaire": ["Usine Dir", "R&D Food", "Qualité Lead", "Supply Chain", "Sécurité Sanitaire", "Packaging", "Production", "Acheteur MP", "Industriel Dir", "Nutrition Expert", "Labo Chef", "Export Lead", "Process Eng", "QHSE Dir", "Logistique", "Maintenance", "Category Manager", "Brand Lead", "Bio Expert", "Innovation Food"],
-        "Éducation": ["Campus Dir", "EdTech Architect", "Doyen", "MBA Consultant", "Innov Pédagogique", "Admissions", "Recherche Dir", "Career Coach", "International Dir", "Recteur", "Scolaire Admin", "Orientation", "Formation Manager", "Inclusion Expert", "Alumni Lead", "Partnership", "Librarian", "Project Manager", "E-learning Dir", "Academic Advisor"]
+        "Finance": ["CFO", "Auditeur Global", "Expert M&A", "Risk Manager", "Analyste ESG", "Trader", "Asset Manager", "Tax Advisor", "Credit Manager", "Trésorier", "Quant Analyst", "Financial Modeler", "Directeur de Banque", "Actuaire", "Contrôleur de Gestion", "Analyste Equity", "Expert FinTech", "Compliance Officer", "Auditeur Fraude", "Gestionnaire de Patrimoine"],
+        "Énergie": ["Directeur Exploration", "Ingénieur Solaire", "Nuclear Expert", "Offshore Manager", "Energy Analyst", "HSE Global", "Smart Grid Eng", "Carbon Lead", "Wind Project Dir", "Raffinerie Dir", "Ingénieur Hydrogène", "Géologue", "Manager Réseau", "Consultant Biomasse", "Pipeline Engineer", "Expert Géothermie", "Energy Trader", "Directeur Maintenance", "Analyste Marchés", "Ingénieur Thermique"],
+        "Informatique & IA": ["AI Architect", "Prompt Engineer", "Data Scientist", "Cyber Analyst", "Cloud Expert", "RAG Systems", "ML Ops", "IT Director", "DevOps", "Ethicien IA", "Vision Eng", "NLP Specialist", "Fullstack", "GPU Infra", "Blockchain Lead", "Solutions Architect", "Product Owner", "UX Strategist", "Network Admin", "Innovation Manager"],
+        "Tourisme": ["Directeur Hôtellerie", "Yield Manager", "Resort Director", "Destination Lead", "Cruise Director", "Luxe Hospitality", "Patrimoine Expert", "Event Planner", "Guide National", "Ecotourisme", "Revenue Manager", "Manager Spa", "Hôtelier Luxe", "Directeur Restauration", "Chef de Produit Voyage", "Digital Nomad Lead", "Responsable Promotion", "Directeur Loisirs", "Auditeur Hospitalité", "Consultant Tourisme"],
+        "Agroalimentaire": ["Directeur Usine", "R&D Manager", "Qualité Lead", "Supply Chain", "Sanitaire Expert", "Packaging Eng", "Production Manager", "Acheteur MP", "Industriel Dir", "Innovation Food", "Chef Labo", "Responsable Export", "Process Engineer", "QHSE Manager", "Logistique Dir", "Maintenance Dir", "Category Manager", "Brand Lead Food", "Auditeur Bio", "Expert Nutrition"],
+        "Éducation": ["Campus Director", "Doyen Académique", "EdTech Architect", "MBA Consultant", "Innov Pédagogique", "Admissions Dir", "Research Lead", "Career Coach", "International Dir", "Recteur", "Admin Scolaire", "Orientation Lead", "Formation Manager", "Inclusion Expert", "Alumni Lead", "Partnership Manager", "Librarian Digital", "Chef Projet Educatif", "E-learning Dir", "Academic Advisor"]
     };
 
-    const STR = {
-        fr: { head: "CERTIFICAT D'EXCELLENCE", awarded: "Le présent titre est décerné à :", for: "Pour la maîtrise stratégique de :", score: "SCORE D'EXPERTISE : ", step: "PHASE ", expert: "ANALYSE STRATÉGIQUE", val: "VALIDER L'ARBITRAGE", finalT: "AUDIT RÉUSSI", gen: "GÉNÉRER MON DIPLÔME", sigH: "Titulaire", sigA: "Autorité" },
-        ar: { head: "شهادة التميز الدولية", awarded: "تمنح هذه الشهادة رسمياً لـ:", for: "للإتقان الاستراتيجي لمهنة:", score: "درجة الخبرة: ", step: "المرحلة ", expert: "التحليل الاستراتيجي", val: "تأكيد القرار", finalT: "تم التدقيق بنجاح", gen: "إصدار الشهادة", sigH: "صاحب الشهادة", sigA: "سلطة الاعتماد" },
-        en: { head: "CERTIFICATE OF EXCELLENCE", awarded: "This official title is awarded to:", for: "For the strategic mastery of:", score: "EXPERTISE SCORE: ", step: "PHASE ", expert: "STRATEGIC ANALYSIS", val: "VALIDATE DECISION", finalT: "AUDIT SUCCESSFUL", gen: "GENERATE CERTIFICATE", sigH: "Holder", sigA: "Authority" }
+    const QUESTIONS_DB = {
+        "Finance": [
+            "Optimisation du WACC en environnement volatil ?", "Hedging du risque de change marchés émergents ?", "Tests de résistance (Stress Tests) en ALM ?", "Évaluation M&A avec actifs immatériels ?", "Conformité IFRS 17 ou Bâle III/IV ?", "Restructuration de dette sous-performance ?", "Audit reporting extra-financier (ESG) ?", "Optimisation du BFR opérationnel ?", "Risque de liquidité en crise systémique ?", "Architecture contrôle interne anti-fraude ?", "Coût du capital projet haut risque ?", "Stratégie dividendes vs réinvestissement ?", "Fiscalité internationale multi-filiales ?", "Impact Tokenisation marchés capitaux ?", "Arbitrage profitabilité vs solvabilité ?", "Valorisation en période d'inflation ?", "Cybersécurité flux trésorerie ?", "Stratégie Green Bonds ?", "Risque crédit contreparties non notées ?", "Disruption FinTech modèle d'affaires ?"
+        ],
+        "Énergie": [
+            "Gestion intermittence mix EnR ?", "Décarbonation profonde actifs industriels ?", "Optimisation LCOE des projets ?", "Sécurité infrastructures critiques ?", "Impact taxe carbone rentabilité ?", "Stockage énergie grande échelle ?", "Conflits d'usage sols EnR ?", "Nucléaire SMR dans la transition ?", "Rendement via Smart Grid ?", "Maintenance prédictive Offshore ?", "Volatilité prix marché électricité ?", "Capture et séquestration carbone (CCUS) ?", "Approvisionnement métaux critiques ?", "Transformation en bio-raffinerie ?", "Acceptabilité sociale grands projets ?", "Audit efficacité parc immobilier ?", "IA et optimisation flux gaz/élec ?", "Démantèlement actifs fin de vie ?", "Hydrogène vert vs bleu ?", "Innovation transport d'énergie ?"
+        ],
+        "Informatique & IA": [
+            "Drift (dérive) données modèle LLM ?", "Architecture RAG sans hallucinations ?", "Coût inférence clusters GPU H100 ?", "Fine-Tuning vs SLM ?", "Sécurité API injections prompts ?", "Alignement éthique algorithmes ?", "Latence IA Edge Computing ?", "Souveraineté données Cloud hybride ?", "Human-in-the-loop pipelines ?", "Quantification taille modèles ?", "Open-Source vs Propriétaire ?", "IA Agentique et flux métiers ?", "Explicabilité (XAI) Black Box ?", "Cybersécurité DevSecOps ?", "Dette technique générée par IA ?", "Interopérabilité multi-agents ?", "Neutralité données (Bias Mitigation) ?", "Entraînement distribué grande échelle ?", "Impact informatique quantique ?", "Fiabilité systèmes autonomes ?"
+        ],
+        "Tourisme": [
+            "Yield Management en haute saison ?", "Stratégie résilience post-crise ?", "Digitalisation parcours client luxe ?", "Durabilité et écotourisme massif ?", "Impact IA sur réservations ?", "Marketing destination émergente ?", "Optimisation taux occupation resort ?", "Gestion crise sanitaire hospitalité ?", "Valorisation patrimoine immatériel ?", "Nouveaux business models hôteliers ?", "Gestion expérience client VIP ?", "Sécurisation données voyageurs ?", "Impact surtourisme sites classés ?", "Ressources Humaines et saisonnalité ?", "Partenariats plateformes (OTA) ?", "Développement tourisme d'affaires ?", "Standardisation vs Personnalisation ?", "Infrastructures transport touristique ?", "Analyse data comportement voyageur ?", "Innovation concept hôtelier 2026 ?"
+        ],
+        "Agroalimentaire": [
+            "Sécurité sanitaire et traçabilité ?", "Optimisation supply chain froid ?", "Innovation packaging durable ?", "Réduction gaspillage industriel ?", "Impact Nutri-score sur R&D ?", "Gestion volatilité matières premières ?", "Certification Bio et labels qualité ?", "Automatisation lignes production ?", "Stratégie export marchés Asie ?", "Développement protéines végétales ?", "Audit conformité hygiène ?", "Efficacité énergétique usines ?", "Gestion déchets organiques ?", "Relation producteur et grande distrib ?", "Analyse sensorielle et marketing ?", "Intelligence artificielle et recettes ?", "Logistique dernier kilomètre ?", "Nouveaux modes conservation ?", "Résilience face aux aléas climatiques ?", "Tendances consommation saine ?"
+        ],
+        "Éducation": [
+            "Hybrid learning et engagement ?", "IA générative dans les cursus ?", "Stratégie recrutement international ?", "Certification et accréditation MBA ?", "Financement recherche académique ?", "Digitalisation services étudiants ?", "Adéquation formation et emploi ?", "Gestion réputation campus ?", "Inclusion et diversité académique ?", "Apprentissage tout au long de la vie ?", "Gouvernance établissements privés ?", "Innovation pédagogique active ?", "Partenariats entreprises et écoles ?", "Analyse data réussite étudiante ?", "Sécurité campus et cyber-risques ?", "Développement soft skills ?", "Modernisation infrastructures ?", "E-learning et taux d'abandon ?", "Orientation et coaching carrière ?", "Impact EdTech sur le marché mondial ?"
+        ]
     };
 
-    const QUESTIONS = ["Stratégie d'arbitrage Capex/Opex ?", "Gestion de crise Supply Chain ?", "Approche Risque & Conformité ?", "Intégration IA & Data ?", "Levier de croissance +15% ?", "Résilience opérationnelle ?", "Management des talents ?", "Optimisation ESG & Carbone ?", "KPI critique de performance ?", "Sécurisation du KMS ?"];
-
-    let lang = 'fr', curJob = "", step = 0, score = 0;
-
-    function setL(l) {
-        lang = l;
-        document.querySelectorAll('.btn-l').forEach(b => b.classList.remove('active-l'));
-        document.getElementById('l-'+l).classList.add('active-l');
-        document.getElementById('body').className = (l==='ar'?'rtl':'');
-        document.getElementById('txt-exp-lab').innerText = STR[lang].expert;
-        document.getElementById('txt-btn-val').innerText = STR[lang].val;
-        document.getElementById('txt-final-t').innerText = STR[lang].finalT;
-        document.getElementById('txt-btn-gen').innerText = STR[lang].gen;
-        renderMenu();
-    }
+    let currentJob = "", currentSector = "", step = 0, score = 0;
 
     function renderMenu() {
-        const area = document.getElementById('menu-area'); area.innerHTML = '';
+        const container = document.getElementById('sectors-container');
+        container.innerHTML = "";
         for (let s in SECTEURS) {
-            let h = `<div class="sector-title">${s}</div><div class="grid">`;
-            SECTEURS[s].forEach(j => h += `<div class="card" onclick="startExam('${j}')">${j}</div>`);
-            area.innerHTML += h + `</div>`;
+            let html = `<div class="sector-title">${s}</div><div class="grid">`;
+            SECTEURS[s].forEach(j => {
+                html += `<div class="card" onclick="startAudit('${j}', '${s}')">${j}</div>`;
+            });
+            container.innerHTML += html + `</div>`;
         }
     }
 
-    function startExam(j) {
-        curJob = j; step = 0; score = 0;
-        document.getElementById('menu-area').style.display='none';
-        document.getElementById('exam-ui').style.display='block';
-        nextStep();
+    function startAudit(job, sector) {
+        currentJob = job; currentSector = sector; step = 0; score = 0;
+        document.getElementById('menu-area').style.display = 'none';
+        document.getElementById('exam-ui').style.display = 'block';
+        loadStep();
     }
 
-    function nextStep(ans=false) {
-        if(ans) { score += (Math.random() * 5 + 5); step++; }
-        if(step >= 10) { showFinal(); return; }
-        document.getElementById('p-bar').style.width = (step*10) + "%";
-        document.getElementById('txt-step').innerText = STR[lang].step + (step+1) + "/10";
-        document.getElementById('q-text').innerText = QUESTIONS[step];
-        document.getElementById('options').innerHTML = `<button class="opt" onclick="nextStep(true)">A) Innovation & Systémique</button><button class="opt" onclick="nextStep(true)">B) Agilité & Rentabilité</button><button class="opt" onclick="nextStep(true)">C) Gouvernance & Risques</button>`;
+    function loadStep() {
+        if (step >= 20) { 
+            const finalScore = Math.round((score / 20) * 100);
+            document.getElementById('exam-ui').style.display = 'none';
+            if(finalScore < 80) {
+                document.getElementById('fail-ui').style.display = 'block';
+            } else {
+                document.getElementById('id-final').style.display = 'block';
+            }
+            return; 
+        }
+        document.getElementById('q-count').innerText = "PHASE D'AUDIT " + (step + 1) + " / 20";
+        document.getElementById('q-text').innerText = QUESTIONS_DB[currentSector][step];
+        document.getElementById('options').innerHTML = `
+            <button class="opt" onclick="processStep(true)">A) Approche Systémique & Efficience</button>
+            <button class="opt" onclick="processStep(true)">B) Agilité Opérationnelle & Rentabilité</button>
+            <button class="opt" onclick="processStep(true)">C) Mitigations des Risques & Gouvernance</button>
+        `;
     }
 
-    function showFinal() { document.getElementById('exam-ui').style.display='none'; document.getElementById('id-final').style.display='block'; }
+    function processStep(correct) { if(correct) score++; step++; loadStep(); }
 
-    function showCert() {
-        const name = document.getElementById('u-name').value || "EXPERT";
-        document.getElementById('id-final').style.display='none';
-        document.getElementById('certificat').style.display='block';
-        document.getElementById('txt-cert-head').innerText = STR[lang].head;
-        document.getElementById('txt-awarded').innerText = STR[lang].awarded;
-        document.getElementById('c-name').innerText = name.toUpperCase();
-        document.getElementById('txt-for').innerText = STR[lang].for;
-        document.getElementById('c-job').innerText = curJob;
-        document.getElementById('c-score').innerText = STR[lang].score + Math.round(score) + "%";
-        document.getElementById('sig-n').innerText = name;
-        document.getElementById('txt-sig-h').innerText = STR[lang].sigH;
-        document.getElementById('txt-sig-a').innerText = STR[lang].sigA;
+    function generateCert() {
+        const name = document.getElementById('u-name').value || "EXPERT ANONYME";
+        document.getElementById('id-final').style.display = 'none';
+        document.getElementById('certificat').style.display = 'block';
+        document.getElementById('disp-name').innerText = name.toUpperCase();
+        document.getElementById('sig-user').innerText = name;
+        document.getElementById('disp-job').innerText = currentJob;
+        document.getElementById('disp-score').innerText = "EXPERTISE SCORE: " + Math.round((score/20)*100) + "%";
         document.getElementById('cert-id').innerText = "MBA-" + Math.random().toString(36).substr(2, 9).toUpperCase();
         document.getElementById('cert-date').innerText = new Date().toLocaleDateString();
     }
-    setL('fr');
+    renderMenu();
 </script>
-</body>
-</html>
