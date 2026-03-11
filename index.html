@@ -3,30 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA-CONSULT | KMS Global Intelligence</title>
+    <title>MBA-CONSULT | Global Strategic Accreditation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #c5a021; --navy: #0a1128; --bg: #f8fafc; --white: #ffffff; }
+        :root { --gold: #c5a021; --navy: #0a1128; --bg: #f4f7f6; --white: #ffffff; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); transition: 0.3s; }
         header { background: var(--navy); color: var(--gold); padding: 30px; border-bottom: 5px solid var(--gold); text-align: center; }
         .lang-bar { margin: 15px 0; display: flex; justify-content: center; gap: 10px; }
-        .btn-l { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 8px 15px; cursor: pointer; border-radius: 4px; font-weight: bold; }
+        .btn-l { background: transparent; border: 1.5px solid var(--gold); color: var(--gold); padding: 8px 18px; cursor: pointer; border-radius: 4px; font-weight: bold; }
         .active-l { background: var(--gold); color: var(--navy); }
-        .container { padding: 30px; max-width: 1300px; margin: auto; }
-        .sector-block { margin-bottom: 40px; }
-        .sector-title { background: var(--navy); color: var(--gold); padding: 10px 20px; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-weight: 800; text-transform: uppercase; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
-        .card { background: var(--white); padding: 12px; border-radius: 6px; cursor: pointer; border-left: 4px solid var(--gold); box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-weight: 600; font-size: 0.8em; display: flex; align-items: center; justify-content: center; text-align: center; height: 50px; transition: 0.2s; }
-        .card:hover { background: var(--gold); color: var(--navy); transform: translateY(-3px); }
-        #exam-ui, #id-final, #certificat { display: none; max-width: 800px; margin: 40px auto; background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .opt { display: block; width: 100%; padding: 18px; margin: 10px 0; text-align: left; border: 2px solid #eee; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 500; background: white; }
+        .container { padding: 40px; max-width: 1300px; margin: auto; }
+        .sector-title { font-family: 'Cinzel', serif; background: var(--navy); color: var(--gold); padding: 10px 25px; border-radius: 2px; display: inline-block; margin: 30px 0 15px 0; letter-spacing: 2px; font-size: 0.9em; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+        .card { background: var(--white); padding: 15px; border-radius: 4px; cursor: pointer; border-left: 5px solid var(--gold); box-shadow: 0 4px 6px rgba(0,0,0,0.05); font-weight: bold; font-size: 0.8em; display: flex; align-items: center; justify-content: center; text-align: center; height: 50px; transition: 0.2s; }
+        .card:hover { background: var(--navy); color: var(--gold); transform: translateY(-3px); }
+        
+        #exam-ui, #id-final, #certificat { display: none; max-width: 850px; margin: 40px auto; background: var(--white); padding: 50px; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .opt { display: block; width: 100%; padding: 18px; margin: 10px 0; text-align: left; border: 2px solid #eee; border-radius: 6px; cursor: pointer; font-size: 15px; background: white; transition: 0.2s; }
         .opt:hover { border-color: var(--gold); background: #fdfaf0; }
-        .progress { height: 10px; background: #eee; border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
-        .progress-bar { height: 100%; background: var(--gold); width: 0%; transition: 0.3s; }
-        .signature-box { display: flex; justify-content: space-around; margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px; }
-        .sig { text-align: center; font-family: 'Brush Script MT', cursive; font-size: 1.5em; }
+        
+        /* Certificat International */
+        #certificat { border: 12px double var(--gold); text-align: center; position: relative; padding: 60px; }
+        .cert-name { font-family: 'Playfair Display', serif; font-size: 42px; color: #111; margin: 20px 0; font-style: italic; border-bottom: 1px solid #ddd; display: inline-block; padding: 0 40px; }
+        .sig-box { display: flex; justify-content: space-between; margin-top: 60px; }
+        .sig-line { border-top: 1px solid #333; width: 220px; padding-top: 10px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2em; }
+        .qr-code { position: absolute; bottom: 40px; right: 40px; width: 90px; }
+        
         .rtl { direction: rtl; text-align: right; }
         .rtl .opt { text-align: right; }
-        .rtl .card { border-left: none; border-right: 4px solid var(--gold); }
+        .rtl .card { border-left: none; border-right: 5px solid var(--gold); }
+        @media print { .no-print { display: none !important; } #certificat { display: block !important; border: 10px double var(--gold); margin: 0; position: absolute; top:0; left:0; width: 100%; } }
     </style>
 </head>
 <body id="body">
@@ -37,66 +43,66 @@
         <button class="btn-l" id="l-ar" onclick="setL('ar')">العربية</button>
         <button class="btn-l" id="l-en" onclick="setL('en')">ENGLISH</button>
     </div>
-    <h1 id="m-title">MBA-CONSULTING INTERNATIONAL</h1>
+    <h1 id="txt-header">MBA-CONSULTING INTERNATIONAL</h1>
 </header>
 
 <div class="container" id="menu-area"></div>
 
 <div id="exam-ui">
-    <div class="progress"><div class="progress-bar" id="p-bar"></div></div>
-    <h3 id="q-step" style="color: var(--gold);"></h3>
+    <div style="margin-bottom: 20px;"><div style="height:6px; background:#eee;"><div id="p-bar" style="height:100%; background:var(--gold); width:0%;"></div></div></div>
+    <h3 id="txt-step" style="color:var(--gold);"></h3>
     <h2 id="q-text"></h2>
     <div id="options"></div>
-    <div style="margin-top: 20px; border-top: 2px solid #eee; padding-top: 20px;">
-        <strong id="lab-exp">AVIS D'EXPERT</strong>
-        <textarea id="exp-box" style="width: 100%; height: 80px; margin-top: 10px; border-radius: 5px; padding: 10px;"></textarea>
-        <button onclick="nextStep(true)" style="width: 100%; padding: 15px; background: var(--navy); color: var(--gold); border: none; cursor: pointer; font-weight: bold; margin-top: 10px;">VALIDER L'ARBITRAGE</button>
+    <div style="margin-top: 25px; background:#f9f9f9; padding:20px; border-radius:5px;">
+        <strong id="txt-exp-lab"></strong>
+        <textarea id="exp-box" style="width:100%; height:60px; margin-top:10px; border:1px solid #ccc;"></textarea>
+        <button onclick="nextStep(true)" id="txt-btn-val" style="width:100%; padding:15px; background:var(--navy); color:var(--gold); border:none; font-weight:bold; cursor:pointer; margin-top:10px;"></button>
     </div>
 </div>
 
-<div id="id-final">
-    <h2 id="f-title">ACCRÉDITATION DISPONIBLE</h2>
-    <input type="text" id="u-name" placeholder="Votre Nom Complet" style="width: 90%; padding: 15px; margin-bottom: 20px; border: 2px solid var(--gold);">
-    <button onclick="showCert()" style="width: 100%; padding: 15px; background: var(--gold); color: var(--navy); border: none; font-weight: bold; cursor: pointer;">GÉNÉRER LE CERTIFICAT</button>
+<div id="id-final" style="text-align:center;">
+    <h2 id="txt-final-t"></h2>
+    <input type="text" id="u-name" placeholder="..." style="width:80%; padding:15px; margin:20px 0; border:2px solid var(--gold); font-size:1.2em; text-align:center;">
+    <button onclick="showCert()" id="txt-btn-gen" style="width:80%; padding:18px; background:var(--gold); color:var(--navy); border:none; font-weight:bold; cursor:pointer;"></button>
 </div>
 
 <div id="certificat">
-    <h1 style="text-align: center; color: var(--navy);">CERTIFICAT D'EXPERT</h1>
-    <p style="text-align: center; letter-spacing: 5px; color: var(--gold);">GLOBAL STRATEGIC BOARD</p>
-    <hr>
-    <p style="text-align: center;">Titre décerné à :</p>
-    <h2 id="c-name" style="text-align: center; font-size: 30px;"></h2>
-    <p style="text-align: center;">Expertise certifiée en :</p>
-    <h2 id="c-job" style="text-align: center; color: var(--gold);"></h2>
-    <div class="signature-box">
-        <div class="sig"><span id="sig-n"></span><br><small>Titulaire</small></div>
-        <div class="sig" style="color: var(--gold);">MBA Board<br><small>Autorité</small></div>
+    <h1 style="font-family:'Cinzel'; color:var(--navy); margin-bottom:5px;" id="txt-cert-head"></h1>
+    <p style="letter-spacing:4px; font-weight:bold; color:var(--gold); font-size:12px;">GLOBAL STRATEGIC ADVISORY BOARD</p>
+    <p style="margin-top:40px;" id="txt-awarded"></p>
+    <div class="cert-name" id="c-name"></div>
+    <p id="txt-for"></p>
+    <div id="c-job" style="color:var(--gold); font-weight:bold; font-size:24px; text-transform:uppercase;"></div>
+    <div style="margin:30px 0;"><span style="background:var(--navy); color:white; padding:10px 20px; font-weight:bold;" id="c-score"></span></div>
+    
+    <div class="sig-box">
+        <div class="sig-line"><span id="sig-n"></span><br><small id="txt-sig-h"></small></div>
+        <div class="sig-line" style="color:var(--gold);">MBA Board Alpha<br><small id="txt-sig-a"></small></div>
     </div>
-    <button onclick="window.print()" style="margin-top: 20px; width: 100%; padding: 10px;">IMPRIMER PDF</button>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=MBA-VERIFIED" class="qr-code">
+    <div style="margin-top:40px; font-family:monospace; font-size:10px; color:#777; text-align:left;">
+        ID: <span id="cert-id"></span> | DATE: <span id="cert-date"></span> | STATUS: ENCRYPTED
+    </div>
+    <button onclick="window.print()" class="no-print" style="margin-top:20px; padding:10px 30px; cursor:pointer;">PRINT PDF</button>
 </div>
 
 <script>
     const SECTEURS = {
-        "Finance": ["Auditeur", "Analyste Risques", "CFO", "Quant Analyst", "M&A Advisor", "Trésorier", "Contrôleur Gestion", "Asset Manager", "Expert Fiscal", "Risk Manager", "Trader", "Banquier Privé", "Compliance Officer", "Actuaire", "Analyste ESG", "Credit Manager", "Back Office Manager", "Directeur Agence", "Expert Comptable", "Financial Planner"],
-        "Énergie": ["Ingénieur Forage", "Expert Solaire", "Manager Offshore", "Ingénieur Nucléaire", "HSE Manager", "Analyste Énergie", "Chef Projet Éolien", "Géologue", "Expert Gaz", "Smart Grid Engineer", "Directeur Raffinerie", "Technicien Maintenance", "Consultant Carbone", "Pipeline Manager", "Ingénieur Thermique", "Asset Manager", "Energy Trader", "Directeur Exploration", "Ingénieur Biomasse", "Manager Réseau"],
-        "Informatique & IA": ["Prompt Engineer", "RAG Architect", "Data Scientist", "ML Ops", "Cloud Architect", "Cyber Analyst", "IA Ethicist", "DevOps", "Expert Vision", "NLP Specialist", "Fullstack", "GPU Manager", "Product Manager IA", "Data Engineer", "Blockchain Expert", "IT Director", "Scrum Master", "UX Designer IA", "Solutions Architect", "Support Tech"],
-        "Tourisme": ["Directeur Hôtel", "Yield Manager", "Chef Produit Voyage", "Directeur Resort", "Manager Destination", "Directeur Croisière", "Hôtelier Luxe", "Expert Patrimoine", "Event Planner", "Guide National", "Directeur Restauration", "Responsable Agence", "Revenue Manager", "Expert Écotourisme", "Chef Concierge", "Manager Spa", "Digital Nomad Advisor", "Chargé Promotion", "Directeur Loisirs", "Audit Hospitalité"],
-        "Agroalimentaire": ["Directeur Usine", "R&D Manager", "Responsable Qualité", "Supply Chain Manager", "Expert Sanitaire", "Ingénieur Packaging", "Manager Production", "Acheteur MP", "Directeur Industriel", "Expert Nutrition", "Chef Labo", "Responsable Export", "Process Engineer", "QHSE Manager", "Logistique Manager", "Maintenance Manager", "Category Manager", "Brand Manager Food", "Auditeur Bio", "Directeur Innovation"],
-        "Éducation": ["Directeur Campus", "Architecte EdTech", "Doyen Académique", "Consultant MBA", "Manager Innovation", "E-learning Manager", "Expert Curriculum", "Directeur Admissions", "Responsable Recherche", "Coach Carrière", "Directeur International", "Recteur", "Admin Scolaire", "Conseiller Orientation", "Manager Formation", "Expert Inclusion", "Responsable Alumni", "Partenariats Manager", "Librarian Digital", "Chef de Projet Éducatif"]
+        "Finance": ["Auditeur Global", "CFO", "Analyste Risques", "M&A Expert", "Trader", "Asset Manager", "Tax Advisor", "Compliance Officer", "Risk Manager", "Portfolio Lead", "Comptable", "Financial Planner", "Audit Interne", "Directeur Banque", "Credit Analyst", "ESG Lead", "Trésorier", "Banquier Privé", "Analyste Equity", "Financial Modeler"],
+        "Informatique & IA": ["AI Architect", "Prompt Engineer", "RAG Expert", "Data Scientist", "Cyber Security", "Cloud Manager", "DevOps", "Ethicien IA", "Fullstack", "IT Director", "ML Ops", "Data Engineer", "Blockchain Lead", "Solutions Architect", "Product Owner", "UX Strategist", "Network Admin", "System Engineer", "Support Lead", "Innovation Manager"],
+        "Énergie": ["Forage Manager", "Expert Solaire", "Offshore Lead", "Ingénieur Nucléaire", "HSE Global", "Energy Analyst", "Eolien Pro", "Géologue", "Gaz Expert", "Smart Grid", "Raffinerie Dir", "Maintenance", "Carbone Lead", "Pipeline Dir", "Biomasse", "Energy Trader", "Réseau Dir", "Hydrogène Expert", "Géo-Énergie", "Exploration Dir"],
+        "Tourisme": ["Hôtel Dir", "Yield Manager", "Voyage Pro", "Resort Dir", "Destination Lead", "Croisière Dir", "Hospitalité Luxe", "Patrimoine", "Event Planner", "Guide National", "Resto Dir", "Agence Dir", "Revenue Manager", "Ecotourisme", "Concierge Lead", "Spa Manager", "Digital Nomad", "Promotion Dir", "Loisirs Dir", "Hospitalité Audit"],
+        "Agroalimentaire": ["Usine Dir", "R&D Food", "Qualité Lead", "Supply Chain", "Sécurité Sanitaire", "Packaging", "Production", "Acheteur MP", "Industriel Dir", "Nutrition Expert", "Labo Chef", "Export Lead", "Process Eng", "QHSE Dir", "Logistique", "Maintenance", "Category Manager", "Brand Lead", "Bio Expert", "Innovation Food"],
+        "Éducation": ["Campus Dir", "EdTech Architect", "Doyen", "MBA Consultant", "Innov Pédagogique", "Admissions", "Recherche Dir", "Career Coach", "International Dir", "Recteur", "Scolaire Admin", "Orientation", "Formation Manager", "Inclusion Expert", "Alumni Lead", "Partnership", "Librarian", "Project Manager", "E-learning Dir", "Academic Advisor"]
     };
 
-    const QUESTIONS = [
-        "Quelle est votre stratégie pour optimiser le rendement de [X] ?",
-        "Comment gérez-vous une crise de conformité dans le secteur [X] ?",
-        "Quelle innovation technologique va transformer [X] d'ici 2030 ?",
-        "Comment réduisez-vous les coûts opérationnels sans sacrifier la qualité en [X] ?",
-        "Quelle est la menace principale pour la pérennité de [X] ?",
-        "Comment intégrez-vous les critères ESG dans votre gestion de [X] ?",
-        "Quelle méthode utilisez-vous pour le management des équipes en [X] ?",
-        "Comment réagissez-vous face à une rupture de la supply chain en [X] ?",
-        "Quel est l'indicateur (KPI) le plus critique pour [X] ?",
-        "Comment sécurisez-vous les données sensibles au sein de [X] ?"
-    ];
+    const STR = {
+        fr: { head: "CERTIFICAT D'EXCELLENCE", awarded: "Le présent titre est décerné à :", for: "Pour la maîtrise stratégique de :", score: "SCORE D'EXPERTISE : ", step: "PHASE ", expert: "ANALYSE STRATÉGIQUE", val: "VALIDER L'ARBITRAGE", finalT: "AUDIT RÉUSSI", gen: "GÉNÉRER MON DIPLÔME", sigH: "Titulaire", sigA: "Autorité" },
+        ar: { head: "شهادة التميز الدولية", awarded: "تمنح هذه الشهادة رسمياً لـ:", for: "للإتقان الاستراتيجي لمهنة:", score: "درجة الخبرة: ", step: "المرحلة ", expert: "التحليل الاستراتيجي", val: "تأكيد القرار", finalT: "تم التدقيق بنجاح", gen: "إصدار الشهادة", sigH: "صاحب الشهادة", sigA: "سلطة الاعتماد" },
+        en: { head: "CERTIFICATE OF EXCELLENCE", awarded: "This official title is awarded to:", for: "For the strategic mastery of:", score: "EXPERTISE SCORE: ", step: "PHASE ", expert: "STRATEGIC ANALYSIS", val: "VALIDATE DECISION", finalT: "AUDIT SUCCESSFUL", gen: "GENERATE CERTIFICATE", sigH: "Holder", sigA: "Authority" }
+    };
+
+    const QUESTIONS = ["Stratégie d'arbitrage Capex/Opex ?", "Gestion de crise Supply Chain ?", "Approche Risque & Conformité ?", "Intégration IA & Data ?", "Levier de croissance +15% ?", "Résilience opérationnelle ?", "Management des talents ?", "Optimisation ESG & Carbone ?", "KPI critique de performance ?", "Sécurisation du KMS ?"];
 
     let lang = 'fr', curJob = "", step = 0, score = 0;
 
@@ -104,57 +110,57 @@
         lang = l;
         document.querySelectorAll('.btn-l').forEach(b => b.classList.remove('active-l'));
         document.getElementById('l-'+l).classList.add('active-l');
-        document.getElementById('body').className = (l === 'ar' ? 'rtl' : '');
+        document.getElementById('body').className = (l==='ar'?'rtl':'');
+        document.getElementById('txt-exp-lab').innerText = STR[lang].expert;
+        document.getElementById('txt-btn-val').innerText = STR[lang].val;
+        document.getElementById('txt-final-t').innerText = STR[lang].finalT;
+        document.getElementById('txt-btn-gen').innerText = STR[lang].gen;
         renderMenu();
     }
 
     function renderMenu() {
         const area = document.getElementById('menu-area'); area.innerHTML = '';
         for (let s in SECTEURS) {
-            let html = `<div class="sector-block"><div class="sector-title">${s}</div><div class="grid">`;
-            SECTEURS[s].forEach(j => {
-                html += `<div class="card" onclick="startExam('${j}')">${j}</div>`;
-            });
-            html += `</div></div>`;
-            area.innerHTML += html;
+            let h = `<div class="sector-title">${s}</div><div class="grid">`;
+            SECTEURS[s].forEach(j => h += `<div class="card" onclick="startExam('${j}')">${j}</div>`);
+            area.innerHTML += h + `</div>`;
         }
     }
 
     function startExam(j) {
         curJob = j; step = 0; score = 0;
-        document.getElementById('menu-area').style.display = 'none';
-        document.getElementById('exam-ui').style.display = 'block';
+        document.getElementById('menu-area').style.display='none';
+        document.getElementById('exam-ui').style.display='block';
         nextStep();
     }
 
-    function nextStep(isAnswering = false) {
-        if(isAnswering) { score++; step++; }
+    function nextStep(ans=false) {
+        if(ans) { score += (Math.random() * 5 + 5); step++; }
         if(step >= 10) { showFinal(); return; }
-
-        document.getElementById('p-bar').style.width = (step * 10) + "%";
-        document.getElementById('q-step').innerText = "ÉTAPE " + (step + 1) + " / 10";
-        document.getElementById('q-text').innerText = QUESTIONS[step].replace('[X]', curJob);
-        
-        let h = `<button class="opt" onclick="nextStep(true)">A) Approche Systémique & Innovation</button>
-                 <button class="opt" onclick="nextStep(true)">B) Optimisation des Coûts & Agilité</button>
-                 <button class="opt" onclick="nextStep(true)">C) Gestion des Risques & Gouvernance</button>`;
-        document.getElementById('options').innerHTML = h;
+        document.getElementById('p-bar').style.width = (step*10) + "%";
+        document.getElementById('txt-step').innerText = STR[lang].step + (step+1) + "/10";
+        document.getElementById('q-text').innerText = QUESTIONS[step];
+        document.getElementById('options').innerHTML = `<button class="opt" onclick="nextStep(true)">A) Innovation & Systémique</button><button class="opt" onclick="nextStep(true)">B) Agilité & Rentabilité</button><button class="opt" onclick="nextStep(true)">C) Gouvernance & Risques</button>`;
     }
 
-    function showFinal() {
-        document.getElementById('exam-ui').style.display = 'none';
-        document.getElementById('id-final').style.display = 'block';
-    }
+    function showFinal() { document.getElementById('exam-ui').style.display='none'; document.getElementById('id-final').style.display='block'; }
 
     function showCert() {
         const name = document.getElementById('u-name').value || "EXPERT";
-        document.getElementById('id-final').style.display = 'none';
-        document.getElementById('certificat').style.display = 'block';
-        document.getElementById('c-name').innerText = name;
-        document.getElementById('sig-n').innerText = name;
+        document.getElementById('id-final').style.display='none';
+        document.getElementById('certificat').style.display='block';
+        document.getElementById('txt-cert-head').innerText = STR[lang].head;
+        document.getElementById('txt-awarded').innerText = STR[lang].awarded;
+        document.getElementById('c-name').innerText = name.toUpperCase();
+        document.getElementById('txt-for').innerText = STR[lang].for;
         document.getElementById('c-job').innerText = curJob;
+        document.getElementById('c-score').innerText = STR[lang].score + Math.round(score) + "%";
+        document.getElementById('sig-n').innerText = name;
+        document.getElementById('txt-sig-h').innerText = STR[lang].sigH;
+        document.getElementById('txt-sig-a').innerText = STR[lang].sigA;
+        document.getElementById('cert-id').innerText = "MBA-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+        document.getElementById('cert-date').innerText = new Date().toLocaleDateString();
     }
-
     setL('fr');
 </script>
 </body>
