@@ -2,52 +2,46 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA-CONSULT | KMS A385</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MBA-CONSULT | GLOBAL KMS A385</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;600;800&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root { --gold: #c5a021; --navy: #0a1128; --white: #ffffff; --bg: #f4f7f9; }
         * { box-sizing: border-box; transition: all 0.3s ease; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); overflow-x: hidden; }
         
-        /* GESTION MOBILE & RTL */
         body.rtl { direction: rtl; font-family: 'Amiri', serif; }
-        body.rtl .cert-validation-block { left: auto; right: 40px; text-align: right; }
+        body.rtl .cert-validation-block { left: auto; right: 60px; text-align: right; }
         body.rtl .cert-footer { flex-direction: row-reverse; }
+        body.rtl #lang-switcher { right: auto; left: 20px; }
 
-        #lang-switcher { position: fixed; top: 10px; right: 10px; z-index: 40000; display: flex; gap: 5px; background: rgba(10,17,40,0.9); padding: 5px; border-radius: 5px; }
-        .lang-btn { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 5px 10px; cursor: pointer; font-size: 0.8em; font-weight: 800; }
+        #lang-switcher { position: fixed; top: 20px; right: 20px; z-index: 40000; display: flex; gap: 8px; background: rgba(10,17,40,0.95); padding: 10px; border-radius: 8px; border: 1px solid var(--gold); }
+        .lang-btn { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 6px 14px; cursor: pointer; font-weight: 800; border-radius: 4px; }
         .lang-btn.active { background: var(--gold); color: var(--navy); }
 
-        #vision-portal { position: fixed; inset: 0; background: var(--navy); z-index: 30000; display: flex; justify-content: center; align-items: center; color: white; padding: 15px; text-align: center; }
-        .welcome-box { border: 2px solid var(--gold); padding: 30px; border-radius: 10px; width: 100%; max-width: 600px; }
-        .speech-text { font-size: 1.1em; line-height: 1.5; margin: 20px 0; font-style: italic; }
+        #vision-portal { position: fixed; inset: 0; background: var(--navy); z-index: 30000; display: flex; justify-content: center; align-items: center; color: white; padding: 20px; text-align: center; }
+        .welcome-box { background: rgba(15, 25, 55, 0.98); border: 2px solid var(--gold); padding: 40px; border-radius: 15px; max-width: 1000px; width: 100%; }
+        .speech-text { font-size: 1.5em; line-height: 1.6; margin: 30px 0; font-weight: 300; font-style: italic; color: #e0e0e0; white-space: pre-line; }
         
-        header { background: var(--navy); color: var(--gold); padding: 20px 10px; text-align: center; border-bottom: 4px solid var(--gold); font-family: 'Cinzel'; font-size: 1.2em; }
+        header { background: var(--navy); color: var(--gold); padding: 25px; text-align: center; border-bottom: 5px solid var(--gold); font-family: 'Cinzel'; font-size: 1.8em; letter-spacing: 6px; }
 
-        .sector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; padding: 20px; max-width: 1200px; margin: 0 auto; }
-        .sector-card { background: white; padding: 20px; border-radius: 10px; border: 1px solid #ddd; cursor: pointer; text-align: center; font-size: 0.9em; font-weight: 800; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .sector-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+        .sector-grid, .job-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; max-width: 1400px; margin: 0 auto; }
+        .sector-card, .job-card { background: white; padding: 40px; border-radius: 15px; border: 2px solid #eee; cursor: pointer; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .sector-card:hover, .job-card:hover { border-color: var(--gold); transform: translateY(-8px); }
 
-        #audit-interface { display: none; width: 95%; max-width: 800px; margin: 20px auto; background: white; padding: 25px; border-radius: 10px; border-left: 8px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .opt-button { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #eee; cursor: pointer; background: white; text-align: inherit; border-radius: 5px; font-size: 1em; }
-        .opt-button.selected { border-color: var(--gold); background: #fffcf0; font-weight: 800; }
+        #audit-interface { display: none; max-width: 950px; width: 95%; margin: 40px auto; background: white; padding: 40px; border-radius: 15px; border-left: 10px solid var(--gold); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        .opt-button { display: block; width: 100%; padding: 22px; margin: 12px 0; border: 2px solid #eee; cursor: pointer; background: white; text-align: inherit; border-radius: 8px; font-size: 1.1em; }
+        .opt-button.selected { border-color: var(--gold); background: #fdfaf0; border-width: 3px; }
 
-        /* CERTIFICAT MOBILE FRIENDLY */
-        #certificat-wrapper { display: none; padding: 20px; text-align: center; }
-        .cert-container-scroll { width: 100%; overflow-x: auto; padding-bottom: 20px; }
-        #cert-area { width: 1000px; height: 700px; background: white; margin: 0 auto; padding: 40px; position: relative; border: 20px double var(--gold); }
-        .cert-validation-block { position: absolute; top: 40px; left: 40px; width: 150px; }
-        .cert-qr { width: 110px; border: 1px solid #eee; }
-        .cert-footer { position: absolute; bottom: 40px; left: 40px; right: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
-
-        @media (max-width: 600px) {
-            header { font-size: 1em; letter-spacing: 2px; }
-            .welcome-box { padding: 20px; }
-            .speech-text { font-size: 0.9em; }
-        }
+        #certificat-wrapper { display: none; padding: 40px 0; text-align: center; }
+        .scroll-box { width: 100%; overflow-x: auto; padding: 20px 0; }
+        #cert-area { width: 1050px; height: 740px; background: white; margin: 0 auto; padding: 50px; position: relative; border: 30px double var(--gold); }
+        .cert-validation-block { position: absolute; top: 60px; left: 60px; text-align: left; }
+        .cert-qr { width: 130px; border: 1px solid #eee; }
+        .cert-footer { position: absolute; bottom: 50px; left: 60px; right: 60px; display: flex; justify-content: space-between; align-items: flex-end; }
     </style>
 </head>
 <body>
@@ -60,52 +54,54 @@
 
 <div id="vision-portal">
     <div class="welcome-box">
-        <h1 style="font-family: 'Cinzel'; font-size: 2em; margin: 0; color: var(--gold);">MBA-CONSULT</h1>
+        <h1 style="font-family: 'Cinzel'; font-size: clamp(1.5em, 5vw, 3.5em); margin: 0; color: var(--gold);">MBA-CONSULT</h1>
         <div class="speech-text" id="v-speech"></div>
-        <button class="lang-btn active" id="v-btn" onclick="document.getElementById('vision-portal').style.display='none'" style="padding: 12px 30px; font-size: 1em;"></button>
+        <button class="lang-btn active" id="v-btn" onclick="document.getElementById('vision-portal').style.display='none'"></button>
     </div>
 </div>
 
 <header id="h-main">MBA-CONSULT | GLOBAL KMS A385</header>
 
 <div id="selection-interface">
-    <h2 id="s-title" style="text-align:center; font-family: 'Cinzel'; margin-top: 25px; font-size: 1.2em;"></h2>
+    <h2 id="s-title" style="text-align:center; font-family: 'Cinzel'; margin-top: 40px;"></h2>
     <div class="sector-grid" id="sector-grid"></div>
 </div>
 
+<div id="job-selection-interface" style="display:none;">
+    <h2 id="j-title" style="text-align:center; font-family: 'Cinzel'; margin-top: 40px;"></h2>
+    <div class="job-grid" id="job-grid"></div>
+</div>
+
 <div id="audit-interface">
-    <div style="display: flex; justify-content: space-between; font-weight: 800; color: var(--gold); margin-bottom: 15px;">
-        <span id="audit-step"></span>
-        <span id="job-badge" style="color: var(--navy);"></span>
-    </div>
-    <h2 id="q-text" style="font-size: 1.2em; margin-bottom: 20px;"></h2>
+    <div id="audit-step" style="font-weight: 800; color: var(--gold); margin-bottom: 20px;"></div>
+    <h2 id="q-text" style="font-size: 1.7em; color: var(--navy);"></h2>
     <div id="options-stack"></div>
-    <button id="q-submit" onclick="submitStep()" style="background: var(--gold); color: var(--navy); border: none; padding: 15px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 15px;"></button>
+    <button id="q-submit" onclick="submitStep()" style="background: var(--gold); color: var(--navy); border: none; padding: 20px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 30px; text-transform: uppercase;"></button>
 </div>
 
 <div id="certificat-wrapper">
-    <button onclick="generatePDF()" style="background: #27ae60; color:white; padding:12px 25px; border:none; border-radius:5px; font-weight:800; margin-bottom:15px; cursor:pointer;">TÉLÉCHARGER LE CERTIFICAT (PDF)</button>
-    <div class="cert-container-scroll">
+    <button onclick="generatePDF()" style="padding:15px 30px; background:#27ae60; color:white; border:none; cursor:pointer; font-weight:800; margin-bottom:20px; border-radius: 5px;">EXPORT PDF</button>
+    <div class="scroll-box">
         <div id="cert-area">
             <div class="cert-validation-block">
                 <img id="c-qr" class="cert-qr" src="">
-                <div style="font-size: 1.5em; font-weight: 900;" id="c-score-pct"></div>
-                <div style="color: var(--gold); font-size: 0.8em; font-weight: 800;">TOP TIER ACCREDITED</div>
+                <div id="c-score-pct" style="font-size: 2em; font-weight: 900;"></div>
+                <div style="color: var(--gold); font-weight: 800;">WORLD RANK: #1 TOP TIER</div>
             </div>
-            <div id="c-title" style="font-family: 'Cinzel'; font-size: 35px; margin-top: 40px;"></div>
-            <div id="c-sub" style="color: var(--gold); letter-spacing: 5px; font-weight: 800; font-size: 0.9em;"></div>
-            <p id="c-confirm" style="font-size: 1.4em; margin-top: 60px;"></p>
-            <div id="c-name" style="font-family: 'Amiri'; font-size: 50px; border-bottom: 2px solid #333; display: inline-block; padding: 0 30px; min-width: 400px;"></div>
-            <p id="c-expert-text" style="font-size: 1.4em; margin-top: 20px;"></p>
-            <div id="c-job" style="font-size: 35px; font-weight: 900; color: var(--gold);"></div>
+            <div id="c-cert-title" style="font-family: 'Cinzel'; font-size: 40px; margin-top: 50px;"></div>
+            <div id="c-sub" style="letter-spacing: 10px; font-weight: 800; color: var(--gold);"></div>
+            <p id="c-confirm" style="font-size: 1.6em; margin-top: 80px;"></p>
+            <div id="c-name" style="font-family: 'Amiri'; font-size: 55px; border-bottom: 3px solid #333; display: inline-block; padding: 0 40px; min-width: 400px;"></div>
+            <p id="c-expert-text" style="font-size: 1.6em; margin-top: 15px;"></p>
+            <div id="c-job" style="font-size: 38px; font-weight: 900; color: var(--gold); text-transform: uppercase;"></div>
             <div class="cert-footer">
                 <div style="text-align:left;">
-                    <div id="c-sig" style="font-family: 'Amiri'; font-size: 25px; border-bottom: 1px solid #333; width: 250px;"></div>
-                    <small id="c-sig-label" style="font-weight: 800;"></small>
+                    <div id="c-sig" style="font-family: 'Amiri'; font-size: 30px; border-bottom: 2px solid #333; width: 280px;"></div>
+                    <small id="c-sig-label" style="font-weight: 800; display: block; margin-top: 5px;"></small>
                 </div>
                 <div style="text-align:right;">
-                    <div style="color: var(--gold); font-weight: 800;">MBA-CONSULT GLOBAL</div>
-                    <div style="font-family: 'Cinzel'; font-size: 15px; border-bottom: 1px solid #333; width: 250px;">OFFICIAL BOARD</div>
+                    <div style="color: var(--gold); font-weight: bold;">HASH-MBA-ACCREDITED</div>
+                    <div style="font-family: 'Cinzel'; font-size: 20px; border-bottom: 2px solid #333; width: 280px; margin-top: 10px;">MBA BOARD ALPHA</div>
                 </div>
             </div>
         </div>
@@ -113,64 +109,91 @@
 </div>
 
 <script>
-    const TXT = {
+    const SECTORS = {
+        "Finance": ["Trader", "Analyste M&A", "Auditeur", "Risk Manager", "Trésorier", "Banquier d'Affaires", "Fiscaliste", "Actuaire", "Gestionnaire de Fortune", "Analyste ESG", "Compliance Officer", "Broker", "Contrôleur de Gestion", "Analyste Quant", "Gestionnaire de Fonds", "Expert Comptable", "Credit Analyst", "Spécialiste Blockchain", "CFO", "Consultant M&A"],
+        "IT & AI": ["Data Scientist", "Architecte Cloud", "Expert Cybersécurité", "Ingénieur Prompt", "Développeur Fullstack", "ML Engineer", "Product Owner", "DevOps", "Analyste SOC", "Architecte Big Data", "Consultant IA", "Blockchain Dev", "Ethical Hacker", "Ingénieur IoT", "UX Designer", "SysAdmin", "Data Engineer", "Scrum Master", "Directeur IT", "Ingénieur QA"],
+        "Energie": ["Ingénieur Solaire", "Expert Éolien", "Analyste Smart Grid", "Ingénieur Nucléaire", "Consultant Carbone", "Foreur", "Géologue Énergie", "Chef Projet Hydrogène", "Technicien Réseau", "Analyste Marché Énergie", "Audit Énergétique", "Ingénieur Biomasse", "Expert Offshore", "Maintenance Éolienne", "Responsable HSE", "Ingénieur Pipeline", "Energy Trader", "Spécialiste Photovoltaïque", "Directeur Énergie", "R&D Stockage"],
+        "Agri-Food": ["Ingénieur Agronome", "Responsable Qualité", "Technologue Alimentaire", "Directeur Production", "Expert Supply Chain", "Acheteur Matières Premières", "Chef de Culture", "Analyste Sanitaire", "R&D Food Tech", "Manager Logistique", "Viticulteur Expert", "Responsable Export", "Auditeur Certif", "Nutritionniste Industriel", "Spécialiste Élevage", "Directeur Usine", "Brand Manager Food", "Expert Packaging", "Spécialiste Hydroponie", "Contrôleur Fraude"],
+        "Tourisme": ["Directeur Hôtel", "Yield Manager", "Expert E-Réputation", "Chef de Projet Événementiel", "Manager Agence Voyage", "Consultant Patrimoine", "Responsable Croisière", "Directeur Resort", "Expert Écotourisme", "Guest Relation", "Spécialiste MICE", "Travel Planner Luxury", "Directeur Marketing", "Revenue Manager", "Expert Gastronomie", "Manager Loisirs", "Chef Concierge", "Analyste Destinations", "Responsable Spa", "Directeur Aéroportuaire"],
+        "Education": ["Directeur Académique", "Concepteur Pédagogique", "Expert EdTech", "Enseignant Chercheur", "Coach Professionnel", "Spécialiste Inclusion", "Responsable Formation", "Analyste Éducation", "Doyen de Faculté", "Coordinateur Scolaire", "Expert Orientation", "Linguiste", "Mentor Startup", "Directeur E-learning", "Responsable RH Éducation", "Spécialiste Psychopédagogie", "Manager Centre Langue", "Directeur Admissions", "Expert Éval", "Chercheur IA Éducative"]
+    };
+
+    const QUESTIONS = {
+        "Finance": ["Optimisation levier financier?", "Analyse risque systémique?", "Valorisation actifs illiquides?", "Stratégie arbitrage HFT?", "Conformité Bâle III?"],
+        "IT & AI": ["Optimisation latence modèle?", "Sécurisation API REST?", "Architecture micro-services?", "Entraînement modèle LLM?", "Gestion dette technique?"],
+        "Energie": ["Stabilité réseau renouvelable?", "Efficacité turbine hydrogène?", "Gestion déchets nucléaires?", "Optimisation cycle combiné?", "Stockage thermique avancé?"],
+        "Agri-Food": ["Traçabilité blockchain bio?", "Optimisation chaîne froid?", "Réduction empreinte eau?", "Sécurité microbiologique?", "Innovation protéines alternatives?"],
+        "Tourisme": ["Optimisation RevPAR?", "Expérience client immersive?", "Tourisme régénératif?", "Digitisation parcours client?", "Gestion crise réputation?"],
+        "Education": ["Pédagogie inversée hybride?", "Mesure impact apprentissage?", "Éthique IA en classe?", "Gamification programmes?", "Management talents académiques?"]
+    };
+
+    const TEXTS = {
         fr: {
-            vSpeech: "Intégrez l'élite mondiale du savoir stratégique.",
-            vBtn: "DÉMARRER", sTitle: "UNITÉS D'ACCRÉDITATION", qSubmit: "VALIDER",
-            promptName: "NOM COMPLET :", promptJob: "VOTRE MÉTIER :",
-            cTitle: "CERTIFICAT D'EXCELLENCE", cSub: "ACCRÉDITATION INTERNATIONALE",
-            cConfirm: "Ce document certifie que", cExpert: "est accrédité pour le métier de :", cSig: "Signature Électronique"
+            vSpeech: "Intégrez l'élite mondiale.\nVotre expertise est votre actif précieux.",
+            vBtn: "DÉPLOYER L'AUDIT", sTitle: "UNITÉS D'ACCRÉDITATION MBA", jTitle: "SÉLECTIONNEZ VOTRE EXPERTISE",
+            qSubmit: "VALIDER", promptName: "NOM COMPLET :", cTitle: "CERTIFICAT D'EXCELLENCE", 
+            cSub: "ACCRÉDITATION MONDIALE", cConfirm: "Ce document atteste solennellement que", 
+            cExpert: "A validé son accréditation pour le métier de :", cSig: "SIGNATURE ÉLECTRONIQUE"
         },
         en: {
-            vSpeech: "Join the global elite of strategic knowledge.",
-            vBtn: "START", sTitle: "ACCREDITATION UNITS", qSubmit: "VALIDATE",
-            promptName: "FULL NAME:", promptJob: "YOUR PROFESSION:",
-            cTitle: "CERTIFICATE OF EXCELLENCE", cSub: "INTERNATIONAL ACCREDITATION",
-            cConfirm: "This document certifies that", cExpert: "is accredited for the profession of:", cSig: "Electronic Signature"
+            vSpeech: "Join the global elite.\nYour expertise is your most valuable asset.",
+            vBtn: "DEPLOY AUDIT", sTitle: "MBA ACCREDITATION UNITS", jTitle: "SELECT YOUR EXPERTISE",
+            qSubmit: "VALIDATE", promptName: "FULL NAME:", cTitle: "CERTIFICATE OF EXCELLENCE",
+            cSub: "GLOBAL ACCREDITATION", cConfirm: "This document solemnly certifies that",
+            cExpert: "Has validated accreditation for the profession of:", cSig: "ELECTRONIC SIGNATURE"
         },
         ar: {
-            vSpeech: "انضم إلى نخبة الخبراء الاستراتيجيين في العالم.",
-            vBtn: "ابدأ الآن", sTitle: "وحدات الاعتماد المهني", qSubmit: "تأكيد",
-            promptName: "الاسم الكامل:", promptJob: "المهنة:",
-            cTitle: "شهادة التميـــــــــز", cSub: "اعتماد مهني دولي",
-            cConfirm: "تشهد هذه الوثيقة بأن الخبير", cExpert: "قد نال الاعتماد العالمي في مهنة:", cSig: "توقيع إلكتروني موثق"
+            vSpeech: "تجاوز حدود المعرفة التقليدية لتنضم إلى نخبة صناع القرار في العالم.",
+            vBtn: "بدء التدقيق الاستراتيجي", sTitle: "وحدات الاعتماد المهني MBA", jTitle: "اختر مهنة الخبرة الخاصة بك",
+            qSubmit: "تأكيد القرار", promptName: "الاسم الكامل للـخبير:", cTitle: "شهادة التميـــــــــز",
+            cSub: "الاعتماد المهنـي العالمـي", cConfirm: "تشهد هذه الوثيقة رسمياً وبكل فخر بأن",
+            cExpert: "قد اجتاز بنجاح الاعتماد العالمي لمهنة:", cSig: "توقيع إلكتروني معتمد"
         }
     };
 
-    let curL = 'fr', score = 0, step = 0, selectedJob = "", tempPts = 0;
+    let curL = 'fr', score = 0, step = 0, selectedSector = "", selectedJob = "", tempPts = 0;
 
     function setLang(l) {
         curL = l;
         document.body.className = (l === 'ar' ? 'rtl' : '');
-        const d = TXT[l];
+        const d = TEXTS[l];
         document.getElementById('v-speech').innerText = d.vSpeech;
         document.getElementById('v-btn').innerText = d.vBtn;
         document.getElementById('s-title').innerText = d.sTitle;
+        document.getElementById('j-title').innerText = d.jTitle;
         document.getElementById('q-submit').innerText = d.qSubmit;
         initSectors();
     }
 
     function initSectors() {
-        const grid = document.getElementById('sector-grid');
-        grid.innerHTML = "";
-        const sectors = ["FINANCE", "IT & AI", "ENERGY", "AGRI-FOOD", "TOURISM", "EDUCATION"];
-        sectors.forEach(s => {
-            grid.innerHTML += `<div class="sector-card" onclick="startAudit('${s}')">${s}</div>`;
+        const grid = document.getElementById('sector-grid'); grid.innerHTML = "";
+        Object.keys(SECTORS).forEach(s => {
+            grid.innerHTML += `<div class="sector-card" onclick="showJobs('${s}')"><h3>${s}</h3></div>`;
         });
     }
 
-    function startAudit(s) {
-        selectedJob = prompt(TXT[curL].promptJob) || "EXPERT";
+    function showJobs(s) {
+        selectedSector = s;
         document.getElementById('selection-interface').style.display = 'none';
+        document.getElementById('job-selection-interface').style.display = 'block';
+        const grid = document.getElementById('job-grid'); grid.innerHTML = "";
+        SECTORS[s].forEach(j => {
+            grid.innerHTML += `<div class="job-card" onclick="startAudit('${j}')">${j}</div>`;
+        });
+    }
+
+    function startAudit(j) {
+        selectedJob = j;
+        document.getElementById('job-selection-interface').style.display = 'none';
         document.getElementById('audit-interface').style.display = 'block';
-        document.getElementById('job-badge').innerText = selectedJob;
         loadQ();
     }
 
     function loadQ() {
         if(step >= 5) { conclude(); return; }
         document.getElementById('audit-step').innerText = `STEP ${step+1}/5`;
-        document.getElementById('q-text').innerText = (curL === 'ar' ? "ما هو القرار الاستراتيجي الأمثل لضمان النمو؟" : "Quelle décision stratégique garantit la croissance ?");
+        const qList = QUESTIONS[selectedSector];
+        document.getElementById('q-text').innerText = (curL === 'ar' ? "القرار الاستراتيجي المطلوب: " : "") + qList[step];
         const stack = document.getElementById('options-stack'); stack.innerHTML = "";
         ["Alpha Decision (+10)", "Beta Decision (+7)", "Gamma Decision (+4)"].forEach((o, i) => {
             stack.innerHTML += `<button class="opt-button" onclick="sel(this, ${[10,7,4][i]})">${o}</button>`;
@@ -188,25 +211,24 @@
         document.getElementById('audit-interface').style.display = 'none';
         if(score < 40) { alert("SCORE INSUFFISANT / درجة غير كافية"); location.reload(); }
         else {
-            const name = prompt(TXT[curL].promptName) || "EXPERT";
-            const d = TXT[curL];
+            const name = prompt(TEXTS[curL].promptName) || "EXPERT";
+            const d = TEXTS[curL];
             document.getElementById('certificat-wrapper').style.display = 'block';
-            document.getElementById('c-title').innerText = d.cTitle;
+            document.getElementById('c-cert-title').innerText = d.cTitle;
             document.getElementById('c-sub').innerText = d.cSub;
             document.getElementById('c-confirm').innerText = d.cConfirm;
             document.getElementById('c-expert-text').innerText = d.cExpert;
+            document.getElementById('c-sig-label').innerText = d.cSig;
             document.getElementById('c-name').innerText = name.toUpperCase();
             document.getElementById('c-job').innerText = selectedJob;
             document.getElementById('c-score-pct').innerText = (score/50*100) + "%";
             document.getElementById('c-sig').innerText = name;
-            document.getElementById('c-sig-label').innerText = d.cSig;
             document.getElementById('c-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=MBA-${name}`;
         }
     }
 
     function generatePDF() {
-        const opt = { margin:0, filename:'MBA-A385.pdf', image:{type:'jpeg', quality:1}, html2canvas:{scale:2}, jsPDF:{unit:'px', format:[1000, 700], orientation:'landscape'} };
-        html2pdf().set(opt).from(document.getElementById('cert-area')).save();
+        html2pdf().set({ margin:0, filename:'MBA-A385.pdf', jsPDF:{format:'a4', orientation:'landscape'} }).from(document.getElementById('cert-area')).save();
     }
 
     setLang('fr');
