@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA-CONSULT | GLOBAL KMS V300</title>
+    <title>MBA-CONSULT | GLOBAL KMS V310</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;600;800&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #c5a021; --navy: #0a1128; --white: #ffffff; --bg: #f4f7f9; }
@@ -62,7 +62,7 @@
     </div>
 </div>
 
-<header>MBA-CONSULT | GLOBAL KMS V300</header>
+<header>MBA-CONSULT | GLOBAL KMS V310</header>
 
 <div class="container" style="max-width: 1300px; margin: auto;">
     <div id="selection-interface">
@@ -85,7 +85,7 @@
     <div id="certificat-final">
         <div style="position: absolute; top: 40px; right: 60px; text-align: right;">
             <div style="font-family: 'Cinzel'; font-size: 22px; color: var(--gold);">MBA BOARD ALPHA</div>
-            <small>ID: <span id="c-hash"></span></small>
+            <small>HASH ID: <span id="c-hash"></span></small>
         </div>
         <div id="c-cert-title" style="font-family: 'Cinzel'; font-size: 45px; margin-top: 60px;">CERTIFICATE OF EXCELLENCE</div>
         <p style="letter-spacing: 10px; font-weight: 800; color: var(--gold); margin-top: 10px;">GLOBAL PROFESSIONAL ACCREDITATION</p>
@@ -95,13 +95,13 @@
         <div id="c-job" style="font-size: 38px; font-weight: 900; color: var(--gold); text-transform: uppercase; margin: 20px 0;"></div>
         
         <div style="display: flex; justify-content: center; gap: 40px; margin: 40px 0;">
-            <div style="background: var(--navy); color: white; padding: 20px 50px; border: 2px solid var(--gold); font-size: 1.5em; font-weight: 800;">SCORE: <span id="c-score"></span>%</div>
+            <div style="background: var(--navy); color: white; padding: 20px 50px; border: 2px solid var(--gold); font-size: 1.5em; font-weight: 800;">SCORE: <span id="c-score"></span>/100</div>
         </div>
 
         <div style="margin-top: 60px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 40px;">
             <div style="text-align:left;">
                 <div id="c-sig" style="font-family: 'Amiri'; font-size: 30px; border-top: 2px solid #333; width: 350px; padding-top: 10px;"></div>
-                <small>E-Signature : MBA-CONSULT KMS VERIFIED</small>
+                <small>E-Signature : MBA-CONSULT KMS SECURED</small>
             </div>
             <img id="c-qr" src="" style="width: 130px;">
         </div>
@@ -111,56 +111,68 @@
 <script>
     const TRANSLATIONS = {
         fr: {
-            vMsg: "Le monde ne récompense pas le savoir, il récompense la capacité à décider dans le chaos. Bienvenue dans l'unité d'élite MBA-Consult.",
-            vVigilance: "⚠ ATTENTION : Seuil d'accréditation fixé à 80%. L'échec est définitif.",
+            vMsg: "L'expertise mondiale exige une capacité de décision sous pression. Bienvenue dans l'unité d'élite MBA-Consult.",
+            vVigilance: "⚠ ATTENTION : Le score minimal d'accréditation est de 80 points sur 100. L'échec est définitif.",
             vBtn: "INITIALISER L'AUDIT",
             sTitle: "UNITÉS DE CERTIFICATION (120 MÉTIERS)",
             qSubmit: "VALIDER LA DÉCISION",
-            promptJob: "CHOISISSEZ VOTRE MÉTIER PARMI LES 20 DU SECTEUR :",
+            promptJob: "CHOISISSEZ VOTRE MÉTIER (Tapez le nom exact parmi la liste) :",
             promptName: "NOM COMPLET POUR LE REGISTRE :",
             cConfirm: "Ceci confirme officiellement que",
             cExpert: "A démontré une expertise métier supérieure en qualité de :",
             audit: "PHASE D'AUDIT",
-            fail: "ÉCHEC D'ACCRÉDITATION. SCORE INSUFFISANT.",
-            strategies: ["Arbitrage Disruptif : Réalignement immédiat des actifs stratégiques.", "Optimisation Tactique : Amélioration continue et pivot résilient.", "Analyse de Risque : Audit de conformité avant toute action."]
+            fail: "ÉCHEC D'ACCRÉDITATION. SCORE INFÉRIEUR À 80.",
+            strategies: [
+                { text: "Arbitrage Alpha : Réponse stratégique radicale optimisant la pérennité.", pts: 10 },
+                { text: "Optimisation Beta : Amélioration tactique réduisant les risques immédiats.", pts: 7 },
+                { text: "Audit Gamma : Analyse prudente et collecte de données supplémentaires.", pts: 4 }
+            ]
         },
         en: {
-            vMsg: "The world does not reward knowledge, it rewards the ability to decide in chaos. Welcome to the MBA-Consult elite unit.",
-            vVigilance: "⚠ WARNING: Accreditation threshold set at 80%. Failure is final.",
+            vMsg: "Global expertise requires decision-making under pressure. Welcome to the MBA-Consult elite unit.",
+            vVigilance: "⚠ WARNING: Minimum accreditation score is 80 points out of 100. Failure is final.",
             vBtn: "INITIALIZE AUDIT",
             sTitle: "CERTIFICATION UNITS (120 PROFESSIONS)",
             qSubmit: "VALIDATE DECISION",
-            promptJob: "CHOOSE YOUR PROFESSION AMONG THE 20 IN THIS SECTOR:",
+            promptJob: "CHOOSE YOUR PROFESSION (Type the exact name from the list):",
             promptName: "FULL NAME FOR THE REGISTER:",
             cConfirm: "This officially confirms that",
             cExpert: "Has demonstrated superior professional expertise as:",
             audit: "AUDIT PHASE",
-            fail: "ACCREDITATION FAILED. INSUFFICIENT SCORE.",
-            strategies: ["Disruptive Arbitrage: Immediate realignment of strategic assets.", "Tactical Optimization: Continuous improvement and resilient pivot.", "Risk Analysis: Compliance audit before any action."]
+            fail: "ACCREDITATION FAILED. SCORE BELOW 80.",
+            strategies: [
+                { text: "Alpha Arbitrage: Radical strategic response optimizing sustainability.", pts: 10 },
+                { text: "Beta Optimization: Tactical improvement reducing immediate risks.", pts: 7 },
+                { text: "Gamma Audit: Prudent analysis and additional data collection.", pts: 4 }
+            ]
         },
         ar: {
-            vMsg: "العالم لا يكافئ المعرفة، بل يكافئ القدرة على اتخاذ القرار في الفوضى. مرحباً بكم في وحدة النخبة بمؤسسة MBA-Consult.",
-            vVigilance: "⚠ تحذير: عتبة الاعتماد محددة بنسبة 80%. الفشل نهائي.",
+            vMsg: "تتطلب الخبرة العالمية القدرة على اتخاذ القرار تحت الضغط. مرحباً بكم في وحدة النخبة بمؤسسة MBA-Consult.",
+            vVigilance: "⚠ تحذير: الحد الأدنى لدرجة الاعتماد هو 80 نقطة من أصل 100. الفشل نهائي.",
             vBtn: "بدء التدقيق المهني",
             sTitle: "وحدات الشهادات (120 مهنة)",
             qSubmit: "تأكيد القرار",
-            promptJob: "اختر مهنتك من بين 20 مهنة في هذا القطاع:",
+            promptJob: "اختر مهنتك (اكتب الاسم بالضبط من القائمة):",
             promptName: "الاسم الكامل للسجل:",
             cConfirm: "هذا يؤكد رسمياً أن",
             cExpert: "أظهر خبرة مهنية متفوقة بصفته:",
             audit: "مرحلة التدقيق",
-            fail: "فشل الاعتماد. النتيجة غير كافية.",
-            strategies: ["قرار جذري: إعادة التنظيم الفوري للأصول الاستراتيجية.", "تحسين تكتيكي: التحسين المستمر والتحول المرن.", "تحليل المخاطر: تدقيق الامتثال قبل اتخاذ أي إجراء."]
+            fail: "فشل الاعتماد. النتيجة أقل من 80.",
+            strategies: [
+                { text: "قرار ألفا: استجابة استراتيجية جذرية تحسن الاستدامة.", pts: 10 },
+                { text: "تحسين بيتا: تحسين تكتيكي يقلل من المخاطر الفورية.", pts: 7 },
+                { text: "تدقيق غاما: تحليل حذر وجمع بيانات إضافية.", pts: 4 }
+            ]
         }
     };
 
     const DATABASE = {
-        Finance: { logo: "🏦", fr: ["Trader", "Analyste M&A", "Auditeur", "Risk Manager", "Trésorier", "Gestionnaire de Patrimoine", "Analyste ESG", "Actuaire", "Directeur Financier", "Fiscaliste", "Broker", "Contrôleur de gestion", "Trader Crypto", "Credit Analyst", "Compliance Officer", "Analyste Quant", "Gestionnaire de fonds", "Expert Comptable", "Banquier d'affaires", "Spécialiste Blockchain"], en: ["Trader", "M&A Analyst", "Auditor", "Risk Manager", "Treasurer", "Wealth Manager", "ESG Analyst", "Actuary", "CFO", "Tax Expert", "Broker", "Financial Controller", "Crypto Trader", "Credit Analyst", "Compliance Officer", "Quant Analyst", "Fund Manager", "Chartered Accountant", "Investment Banker", "Blockchain Specialist"], ar: ["متداول", "محلل اندماج", "مدقق", "مدير مخاطر", "أمين صندوق", "مدير ثروات", "محلل بيئي", "خبير اكتواري", "مدير مالي", "خبير ضرائب", "وسيط", "مراقب تسيير", "متداول كريبتو", "محلل ائتمان", "مسؤول امتثال", "محلل كمي", "مدير صناديق", "خبير محاسب", "مصرفي استثمار", "خبير بلوكشين"] },
-        Energie: { logo: "⚡", fr: ["Ingénieur Forage", "Expert Solaire", "Analyste Smart-Grid", "Géologue", "Manager Éolien", "Ingénieur Nucléaire", "Consultant Hydrogène", "Responsable HSE", "Directeur de centrale", "Analyste Marchés", "Technicien Réseaux", "Audit Énergétique", "Manager Biomasse", "Géophysicien", "Planificateur", "Expert Off-shore", "Spécialiste GRID", "Ingénieur Thermique", "Foreur", "Consultant Carbone"], en: ["Drilling Engineer", "Solar Expert", "Smart-Grid Analyst", "Geologist", "Wind Manager", "Nuclear Engineer", "Hydrogen Consultant", "HSE Manager", "Plant Director", "Market Analyst", "Network Technician", "Energy Auditor", "Biomass Manager", "Geophysicist", "Planner", "Off-shore Expert", "GRID Specialist", "Thermal Engineer", "Driller", "Carbon Consultant"], ar: ["مهندس حفر", "خبير شمسي", "محلل شبكات ذكية", "جيولوجي", "مدير طاقة رياح", "مهندس نووي", "مستشار هيدروجين", "مسؤول سلامة", "مدير محطة", "محلل أسواق", "تقني شبكات", "مدقق طاقة", "مدير طاقة حيوية", "جيوفيزيائي", "مخطط طاقة", "خبير أوفشور", "خبير شبكات", "مهندس حراري", "حفار", "مستشار كربون"] },
-        IT_AI: { logo: "🤖", fr: ["Data Scientist", "Architecte Cloud", "Cyber Expert", "Prompt Engineer", "ML Ops", "Pentester", "Data Architect", "Scrum Master", "Analyste SOC", "Ingénieur VR", "DevSecOps", "UX Designer", "Product Owner", "Expert Big Data", "Manager IT", "Architecte Réseaux", "Fullstack Dev", "Expert Blockchain", "Consultant ERP", "Ingénieur Robotique"], en: ["Data Scientist", "Cloud Architect", "Cyber Expert", "Prompt Engineer", "ML Ops", "Pentester", "Data Architect", "Scrum Master", "SOC Analyst", "VR Engineer", "DevSecOps", "UX Designer", "Product Owner", "Big Data Expert", "IT Manager", "Network Architect", "Fullstack Dev", "Blockchain Expert", "ERP Consultant", "Robotics Engineer"], ar: ["عالم بيانات", "معماري سحابي", "خبير سيبراني", "مهندس أوامر", "مهندس ML", "مختبر اختراق", "معماري بيانات", "سكرم ماستر", "محلل SOC", "مهندس واقع افتراضي", "مهندس DevSecOps", "مصمم UX", "مالك منتج", "خبير بيانات ضخمة", "مدير تكنولوجيا", "معماري شبكات", "مطور شامل", "خبير بلوكشين", "مستشار ERP", "مهندس روبوتات"] },
-        Agri_Food: { logo: "🌾", fr: ["Agronome", "Responsable Qualité", "Manager Supply", "Généticien", "Audit Bio", "Oenologue", "Nutritionniste", "Irrigologue", "Acheteur", "Manager de prod", "Expert Sols", "Responsable RSE", "Ingénieur Agro", "Logistique Froid", "Manager Coop", "Pathologiste", "Expert Semences", "Chef de culture", "Analyste Terroir", "Horticulteur"], en: ["Agronomist", "Quality Manager", "Supply Manager", "Geneticist", "Bio Auditor", "Oenologist", "Nutritionist", "Irrigation Expert", "Buyer", "Production Manager", "Soil Expert", "CSR Manager", "Agro Engineer", "Cold Logistics", "Coop Manager", "Pathologist", "Seed Expert", "Culture Lead", "Terroir Analyst", "Horticulturist"], ar: ["مهندس زراعي", "مسؤول جودة", "مدير توريد", "خبير جينات", "مدقق عضوي", "خبير خمور", "خبير تغذية", "خبير ري", "مشتري زراعي", "مدير إنتاج", "خبير تربة", "مدير مسؤولية", "مهندس أغذية", "لوجستيك بارد", "مدير تعاونية", "خبير أمراض", "خبير بذور", "مدير زراعة", "محلل أراضي", "بستاني"] },
-        Tourism: { logo: "🌍", fr: ["Revenue Manager", "Directeur Resort", "Yield Analyst", "E-reputation", "Conceptrice Exp", "Manager Éco", "Chef Réception", "Directeur Croisière", "Guide Montagne", "Concierge Clés d'Or", "Manager Desti", "Analyste Flux", "Directeur de Parc", "Event Planner", "Responsable Loisirs", "Audit Hôtelier", "Expert Mobilité", "Manager Incentive", "Chef de produit", "Directeur Hôtelier"], en: ["Revenue Manager", "Resort Director", "Yield Analyst", "E-reputation", "Exp Designer", "Eco Manager", "Reception Head", "Cruise Director", "Mountain Guide", "Clefs d'Or Concierge", "Desti Manager", "Flow Analyst", "Park Director", "Event Planner", "Leisure Manager", "Hotel Auditor", "Mobility Expert", "Incentive Manager", "Product Lead", "Hotel Director"], ar: ["مدير إيرادات", "مدير منتجع", "محلل Yield", "مدير سمعة", "مصمم تجارب", "مدير سياحة بيئية", "رئيس استقبال", "مدير كروز", "دليل جبال", "كونسيرج ذهبي", "مدير وجهة", "محلل تدفقات", "مدير منتزه", "مخطط فعاليات", "مسؤول ترفيه", "مدقق فندقي", "خبير تنقل", "مدير حوافز", "مدير منتج", "مدير فندق"] },
-        Education: { logo: "🎓", fr: ["Ingénieur Pédago", "Directeur Académique", "Chercheur EdTech", "Directeur Campus", "Andragogue", "Coach Dirigeant", "Spécialiste LMS", "Analyste Compétences", "Innovation Manager", "Expert VAE", "Consultant Orient", "Directeur Recherche", "Manager Faculté", "Médiateur", "Inclusion Expert", "Concepteur E-learn", "Formateur Expert", "Audit Qualité Ed", "Planificateur", "Directeur École"], en: ["Instructional Designer", "Academic Director", "EdTech Researcher", "Campus Director", "Andragogue", "Executive Coach", "LMS Specialist", "Skills Analyst", "Innovation Manager", "VAE Expert", "Guidance Consultant", "Research Director", "Faculty Manager", "Mediator", "Inclusion Expert", "E-learn Designer", "Expert Trainer", "Ed Quality Auditor", "Planner", "School Director"], ar: ["مصمم تعليمي", "مدير أكاديمي", "باحث EdTech", "مدير كامبوس", "خبير أندراغوجيا", "مدرب تنفيذيين", "خبير LMS", "محلل مهارات", "مدير ابتكار", "خبير VAE", "مستشار توجيه", "مدير بحث", "مدير كلية", "وسيط تعليمي", "خبير دمج", "مصمم تعلم رقمي", "مدرب خبير", "مدقق جودة تعليم", "مخطط", "مدير مدرسة"] }
+        Finance: { logo: "🏦", fr: ["Trader", "Analyste M&A", "Auditeur", "Risk Manager", "Trésorier", "Gestionnaire de Patrimoine", "Analyste ESG", "Actuaire", "Directeur Financier", "Fiscaliste", "Broker", "Contrôleur de gestion", "Trader Crypto", "Credit Analyst", "Compliance Officer", "Analyste Quant", "Gestionnaire de fonds", "Expert Comptable", "Banquier d'affaires", "Spécialiste Blockchain"] },
+        Energie: { logo: "⚡", fr: ["Ingénieur Forage", "Expert Solaire", "Analyste Smart-Grid", "Géologue", "Manager Éolien", "Ingénieur Nucléaire", "Consultant Hydrogène", "Responsable HSE", "Directeur de centrale", "Analyste Marchés", "Technicien Réseaux", "Audit Énergétique", "Manager Biomasse", "Géophysicien", "Planificateur", "Expert Off-shore", "Spécialiste GRID", "Ingénieur Thermique", "Foreur", "Consultant Carbone"] },
+        IT_AI: { logo: "🤖", fr: ["Data Scientist", "Architecte Cloud", "Cyber Expert", "Prompt Engineer", "ML Ops", "Pentester", "Data Architect", "Scrum Master", "Analyste SOC", "Ingénieur VR", "DevSecOps", "UX Designer", "Product Owner", "Expert Big Data", "Manager IT", "Architecte Réseaux", "Fullstack Dev", "Expert Blockchain", "Consultant ERP", "Ingénieur Robotique"] },
+        Agri_Food: { logo: "🌾", fr: ["Agronome", "Responsable Qualité", "Manager Supply", "Généticien", "Audit Bio", "Oenologue", "Nutritionniste", "Irrigologue", "Acheteur", "Manager de prod", "Expert Sols", "Responsable RSE", "Ingénieur Agro", "Logistique Froid", "Manager Coop", "Pathologiste", "Expert Semences", "Chef de culture", "Analyste Terroir", "Horticulteur"] },
+        Tourism: { logo: "🌍", fr: ["Revenue Manager", "Directeur Resort", "Yield Analyst", "E-reputation", "Conceptrice Exp", "Manager Éco", "Chef Réception", "Directeur Croisière", "Guide Montagne", "Concierge Clés d'Or", "Manager Desti", "Analyste Flux", "Directeur de Parc", "Event Planner", "Responsable Loisirs", "Audit Hôtelier", "Expert Mobilité", "Manager Incentive", "Chef de produit", "Directeur Hôtelier"] },
+        Education: { logo: "🎓", fr: ["Ingénieur Pédago", "Directeur Académique", "Chercheur EdTech", "Directeur Campus", "Andragogue", "Coach Dirigeant", "Spécialiste LMS", "Analyste Compétences", "Innovation Manager", "Expert VAE", "Consultant Orient", "Directeur Recherche", "Manager Faculté", "Médiateur", "Inclusion Expert", "Concepteur E-learn", "Formateur Expert", "Audit Qualité Ed", "Planificateur", "Directeur École"] }
     };
 
     let curL = 'fr', score = 0, step = 0, currentSec = "", selectedJob = "";
@@ -192,7 +204,7 @@
 
     function selectSector(id) {
         currentSec = id;
-        const jobs = DATABASE[id][curL];
+        const jobs = DATABASE[id].fr; // On utilise la liste de référence pour le prompt
         selectedJob = prompt(`${TRANSLATIONS[curL].promptJob}\n\n${jobs.join(" | ")}`) || jobs[0];
         document.getElementById('selection-interface').style.display = 'none';
         document.getElementById('audit-interface').style.display = 'block';
@@ -203,18 +215,22 @@
     function loadQ() {
         if(step >= 10) { conclude(); return; }
         const contexts = {
-            fr: ["Crise de liquidité", "Cyber-attaque", "Défaillance technique", "Obsolescence", "Rupture de stock"],
-            en: ["Liquidity crisis", "Cyber-attack", "Technical failure", "Obsolescence", "Out of stock"],
-            ar: ["أزمة سيولة", "هجوم سيبراني", "فشل تقني", "تقادم", "نفاد المخزون"]
+            fr: ["Optimisation", "Crise Majeure", "Conformité", "Technologie", "Ressources"],
+            en: ["Optimization", "Major Crisis", "Compliance", "Technology", "Resources"],
+            ar: ["تحسين", "أزمة كبرى", "امتثال", "تكنولوجيا", "موارد"]
         };
         const ctx = contexts[curL][step % 5];
         document.getElementById('audit-step').innerText = `${TRANSLATIONS[curL].audit} ${step+1}/10`;
-        document.getElementById('q-text').innerText = `[${ctx}] - En tant que ${selectedJob}, quelle est votre stratégie de cœur de métier face à cette situation critique ?`;
+        document.getElementById('q-text').innerText = `[SCÉNARIO : ${ctx}] - En tant que ${selectedJob}, quelle action prioritaire définit votre excellence métier ?`;
         
         const stack = document.getElementById('options-stack');
         stack.innerHTML = "";
-        TRANSLATIONS[curL].strategies.forEach((s, i) => {
-            stack.innerHTML += `<button class="opt-button" onclick="sel(this, ${10-i*3})">${s}</button>`;
+        
+        // Mélange des stratégies pour éviter le choix statique
+        const currentStrategies = [...TRANSLATIONS[curL].strategies].sort(() => Math.random() - 0.5);
+        
+        currentStrategies.forEach((s, i) => {
+            stack.innerHTML += `<button class="opt-button" onclick="sel(this, ${s.pts})">${String.fromCharCode(65 + i)}) ${s.text}</button>`;
         });
         tempPts = 0;
     }
@@ -237,12 +253,12 @@
             alert(TRANSLATIONS[curL].fail);
             location.reload();
         } else {
-            const name = prompt(TRANSLATIONS[curL].promptName);
+            const name = prompt(TRANSLATIONS[curL].promptName) || "EXPERT";
             document.getElementById('certificat-final').style.display = 'block';
             document.getElementById('c-name').innerText = name.toUpperCase();
             document.getElementById('c-job').innerText = selectedJob;
             document.getElementById('c-score').innerText = score;
-            document.getElementById('c-hash').innerText = Math.random().toString(36).substr(2, 10).toUpperCase();
+            document.getElementById('c-hash').innerText = "KMS-" + Math.random().toString(36).substr(2, 9).toUpperCase();
             document.getElementById('c-sig').innerText = name;
             document.getElementById('c-confirm').innerText = TRANSLATIONS[curL].cConfirm;
             document.getElementById('c-expert-text').innerText = TRANSLATIONS[curL].cExpert;
