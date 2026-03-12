@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA-CONSULT | GLOBAL KMS V370</title>
+    <title>MBA-CONSULT | GLOBAL KMS V385</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;600;800&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,27 +25,17 @@
         
         header { background: var(--navy); color: var(--gold); padding: 25px; text-align: center; border-bottom: 5px solid var(--gold); font-family: 'Cinzel'; font-size: 1.8em; letter-spacing: 6px; }
 
-        /* SECTOR GRID */
         .sector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 40px; max-width: 1400px; margin: 0 auto; }
         .sector-card { background: white; padding: 50px; border-radius: 15px; border: 2px solid #eee; cursor: pointer; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .sector-card:hover { border-color: var(--gold); transform: translateY(-10px); }
 
-        /* AUDIT INTERFACE */
         #audit-interface { display: none; max-width: 950px; margin: 40px auto; background: white; padding: 50px; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border-left: 10px solid var(--gold); }
         .opt-button { display: block; width: 100%; padding: 22px; margin: 12px 0; border: 2px solid #eee; cursor: pointer; background: white; text-align: inherit; border-radius: 8px; font-size: 1.1em; }
         .opt-button.selected { border-color: var(--gold); background: #fdfaf0; font-weight: 800; border-width: 3px; }
 
-        /* CERTIFICAT MEP V370 (QR HAUT-GAUCHE) */
         #certificat-wrapper { display: none; padding: 40px 0; text-align: center; }
-        #cert-area { 
-            width: 1050px; height: 740px; 
-            background: white; margin: 0 auto; 
-            padding: 50px; position: relative; 
-            border: 30px double var(--gold); 
-            overflow: hidden; 
-        }
+        #cert-area { width: 1050px; height: 740px; background: white; margin: 0 auto; padding: 50px; position: relative; border: 30px double var(--gold); overflow: hidden; }
         
-        /* Bloc Validation Haut-Gauche */
         .cert-validation-block { position: absolute; top: 60px; left: 60px; text-align: left; width: 180px; }
         .cert-qr { width: 130px; border: 1px solid #eee; margin-bottom: 10px; }
         .cert-score-pct { font-size: 1.8em; font-weight: 900; color: var(--navy); margin: 5px 0; }
@@ -72,7 +62,7 @@
     </div>
 </div>
 
-<header>MBA-CONSULT | GLOBAL KMS V370</header>
+<header>MBA-CONSULT | GLOBAL KMS V385</header>
 
 <div class="container" style="max-width: 1300px; margin: auto;">
     <div id="selection-interface">
@@ -85,8 +75,14 @@
             <span id="audit-step" style="font-weight: 800; color: var(--gold); font-size: 1.2em;"></span>
             <span id="job-badge" style="background: var(--navy); color: white; padding: 10px 25px; border-radius: 30px; font-weight: bold;"></span>
         </div>
-        <h2 id="q-text" style="font-size: 1.7em; line-height: 1.4; color: var(--navy); margin-bottom: 40px;"></h2>
+        <h2 id="q-text" style="font-size: 1.7em; line-height: 1.4; color: var(--navy); margin-bottom: 20px;"></h2>
         <div id="options-stack"></div>
+        
+        <div id="user-comment-box" style="margin-top:20px;">
+            <label id="l-comment" style="font-weight:bold; display:block; margin-bottom:10px;"></label>
+            <textarea id="q-comment" style="width:100%; height:80px; padding:15px; border:1px solid #ccc; border-radius:8px; font-family:inherit;" placeholder="Expert opinion..."></textarea>
+        </div>
+
         <button id="q-submit" onclick="submitStep()" style="background: var(--gold); color: var(--navy); border: none; padding: 20px 60px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 20px; text-transform: uppercase;"></button>
     </div>
 
@@ -95,23 +91,18 @@
             <button class="btn-action" style="background: #27ae60;" onclick="generatePDF()"><i class="fa-solid fa-file-pdf"></i> PDF OFFICIEL</button>
             <button class="btn-action" style="background: #0077b5;" onclick="shareLinkedIn()"><i class="fa-brands fa-linkedin"></i> PARTAGER</button>
         </div>
-
         <div id="cert-area">
             <div class="cert-validation-block">
                 <img id="c-qr" class="cert-qr" src="">
                 <div class="cert-score-pct" id="c-score-pct"></div>
                 <div class="cert-rank" id="c-rank">WORLD RANK: #1 TOP TIER</div>
             </div>
-
             <div style="font-family: 'Cinzel'; font-size: 45px; margin-top: 50px; margin-left: 150px;">CERTIFICATE OF EXCELLENCE</div>
             <div style="letter-spacing: 10px; font-weight: 800; color: var(--gold); margin-top: 10px; margin-left: 150px;">GLOBAL PROFESSIONAL ACCREDITATION</div>
-            
             <p id="c-confirm" style="font-size: 1.6em; margin-top: 80px;"></p>
             <div id="c-name" style="font-family: 'Amiri', serif; font-size: 60px; border-bottom: 3px solid #333; display: inline-block; padding: 0 50px; margin: 10px 0;"></div>
-            
             <p id="c-expert-text" style="font-size: 1.6em; margin-top: 15px;"></p>
             <div id="c-job" style="font-size: 42px; font-weight: 900; color: var(--gold); text-transform: uppercase;"></div>
-            
             <div class="cert-footer">
                 <div style="text-align:left;">
                     <div id="c-sig" style="font-family: 'Amiri'; font-size: 32px; border-bottom: 2px solid #333; width: 300px; padding-bottom: 5px;"></div>
@@ -129,12 +120,40 @@
 
 <script>
     const DATABASE = {
-        Finance: { logo: "🏦", list: ["Trader Haute Fréquence", "Analyste M&A Senior", "Auditeur Financier", "Risk Manager", "Directeur de Trésorerie", "Banquier d'Affaires", "Fiscaliste International", "Actuaire", "Gestionnaire de Fortune", "Analyste ESG", "Compliance Officer", "Broker", "Contrôleur de Gestion", "Analyste Quantitatif", "Gestionnaire de Fonds", "Expert Comptable", "Credit Analyst", "Spécialiste Blockchain", "Directeur Financier (CFO)", "Consultant en Restructuration"] },
-        Energie: { logo: "⚡", list: ["Ingénieur Forage", "Expert Solaire", "Analyste Smart-Grid", "Géologue de Réservoir", "Manager Éolien", "Ingénieur Nucléaire", "Consultant Hydrogène", "Responsable HSE", "Directeur de Centrale", "Analyste Marchés de l'Énergie", "Technicien Réseaux", "Auditeur Énergétique", "Manager Biomasse", "Géophysicien", "Planificateur Infrastructures", "Expert Off-shore", "Spécialiste Transport GRID", "Ingénieur Thermique", "Foreur Puits Profonds", "Consultant Décarbonation"] },
-        IT_AI: { logo: "🤖", list: ["Data Scientist", "Architecte Cloud", "Expert Cybersécurité", "Prompt Engineer", "Ingénieur ML Ops", "Pentester", "Architecte de Données", "Scrum Master", "Analyste SOC", "Ingénieur Réalité VR", "DevSecOps", "UX Designer Senior", "Product Owner AI", "Expert Big Data", "Manager IT", "Architecte Réseaux", "Développeur Fullstack", "Ingénieur Blockchain", "Consultant ERP", "Ingénieur Robotique"] },
-        Agri_Food: { logo: "🌾", list: ["Ingénieur Agronome", "Responsable Qualité", "Manager Supply Chain", "Généticien Végétal", "Auditeur Bio", "Oenologue", "Nutritionniste Industriel", "Expert Irrigation", "Acheteur Matières Premières", "Manager de Production", "Expert des Sols", "Responsable RSE", "Ingénieur Agro-Alimentaire", "Logistique Chaîne du Froid", "Manager de Coopérative", "Phytopathologiste", "Expert Semences", "Chef de Culture", "Analyste Terroir", "Horticulteur"] },
-        Tourism: { logo: "🌍", list: ["Revenue Manager", "Directeur de Resort", "Yield Analyst", "Expert E-reputation", "Concepteur Expériences", "Manager Écotourisme", "Chef de Réception", "Directeur de Croisière", "Guide de Haute Montagne", "Concierge Clés d'Or", "Manager Destination", "Analyste de Flux", "Directeur de Parc", "Event Planner Senior", "Responsable Loisirs", "Auditeur Hôtelier", "Expert Mobilité", "Manager Incentive", "Chef de Produit Voyage", "Directeur Hôtelier"] },
-        Education: { logo: "🎓", list: ["Ingénieur Pédagogique", "Directeur Académique", "Chercheur EdTech", "Directeur de Campus", "Andragogue", "Coach de Dirigeants", "Spécialiste LMS", "Analyste Compétences", "Manager Innovation", "Expert VAE", "Consultant Orientation", "Directeur Recherche", "Manager de Faculté", "Médiateur Éducatif", "Expert Inclusion", "Concepteur E-learning", "Formateur Expert", "Auditeur Qualité Éducation", "Planificateur Académique", "Directeur d'École"] }
+        Finance: { logo: "🏦", list: ["Trader", "Analyste M&A", "Auditeur", "Risk Manager", "Trésorier", "Banquier d'Affaires", "Fiscaliste", "Actuaire", "Gestionnaire de Fortune", "Analyste ESG", "Compliance", "Broker", "Contrôleur de Gestion", "Analyste Quant", "Gérant de Fonds", "Expert Comptable", "Credit Analyst", "Blockchain Expert", "CFO", "Consultant Restructuration"] },
+        Energie: { logo: "⚡", list: ["Ingénieur Forage", "Expert Solaire", "Smart-Grid Manager", "Géologue", "Manager Éolien", "Ingénieur Nucléaire", "Consultant Hydrogène", "HSE Manager", "Directeur Centrale", "Market Analyst", "Technicien Réseau", "Auditeur Énergie", "Biomasse Manager", "Géophysicien", "Infrastructures Lead", "Expert Off-shore", "Grid Specialist", "Thermologue", "Deep Drilling Lead", "Carbon Consultant"] },
+        IT_AI: { logo: "🤖", list: ["Data Scientist", "Cloud Architect", "Cyber Specialist", "Prompt Engineer", "ML Ops", "Pentester", "Data Architect", "Scrum Master", "SOC Analyst", "VR Engineer", "DevSecOps", "UX Senior", "Product Owner AI", "Big Data Expert", "IT Manager", "Network Architect", "Fullstack Dev", "Blockchain Lead", "ERP Consultant", "Robotics Lead"] },
+        Agri_Food: { logo: "🌾", list: ["Agronome", "Qualité Lead", "Supply Chain", "Généticien", "Auditeur Bio", "Oenologue", "Nutritionniste", "Irrigation Expert", "Acheteur MP", "Production Lead", "Soil Specialist", "CSR Manager", "Agro Engineer", "Cold Chain Lead", "Coop Manager", "Phytopatho", "Seed Expert", "Culture Lead", "Terroir Analyst", "Horticulteur"] },
+        Tourism: { logo: "🌍", list: ["Revenue Manager", "Resort Director", "Yield Analyst", "E-reputation Expert", "Expérience Designer", "Ecotourisme Manager", "Front Office Manager", "Cruise Director", "Mountain Guide", "Clefs d'Or", "Destination Manager", "Flow Analyst", "Park Director", "Event Planner", "Leisure Manager", "Hotel Auditor", "Mobility Expert", "Incentive Manager", "Product Manager", "General Manager"] },
+        Education: { logo: "🎓", list: ["Ingénieur Pédago", "Directeur Académique", "EdTech Researcher", "Campus Director", "Andragogue", "Executive Coach", "LMS Specialist", "Skills Analyst", "Innovation Manager", "VAE Expert", "Orientation Lead", "Research Director", "Faculty Manager", "Mediator", "Inclusion Expert", "E-learning Designer", "Master Trainer", "Quality Auditor", "Academic Planner", "School Principal"] }
+    };
+
+    const SECTOR_QUESTIONS = {
+        Finance: [
+            { q: "Risque de liquidité : Quelle stratégie Alpha garantit la solvabilité lors d'un 'Bank Run' numérique ?", r: ["Alpha: Activation immédiate des lignes de crédit contingentes et Repo bilatéral.", "Beta: Vente massive d'actifs liquides (T-Bills) pour restaurer le cash-flow.", "Gamma: Demande de facilités de prêt d'urgence auprès de la Banque Centrale."] },
+            { q: "Arbitrage Arbitraire : Face à un déséquilibre de base (Basis Trade), quel levier Alpha utilisez-vous ?", r: ["Alpha: Exploitation par algorithme de convergence à haute fréquence (HFT).", "Beta: Couverture par contrats Futures à échéance longue.", "Gamma: Observation du spread et ajustement manuel du portefeuille."] },
+            { q: "Finance Durable : Comment intégrer l'impact carbone dans un modèle de valorisation Alpha ?", r: ["Alpha: Ajustement du WACC via une prime de risque ESG dynamique.", "Beta: Exclusion simple des secteurs à haute empreinte carbone.", "Gamma: Reporting extra-financier sans impact direct sur le pricing."] },
+            { q: "M&A Cross-Border : Quel est l'outil Alpha pour sécuriser le risque de change post-fusion ?", r: ["Alpha: Swap de devises long terme combiné à des options 'Barrier'.", "Beta: Forward direct sur la valeur totale de la transaction.", "Gamma: Couverture naturelle par endettement dans la monnaie cible."] },
+            { q: "Cryptofinance : Comment sécuriser la détention institutionnelle d'actifs numériques ?", r: ["Alpha: Architecture Multi-Party Computation (MPC) et Cold Storage certifié.", "Beta: Utilisation de plateformes de garde tierces assurées.", "Gamma: Hot Wallet avec limites de retrait journalières strictes."] }
+        ],
+        Energie: [
+            { q: "Mix Énergétique : Quelle approche Alpha stabilise un réseau saturé d'EnR intermittentes ?", r: ["Alpha: Virtual Power Plant (VPP) coordonnant production, stockage et effacement.", "Beta: Renforcement massif des interconnexions physiques transfrontalières.", "Gamma: Utilisation de centrales à gaz en back-up pour réguler la charge."] },
+            { q: "Hydrogène Vert : Quel est le verrou Alpha pour une production à échelle industrielle ?", r: ["Alpha: Optimisation du stack d'électrolyse par matériaux nanostructurés.", "Beta: Réduction du coût de l'électricité renouvelable en amont.", "Gamma: Subventions étatiques massives pour compenser le CAPEX."] },
+            { q: "Smart City : Comment optimiser l'autoconsommation collective dans un quartier Alpha ?", r: ["Alpha: Blockchain pour le trading d'énergie Peer-to-Peer en temps réel.", "Beta: Installation de batteries de stockage centralisées par bâtiment.", "Gamma: Tarification incitative selon les pics de production solaire."] }
+        ],
+        IT_AI: [
+            { q: "Cyber-Résilience : Quel protocole Alpha contre une attaque par Ransomware sophistiquée ?", r: ["Alpha: Isolation 'Air-Gap' logique et restauration automatisée par IA.", "Beta: Sauvegardes immuables hors site avec tests de reprise hebdomadaires.", "Gamma: Paiement de la rançon sous contrôle cyber-assurance (dernier recours)."] },
+            { q: "IA Souveraine : Comment entraîner un modèle Alpha sans fuite de données confidentielles ?", r: ["Alpha: Federated Learning sur infrastructures décentralisées cryptées.", "Beta: Anonymisation par Differential Privacy avant entraînement centralisé.", "Gamma: Utilisation stricte de données synthétiques générées en interne."] }
+        ],
+        Agri_Food: [
+            { q: "Sécurité Alimentaire : Quelle technologie Alpha garantit la traçabilité 'de la ferme à la table' ?", r: ["Alpha: Ledger distribué (Blockchain) avec capteurs IoT de température.", "Beta: Certification par audits tiers fréquents et labels de qualité.", "Gamma: Étiquetage QR code renvoyant vers une base de données PDF."] }
+        ],
+        Tourism: [
+            { q: "Tourisme de Luxe : Comment créer une hyper-personnalisation Alpha sans intrusion ?", r: ["Alpha: Analyse prédictive non-intrusive des préférences via signaux faibles.", "Beta: Majordome dédié disponible 24/7 pour anticiper chaque demande.", "Gamma: Questionnaire de satisfaction détaillé envoyé avant l'arrivée."] }
+        ],
+        Education: [
+            { q: "Neuro-Éducation : Quel levier Alpha maximise la rétention de l'information long terme ?", r: ["Alpha: Algorithmes de répétition espacée basés sur les courbes d'oubli individuelles.", "Beta: Utilisation intensive de la réalité virtuelle pour l'apprentissage immersif.", "Gamma: Méthodes pédagogiques actives privilégiant le projet collaboratif."] }
+        ]
     };
 
     const TRANSLATIONS = {
@@ -143,61 +162,17 @@
             vVigilance: "⚠ SEUIL CRITIQUE : 80% (40/50 pts). L'ÉLITE NE CONNAÎT PAS L'APPROXIMATION.",
             vBtn: "DÉPLOYER L'AUDIT STRATÉGIQUE",
             sTitle: "SÉLECTION DE L'UNITÉ DE COMPÉTENCE",
-            qSubmit: "VALIDER LA DÉCISION",
+            qSubmit: "VALIDER LA DÉCISION & AVIS",
+            lComment: "VOTRE AVIS D'EXPERT (FACULTATIF) :",
             promptJob: "SÉLECTIONNEZ VOTRE MÉTIER :",
             promptName: "NOM COMPLET DE L'EXPERT :",
             cConfirm: "Ce document atteste solennellement que",
             cExpert: "A validé son accréditation mondiale pour le métier de :",
-            fail: "ÉCHEC. SCORE INSUFFISANT POUR L'ACCRÉDITATION.",
-            scenarios: [
-                { q: "Crise systémique majeure : quel est votre protocole de sécurisation prioritaire ?", r: ["Alpha: Hedging global et isolation immédiate des actifs critiques.", "Beta: Optimisation des flux et réduction drastique des coûts.", "Gamma: Analyse d'impact et observation des marchés."] },
-                { q: "Rupture technologique imminente : comment pilotez-vous votre unité ?", r: ["Alpha: Pivot disruptif immédiat vers l'innovation radicale.", "Beta: Intégration hybride et plan de formation accéléré.", "Gamma: Veille technologique et audit de faisabilité."] },
-                { q: "Conflit éthique ou réglementaire : quelle est votre posture officielle ?", r: ["Alpha: Mise en conformité totale et transparence absolue.", "Beta: Négociation tactique et ajustement des process.", "Gamma: Analyse juridique et temporisation stratégique."] },
-                { q: "Chute de performance de 15% : quel levier actionnez-vous ?", r: ["Alpha: Restructuration du modèle de valeur et agilité.", "Beta: Renforcement des KPIs et management de proximité.", "Gamma: Audit externe et réduction budgétaire."] },
-                { q: "Opportunité d'acquisition risquée : votre recommandation ?", r: ["Alpha: Intégration verticale pour domination du marché.", "Beta: Partenariat stratégique et partage des risques.", "Gamma: Étude de marché exploratoire approfondie."] }
-            ]
-        },
-        en: {
-            vSpeech: "Cross the boundaries of conventional knowledge to join the world's decision-making elite.\nYour expertise is your most valuable asset, this audit is its ultimate validation.\nJoin the MBA-Consult network and redefine your industry standards.",
-            vVigilance: "⚠ CRITICAL THRESHOLD: 80% (40/50 pts). EXCELLENCE IS NON-NEGOTIABLE.",
-            vBtn: "DEPLOY STRATEGIC AUDIT",
-            sTitle: "COMPETENCY UNIT SELECTION",
-            qSubmit: "VALIDATE DECISION",
-            promptJob: "SELECT YOUR PROFESSION:",
-            promptName: "EXPERT FULL NAME:",
-            cConfirm: "This document solemnly certifies that",
-            cExpert: "Has validated global accreditation for the profession of:",
-            fail: "FAILURE. INSUFFICIENT SCORE FOR ACCREDITATION.",
-            scenarios: [
-                { q: "Major systemic crisis: what is your priority security protocol?", r: ["Alpha: Global hedging and immediate isolation of critical assets.", "Beta: Flow optimization and drastic cost reduction.", "Gamma: Impact analysis and market observation."] },
-                { q: "Imminent tech disruption: how do you lead your unit?", r: ["Alpha: Immediate disruptive pivot to radical innovation.", "Beta: Hybrid integration and accelerated training plan.", "Gamma: Tech watch and feasibility audit."] },
-                { q: "Ethical or regulatory conflict: what is your official stance?", r: ["Alpha: Total compliance and absolute transparency.", "Beta: Tactical negotiation and process adjustment.", "Gamma: Legal analysis and strategic delay."] },
-                { q: "Performance drop of 15%: what lever do you pull?", r: ["Alpha: Value model restructuring and agility.", "Beta: KPI reinforcement and proximity management.", "Gamma: External audit and budget reduction."] },
-                { q: "Risky acquisition opportunity: your recommendation?", r: ["Alpha: Vertical integration for market dominance.", "Beta: Strategic partnership and risk sharing.", "Gamma: In-depth exploratory market study."] }
-            ]
-        },
-        ar: {
-            vSpeech: "تجاوز حدود المعرفة التقليدية لتنضم إلى نخبة صناع القرار في العالم.\nخبرتك هي أثمن أصولك، وهذا التدقيق هو التحقق النهائي منها.\nانضم إلى شبكة MBA-Consult وأعد تعريف معايير صناعتك.",
-            vVigilance: "⚠ عتبة حرجة: 80٪ (40/50 نقطة). التميز لا يعرف التقريب.",
-            vBtn: "نشر التدقيق الاستراتيجي",
-            sTitle: "اختيار وحدة الكفاءة",
-            qSubmit: "تأكيد القرار",
-            promptJob: "اختر مهنتك:",
-            promptName: "الاسم الكامل للخبير:",
-            cConfirm: "تشهد هذه الوثيقة رسمياً بأن",
-            cExpert: "قد اجتاز الاعتماد العالمي لمهنة:",
-            fail: "فشل. النتيجة غير كافية للاعتماد.",
-            scenarios: [
-                { q: "أزمة نظامية كبرى: ما هو بروتوكول التأمين ذو الأولوية لديك؟", r: ["ألفا: التحوط العالمي والعزل الفوري للأصول الحرجة.", "بيتا: تحسين التدفقات وخفض التكاليف بشكل جذري.", "غاما: تحليل الأثر ومراقبة الأسواق."] },
-                { q: "اختراق تقني وشيك: كيف تقود وحدتك؟", r: ["ألفا: التحول الجذري الفوري نحو الابتكار الشامل.", "بيتا: التكامل الهجين وخطة تدريب مكثفة.", "غاما: مراقبة تقنية وتدقيق الجدوى."] },
-                { q: "صراع أخلاقي أو تنظيمي: ما هو موقفك الرسمي؟", r: ["ألفا: الامتثال الكامل والشفافية المطلقة.", "بيتا: التفاوض التكتيكي وتعديل العمليات.", "غاما: التحليل القانوني والتريث الاستراتيجي."] },
-                { q: "انخفاض الأداء بنسبة 15٪: ما هو المحرك الذي تستخدمه؟", r: ["ألفا: إعادة هيكلة نموذج القيمة والمرونة.", "بيتا: تعزيز مؤشرات الأداء والإدارة المباشرة.", "غاما: تدقيق خارجي وخفض الميزانية."] },
-                { q: "فرصة استحواذ محفوفة بالمخاطر: ما هي توصيتك؟", r: ["ألفا: التكامل العمودي للهيمنة على السوق.", "بيتا: الشراكة الاستراتيجية وتقاسم المخاطر.", "غاما: دراسة سوقية استكشافية متعمقة."] }
-            ]
+            fail: "ÉCHEC. SCORE INSUFFISANT POUR L'ACCRÉDITATION."
         }
     };
 
-    let curL = 'fr', score = 0, step = 0, selectedJob = "";
+    let curL = 'fr', score = 0, step = 0, selectedJob = "", currentSector = "";
 
     function setLang(l) {
         curL = l;
@@ -208,6 +183,7 @@
         document.getElementById('v-btn').innerText = d.vBtn;
         document.getElementById('s-title').innerText = d.sTitle;
         document.getElementById('q-submit').innerText = d.qSubmit;
+        document.getElementById('l-comment').innerText = d.lComment;
         initSectors();
     }
 
@@ -219,6 +195,7 @@
     }
 
     function selectSector(id) {
+        currentSector = id;
         const jobs = DATABASE[id].list;
         selectedJob = prompt(`${TRANSLATIONS[curL].promptJob}\n\n${jobs.slice(0,10).join(" | ")}...`) || jobs[0];
         document.getElementById('selection-interface').style.display = 'none';
@@ -228,15 +205,17 @@
     }
 
     function loadQ() {
+        const sectorQs = SECTOR_QUESTIONS[currentSector] || SECTOR_QUESTIONS["Finance"];
         if(step >= 5) { conclude(); return; }
-        const scenario = TRANSLATIONS[curL].scenarios[step];
+        const qData = sectorQs[step % sectorQs.length];
         document.getElementById('audit-step').innerText = `STEP ${step+1}/5`;
-        document.getElementById('q-text').innerText = scenario.q;
+        document.getElementById('q-text').innerText = qData.q;
         const stack = document.getElementById('options-stack'); stack.innerHTML = "";
-        scenario.r.forEach((o) => {
+        qData.r.forEach((o) => {
             let pts = o.includes("Alpha") ? 10 : (o.includes("Beta") ? 7 : 4);
             stack.innerHTML += `<button class="opt-button" onclick="sel(this, ${pts})">${o}</button>`;
         });
+        document.getElementById('q-comment').value = "";
         tempPts = 0;
     }
 
