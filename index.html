@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA-CONSULT | GLOBAL KMS V340</title>
-    
+    <title>MBA-CONSULT | GLOBAL KMS V360</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;600;800&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root { --gold: #c5a021; --navy: #0a1128; --white: #ffffff; --bg: #f4f7f9; }
+        :root { --gold: #c5a021; --navy: #0a1128; --white: #ffffff; --bg: #f4f7f9; --linkedin: #0077b5; }
         * { box-sizing: border-box; transition: all 0.3s ease; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); }
         body.rtl { direction: rtl; font-family: 'Amiri', serif; }
 
         /* UI ELEMENTS */
@@ -20,60 +19,39 @@
         .lang-btn { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 6px 14px; cursor: pointer; font-weight: 800; border-radius: 4px; font-size: 0.8em; }
         .lang-btn.active { background: var(--gold); color: var(--navy); }
 
-        /* PORTAL */
         #vision-portal { position: fixed; inset: 0; background: var(--navy); z-index: 30000; display: flex; justify-content: center; align-items: center; color: white; padding: 20px; text-align: center; }
         .welcome-box { background: rgba(15, 25, 55, 0.98); border: 2px solid var(--gold); padding: 50px; border-radius: 15px; max-width: 900px; }
         
-        /* HEADER AVEC LOGO OFFICIEL */
-        header { background: var(--navy); color: var(--gold); padding: 15px; text-align: center; border-bottom: 5px solid var(--gold); display: flex; align-items: center; justify-content: center; gap: 20px; }
-        .main-logo { height: 60px; filter: drop-shadow(0 0 5px rgba(197,160,33,0.5)); }
+        header { background: var(--navy); color: var(--gold); padding: 25px; text-align: center; border-bottom: 5px solid var(--gold); font-family: 'Cinzel'; font-size: 1.8em; letter-spacing: 6px; }
 
-        /* GRANDE GRILLE DES SECTEURS (Répartition Proportionnelle) */
-        .sector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 40px; max-width: 1400px; margin: 0 auto; }
-        .sector-card { background: white; padding: 60px 40px; border-radius: 20px; border: 2px solid #eee; cursor: pointer; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
-        .sector-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 15px 50px rgba(197,160,33,0.2); }
-        .sector-icon { font-size: 5em; color: var(--navy); margin-bottom: 25px; display: block; }
-        .sector-card h3 { font-family: 'Cinzel'; font-size: 1.5em; margin: 0; color: var(--navy); }
-        .sector-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 8px; background: var(--gold); transform: scaleX(0); transition: transform 0.3s; }
-        .sector-card:hover::after { transform: scaleX(1); }
+        /* SECTOR GRID (Design V320 original) */
+        .sector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 40px; max-width: 1400px; margin: 0 auto; }
+        .sector-card { background: white; padding: 50px; border-radius: 15px; border: 2px solid #eee; cursor: pointer; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .sector-card:hover { border-color: var(--gold); transform: translateY(-10px); }
+        .sector-logo { font-size: 4em; display: block; margin-bottom: 20px; }
 
         /* AUDIT INTERFACE */
-        #audit-interface { display: none; max-width: 1000px; margin: 40px auto; background: white; padding: 50px; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border-left: 10px solid var(--gold); }
+        #audit-interface { display: none; max-width: 950px; margin: 40px auto; background: white; padding: 50px; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border-left: 10px solid var(--gold); }
         .opt-button { display: block; width: 100%; padding: 22px; margin: 12px 0; border: 2px solid #eee; cursor: pointer; background: white; text-align: inherit; border-radius: 8px; font-size: 1.1em; line-height: 1.5; }
-        .opt-button:hover { border-color: var(--gold); background: #fdfaf0; }
         .opt-button.selected { border-color: var(--gold); background: #fdfaf0; font-weight: 800; border-width: 3px; }
 
-        /* CERTIFICAT - MISE EN PAGE CORRIGÉE & VERROUILLÉE */
-        #cert-container { display: none; padding: 40px 0; text-align: center; }
+        /* CERTIFICAT MEP CORRIGÉE & ACTIONS */
+        #certificat-wrapper { display: none; padding: 40px 0; text-align: center; }
+        .action-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        
         #cert-area { 
-            width: 1100px; height: 770px; /* Dimensions fixes A4 Paysage optimisées */
+            width: 1050px; height: 740px; 
             background: white; margin: 0 auto; 
             padding: 50px; position: relative; 
-            border: 35px double var(--gold); 
-            box-shadow: 0 0 60px rgba(0,0,0,0.2);
-            overflow: hidden; /* Verrouille tout contenu à l'intérieur */
+            border: 30px double var(--gold); 
+            overflow: hidden; 
         }
+        .cert-footer { position: absolute; bottom: 50px; left: 50px; right: 50px; display: flex; justify-content: space-between; align-items: flex-end; }
         
-        /* Filigrane Logo Officiel */
-        .cert-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.03; height: 400px; pointer-events: none; }
-        
-        #download-btn { background: #27ae60; color: white; padding: 18px 45px; border: none; font-weight: 800; cursor: pointer; border-radius: 5px; margin-bottom: 30px; font-size: 1.2em; gap: 10px; display: inline-flex; align-items: center; }
-        #download-btn:hover { background: #219150; transform: scale(1.05); }
-        
-        /* Pied de page du certificat verrouillé */
-        .cert-footer { 
-            position: absolute; 
-            bottom: 50px; /* Distance fixe du bas du cadre */
-            left: 50px; 
-            right: 50px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-end; 
-        }
-
-        /* Responsive pour la grille */
-        @media (max-width: 1000px) { .sector-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .sector-grid { grid-template-columns: 1fr; } }
+        .btn-action { padding: 15px 30px; border: none; font-weight: 800; cursor: pointer; border-radius: 5px; font-size: 1.1em; display: flex; align-items: center; gap: 10px; color: white; }
+        #download-btn { background: #27ae60; }
+        #linkedin-btn { background: var(--linkedin); }
+        .btn-action:hover { opacity: 0.9; transform: scale(1.02); }
     </style>
 </head>
 <body>
@@ -86,24 +64,19 @@
 
 <div id="vision-portal">
     <div class="welcome-box">
-        <img src="https://i.ibb.co/vz4444T/logo-mba.png" alt="MBA-CONSULT" class="main-logo" style="height: 100px; margin-bottom: 20px;">
-        <h1 style="font-family: 'Cinzel'; font-size: 2.5em; margin: 0; color: var(--gold);">GLOBAL KMS</h1>
+        <h1 style="font-family: 'Cinzel'; font-size: 3em; margin: 0;">MBA-CONSULT</h1>
         <div id="v-msg" style="font-size: 1.4em; line-height: 1.8; margin: 30px 0;"></div>
-        <div id="v-vigilance" style="color:#ff4d4d; font-weight:800; letter-spacing:1px; text-transform: uppercase;"></div>
-        <button class="lang-btn active" id="v-btn" onclick="document.getElementById('vision-portal').style.display='none'" style="margin-top: 30px; padding: 15px 40px; font-size: 1em;"></button>
+        <div id="v-vigilance" style="color:#ff4d4d; font-weight:800; letter-spacing:2px;"></div>
+        <button class="lang-btn active" id="v-btn" onclick="document.getElementById('vision-portal').style.display='none'" style="margin-top: 30px; padding: 15px 40px;"></button>
     </div>
 </div>
 
-<header>
-    <img src="https://i.ibb.co/vz4444T/logo-mba.png" alt="MBA-CONSULT Logo" class="main-logo">
-    <div style="font-family: 'Cinzel';">MBA-CONSULT | GLOBAL KMS V340</div>
-</header>
+<header>MBA-CONSULT | GLOBAL KMS V360</header>
 
-<div class="container">
+<div class="container" style="max-width: 1300px; margin: auto;">
     <div id="selection-interface">
-        <h2 id="s-title" style="text-align:center; font-family: 'Cinzel'; margin: 40px 0; color: var(--navy); letter-spacing: 2px;"></h2>
-        <div class="sector-grid" id="sector-grid">
-            </div>
+        <h2 id="s-title" style="text-align:center; font-family: 'Cinzel'; margin-top: 40px;"></h2>
+        <div class="sector-grid" id="sector-grid"></div>
     </div>
 
     <div id="audit-interface">
@@ -111,46 +84,42 @@
             <span id="audit-step" style="font-weight: 800; color: var(--gold); font-size: 1.2em;"></span>
             <span id="job-badge" style="background: var(--navy); color: white; padding: 10px 25px; border-radius: 30px; font-weight: bold;"></span>
         </div>
-        <h2 id="q-text" style="font-size: 1.8em; line-height: 1.4; color: var(--navy); margin-bottom: 40px;"></h2>
+        <h2 id="q-text" style="font-size: 1.7em; line-height: 1.4; color: var(--navy); margin-bottom: 40px;"></h2>
         <div id="options-stack"></div>
-        <button id="q-submit" onclick="submitStep()" style="background: var(--gold); color: var(--navy); border: none; padding: 20px 60px; font-weight: 800; cursor: pointer; border-radius: 5px; width: 100%; margin-top: 30px; text-transform: uppercase; font-size: 1.1em;"></button>
+        <button id="q-submit" onclick="submitStep()" style="background: var(--gold); color: var(--navy); border: none; padding: 20px 60px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 20px;"></button>
     </div>
 
-    <div id="cert-container">
-        <button id="download-btn" onclick="generatePDF()">
-            <i class="fas fa-file-pdf"></i> TÉLÉCHARGER LE CERTIFICAT OFFICIEL (PDF)
-        </button>
-        
-        <div id="cert-area">
-            <img src="https://i.ibb.co/vz4444T/logo-mba.png" alt="Watermark" class="cert-watermark">
-            
-            <div style="font-family: 'Cinzel'; font-size: 45px; margin-top: 30px; color: var(--navy);">CERTIFICATE OF EXCELLENCE</div>
-            <div style="letter-spacing: 8px; font-weight: 800; color: var(--gold); margin-top: 5px; font-size: 1.1em;">GLOBAL PROFESSIONAL ACCREDITATION</div>
-            
-            <div style="margin-top: 60px; font-size: 1.6em; font-style: italic; color: #555;" id="c-confirm"></div>
-            <div id="c-name" style="font-family: 'Amiri', serif; font-size: 65px; border-bottom: 3px solid var(--navy); display: inline-block; min-width: 600px; margin: 15px 0; padding: 0 30px; color: var(--navy);"></div>
-            
-            <div style="font-size: 1.6em; margin-top: 10px; color: #555;" id="c-expert-text"></div>
-            <div id="c-job" style="font-size: 45px; font-weight: 900; color: var(--gold); text-transform: uppercase; margin-top: 10px;"></div>
-            
-            <div style="background: var(--navy); color: white; padding: 20px 70px; font-size: 2.2em; font-weight: 800; width: fit-content; margin: 50px auto; border: 3px solid var(--gold); box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
-                SCORE: <span id="c-score"></span>/50
-            </div>
+    <div id="certificat-wrapper">
+        <div class="action-bar">
+            <button id="download-btn" class="btn-action" onclick="generatePDF()">
+                <i class="fa-solid fa-file-pdf"></i> PDF OFFICIEL
+            </button>
+            <button id="linkedin-btn" class="btn-action" onclick="shareLinkedIn()">
+                <i class="fa-brands fa-linkedin"></i> PARTAGER SUR LINKEDIN
+            </button>
+        </div>
 
+        <div id="cert-area">
+            <div style="font-family: 'Cinzel'; font-size: 45px; margin-top: 40px;">CERTIFICATE OF EXCELLENCE</div>
+            <div style="letter-spacing: 10px; font-weight: 800; color: var(--gold); margin-top: 10px;">GLOBAL PROFESSIONAL ACCREDITATION</div>
+            <p id="c-confirm" style="font-size: 1.6em; margin-top: 50px;"></p>
+            <div id="c-name" style="font-family: 'Amiri', serif; font-size: 60px; border-bottom: 3px solid #333; display: inline-block; padding: 0 50px; margin: 10px 0;"></div>
+            <p id="c-expert-text" style="font-size: 1.6em; margin-top: 15px;"></p>
+            <div id="c-job" style="font-size: 40px; font-weight: 900; color: var(--gold); text-transform: uppercase;"></div>
+            <div style="background: var(--navy); color: white; padding: 20px 60px; font-size: 2em; font-weight: 800; width: fit-content; margin: 40px auto; border: 2px solid var(--gold);">SCORE: <span id="c-score"></span>/50</div>
+            
             <div class="cert-footer">
                 <div style="text-align:left;">
-                    <div id="c-sig" style="font-family: 'Amiri'; font-size: 35px; border-bottom: 2px solid #333; width: 320px; padding-bottom: 5px; color: var(--navy);"></div>
-                    <small style="font-weight: 800; display: block; margin-top: 5px; color: #555;">SIGNATURE ÉLECTRONIQUE MBA-CONSULT</small>
+                    <div id="c-sig" style="font-family: 'Amiri'; font-size: 32px; border-bottom: 2px solid #333; width: 300px; padding-bottom: 5px;"></div>
+                    <small style="font-weight: 800; display: block; margin-top: 5px;">SIGNATURE ÉLECTRONIQUE VÉRIFIÉE</small>
                 </div>
-                
                 <div style="text-align: center;">
-                    <img id="c-qr" src="" style="width: 125px; border: 2px solid #eee; padding: 5px; background: white;">
-                    <br><small id="c-hash" style="color: var(--gold); font-weight: bold; margin-top: 5px; display: block;"></small>
+                    <img id="c-qr" src="" style="width: 120px; border: 1px solid #eee;">
+                    <br><small id="c-hash" style="color: var(--gold); font-weight: bold;"></small>
                 </div>
-
                 <div style="text-align:right;">
-                    <div style="font-family: 'Cinzel'; font-size: 22px; border-bottom: 2px solid #333; width: 320px; padding-bottom: 5px; color: var(--navy);">MBA BOARD ALPHA</div>
-                    <small style="font-weight: 800; display: block; margin-top: 5px; color: #555;">VERIFIED DIGITAL ACCREDITATION</small>
+                    <div style="font-family: 'Cinzel'; font-size: 20px; border-bottom: 2px solid #333; width: 300px; padding-bottom: 5px;">MBA BOARD ALPHA</div>
+                    <small style="font-weight: 800; display: block; margin-top: 5px;">ACCRÉDITATION MBA-CONSULT</small>
                 </div>
             </div>
         </div>
@@ -158,81 +127,80 @@
 </div>
 
 <script>
-    // --- DONNÉES & TRADUCTIONS (Fusion V320/V330) ---
+    // --- DATABASE V320 + 20 MÉTIERS ---
+    const DATABASE = {
+        Finance: { logo: "🏦", list: ["Trader Haute Fréquence", "Analyste M&A Senior", "Auditeur Financier", "Risk Manager", "Directeur de Trésorerie", "Banquier d'Affaires", "Fiscaliste International", "Actuaire", "Gestionnaire de Fortune", "Analyste ESG", "Compliance Officer", "Broker", "Contrôleur de Gestion", "Analyste Quantitatif", "Gestionnaire de Fonds", "Expert Comptable", "Credit Analyst", "Spécialiste Blockchain", "Directeur Financier (CFO)", "Consultant en Restructuration"] },
+        Energie: { logo: "⚡", list: ["Ingénieur Forage", "Expert Solaire", "Analyste Smart-Grid", "Géologue de Réservoir", "Manager Éolien", "Ingénieur Nucléaire", "Consultant Hydrogène", "Responsable HSE", "Directeur de Centrale", "Analyste Marchés de l'Énergie", "Technicien Réseaux", "Auditeur Énergétique", "Manager Biomasse", "Géophysicien", "Planificateur Infrastructures", "Expert Off-shore", "Spécialiste Transport GRID", "Ingénieur Thermique", "Foreur Puits Profonds", "Consultant Décarbonation"] },
+        IT_AI: { logo: "🤖", list: ["Data Scientist", "Architecte Cloud", "Expert Cybersécurité", "Prompt Engineer", "Ingénieur ML Ops", "Pentester", "Architecte de Données", "Scrum Master", "Analyste SOC", "Ingénieur Réalité VR", "DevSecOps", "UX Designer Senior", "Product Owner AI", "Expert Big Data", "Manager IT", "Architecte Réseaux", "Développeur Fullstack", "Ingénieur Blockchain", "Consultant ERP", "Ingénieur Robotique"] },
+        Agri_Food: { logo: "🌾", list: ["Ingénieur Agronome", "Responsable Qualité", "Manager Supply Chain", "Généticien Végétal", "Auditeur Bio", "Oenologue", "Nutritionniste Industriel", "Expert Irrigation", "Acheteur Matières Premières", "Manager de Production", "Expert des Sols", "Responsable RSE", "Ingénieur Agro-Alimentaire", "Logistique Chaîne du Froid", "Manager de Coopérative", "Phytopathologiste", "Expert Semences", "Chef de Culture", "Analyste Terroir", "Horticulteur"] },
+        Tourism: { logo: "🌍", list: ["Revenue Manager", "Directeur de Resort", "Yield Analyst", "Expert E-reputation", "Concepteur Expériences", "Manager Écotourisme", "Chef de Réception", "Directeur de Croisière", "Guide de Haute Montagne", "Concierge Clés d'Or", "Manager Destination", "Analyste de Flux", "Directeur de Parc", "Event Planner Senior", "Responsable Loisirs", "Auditeur Hôtelier", "Expert Mobilité", "Manager Incentive", "Chef de Produit Voyage", "Directeur Hôtelier"] },
+        Education: { logo: "🎓", list: ["Ingénieur Pédagogique", "Directeur Académique", "Chercheur EdTech", "Directeur de Campus", "Andragogue", "Coach de Dirigeants", "Spécialiste LMS", "Analyste Compétences", "Manager Innovation", "Expert VAE", "Consultant Orientation", "Directeur Recherche", "Manager de Faculté", "Médiateur Éducatif", "Expert Inclusion", "Concepteur E-learning", "Formateur Expert", "Auditeur Qualité Éducation", "Planificateur Académique", "Directeur d'École"] }
+    };
+
     const TRANSLATIONS = {
         fr: {
-            vMsg: "L'excellence mondiale exige une capacité de décision sous pression. Bienvenue dans l'unité d'élite MBA-Consult.",
-            vVigilance: "⚠ SEUIL CRITIQUE : 80% (40/50 pts). L'échec est éliminatoire.",
+            vMsg: "L'excellence mondiale définit votre rang. Bienvenue dans l'unité d'élite MBA-Consult.",
+            vVigilance: "⚠ SEUIL CRITIQUE : 80% (40/50 pts). Zéro tolérance.",
             vBtn: "DÉMARRER L'AUDIT ÉLITE",
-            sTitle: "SÉLECTIONNEZ VOTRE UNITÉ D'ACCRÉDITATION",
-            qSubmit: "VALIDER LA STRATÉGIE",
-            promptJob: "SAISISSEZ VOTRE MÉTIER PRÉCIS :",
-            promptName: "NOM COMPLET POUR LE REGISTRE :",
+            sTitle: "UNITÉS D'ACCRÉDITATION MBA",
+            qSubmit: "CONFIRMER LA STRATÉGIE",
+            promptJob: "SÉLECTIONNEZ VOTRE MÉTIER :",
+            promptName: "NOM COMPLET DE L'EXPERT :",
             cConfirm: "Ce document atteste solennellement que",
-            cExpert: "a démontré une expertise métier supérieure en qualité de :",
-            audit: "AUDIT STRATÉGIQUE",
-            fail: "CERTIFICATION REFUSÉE. SCORE INSUFFISANT (INFÉRIEUR À 80%).",
+            cExpert: "A validé son accréditation mondiale pour le métier de :",
+            fail: "CERTIFICATION REFUSÉE. SCORE INSUFFISANT.",
+            liPost: "Je suis fier d'annoncer avoir obtenu mon accréditation mondiale MBA-CONSULT avec un score de ",
             scenarios: [
-                { q: "Face à une crise systémique imminente, quel est votre protocole de sécurisation ?", r: ["Alpha: Hedging global et isolation immédiate des actifs critiques.", "Beta: Optimisation des flux de trésorerie et réduction des coûts variables.", "Gamma: Analyse d'impact approfondie et observation des mouvements de marché."] },
-                { q: "Une technologie de rupture menace votre cœur de métier. Comment pilotez-vous la transition ?", r: ["Alpha: Pivot disruptif immédiat vers le nouveau modèle sémantique.", "Beta: Intégration hybride progressive et formation accélérée des cadres.", "Gamma: Veille technologique accrue et audit de faisabilité externe."] },
-                { q: "Un conflit éthique ou réglementaire majeur surgit. Quelle est votre posture ?", r: ["Alpha: Mise en conformité radicale avec transparence totale et publique.", "Beta: Négociation tactique et ajustement discret des procédures internes.", "Gamma: Analyse juridique approfondie et temporisation stratégique."] },
-                { q: "La performance globale chute brutalement de 15%. Quel levier actionnez-vous ?", r: ["Alpha: Restructuration complète du modèle de valeur et agilité accrue.", "Beta: Renforcement immédiat des KPIs et management de proximité.", "Gamma: Audit externe de performance et réduction budgétaire ciblée."] },
-                { q: "Une opportunité d'acquisition complexe et risquée se présente. Votre décision ?", r: ["Alpha: Intégration verticale totale pour domination rapide du marché.", "Beta: Partenariat stratégique et co-entreprise pour partage des risques.", "Gamma: Étude de marché exploratoire avant tout engagement financier."] }
+                { q: "En situation de crise systémique, quel est votre protocole de sécurisation ?", r: ["Alpha: Hedging global et isolation des actifs critiques.", "Beta: Optimisation des flux et réduction des coûts.", "Gamma: Analyse d'impact et observation."] },
+                { q: "Une rupture technologique menace votre secteur. Votre décision ?", r: ["Alpha: Pivot disruptif immédiat vers l'innovation.", "Beta: Intégration hybride et formation.", "Gamma: Veille technologique prudente."] },
+                { q: "Un conflit d'éthique réglementaire surgit. Votre posture ?", r: ["Alpha: Mise en conformité radicale et transparence.", "Beta: Négociation tactique et ajustement.", "Gamma: Analyse juridique et temporisation."] },
+                { q: "La performance globale chute de 15%. Quel levier actionnez-vous ?", r: ["Alpha: Restructuration du modèle de valeur.", "Beta: Renforcement des KPIs et proximité.", "Gamma: Audit externe et réduction budgétaire."] },
+                { q: "Une opportunité d'acquisition se présente. Votre décision ?", r: ["Alpha: Intégration verticale pour domination.", "Beta: Partenariat et partage de risques.", "Gamma: Étude de marché approfondie."] }
             ]
         },
         en: {
-            vMsg: "Global excellence requires decision-making under pressure. Welcome to the MBA-Consult elite unit.",
-            vVigilance: "⚠ CRITICAL THRESHOLD: 80% (40/50 pts). Failure is final.",
+            vMsg: "Global excellence defines your rank. Welcome to the MBA-Consult elite unit.",
+            vVigilance: "⚠ CRITICAL THRESHOLD: 80% (40/50 pts). Zero tolerance.",
             vBtn: "START ELITE AUDIT",
-            sTitle: "SELECT YOUR ACCREDITATION UNIT",
-            qSubmit: "VALIDATE STRATEGY",
-            promptJob: "ENTER YOUR PRECISE PROFESSION:",
-            promptName: "FULL NAME FOR THE REGISTER:",
+            sTitle: "MBA ACCREDITATION UNITS",
+            qSubmit: "CONFIRM STRATEGY",
+            promptJob: "SELECT YOUR PROFESSION:",
+            promptName: "EXPERT FULL NAME:",
             cConfirm: "This document solemnly certifies that",
-            cExpert: "has demonstrated superior professional expertise as:",
-            audit: "STRATEGIC AUDIT",
-            fail: "CERTIFICATION DENIED. INSUFFICIENT SCORE (BELOW 80%).",
+            cExpert: "Has validated global accreditation for the profession of:",
+            fail: "CERTIFICATION DENIED. INSUFFICIENT SCORE.",
+            liPost: "Proud to announce that I have received my MBA-CONSULT global accreditation with a score of ",
             scenarios: [
-                { q: "Facing an imminent systemic crisis, what is your security protocol?", r: ["Alpha: Global hedging and immediate isolation of critical assets.", "Beta: Cash-flow optimization and variable cost reduction.", "Gamma: In-depth impact analysis and market observation."] },
-                { q: "A disruptive technology threatens your core business. How do you lead the transition?", r: ["Alpha: Immediate disruptive pivot to the new semantic model.", "Beta: Progressive hybrid integration and accelerated executive training.", "Gamma: Increased tech watch and external feasibility audit."] },
-                { q: "A major ethical or regulatory conflict arises. What is your stance?", r: ["Alpha: Radical compliance with total and public transparency.", "Beta: Tactical negotiation and discreet adjustment of internal procedures.", "Gamma: In-depth legal analysis and strategic delay."] },
-                { q: "Global performance drops brutally by 15%. What lever do you pull?", r: ["Alpha: Complete value model restructuring and increased agility.", "Beta: Immediate KPI reinforcement and proximity management.", "Gamma: External performance audit and targeted budget cuts."] },
-                { q: "A complex and risky acquisition opportunity arises. Your decision?", r: ["Alpha: Total vertical integration for rapid market dominance.", "Beta: Strategic partnership and joint venture for risk sharing.", "Gamma: Exploratory market study before any financial commitment."] }
+                { q: "In a systemic crisis, what is your security protocol?", r: ["Alpha: Global hedging and isolation of critical assets.", "Beta: Flow optimization and cost reduction.", "Gamma: Impact analysis and observation."] },
+                { q: "A technological disruption threatens your sector. Your pivot?", r: ["Alpha: Immediate disruptive pivot to innovation.", "Beta: Hybrid integration and upskilling.", "Gamma: Prudent tech watch."] },
+                { q: "A regulatory ethics conflict arises. Your stance?", r: ["Alpha: Total transparency and immediate compliance.", "Beta: Tactical negotiation and adjustment.", "Gamma: Legal analysis and delay."] },
+                { q: "Global performance drops by 15%. What lever do you pull?", r: ["Alpha: Value model restructuring.", "Beta: KPI reinforcement and management.", "Gamma: External audit and budget cuts."] },
+                { q: "An acquisition opportunity arises. Your decision?", r: ["Alpha: Vertical integration for market dominance.", "Beta: Strategic partnership and risk sharing.", "Gamma: In-depth market study."] }
             ]
         },
         ar: {
-            vMsg: "تتطلب الخبرة العالمية القدرة على اتخاذ القرار تحت الضغط. مرحباً بكم في وحدة النخبة بمؤسسة MBA-Consult.",
-            vVigilance: "⚠ عتبة حرجة: 80٪ (40/50 نقطة). الفشل نهائي.",
+            vMsg: "التميز العالمي يحدد رتبتك. مرحباً بكم في وحدة النخبة بمؤسسة MBA-Consult.",
+            vVigilance: "⚠ عتبة حرجة: 80٪ (40/50 نقطة). لا تسامح.",
             vBtn: "بدء التدقيق المهني",
-            sTitle: "اختر وحدة الاعتماد الخاصة بك",
+            sTitle: "وحدات الاعتماد المهني",
             qSubmit: "تأكيد الاستراتيجية",
-            promptJob: "أدخل مهنتك الدقيقة:",
-            promptName: "الاسم الكامل للسجل:",
+            promptJob: "اختر مهنتك:",
+            promptName: "الاسم الكامل للخبير:",
             cConfirm: "تشهد هذه الوثيقة رسمياً بأن",
-            cExpert: "قد أظهر تميزاً مهنيا استثنائياً بصفته:",
-            audit: "التدقيق الاستراتيجي",
-            fail: "تم رفض الشهادة. النتيجة غير كافية (أقل من 80٪).",
+            cExpert: "قد اجتاز الاعتماد العالمي لمهنة:",
+            fail: "تم رفض الشهادة. النتيجة غير كافية.",
+            liPost: "أنا فخور بالإعلان عن حصولي على الاعتماد العالمي من MBA-CONSULT بدرجة ",
             scenarios: [
-                { q: "في مواجهة أزمة نظامية وشيكة، ما هو بروتوكول التأمين لديك؟", r: ["ألفا: التحوط العالمي والعزل الفوري للأصول الحرجة.", "بيتا: تحسين التدفقات النقدية وخفض التكاليف المتغيرة.", "غاما: تحليل الأثر المتعمق ومراقبة تحركات السوق."] },
-                { q: "تقنية خارقة تهدد عملك الأساسي. كيف تقود مرحلة الانتقال؟", r: ["ألفا: التحول الجذري الفوري نحو النموذج الدلالي الجديد.", "بيتا: التكامل الهجين التدريجي والتدريب المكثف للتنفيذيين.", "غاما: زيادة المراقبة التقنية وتدقيق الجدوى الخارجية."] },
-                { q: "نشوب صراع أخلاقي أو تنظيمي كبير. ما هو موقفك؟", r: ["ألفا: الامتثال الجذري مع الشفافية الكاملة والعامة.", "بيتا: التفاوض التكتيكي والتعديل الحذر للإجراءات الداخلية.", "غاما: التحليل القانوني المتعمق والتريث الاستراتيجي."] },
-                { q: "انخفاض الأداء العالمي فجأة بنسبة 15٪. ما هو المحرك الذي ستستخدمه؟", r: ["ألفا: إعادة هيكلة نموذج القيمة بالكامل وزيادة المرونة.", "بيتا: تعزيز مؤشرات الأداء الرئيسية فوراً والإدارة المباشرة.", "غاما: تدقيق خارجي للأداء وخفض الميزانية المستهدف."] },
-                { q: "فرصة استحواذ معقدة ومحفوفة بالخاطر تلوح في الأفق. ما هو قرارك؟", r: ["ألفا: التكامل العمودي الكامل للهيمنة السريعة على السوق.", "بيتا: الشراكة الاستراتيجية والمشروع المشترك لتقاسم المخاطر.", "غاما: دراسة سوقية استكشافية قبل أي التزام مالي."] }
+                { q: "في حالة وجود أزمة نظامية، ما هو بروتوكول التأمين لديك؟", r: ["ألفا: التحوط العالمي وعزل الأصول.", "بيتا: تحسين التدفقات وتقليل التكاليف.", "غاما: تحليل الأثر والمراقبة."] },
+                { q: "تهديد تقني يواجه قطاعك. كيف تقود مرحلة الانتقال؟", r: ["ألفا: التحول الجذري الفوري نحو الابتكار.", "بيتا: التكامل الهجين والتدريب.", "غاما: مراقبة تقنية حذرة."] },
+                { q: "نشوب صراع أخلاقي تنظيمي. ما هو موقفك؟", r: ["ألفا: الامتثال الجذري مع الشفافية.", "بيتا: التفاوض وتعديل الإجراءات.", "غاما: التحليل القانوني والتريث."] },
+                { q: "انخفاض الأداء العالمي بنسبة 15٪. ما هو المحرك؟", r: ["ألفا: إعادة هيكلة نموذج القيمة.", "بيتا: تعزيز مؤشرات الأداء والإدارة.", "غاما: تدقيق خارجي وخفض الميزانية."] },
+                { q: "فرصة استحواذ معقدة. ما هو قرارك؟", r: ["ألفا: التكامل العمودي للسيطرة.", "بيتا: الشراكة وتقاسم المخاطر.", "غاما: دراسة سوقية متعمقة."] }
             ]
         }
     };
 
-    const DATABASE = {
-        Finance: { logo: "fa-solid fa-building-columns", fr: ["Trader", "Analyste M&A", "Auditeur Risk", "Directeur Financier"] },
-        Energie: { logo: "fa-solid fa-bolt", fr: ["Ingénieur Forage", "Expert Solaire", "Ingénieur Nucléaire", "Manager HSE"] },
-        IT_AI: { logo: "fa-solid fa-robot", fr: ["Data Scientist", "Architecte Cloud", "Cyber Expert", "ML Ops"] },
-        Agri_Food: { logo: "fa-solid fa-wheat-awn", fr: ["Agronome", "Responsable Qualité", "Généticien Agro", "Oenologue"] },
-        Tourism: { logo: "fa-solid fa-earth-americas", fr: ["Revenue Manager", "Directeur Resort", "Directeur Hôtelier"] },
-        Education: { logo: "fa-solid fa-graduation-cap", fr: ["Directeur Académique", "Chercheur EdTech", "Innovation Manager"] }
-    };
-
-    // --- LOGIQUE CORE SYSTÈME ---
-    let curL = 'fr', score = 0, step = 0, selectedJob = "";
+    let curL = 'fr', score = 0, step = 0, selectedJob = "", userName = "";
 
     function setLang(l) {
         curL = l;
@@ -249,43 +217,32 @@
     function initSectors() {
         const grid = document.getElementById('sector-grid'); grid.innerHTML = "";
         for (const [id, data] of Object.entries(DATABASE)) {
-            // Reprise du design "Grands Logos proportionnels"
-            grid.innerHTML += `
-                <div class="sector-card" onclick="selectSector('${id}')">
-                    <i class="${data.logo} sector-icon"></i>
-                    <h3>${id.replace('_',' & ')}</h3>
-                </div>
-            `;
+            grid.innerHTML += `<div class="sector-card" onclick="selectSector('${id}')"><span class="sector-logo">${data.logo}</span><h3>${id}</h3></div>`;
         }
     }
 
     function selectSector(id) {
-        const jobsFr = DATABASE[id].fr; // Liste de référence en FR
-        selectedJob = prompt(`${TRANSLATIONS[curL].promptJob}\n\n${jobsFr.join(" | ")}`) || jobsFr[0];
+        const jobs = DATABASE[id].list;
+        selectedJob = prompt(`${TRANSLATIONS[curL].promptJob}\n\n${jobs.slice(0,10).join(" | ")}...`) || jobs[0];
         document.getElementById('selection-interface').style.display = 'none';
         document.getElementById('audit-interface').style.display = 'block';
-        document.getElementById('job-badge').innerText = selectedJob.toUpperCase();
+        document.getElementById('job-badge').innerText = selectedJob;
         loadQ();
     }
 
     function loadQ() {
-        if(step >= 5) { conclude(); return; } // Logique V320: 5 questions
+        if(step >= 5) { conclude(); return; }
         const scenario = TRANSLATIONS[curL].scenarios[step];
-        document.getElementById('audit-step').innerText = `${TRANSLATIONS[curL].audit} ${step+1}/5`;
+        document.getElementById('audit-step').innerText = `STEP ${step+1}/5`;
         document.getElementById('q-text').innerText = scenario.q;
         const stack = document.getElementById('options-stack'); stack.innerHTML = "";
-        
-        // Mélange aléatoire des options
-        const shuffledOpts = [...scenario.r].sort(() => Math.random() - 0.5);
-        
-        shuffledOpts.forEach((o) => {
+        scenario.r.forEach((o) => {
             let pts = o.includes("Alpha") ? 10 : (o.includes("Beta") ? 7 : 4);
             stack.innerHTML += `<button class="opt-button" onclick="sel(this, ${pts})">${o}</button>`;
         });
         tempPts = 0;
     }
 
-    let tempPts = 0;
     function sel(btn, p) {
         document.querySelectorAll('.opt-button').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected'); tempPts = p;
@@ -295,44 +252,40 @@
 
     function conclude() {
         document.getElementById('audit-interface').style.display = 'none';
-        if(score < 40) { // Seuil V320: 80% de 50 pts = 40 pts
-            alert(TRANSLATIONS[curL].fail); location.reload();
-        } else {
-            const name = prompt(TRANSLATIONS[curL].promptName) || "EXPERT";
-            document.getElementById('cert-container').style.display = 'block';
-            document.getElementById('c-name').innerText = name.toUpperCase();
+        if(score < 40) { alert(TRANSLATIONS[curL].fail); location.reload(); }
+        else {
+            userName = prompt(TRANSLATIONS[curL].promptName) || "EXPERT";
+            document.getElementById('certificat-wrapper').style.display = 'block';
+            document.getElementById('c-name').innerText = userName.toUpperCase();
             document.getElementById('c-job').innerText = selectedJob;
             document.getElementById('c-score').innerText = score;
-            document.getElementById('c-sig').innerText = name;
-            
-            // Textes statiques du certificat localisés
+            document.getElementById('c-sig').innerText = userName;
             document.getElementById('c-confirm').innerText = TRANSLATIONS[curL].cConfirm;
             document.getElementById('c-expert-text').innerText = TRANSLATIONS[curL].cExpert;
-            document.getElementById('c-cert-title').innerText = curL === 'ar' ? 'شهادة التميز المهني' : 'CERTIFICATE OF EXCELLENCE';
-
-            // Sécurité
-            const hash = "KMS-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+            const hash = "MBA-" + Math.random().toString(36).substr(2, 9).toUpperCase();
             document.getElementById('c-hash').innerText = hash;
-            document.getElementById('c-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=125x125&data=MBA-VERIFIED-${hash}-${name}-${score}`;
-            
-            window.scrollTo(0, 500); // Scroll vers le certificat
+            document.getElementById('c-qr').src = `https://api.qrserver.com/v1/create-qr-code/?data=${hash}`;
         }
     }
 
-    // --- GÉNÉRATION PDF OFFICIELLE ( html2pdf.js ) ---
     function generatePDF() {
         const element = document.getElementById('cert-area');
         const opt = {
             margin: 0,
-            filename: `MBA-CONSULT-ACCREDITATION-${document.getElementById('c-hash').innerText}.pdf`,
+            filename: `MBA-CONSULT-${userName.replace(' ','-')}.pdf`,
             image: { type: 'jpeg', quality: 1 },
-            html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' } // Verrouillage A4 Paysage
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
         };
         html2pdf().set(opt).from(element).save();
     }
 
-    // Démarrage par défaut
+    function shareLinkedIn() {
+        const text = encodeURIComponent(`${TRANSLATIONS[curL].liPost}${score}/50 en tant que ${selectedJob}. #MBAConsult #EliteAccreditation #GlobalKMS`);
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&summary=${text}`, '_blank');
+    }
+
     setLang('fr');
 </script>
 </body>
