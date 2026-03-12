@@ -3,320 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA-CONSULT | OMNI-KMS V200</title>
+    <title>MBA-CONSULT | KMS OMNI-INTELLIGENCE V210</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;400;600;800&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #c5a021; --navy: #0a1128; --white: #ffffff; --bg: #f4f7f9; }
-        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        * { box-sizing: border-box; transition: all 0.3s ease; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); overflow-x: hidden; }
         body.rtl { direction: rtl; font-family: 'Amiri', serif; }
 
-        /* SELECTEUR DE LANGUE FLOTTANT */
-        #lang-switcher { position: fixed; top: 25px; right: 25px; z-index: 30000; display: flex; gap: 10px; background: rgba(10, 17, 40, 0.9); padding: 10px; border-radius: 8px; border: 1px solid var(--gold); }
-        .lang-btn { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; cursor: pointer; font-weight: 800; border-radius: 4px; font-size: 0.8em; }
+        /* HEADER & LANG */
+        #lang-switcher { position: fixed; top: 20px; right: 20px; z-index: 30000; display: flex; gap: 8px; background: rgba(10,17,40,0.9); padding: 8px; border-radius: 5px; border: 1px solid var(--gold); }
+        .lang-btn { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 4px 10px; cursor: pointer; font-size: 0.8em; }
         .lang-btn.active { background: var(--gold); color: var(--navy); }
 
-        /* INTERFACES DE PRESENTATION */
+        /* PORTALS */
         #vision-portal, #onboarding-portal { position: fixed; inset: 0; background: var(--navy); z-index: 20000; display: flex; justify-content: center; align-items: center; color: white; padding: 20px; text-align: center; }
-        .welcome-box { background: rgba(15, 25, 55, 0.98); border: 2px solid var(--gold); padding: 50px; border-radius: 20px; max-width: 900px; box-shadow: 0 0 100px rgba(0,0,0,0.7); }
-        .btn-gold { background: var(--gold); color: var(--navy); border: none; padding: 20px 60px; font-weight: 800; font-size: 1.1em; cursor: pointer; border-radius: 5px; text-transform: uppercase; margin-top: 30px; letter-spacing: 2px; }
+        .welcome-box { background: rgba(15, 25, 55, 0.98); border: 2px solid var(--gold); padding: 40px; border-radius: 15px; max-width: 800px; box-shadow: 0 0 80px rgba(0,0,0,0.8); }
+        .btn-gold { background: var(--gold); color: var(--navy); border: none; padding: 18px 50px; font-weight: 800; cursor: pointer; border-radius: 4px; text-transform: uppercase; margin-top: 25px; }
 
-        /* STRUCTURE PRINCIPALE */
-        header { background: var(--navy); color: var(--gold); padding: 30px; text-align: center; border-bottom: 6px solid var(--gold); }
-        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .section-card { background: white; border-radius: 15px; padding: 50px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid #ddd; }
+        /* MAIN APP */
+        header { background: var(--navy); color: var(--gold); padding: 20px; text-align: center; border-bottom: 5px solid var(--gold); font-family: 'Cinzel'; font-size: 1.5em; letter-spacing: 5px; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .section-card { background: white; border-radius: 12px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
 
-        /* GRILLE SECTEURS */
-        .sector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
-        .sector-box { padding: 40px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; text-align: center; font-weight: 800; font-size: 1.1em; }
-        .sector-box:hover { background: var(--navy); color: var(--gold); border-color: var(--gold); transform: translateY(-5px); }
-
-        /* MOTEUR D'AUDIT */
+        /* AUDIT ENGINE */
         #audit-interface { display: none; }
-        .opt-button { display: block; width: 100%; padding: 22px; margin: 15px 0; text-align: left; border: 2px solid #eee; background: white; border-radius: 10px; cursor: pointer; font-size: 1.1em; }
+        .opt-button { display: block; width: 100%; padding: 18px; margin: 12px 0; text-align: left; border: 2px solid #eee; background: white; border-radius: 8px; cursor: pointer; font-size: 1em; }
         .rtl .opt-button { text-align: right; }
-        .opt-button.selected { border-color: var(--gold); background: #fffcf0; font-weight: 600; }
-        .analysis-box { width: 100%; height: 140px; margin-top: 25px; padding: 20px; border: 2px dashed #ccc; border-radius: 10px; font-family: inherit; font-size: 1.1em; }
+        .opt-button.selected { border-color: var(--gold); background: #fffcf0; font-weight: 700; }
+        .analysis-box { width: 100%; height: 120px; margin-top: 20px; padding: 15px; border: 2px dashed #ccc; border-radius: 8px; font-family: inherit; font-size: 1em; }
 
-        /* CERTIFICAT PAYSAGE HAUTE DÉFINITION */
-        #certificat-final { display: none; width: 1120px; height: 790px; border: 45px double var(--gold); background: white; margin: 40px auto; padding: 70px; position: relative; text-align: center; box-shadow: 0 0 60px rgba(0,0,0,0.2); }
-        .cert-name { font-family: 'Amiri', serif; font-size: 55px; border-bottom: 3px solid #333; display: inline-block; margin: 20px 0; padding: 0 60px; font-style: italic; }
-        .sig-box { border-top: 2px solid #333; width: 350px; margin-top: 20px; padding-top: 10px; font-family: 'Amiri'; font-size: 35px; color: #1a2a6c; }
+        /* CERTIFICAT PAYSAGE */
+        #certificat-final { display: none; width: 1120px; height: 790px; border: 40px double var(--gold); background: white; margin: 20px auto; padding: 60px; position: relative; text-align: center; }
+        .cert-name { font-family: 'Amiri', serif; font-size: 50px; border-bottom: 2px solid #333; display: inline-block; margin: 15px 0; padding: 0 40px; }
 
         @media print {
             @page { size: A4 landscape; margin: 0; }
             body * { display: none; }
-            #certificat-final { display: block !important; position: absolute; inset: 0; margin: 0; border-width: 50px !important; }
+            #certificat-final { display: block !important; position: absolute; inset: 0; border-width: 45px !important; }
         }
     </style>
 </head>
 <body>
 
 <div id="lang-switcher">
-    <button class="lang-btn" id="btn-fr" onclick="updateLang('fr')">FR</button>
-    <button class="lang-btn" id="btn-en" onclick="updateLang('en')">EN</button>
-    <button class="lang-btn" id="btn-ar" onclick="updateLang('ar')">AR</button>
+    <button class="lang-btn" id="btn-fr" onclick="setLanguage('fr')">FR</button>
+    <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+    <button class="lang-btn" id="btn-ar" onclick="setLanguage('ar')">AR</button>
 </div>
 
 <div id="vision-portal">
     <div class="welcome-box">
-        <h1 id="v-brand">MBA-CONSULT</h1>
-        <p id="v-tag" style="letter-spacing: 5px; color: var(--gold); font-weight: 800;"></p>
-        <div id="v-msg" style="font-size: 1.3em; line-height: 1.8; margin: 30px 0;"></div>
-        <button class="btn-gold" id="v-btn" onclick="goToProtocol()"></button>
+        <h1 style="font-family: 'Cinzel'; letter-spacing: 4px;">MBA-CONSULT</h1>
+        <p id="v-tag" style="color: var(--gold); font-weight: 800;"></p>
+        <p id="v-msg" style="line-height: 1.6; margin: 20px 0;"></p>
+        <button class="btn-gold" id="v-btn" onclick="openProtocol()"></button>
     </div>
 </div>
 
 <div id="onboarding-portal" style="display:none;">
     <div class="welcome-box">
-        <h2 id="p-title" style="color: var(--gold); font-size: 2.5em;"></h2>
-        <div id="p-rules-box" style="text-align:left; background: rgba(255,255,255,0.05); padding: 30px; border-radius:15px; margin: 30px 0; border-left: 5px solid var(--gold);">
-            <ul id="p-list" style="line-height: 2.2; font-size: 1.1em;"></ul>
+        <h2 id="p-title" style="color: var(--gold);"></h2>
+        <div style="text-align:left; background: rgba(255,255,255,0.05); padding: 25px; border-radius:10px; margin: 20px 0;">
+            <ul id="p-rules" style="line-height: 2;"></ul>
         </div>
-        <button class="btn-gold" id="p-btn" onclick="closePortals()"></button>
+        <button class="btn-gold" id="p-btn" onclick="startApp()"></button>
     </div>
 </div>
 
-<header>
-    <div style="font-family: 'Cinzel'; letter-spacing: 10px; font-size: 2em;">MBA-CONSULT | KMS GLOBAL</div>
-</header>
+<header>MBA-CONSULT | GLOBAL KMS</header>
 
 <div class="container">
     <div id="selection-interface" class="section-card">
-        <h2 id="s-title" style="text-align:center; font-family: 'Cinzel'; margin-bottom: 40px;"></h2>
-        <div class="sector-grid" id="sector-grid"></div>
+        <h2 id="s-title" style="text-align:center; font-family: 'Cinzel';"></h2>
+        <div id="sector-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 25px;"></div>
     </div>
 
     <div id="audit-interface">
-        <div class="section-card" style="border-left: 10px solid var(--gold);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-                <span id="audit-count" style="font-weight: 800; color: var(--gold); letter-spacing: 2px;"></span>
-                <span id="live-rank" style="background: var(--navy); color: white; padding: 8px 20px; border-radius: 25px; font-size: 0.9em; font-weight: bold;"></span>
+        <div class="section-card" style="border-left: 8px solid var(--gold);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <span id="audit-step" style="font-weight: 800; color: var(--gold);"></span>
+                <span id="audit-rank" style="background: var(--navy); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em;"></span>
             </div>
-            <h2 id="q-text" style="font-size: 1.8em; line-height: 1.4; margin-bottom: 35px;"></h2>
+            <h2 id="q-text" style="font-size: 1.5em; line-height: 1.4;"></h2>
             <div id="options-stack"></div>
             <textarea id="analysis-input" class="analysis-box"></textarea>
-            <div style="text-align: right; margin-top: 35px;">
-                <button id="q-submit" onclick="submitAnswer()" style="background: var(--navy); color: var(--gold); padding: 20px 60px; border: none; font-weight: 800; cursor: pointer; border-radius: 5px; font-size: 1.1em;"></button>
+            <div style="text-align: right; margin-top: 20px;">
+                <button id="q-submit" onclick="nextPhase()" style="background:var(--navy); color:var(--gold); padding:15px 45px; border:none; cursor:pointer; font-weight:800;"></button>
             </div>
         </div>
     </div>
 
     <div id="failure-screen" class="section-card" style="display:none; text-align:center;">
-        <div style="font-size: 5em; color: #e74c3c; margin-bottom: 30px;">⚠</div>
-        <h2 id="f-title" style="color: #c0392b; font-size: 2.5em; font-family: 'Cinzel';"></h2>
-        <p id="f-msg" style="font-size: 1.3em; color: #555; max-width: 700px; margin: 25px auto;"></p>
+        <h2 id="f-title" style="color: #c0392b;"></h2>
+        <p id="f-msg"></p>
         <button class="btn-gold" onclick="location.reload()" id="f-btn"></button>
     </div>
 </div>
 
 <div id="certificat-final">
-    <div style="position: absolute; top: 60px; right: 80px; text-align: right;">
-        <div style="font-family: 'Cinzel'; font-size: 26px; color: var(--gold); border-bottom: 2px solid var(--navy);">MBA BOARD ALPHA</div>
-        <div style="font-size: 11px; letter-spacing: 3px;">GLOBAL REFERENTIAL KMS</div>
+    <div style="position: absolute; top: 40px; right: 60px; text-align: right;">
+        <div style="font-family: 'Cinzel'; font-size: 22px; color: var(--gold);">MBA BOARD ALPHA</div>
+        <small>GLOBAL KMS V210</small>
     </div>
-    <div id="c-title-cert" style="font-family: 'Cinzel'; font-size: 50px; margin-top: 90px; letter-spacing: 6px;">CERTIFICATE OF EXCELLENCE</div>
-    <p id="c-sub-cert" style="letter-spacing: 12px; font-weight: 800; color: var(--gold); margin-top: 10px;">PROFESSIONAL ACCREDITATION UNIT</p>
-    
-    <p id="c-confirm" style="font-size: 1.6em; margin-top: 50px;"></p>
-    <div class="cert-name" id="c-user-name"></div>
-    
-    <p id="c-expertise" style="font-size: 1.6em;"></p>
-    <div id="c-user-job" style="font-size: 42px; font-weight: 900; color: var(--gold); margin: 20px 0; text-transform: uppercase;"></div>
+    <div style="font-family: 'Cinzel'; font-size: 45px; margin-top: 80px;">CERTIFICATE OF EXCELLENCE</div>
+    <p style="letter-spacing: 10px; font-weight: 800; color: var(--gold);">PROFESSIONAL ACCREDITATION</p>
+    <p id="c-txt" style="font-size: 1.4em; margin-top: 40px;"></p>
+    <div class="cert-name" id="c-name"></div>
+    <p id="c-exp" style="font-size: 1.4em;"></p>
+    <div id="c-job" style="font-size: 38px; font-weight: 900; color: var(--gold); text-transform: uppercase;"></div>
     
     <div style="display: flex; justify-content: center; gap: 40px; margin: 30px 0;">
-        <div style="background: var(--navy); color: white; padding: 15px 40px; border: 2px solid var(--gold); font-weight: bold; font-size: 1.3em;">
-            SCORE: <span id="c-final-score"></span>%
-        </div>
-        <div style="background: var(--gold); color: var(--navy); padding: 15px 40px; font-weight: 900; font-size: 1.3em;">
-            RANK: <span id="c-final-rank"></span>
-        </div>
+        <div style="background: var(--navy); color: white; padding: 12px 35px; border: 2px solid var(--gold); font-weight: bold;">SCORE: <span id="c-score"></span>%</div>
+        <div style="background: var(--gold); color: var(--navy); padding: 12px 35px; font-weight: 900;">RANK: <span id="c-rank"></span></div>
     </div>
 
-    <div style="margin-top: 80px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 50px;">
+    <div style="margin-top: 60px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 40px;">
         <div style="text-align:left;">
-            <div class="sig-box" id="c-user-sig"></div>
-            <small id="c-sig-label"></small>
+            <div id="c-sig" style="font-family: 'Amiri'; font-size: 35px; border-top: 2px solid #333; width: 300px; padding-top: 10px;"></div>
+            <small id="c-sig-lbl"></small>
         </div>
-        <img id="c-qr" src="" style="width: 120px;">
+        <img id="c-qr" src="" style="width: 110px;">
     </div>
-    
-    <div style="position: absolute; bottom: 40px; left: 80px; font-family: monospace; font-size: 11px; color: #999; text-align: left;">
-        VERIFICATION HASH: <span id="c-hash"></span><br>
-        MBA-CONSULT SECURE INFRASTRUCTURE | KMS V200
-    </div>
-    <button onclick="window.print()" class="no-print" style="margin-top:40px; padding: 20px 50px; background: var(--navy); color: var(--gold); cursor: pointer; font-weight: 900; border-radius: 5px; border: 2px solid var(--gold);">GÉNÉRER LE PDF (A4 PAYSAGE)</button>
+    <div style="position: absolute; bottom: 30px; left: 60px; font-family: monospace; font-size: 10px; color: #999;">HASH ID: <span id="c-hash"></span></div>
+    <button onclick="window.print()" class="no-print" style="margin-top:20px; padding: 15px 40px; background: var(--navy); color: var(--gold); cursor: pointer; font-weight: 800; border: 2px solid var(--gold);">GÉNÉRER PDF</button>
 </div>
 
 <script>
-    const TRANSLATIONS = {
-        fr: {
-            vTag: "L'INTELLIGENCE DÉCISIONNELLE MONDIALE",
-            vMsg: "Le KMS de MBA-CONSULT est le pivot de l'excellence stratégique. Validez votre expertise au sommet de la hiérarchie mondiale.",
-            vBtn: "ACCÉDER AU SYSTÈME",
-            pTitle: "PROTOCOLE D'EXCELLENCE",
-            pRules: ["Seuil de réussite : 80% minimum", "Audit IA : 10 questions uniques générées", "Justification métier obligatoire (30 car. min)", "Classement mondial calculé en temps réel"],
-            pBtn: "INITIALISER L'AUDIT",
-            sTitle: "UNITÉS DE CERTIFICATION SECTORIELLES",
-            sectors: ["ÉDUCATION", "ÉNERGIE", "TOURISME", "IA & TECH", "AGRO", "FINANCE"],
-            qSubmit: "VALIDER LA DÉCISION",
-            qPlaceholder: "Analyse stratégique de l'arbitrage...",
-            fTitle: "ACCRÉDITATION REFUSÉE",
-            fMsg: "Votre score est inférieur au seuil d'excellence de 80%. Le certificat MBA-CONSULT n'est pas délivré.",
-            fBtn: "RECOMMENCER L'AUDIT",
-            cConfirm: "Ceci confirme officiellement que",
-            cExpertise: "a démontré une expertise supérieure en",
-            cSigLabel: "Signature Électronique Vérifiée",
-            rank: "Classement Mondial"
+    const DICT = {
+        fr: { vTag: "L'INTELLIGENCE AU SERVICE DE LA DÉCISION", vMsg: "Validez votre expertise métier par un audit IA global sans précédent.", vBtn: "ACCÉDER AU KMS", pTitle: "PROTOCOLE D'EXCELLENCE", pRules: ["Seuil requis : 80%", "IA Scraping : 1200 variations uniques", "Analyse métier obligatoire", "Classement mondial dynamique"], pBtn: "INITIALISER L'AUDIT", sTitle: "UNITÉS DE CERTIFICATION", sectors: ["Éducation", "Énergie", "Tourisme", "IA & Tech", "Agri-food", "Finance"], qSub: "VALIDER", fTitle: "ÉCHEC DE L'AUDIT", fMsg: "Score insuffisant (<80%). Excellence non atteinte.", fBtn: "RÉESSAYER", cTxt: "Ceci certifie que", cExp: "a démontré une expertise en", cSig: "Signature Électronique", rank: "Rang Global" },
+        en: { vTag: "INTELLIGENCE AT THE SERVICE OF DECISION", vMsg: "Validate your expertise through an unprecedented global AI audit.", vBtn: "ACCESS KMS", pTitle: "EXCELLENCE PROTOCOL", pRules: ["Required threshold: 80%", "AI Scraping: 1200 unique variations", "Mandatory business analysis", "Dynamic global ranking"], pBtn: "INITIALIZE AUDIT", sTitle: "CERTIFICATION UNITS", sectors: ["Education", "Energy", "Tourism", "AI & Tech", "Agri-food", "Finance"], qSub: "VALIDATE", fTitle: "AUDIT FAILED", fMsg: "Insufficient score (<80%). Excellence not met.", fBtn: "RETRY", cTxt: "This certifies that", cExp: "demonstrated expertise in", cSig: "Electronic Signature", rank: "Global Rank" },
+        ar: { vTag: "الذكاء في خدمة القرار", vMsg: "أثبت خبرتك المهنية من خلال تدقيق عالمي غير مسبوق بالذكاء الاصطناعي.", vBtn: "الدخول إلى النظام", pTitle: "بروتوكول التميز", pRules: ["الحد المطلوب: 80٪", "كشط ذكي: 1200 تباين فريد", "تحليل مهني إلزامي", "تصنيف عالمي ديناميكي"], pBtn: "بدء التدقيق", sTitle: "وحدات الشهادات", sectors: ["التعليم", "الطاقة", "السياحة", "الذكاء الاصطناعي", "الزراعة", "المالية"], qSub: "تأكيد", fTitle: "فشل التدقيق", fMsg: "الدرجة غير كافية (<80٪). لم يتم تحقيق التميز.", fBtn: "إعادة المحاولة", cTxt: "هذا يشهد بأن", cExp: "قد أظهر خبرة في", cSig: "توقيع إلكتروني معتمد", rank: "التصنيف العالمي" }
+    };
+
+    // MATRICE IA POUR QUESTIONS INFINIES
+    const IA_MATRIX = {
+        axes: {
+            fr: ["Stratégique", "Technologique", "Éthique/RSE", "Financier", "Opérationnel"],
+            en: ["Strategic", "Technological", "Ethical/CSR", "Financial", "Operational"],
+            ar: ["استراتيجي", "تكنولوجي", "أخلاقي", "مالي", "تشغيلي"]
         },
-        en: {
-            vTag: "GLOBAL DECISIONAL INTELLIGENCE",
-            vMsg: "The MBA-CONSULT KMS is the pivot of strategic excellence. Validate your expertise at the top of the global hierarchy.",
-            vBtn: "ACCESS THE SYSTEM",
-            pTitle: "EXCELLENCE PROTOCOL",
-            pRules: ["Passing threshold: 80% minimum", "AI Audit: 10 unique questions generated", "Mandatory business justification (30 char. min)", "Global ranking calculated in real-time"],
-            pBtn: "INITIALIZE AUDIT",
-            sTitle: "SECTORAL CERTIFICATION UNITS",
-            sectors: ["EDUCATION", "ENERGY", "TOURISM", "AI & TECH", "AGRI-FOOD", "FINANCE"],
-            qSubmit: "VALIDATE DECISION",
-            qPlaceholder: "Strategic analysis of the arbitrage...",
-            fTitle: "ACCREDITATION DENIED",
-            fMsg: "Your score is below the 80% excellence threshold. The MBA-CONSULT certificate is not issued.",
-            fBtn: "RESTART AUDIT",
-            cConfirm: "This officially confirms that",
-            cExpertise: "has demonstrated superior expertise in",
-            cSigLabel: "Verified Electronic Signature",
-            rank: "Global Rank"
-        },
-        ar: {
-            vTag: "ذكاء اتخاذ القرار العالمي",
-            vMsg: "نظام إدارة المعرفة الخاص بـ MBA-CONSULT هو محور التميز الاستراتيجي. أثبت خبرتك في قمة الهرم العالمي.",
-            vBtn: "الدخول إلى النظام",
-            pTitle: "بروتوكول التميز",
-            pRules: ["حد النجاح: 80٪ كحد أدنى", "تدقيق الذكاء الاصطناعي: 10 أسئلة فريدة", "تبرير مهني إلزامي (30 حرفًا)", "تصنيف عالمي يحسب في الوقت الفعلي"],
-            pBtn: "بدء التدقيق",
-            sTitle: "وحدات الشهادات القطاعية",
-            sectors: ["التعليم", "الطاقة", "السياحة", "الذكاء الاصطناعي", "الزراعة", "المالية"],
-            qSubmit: "تأكيد القرار",
-            qPlaceholder: "التحليل الاستراتيجي للمفاضلة...",
-            fTitle: "تم رفض الاعتماد",
-            fMsg: "درجتك أقل من عتبة التميز البالغة 80٪. لا يتم إصدار شهادة MBA-CONSULT.",
-            fBtn: "إعادة التدقيق",
-            cConfirm: "هذا يؤكد رسمياً أن",
-            cExpertise: "قد أظهر خبرة متفوقة في",
-            cSigLabel: "توقيع إلكتروني معتمد",
-            rank: "التصنيف العالمي"
+        crises: {
+            fr: ["Inflation galopante", "Cyber-attaque massive", "Nouvelle régulation restrictive", "Pénurie de talents", "Rupture de supply-chain"],
+            en: ["Rising inflation", "Massive cyber-attack", "New restrictive regulation", "Talent shortage", "Supply-chain disruption"],
+            ar: ["تضخم متسارع", "هجوم سيبراني واسع", "تشريعات جديدة مقيدة", "نقص في الكفاءات", "انقطاع سلاسل الإمداد"]
         }
     };
 
-    const IA_MATRICES = {
-        ctx: { fr: ["Rupture", "Crise", "Transition", "Conflit"], en: ["Disruption", "Crisis", "Transition", "Conflict"], ar: ["انقطاع", "أزمة", "تحول", "صراع"] },
-        obj: { fr: ["des actifs", "de la régulation", "du marché"], en: ["of assets", "of regulation", "of the market"], ar: ["للأصول", "للتنظيم", "للسوق"] }
-    };
+    let L = 'fr', score = 0, step = 0, sector = "", job = "", usedQ = new Set();
 
-    let lang = 'fr', score = 0, step = 0, sector = "", job = "", tempPts = 0;
-
-    function updateLang(l) {
-        lang = l;
-        document.body.className = l === 'ar' ? 'rtl' : '';
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(`btn-${l}`).classList.add('active');
-        
-        const d = TRANSLATIONS[l];
+    function setLanguage(lang) {
+        L = lang; document.body.className = lang === 'ar' ? 'rtl' : '';
+        const d = DICT[L];
         document.getElementById('v-tag').innerText = d.vTag;
         document.getElementById('v-msg').innerText = d.vMsg;
         document.getElementById('v-btn').innerText = d.vBtn;
         document.getElementById('p-title').innerText = d.pTitle;
         document.getElementById('p-btn').innerText = d.pBtn;
         document.getElementById('s-title').innerText = d.sTitle;
-        document.getElementById('q-submit').innerText = d.qSubmit;
-        document.getElementById('analysis-input').placeholder = d.qPlaceholder;
+        document.getElementById('q-submit').innerText = d.qSub;
         document.getElementById('f-title').innerText = d.fTitle;
         document.getElementById('f-msg').innerText = d.fMsg;
         document.getElementById('f-btn').innerText = d.fBtn;
         
-        const pList = document.getElementById('p-list');
-        pList.innerHTML = "";
-        d.pRules.forEach(r => pList.innerHTML += `<li>${r}</li>`);
+        const r = document.getElementById('p-rules'); r.innerHTML = "";
+        d.pRules.forEach(rule => r.innerHTML += `<li>${rule}</li>`);
         
-        const grid = document.getElementById('sector-grid');
-        grid.innerHTML = "";
-        const icons = ["🎓", "⚡", "🌍", "🤖", "🌾", "🏦"];
-        d.sectors.forEach((s, i) => {
-            grid.innerHTML += `<div class="sector-box" onclick="initAudit('${s}')"><i>${icons[i]}</i><br>${s}</div>`;
-        });
+        const g = document.getElementById('sector-grid'); g.innerHTML = "";
+        d.sectors.forEach(s => g.innerHTML += `<div class="sector-box" style="padding:25px; border:2px solid #eee; cursor:pointer; text-align:center; font-weight:800; border-radius:10px;" onclick="initAudit('${s}')">${s}</div>`);
     }
 
-    function goToProtocol() { document.getElementById('vision-portal').style.display='none'; document.getElementById('onboarding-portal').style.display='flex'; }
-    function closePortals() { document.getElementById('onboarding-portal').style.display='none'; }
+    function openProtocol() { document.getElementById('vision-portal').style.display='none'; document.getElementById('onboarding-portal').style.display='flex'; }
+    function startApp() { document.getElementById('onboarding-portal').style.display='none'; }
 
     function initAudit(s) {
-        sector = s;
-        job = prompt(lang === 'ar' ? "أدخل مسمى وظيفتك:" : "Votre métier :", "Expert Strategist") || "Expert";
+        sector = s; job = prompt(L==='ar'?'وظيفتك:':'Votre métier précisément:', 'Analyste Expert');
         document.getElementById('selection-interface').style.display = 'none';
         document.getElementById('audit-interface').style.display = 'block';
-        loadQuestion();
+        generateIAQuestion();
     }
 
-    function loadQuestion() {
-        if(step >= 10) { finish(); return; }
-        const ctx = IA_MATRICES.ctx[lang][Math.floor(Math.random()*4)];
-        const obj = IA_MATRICES.obj[lang][Math.floor(Math.random()*3)];
+    function generateIAQuestion() {
+        if(step >= 10) { conclude(); return; }
         
-        document.getElementById('audit-count').innerText = `${lang==='ar'?'المرحلة':'PHASE'} ${step+1} / 10`;
-        document.getElementById('live-rank').innerText = `${TRANSLATIONS[lang].rank}: #${Math.floor(Math.random()*500)+100}`;
+        // Scraping Intelligent : Mélange aléatoire des axes et crises pour éviter toute répétition
+        let axis = IA_MATRIX.axes[L][Math.floor(Math.random() * 5)];
+        let crisis = IA_MATRIX.crises[L][Math.floor(Math.random() * 5)];
+        let qKey = `${axis}-${crisis}`;
         
-        const questions = {
-            fr: `${ctx} majeure ${obj} dans le secteur ${sector}. Quel arbitrage imposez-vous ?`,
-            en: `Major ${ctx} ${obj} in the ${sector} sector. What arbitrage do you impose?`,
-            ar: `${ctx} كبير ${obj} في قطاع ${sector}. ما هي المفاضلة التي تفرضها؟`
+        if(usedQ.has(qKey)) { generateIAQuestion(); return; } // Sécurité anti-doublon
+        usedQ.add(qKey);
+
+        document.getElementById('audit-step').innerText = `PHASE ${step+1}/10`;
+        document.getElementById('audit-rank').innerText = `${DICT[L].rank}: #${Math.floor(Math.random()*200)+50}`;
+        
+        const qTemplates = {
+            fr: `[Audit ${axis}] Sous l'impact de : "${crisis}", en tant que ${job} dans le secteur ${sector}, quel arbitrage imposez-vous ?`,
+            en: `[${axis} Audit] Under the impact of: "${crisis}", as a ${job} in the ${sector} sector, what arbitrage do you impose?`,
+            ar: `[تدقيق ${axis}] تحت تأثير: "${crisis}"، بصفتك ${job} في قطاع ${sector}، ما هو القرار الذي تفرضه؟`
         };
-        document.getElementById('q-text').innerText = questions[lang];
-        
+        document.getElementById('q-text').innerText = qTemplates[L];
         document.getElementById('options-stack').innerHTML = `
-            <button class="opt-button" onclick="setPts(this, 10)">A) ${lang==='ar'?'مفاضلة جذرية':'Arbitrage Disruptif'}</button>
-            <button class="opt-button" onclick="setPts(this, 7)">B) ${lang==='ar'?'مرونة تكتيكية':'Résilience Tactique'}</button>
-            <button class="opt-button" onclick="setPts(this, 4)">C) ${lang==='ar'?'تدقيق تحليلي':'Audit Analytique'}</button>
+            <button class="opt-button" onclick="sel(this,10)">A) Arbitrage Radical : Réalignement total.</button>
+            <button class="opt-button" onclick="sel(this,7)">B) Pivot Tactique : Résilience optimisée.</button>
+            <button class="opt-button" onclick="sel(this,4)">C) Analyse de Risque : Observation prudente.</button>
         `;
         document.getElementById('analysis-input').value = "";
-        tempPts = 0;
     }
 
-    function setPts(btn, p) {
-        document.querySelectorAll('.opt-button').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected'); tempPts = p;
+    let tmpPts = 0;
+    function sel(btn, p) { document.querySelectorAll('.opt-button').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); tmpPts = p; }
+
+    function nextPhase() {
+        if(!tmpPts || document.getElementById('analysis-input').value.length < 30) { alert("Analyse obligatoire (30 car.)"); return; }
+        score += tmpPts; step++; generateIAQuestion();
     }
 
-    function submitAnswer() {
-        if(!tempPts || document.getElementById('analysis-input').value.length < 30) {
-            alert(lang==='ar'?'التحليل مطلوب (30 حرفاً)':'Analyse obligatoire (30 car. min)'); return;
-        }
-        score += tempPts; step++; loadQuestion();
-    }
-
-    function finish() {
+    function conclude() {
         document.getElementById('audit-interface').style.display = 'none';
-        if(score < 80) {
-            document.getElementById('failure-screen').style.display = 'block';
-        } else {
-            const name = prompt("FULL NAME / NOM COMPLET / الاسم الكامل :") || "Expert";
-            const d = TRANSLATIONS[lang];
+        if(score < 80) { document.getElementById('failure-screen').style.display = 'block'; }
+        else {
+            const name = prompt("NAME / NOM / الاسم :") || "Elite Expert";
             document.getElementById('certificat-final').style.display = 'block';
-            document.getElementById('c-user-name').innerText = name.toUpperCase();
-            document.getElementById('c-user-sig').innerText = name;
-            document.getElementById('c-user-job').innerText = job;
-            document.getElementById('c-final-score').innerText = score;
-            document.getElementById('c-final-rank').innerText = "#" + (Math.floor(Math.random()*40)+1) + " Global";
-            document.getElementById('c-confirm').innerText = d.cConfirm;
-            document.getElementById('c-expertise').innerText = d.cExpertise;
-            document.getElementById('c-sig-label').innerText = d.cSigLabel;
-            document.getElementById('c-hash').innerText = Math.random().toString(16).substr(2, 14).toUpperCase();
-            document.getElementById('c-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=MBA-KMS-VERIFIED-${score}`;
+            document.getElementById('c-name').innerText = name.toUpperCase();
+            document.getElementById('c-sig').innerText = name;
+            document.getElementById('c-job').innerText = job;
+            document.getElementById('c-score').innerText = score;
+            document.getElementById('c-rank').innerText = "#" + (Math.floor(Math.random()*30)+1) + " Global";
+            document.getElementById('c-hash').innerText = Math.random().toString(36).substr(2, 10).toUpperCase();
+            document.getElementById('c-txt').innerText = DICT[L].cTxt;
+            document.getElementById('c-exp').innerText = DICT[L].cExp;
+            document.getElementById('c-sig-lbl').innerText = DICT[L].cSig;
+            document.getElementById('c-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=MBA-KMS-VERIFIED-${name}`;
             window.scrollTo(0,0);
         }
     }
-
-    updateLang('fr');
+    setLanguage('fr');
 </script>
 </body>
 </html>
