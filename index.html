@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA-CONSULT | GLOBAL KMS V310</title>
+    <title>MBA-CONSULT | GLOBAL KMS V320</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;600;800&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #c5a021; --navy: #0a1128; --white: #ffffff; --bg: #f4f7f9; }
@@ -11,38 +11,30 @@
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); overflow-x: hidden; }
         body.rtl { direction: rtl; font-family: 'Amiri', serif; }
 
-        /* MULTI-LANGUE UI */
+        /* HEADER & UI */
         #lang-switcher { position: fixed; top: 20px; right: 20px; z-index: 40000; display: flex; gap: 8px; background: rgba(10,17,40,0.95); padding: 10px; border-radius: 8px; border: 1px solid var(--gold); }
         .lang-btn { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 6px 14px; cursor: pointer; font-weight: 800; border-radius: 4px; font-size: 0.8em; }
         .lang-btn.active { background: var(--gold); color: var(--navy); }
 
-        /* PORTAIL DE VIGILANCE */
         #vision-portal { position: fixed; inset: 0; background: var(--navy); z-index: 30000; display: flex; justify-content: center; align-items: center; color: white; padding: 20px; text-align: center; }
         .welcome-box { background: rgba(15, 25, 55, 0.98); border: 2px solid var(--gold); padding: 50px; border-radius: 15px; max-width: 900px; box-shadow: 0 0 100px rgba(0,0,0,0.9); }
-        .vigilance-text { color: #ff4d4d; font-weight: 800; text-transform: uppercase; margin-top: 25px; font-size: 0.9em; letter-spacing: 2px; }
-
-        /* HEADER */
+        
         header { background: var(--navy); color: var(--gold); padding: 25px; text-align: center; border-bottom: 5px solid var(--gold); font-family: 'Cinzel'; font-size: 1.8em; letter-spacing: 6px; }
 
-        /* GRILLE DES SECTEURS */
+        /* GRID */
         .sector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; padding: 20px; }
         .sector-card { background: white; padding: 40px; border-radius: 12px; border: 2px solid #eee; cursor: pointer; text-align: center; }
-        .sector-card:hover { border-color: var(--gold); transform: translateY(-10px); background: #fdfaf0; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
-        .sector-logo { font-size: 3.5em; margin-bottom: 15px; display: block; }
+        .sector-card:hover { border-color: var(--gold); transform: translateY(-10px); background: #fdfaf0; }
 
-        /* INTERFACE D'AUDIT */
+        /* AUDIT */
         #audit-interface { display: none; max-width: 1000px; margin: 40px auto; background: white; padding: 50px; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
-        .opt-button { display: block; width: 100%; padding: 22px; margin: 12px 0; border: 2px solid #eee; cursor: pointer; background: white; text-align: inherit; border-radius: 8px; font-size: 1.1em; }
+        .opt-button { display: block; width: 100%; padding: 22px; margin: 12px 0; border: 2px solid #eee; cursor: pointer; background: white; text-align: inherit; border-radius: 8px; font-size: 1.1em; line-height: 1.4; }
         .opt-button:hover { background: #fdfaf0; border-color: var(--gold); }
         .opt-button.selected { border-color: var(--gold); background: #fdfaf0; font-weight: 800; border-width: 3px; }
 
-        /* CERTIFICAT PAYSAGE */
+        /* CERTIFICAT */
         #certificat-final { display: none; width: 1120px; height: 790px; border: 40px double var(--gold); background: white; margin: 20px auto; padding: 60px; position: relative; text-align: center; }
-        @media print {
-            @page { size: A4 landscape; margin: 0; }
-            body * { display: none; }
-            #certificat-final { display: block !important; position: absolute; inset: 0; }
-        }
+        @media print { @page { size: A4 landscape; margin: 0; } body * { display: none; } #certificat-final { display: block !important; position: absolute; inset: 0; } }
     </style>
 </head>
 <body>
@@ -57,12 +49,12 @@
     <div class="welcome-box">
         <h1 style="font-family: 'Cinzel'; font-size: 3em; margin: 0;">MBA-CONSULT</h1>
         <div id="v-msg" style="font-size: 1.4em; line-height: 1.8; margin: 30px 0;"></div>
-        <div id="v-vigilance" class="vigilance-text"></div>
+        <div id="v-vigilance" style="color:#ff4d4d; font-weight:800; letter-spacing:2px;"></div>
         <button class="lang-btn active" id="v-btn" onclick="document.getElementById('vision-portal').style.display='none'" style="margin-top: 30px; padding: 15px 40px; font-size: 1.1em;"></button>
     </div>
 </div>
 
-<header>MBA-CONSULT | GLOBAL KMS V310</header>
+<header>MBA-CONSULT | GLOBAL KMS V320</header>
 
 <div class="container" style="max-width: 1300px; margin: auto;">
     <div id="selection-interface">
@@ -73,35 +65,31 @@
     <div id="audit-interface">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
             <span id="audit-step" style="font-weight: 800; color: var(--gold); font-size: 1.2em;"></span>
-            <span id="job-badge" style="background: var(--navy); color: white; padding: 10px 25px; border-radius: 30px; font-weight: bold; font-size: 0.9em;"></span>
+            <span id="job-badge" style="background: var(--navy); color: white; padding: 10px 25px; border-radius: 30px; font-weight: bold;"></span>
         </div>
-        <h2 id="q-text" style="font-size: 1.8em; line-height: 1.4; color: var(--navy); margin-bottom: 40px;"></h2>
+        <h2 id="q-text" style="font-size: 1.7em; line-height: 1.4; color: var(--navy); margin-bottom: 40px;"></h2>
         <div id="options-stack"></div>
         <div style="text-align:right; margin-top: 40px;">
-            <button id="q-submit" onclick="submitStep()" style="background: var(--gold); color: var(--navy); border: none; padding: 20px 60px; font-weight: 800; cursor: pointer; border-radius: 5px; text-transform: uppercase;"></button>
+            <button id="q-submit" onclick="submitStep()" style="background: var(--gold); color: var(--navy); border: none; padding: 20px 60px; font-weight: 800; cursor: pointer; border-radius: 5px;"></button>
         </div>
     </div>
 
     <div id="certificat-final">
         <div style="position: absolute; top: 40px; right: 60px; text-align: right;">
             <div style="font-family: 'Cinzel'; font-size: 22px; color: var(--gold);">MBA BOARD ALPHA</div>
-            <small>HASH ID: <span id="c-hash"></span></small>
+            <small>HASH: <span id="c-hash"></span></small>
         </div>
         <div id="c-cert-title" style="font-family: 'Cinzel'; font-size: 45px; margin-top: 60px;">CERTIFICATE OF EXCELLENCE</div>
         <p style="letter-spacing: 10px; font-weight: 800; color: var(--gold); margin-top: 10px;">GLOBAL PROFESSIONAL ACCREDITATION</p>
         <p id="c-confirm" style="font-size: 1.4em; margin-top: 40px;"></p>
         <div id="c-name" style="font-family: 'Amiri', serif; font-size: 55px; border-bottom: 3px solid #333; display: inline-block; margin: 15px 0; padding: 0 60px;"></div>
         <p id="c-expert-text" style="font-size: 1.4em;"></p>
-        <div id="c-job" style="font-size: 38px; font-weight: 900; color: var(--gold); text-transform: uppercase; margin: 20px 0;"></div>
-        
-        <div style="display: flex; justify-content: center; gap: 40px; margin: 40px 0;">
-            <div style="background: var(--navy); color: white; padding: 20px 50px; border: 2px solid var(--gold); font-size: 1.5em; font-weight: 800;">SCORE: <span id="c-score"></span>/100</div>
-        </div>
-
+        <div id="c-job" style="font-size: 38px; font-weight: 900; color: var(--gold); text-transform: uppercase;"></div>
+        <div style="background: var(--navy); color: white; padding: 20px 50px; border: 2px solid var(--gold); font-size: 1.5em; font-weight: 800; width: fit-content; margin: 30px auto;">SCORE: <span id="c-score"></span>/50</div>
         <div style="margin-top: 60px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 40px;">
             <div style="text-align:left;">
                 <div id="c-sig" style="font-family: 'Amiri'; font-size: 30px; border-top: 2px solid #333; width: 350px; padding-top: 10px;"></div>
-                <small>E-Signature : MBA-CONSULT KMS SECURED</small>
+                <small>DIGITAL SEAL: MBA-CONSULT KMS V320</small>
             </div>
             <img id="c-qr" src="" style="width: 130px;">
         </div>
@@ -111,71 +99,77 @@
 <script>
     const TRANSLATIONS = {
         fr: {
-            vMsg: "L'expertise mondiale exige une capacité de décision sous pression. Bienvenue dans l'unité d'élite MBA-Consult.",
-            vVigilance: "⚠ ATTENTION : Le score minimal d'accréditation est de 80 points sur 100. L'échec est définitif.",
-            vBtn: "INITIALISER L'AUDIT",
-            sTitle: "UNITÉS DE CERTIFICATION (120 MÉTIERS)",
-            qSubmit: "VALIDER LA DÉCISION",
-            promptJob: "CHOISISSEZ VOTRE MÉTIER (Tapez le nom exact parmi la liste) :",
-            promptName: "NOM COMPLET POUR LE REGISTRE :",
-            cConfirm: "Ceci confirme officiellement que",
-            cExpert: "A démontré une expertise métier supérieure en qualité de :",
-            audit: "PHASE D'AUDIT",
-            fail: "ÉCHEC D'ACCRÉDITATION. SCORE INFÉRIEUR À 80.",
-            strategies: [
-                { text: "Arbitrage Alpha : Réponse stratégique radicale optimisant la pérennité.", pts: 10 },
-                { text: "Optimisation Beta : Amélioration tactique réduisant les risques immédiats.", pts: 7 },
-                { text: "Audit Gamma : Analyse prudente et collecte de données supplémentaires.", pts: 4 }
+            vMsg: "L'excellence n'est pas un acte, c'est une habitude. Cet audit de 5 étapes définit votre rang mondial.",
+            vVigilance: "⚠ SEUIL CRITIQUE : 80% (40/50 points). Zéro erreur tolérée sur les fondamentaux.",
+            vBtn: "DÉMARRER L'AUDIT ÉLITE",
+            sTitle: "UNITÉS D'ACCRÉDITATION MBA",
+            qSubmit: "CONFIRMER LA STRATÉGIE",
+            promptJob: "CHOISISSEZ VOTRE MÉTIER PARMI LES 120 DISPONIBLES :",
+            promptName: "NOM DE L'EXPERT :",
+            cConfirm: "Ceci atteste officiellement que",
+            cExpert: "A validé son accréditation mondiale pour le métier de :",
+            audit: "AUDIT DE COMPÉTENCE",
+            fail: "CERTIFICATION REFUSÉE. SCORE INSUFFISANT POUR MBA-CONSULT.",
+            scenarios: [
+                { q: "En situation de crise systémique, quel est votre protocole de sécurisation prioritaire ?", r: ["Alpha: Hedging global et isolation des actifs critiques.", "Beta: Optimisation des flux et réduction des coûts variables.", "Gamma: Analyse d'impact et observation des marchés."] },
+                { q: "Une rupture technologique menace votre secteur. Comment pilotez-vous la transition ?", r: ["Alpha: Pivot disruptif immédiat vers l'innovation de rupture.", "Beta: Intégration progressive et formation des cadres.", "Gamma: Veille concurrentielle et audit de faisabilité."] },
+                { q: "Un conflit éthique ou réglementaire surgit. Quelle est votre posture ?", r: ["Alpha: Mise en conformité radicale avec transparence totale.", "Beta: Négociation tactique et ajustement des procédures.", "Gamma: Analyse juridique et temporisation stratégique."] },
+                { q: "La performance globale chute de 15%. Quelle levier actionnez-vous ?", r: ["Alpha: Restructuration du modèle de valeur et agilité accrue.", "Beta: Renforcement des KPIs et management de proximité.", "Gamma: Audit externe et réduction budgétaire ciblée."] },
+                { q: "Une opportunité d'acquisition complexe se présente. Votre décision ?", r: ["Alpha: Intégration verticale pour domination du marché.", "Beta: Partenariat stratégique et partage de risques.", "Gamma: Étude de marché approfondie avant engagement."] }
             ]
         },
         en: {
-            vMsg: "Global expertise requires decision-making under pressure. Welcome to the MBA-Consult elite unit.",
-            vVigilance: "⚠ WARNING: Minimum accreditation score is 80 points out of 100. Failure is final.",
-            vBtn: "INITIALIZE AUDIT",
-            sTitle: "CERTIFICATION UNITS (120 PROFESSIONS)",
-            qSubmit: "VALIDATE DECISION",
-            promptJob: "CHOOSE YOUR PROFESSION (Type the exact name from the list):",
-            promptName: "FULL NAME FOR THE REGISTER:",
-            cConfirm: "This officially confirms that",
-            cExpert: "Has demonstrated superior professional expertise as:",
-            audit: "AUDIT PHASE",
-            fail: "ACCREDITATION FAILED. SCORE BELOW 80.",
-            strategies: [
-                { text: "Alpha Arbitrage: Radical strategic response optimizing sustainability.", pts: 10 },
-                { text: "Beta Optimization: Tactical improvement reducing immediate risks.", pts: 7 },
-                { text: "Gamma Audit: Prudent analysis and additional data collection.", pts: 4 }
+            vMsg: "Excellence is not an act, it's a habit. This 5-step audit defines your global ranking.",
+            vVigilance: "⚠ CRITICAL THRESHOLD: 80% (40/50 points). Zero tolerance on core fundamentals.",
+            vBtn: "START ELITE AUDIT",
+            sTitle: "MBA ACCREDITATION UNITS",
+            qSubmit: "CONFIRM STRATEGY",
+            promptJob: "CHOOSE YOUR PROFESSION AMONG THE 120 AVAILABLE:",
+            promptName: "EXPERT NAME:",
+            cConfirm: "This officially certifies that",
+            cExpert: "Has validated global accreditation for the profession of:",
+            audit: "COMPETENCY AUDIT",
+            fail: "CERTIFICATION DENIED. INSUFFICIENT SCORE FOR MBA-CONSULT.",
+            scenarios: [
+                { q: "In a systemic crisis, what is your primary security protocol?", r: ["Alpha: Global hedging and isolation of critical assets.", "Beta: Flow optimization and variable cost reduction.", "Gamma: Impact analysis and market observation."] },
+                { q: "A technological disruption threatens your sector. How do you lead the transition?", r: ["Alpha: Immediate disruptive pivot to breakthrough innovation.", "Beta: Progressive integration and executive training.", "Gamma: Competitive intelligence and feasibility audit."] },
+                { q: "An ethical or regulatory conflict arises. What is your stance?", r: ["Alpha: Radical compliance with total transparency.", "Beta: Tactical negotiation and procedural adjustment.", "Gamma: Legal analysis and strategic delay."] },
+                { q: "Global performance drops by 15%. What lever do you pull?", r: ["Alpha: Value model restructuring and increased agility.", "Beta: KPI reinforcement and proximity management.", "Gamma: External audit and targeted budget cuts."] },
+                { q: "A complex acquisition opportunity arises. Your decision?", r: ["Alpha: Vertical integration for market dominance.", "Beta: Strategic partnership and risk sharing.", "Gamma: In-depth market study before commitment."] }
             ]
         },
         ar: {
-            vMsg: "تتطلب الخبرة العالمية القدرة على اتخاذ القرار تحت الضغط. مرحباً بكم في وحدة النخبة بمؤسسة MBA-Consult.",
-            vVigilance: "⚠ تحذير: الحد الأدنى لدرجة الاعتماد هو 80 نقطة من أصل 100. الفشل نهائي.",
+            vMsg: "التميز ليس فعلاً، بل هو عادة. يحدد هذا التدقيق المكون من 5 خطوات تصنيفك العالمي.",
+            vVigilance: "⚠ عتبة حرجة: 80٪ (40/50 نقطة). لا تسامح مع الأخطاء في الأساسيات.",
             vBtn: "بدء التدقيق المهني",
-            sTitle: "وحدات الشهادات (120 مهنة)",
-            qSubmit: "تأكيد القرار",
-            promptJob: "اختر مهنتك (اكتب الاسم بالضبط من القائمة):",
-            promptName: "الاسم الكامل للسجل:",
-            cConfirm: "هذا يؤكد رسمياً أن",
-            cExpert: "أظهر خبرة مهنية متفوقة بصفته:",
-            audit: "مرحلة التدقيق",
-            fail: "فشل الاعتماد. النتيجة أقل من 80.",
-            strategies: [
-                { text: "قرار ألفا: استجابة استراتيجية جذرية تحسن الاستدامة.", pts: 10 },
-                { text: "تحسين بيتا: تحسين تكتيكي يقلل من المخاطر الفورية.", pts: 7 },
-                { text: "تدقيق غاما: تحليل حذر وجمع بيانات إضافية.", pts: 4 }
+            sTitle: "وحدات الاعتماد المهني",
+            qSubmit: "تأكيد الاستراتيجية",
+            promptJob: "اختر مهنتك من بين 120 مهنة متوفرة:",
+            promptName: "اسم الخبير:",
+            cConfirm: "هذا يشهد رسمياً بأن",
+            cExpert: "قد اجتاز الاعتماد العالمي لمهنة:",
+            audit: "تدقيق الكفاءة",
+            fail: "تم رفض الشهادة. النتيجة غير كافية لمؤسسة MBA-CONSULT.",
+            scenarios: [
+                { q: "في حالة وجود أزمة نظامية، ما هو بروتوكول التأمين ذو الأولوية لديك؟", r: ["ألفا: التحوط العالمي وعزل الأصول الحرجة.", "بيتا: تحسين التدفقات وتقليل التكاليف المتغيرة.", "غاما: تحليل الأثر ومراقبة الأسواق."] },
+                { q: "تهديد تقني يواجه قطاعك. كيف تقود مرحلة الانتقال؟", r: ["ألفا: التحول الجذري الفوري نحو الابتكار الخارق.", "بيتا: التكامل التدريجي وتدريب الكوادر التنفيذية.", "غاما: ذكاء تنافسي وتدقيق الجدوى."] },
+                { q: "نشوب صراع أخلاقي أو تنظيمي. ما هو موقفك؟", r: ["ألفا: الامتثال الجذري مع الشفافية الكاملة.", "بيتا: التفاوض التكتيكي وتعديل الإجراءات.", "غاما: التحليل القانوني والتريث الاستراتيجي."] },
+                { q: "انخفاض الأداء العالمي بنسبة 15٪. ما هو المحرك الذي ستستخدمه؟", r: ["ألفا: إعادة هيكلة نموذج القيمة وزيادة المرونة.", "بيتا: تعزيز مؤشرات الأداء والإدارة المباشرة.", "غاما: تدقيق خارجي وخفض الميزانية المستهدف."] },
+                { q: "ظهور فرصة استحواذ معقدة. ما هو قرارك؟", r: ["ألفا: التكامل العمودي للسيطرة على السوق.", "بيتا: الشراكة الاستراتيجية وتقاسم المخاطر.", "غاما: دراسة سوقية متعمقة قبل الالتزام."] }
             ]
         }
     };
 
     const DATABASE = {
-        Finance: { logo: "🏦", fr: ["Trader", "Analyste M&A", "Auditeur", "Risk Manager", "Trésorier", "Gestionnaire de Patrimoine", "Analyste ESG", "Actuaire", "Directeur Financier", "Fiscaliste", "Broker", "Contrôleur de gestion", "Trader Crypto", "Credit Analyst", "Compliance Officer", "Analyste Quant", "Gestionnaire de fonds", "Expert Comptable", "Banquier d'affaires", "Spécialiste Blockchain"] },
-        Energie: { logo: "⚡", fr: ["Ingénieur Forage", "Expert Solaire", "Analyste Smart-Grid", "Géologue", "Manager Éolien", "Ingénieur Nucléaire", "Consultant Hydrogène", "Responsable HSE", "Directeur de centrale", "Analyste Marchés", "Technicien Réseaux", "Audit Énergétique", "Manager Biomasse", "Géophysicien", "Planificateur", "Expert Off-shore", "Spécialiste GRID", "Ingénieur Thermique", "Foreur", "Consultant Carbone"] },
-        IT_AI: { logo: "🤖", fr: ["Data Scientist", "Architecte Cloud", "Cyber Expert", "Prompt Engineer", "ML Ops", "Pentester", "Data Architect", "Scrum Master", "Analyste SOC", "Ingénieur VR", "DevSecOps", "UX Designer", "Product Owner", "Expert Big Data", "Manager IT", "Architecte Réseaux", "Fullstack Dev", "Expert Blockchain", "Consultant ERP", "Ingénieur Robotique"] },
-        Agri_Food: { logo: "🌾", fr: ["Agronome", "Responsable Qualité", "Manager Supply", "Généticien", "Audit Bio", "Oenologue", "Nutritionniste", "Irrigologue", "Acheteur", "Manager de prod", "Expert Sols", "Responsable RSE", "Ingénieur Agro", "Logistique Froid", "Manager Coop", "Pathologiste", "Expert Semences", "Chef de culture", "Analyste Terroir", "Horticulteur"] },
-        Tourism: { logo: "🌍", fr: ["Revenue Manager", "Directeur Resort", "Yield Analyst", "E-reputation", "Conceptrice Exp", "Manager Éco", "Chef Réception", "Directeur Croisière", "Guide Montagne", "Concierge Clés d'Or", "Manager Desti", "Analyste Flux", "Directeur de Parc", "Event Planner", "Responsable Loisirs", "Audit Hôtelier", "Expert Mobilité", "Manager Incentive", "Chef de produit", "Directeur Hôtelier"] },
-        Education: { logo: "🎓", fr: ["Ingénieur Pédago", "Directeur Académique", "Chercheur EdTech", "Directeur Campus", "Andragogue", "Coach Dirigeant", "Spécialiste LMS", "Analyste Compétences", "Innovation Manager", "Expert VAE", "Consultant Orient", "Directeur Recherche", "Manager Faculté", "Médiateur", "Inclusion Expert", "Concepteur E-learn", "Formateur Expert", "Audit Qualité Ed", "Planificateur", "Directeur École"] }
+        Finance: { logo: "🏦", list: ["Trader", "Analyste M&A", "Auditeur", "Risk Manager", "Trésorier", "Banquier d'affaires", "Fiscaliste", "Actuaire", "Gestionnaire de Patrimoine", "Analyste ESG", "Compliance Officer", "Broker", "Contrôleur de gestion", "Analyste Quant", "Gestionnaire de fonds", "Expert Comptable", "Credit Analyst", "Spécialiste Blockchain", "Directeur Financier", "Consultant Pivot"] },
+        Energie: { logo: "⚡", list: ["Ingénieur Forage", "Expert Solaire", "Analyste Smart-Grid", "Géologue", "Manager Éolien", "Ingénieur Nucléaire", "Consultant Hydrogène", "Responsable HSE", "Directeur de centrale", "Analyste Marchés", "Technicien Réseaux", "Audit Énergétique", "Manager Biomasse", "Géophysicien", "Planificateur", "Expert Off-shore", "Spécialiste GRID", "Ingénieur Thermique", "Foreur", "Consultant Carbone"] },
+        IT_AI: { logo: "🤖", list: ["Data Scientist", "Architecte Cloud", "Cyber Expert", "Prompt Engineer", "ML Ops", "Pentester", "Data Architect", "Scrum Master", "Analyste SOC", "Ingénieur VR", "DevSecOps", "UX Designer", "Product Owner", "Expert Big Data", "Manager IT", "Architecte Réseaux", "Fullstack Dev", "Expert Blockchain", "Consultant ERP", "Ingénieur Robotique"] },
+        Agri_Food: { logo: "🌾", list: ["Agronome", "Responsable Qualité", "Manager Supply", "Généticien", "Audit Bio", "Oenologue", "Nutritionniste", "Irrigologue", "Acheteur", "Manager de prod", "Expert Sols", "Responsable RSE", "Ingénieur Agro", "Logistique Froid", "Manager Coop", "Pathologiste", "Expert Semences", "Chef de culture", "Analyste Terroir", "Horticulteur"] },
+        Tourism: { logo: "🌍", list: ["Revenue Manager", "Directeur Resort", "Yield Analyst", "E-reputation", "Conceptrice Exp", "Manager Éco", "Chef Réception", "Directeur Croisière", "Guide Montagne", "Concierge Clés d'Or", "Manager Desti", "Analyste Flux", "Directeur de Parc", "Event Planner", "Responsable Loisirs", "Audit Hôtelier", "Expert Mobilité", "Manager Incentive", "Chef de produit", "Directeur Hôtelier"] },
+        Education: { logo: "🎓", list: ["Ingénieur Pédago", "Directeur Académique", "Chercheur EdTech", "Directeur Campus", "Andragogue", "Coach Dirigeant", "Spécialiste LMS", "Analyste Compétences", "Innovation Manager", "Expert VAE", "Consultant Orient", "Directeur Recherche", "Manager Faculté", "Médiateur", "Inclusion Expert", "Concepteur E-learn", "Formateur Expert", "Audit Qualité Ed", "Planificateur", "Directeur École"] }
     };
 
-    let curL = 'fr', score = 0, step = 0, currentSec = "", selectedJob = "";
+    let curL = 'fr', score = 0, step = 0, selectedJob = "";
 
     function setLang(l) {
         curL = l;
@@ -193,19 +187,13 @@
         const grid = document.getElementById('sector-grid');
         grid.innerHTML = "";
         for (const [id, data] of Object.entries(DATABASE)) {
-            grid.innerHTML += `
-                <div class="sector-card" onclick="selectSector('${id}')">
-                    <span class="sector-logo">${data.logo}</span>
-                    <h3 style="font-family:'Cinzel';">${id.replace('_',' ')}</h3>
-                </div>
-            `;
+            grid.innerHTML += `<div class="sector-card" onclick="selectSector('${id}')"><span class="sector-logo">${data.logo}</span><h3>${id.replace('_',' ')}</h3></div>`;
         }
     }
 
     function selectSector(id) {
-        currentSec = id;
-        const jobs = DATABASE[id].fr; // On utilise la liste de référence pour le prompt
-        selectedJob = prompt(`${TRANSLATIONS[curL].promptJob}\n\n${jobs.join(" | ")}`) || jobs[0];
+        const jobs = DATABASE[id].list;
+        selectedJob = prompt(`${TRANSLATIONS[curL].promptJob}\n\n${jobs.slice(0,10).join(" | ")}...`) || jobs[0];
         document.getElementById('selection-interface').style.display = 'none';
         document.getElementById('audit-interface').style.display = 'block';
         document.getElementById('job-badge').innerText = selectedJob.toUpperCase();
@@ -213,24 +201,17 @@
     }
 
     function loadQ() {
-        if(step >= 10) { conclude(); return; }
-        const contexts = {
-            fr: ["Optimisation", "Crise Majeure", "Conformité", "Technologie", "Ressources"],
-            en: ["Optimization", "Major Crisis", "Compliance", "Technology", "Resources"],
-            ar: ["تحسين", "أزمة كبرى", "امتثال", "تكنولوجيا", "موارد"]
-        };
-        const ctx = contexts[curL][step % 5];
-        document.getElementById('audit-step').innerText = `${TRANSLATIONS[curL].audit} ${step+1}/10`;
-        document.getElementById('q-text').innerText = `[SCÉNARIO : ${ctx}] - En tant que ${selectedJob}, quelle action prioritaire définit votre excellence métier ?`;
+        if(step >= 5) { conclude(); return; }
+        const scenario = TRANSLATIONS[curL].scenarios[step];
+        document.getElementById('audit-step').innerText = `${TRANSLATIONS[curL].audit} ${step+1}/5`;
+        document.getElementById('q-text').innerText = scenario.q.replace("quel est", `en tant que ${selectedJob}, quel est`);
         
         const stack = document.getElementById('options-stack');
         stack.innerHTML = "";
-        
-        // Mélange des stratégies pour éviter le choix statique
-        const currentStrategies = [...TRANSLATIONS[curL].strategies].sort(() => Math.random() - 0.5);
-        
-        currentStrategies.forEach((s, i) => {
-            stack.innerHTML += `<button class="opt-button" onclick="sel(this, ${s.pts})">${String.fromCharCode(65 + i)}) ${s.text}</button>`;
+        const opts = [...scenario.r].sort(() => Math.random() - 0.5);
+        opts.forEach((o, i) => {
+            let pts = o.includes("Alpha") ? 10 : (o.includes("Beta") ? 7 : 4);
+            stack.innerHTML += `<button class="opt-button" onclick="sel(this, ${pts})">${String.fromCharCode(65+i)}) ${o}</button>`;
         });
         tempPts = 0;
     }
@@ -249,7 +230,7 @@
 
     function conclude() {
         document.getElementById('audit-interface').style.display = 'none';
-        if(score < 80) {
+        if(score < 40) {
             alert(TRANSLATIONS[curL].fail);
             location.reload();
         } else {
@@ -258,7 +239,7 @@
             document.getElementById('c-name').innerText = name.toUpperCase();
             document.getElementById('c-job').innerText = selectedJob;
             document.getElementById('c-score').innerText = score;
-            document.getElementById('c-hash').innerText = "KMS-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+            document.getElementById('c-hash').innerText = "MBA-" + Math.random().toString(36).substr(2, 9).toUpperCase();
             document.getElementById('c-sig').innerText = name;
             document.getElementById('c-confirm').innerText = TRANSLATIONS[curL].cConfirm;
             document.getElementById('c-expert-text').innerText = TRANSLATIONS[curL].cExpert;
