@@ -3,100 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA-CONSULT | KMS OMNI-INTELLIGENCE V210</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;400;600;800&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
+    <title>MBA-CONSULT | KMS ELITE V230</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;600;800&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #c5a021; --navy: #0a1128; --white: #ffffff; --bg: #f4f7f9; }
         * { box-sizing: border-box; transition: all 0.3s ease; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); overflow-x: hidden; }
         body.rtl { direction: rtl; font-family: 'Amiri', serif; }
 
-        /* HEADER & LANG */
-        #lang-switcher { position: fixed; top: 20px; right: 20px; z-index: 30000; display: flex; gap: 8px; background: rgba(10,17,40,0.9); padding: 8px; border-radius: 5px; border: 1px solid var(--gold); }
-        .lang-btn { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 4px 10px; cursor: pointer; font-size: 0.8em; }
+        /* MULTI-LANGUE UI */
+        #lang-switcher { position: fixed; top: 20px; right: 20px; z-index: 30000; display: flex; gap: 8px; background: rgba(10,17,40,0.9); padding: 10px; border-radius: 8px; border: 1px solid var(--gold); }
+        .lang-btn { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; cursor: pointer; font-weight: 800; border-radius: 4px; font-size: 0.8em; }
         .lang-btn.active { background: var(--gold); color: var(--navy); }
 
         /* PORTALS */
         #vision-portal, #onboarding-portal { position: fixed; inset: 0; background: var(--navy); z-index: 20000; display: flex; justify-content: center; align-items: center; color: white; padding: 20px; text-align: center; }
-        .welcome-box { background: rgba(15, 25, 55, 0.98); border: 2px solid var(--gold); padding: 40px; border-radius: 15px; max-width: 800px; box-shadow: 0 0 80px rgba(0,0,0,0.8); }
-        .btn-gold { background: var(--gold); color: var(--navy); border: none; padding: 18px 50px; font-weight: 800; cursor: pointer; border-radius: 4px; text-transform: uppercase; margin-top: 25px; }
+        .welcome-box { background: rgba(15, 25, 55, 0.98); border: 2px solid var(--gold); padding: 50px; border-radius: 15px; max-width: 900px; box-shadow: 0 0 100px rgba(0,0,0,0.9); }
+        .vigilance-text { color: #ff4d4d; font-weight: 800; text-transform: uppercase; margin-top: 20px; font-size: 0.9em; letter-spacing: 2px; }
 
-        /* MAIN APP */
-        header { background: var(--navy); color: var(--gold); padding: 20px; text-align: center; border-bottom: 5px solid var(--gold); font-family: 'Cinzel'; font-size: 1.5em; letter-spacing: 5px; }
-        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
-        .section-card { background: white; border-radius: 12px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
+        /* HEADER */
+        header { background: var(--navy); color: var(--gold); padding: 25px; text-align: center; border-bottom: 5px solid var(--gold); font-family: 'Cinzel'; font-size: 1.8em; letter-spacing: 6px; }
 
-        /* AUDIT ENGINE */
+        /* SECTORS */
+        .sector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
+        .sector-card { background: white; padding: 40px; border-radius: 12px; border: 2px solid #eee; cursor: pointer; text-align: center; }
+        .sector-card:hover { border-color: var(--gold); transform: translateY(-10px); background: #fdfaf0; }
+        .sector-logo { font-size: 3.5em; margin-bottom: 15px; display: block; }
+
+        /* AUDIT */
         #audit-interface { display: none; }
-        .opt-button { display: block; width: 100%; padding: 18px; margin: 12px 0; text-align: left; border: 2px solid #eee; background: white; border-radius: 8px; cursor: pointer; font-size: 1em; }
-        .rtl .opt-button { text-align: right; }
-        .opt-button.selected { border-color: var(--gold); background: #fffcf0; font-weight: 700; }
-        .analysis-box { width: 100%; height: 120px; margin-top: 20px; padding: 15px; border: 2px dashed #ccc; border-radius: 8px; font-family: inherit; font-size: 1em; }
+        .analysis-box { width: 100%; height: 140px; margin-top: 25px; padding: 20px; border: 2px dashed var(--gold); border-radius: 10px; font-size: 1.1em; background: #fffcf0; }
+        .btn-gold { background: var(--gold); color: var(--navy); border: none; padding: 20px 60px; font-weight: 800; cursor: pointer; border-radius: 5px; text-transform: uppercase; margin-top: 30px; }
 
-        /* CERTIFICAT PAYSAGE */
+        /* CERTIFICAT */
         #certificat-final { display: none; width: 1120px; height: 790px; border: 40px double var(--gold); background: white; margin: 20px auto; padding: 60px; position: relative; text-align: center; }
-        .cert-name { font-family: 'Amiri', serif; font-size: 50px; border-bottom: 2px solid #333; display: inline-block; margin: 15px 0; padding: 0 40px; }
+        .cert-name { font-family: 'Amiri', serif; font-size: 50px; border-bottom: 3px solid #333; display: inline-block; margin: 15px 0; padding: 0 50px; }
 
         @media print {
             @page { size: A4 landscape; margin: 0; }
             body * { display: none; }
-            #certificat-final { display: block !important; position: absolute; inset: 0; border-width: 45px !important; }
+            #certificat-final { display: block !important; position: absolute; inset: 0; }
         }
     </style>
 </head>
 <body>
 
 <div id="lang-switcher">
-    <button class="lang-btn" id="btn-fr" onclick="setLanguage('fr')">FR</button>
-    <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
-    <button class="lang-btn" id="btn-ar" onclick="setLanguage('ar')">AR</button>
+    <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-ar" onclick="setLang('ar')">AR</button>
 </div>
 
 <div id="vision-portal">
     <div class="welcome-box">
-        <h1 style="font-family: 'Cinzel'; letter-spacing: 4px;">MBA-CONSULT</h1>
-        <p id="v-tag" style="color: var(--gold); font-weight: 800;"></p>
-        <p id="v-msg" style="line-height: 1.6; margin: 20px 0;"></p>
-        <button class="btn-gold" id="v-btn" onclick="openProtocol()"></button>
+        <h1 id="v-brand" style="font-family: 'Cinzel'; font-size: 3em;">MBA-CONSULT</h1>
+        <div id="v-msg" style="font-size: 1.4em; line-height: 1.8; margin: 30px 0;"></div>
+        <div id="v-vigilance" class="vigilance-text"></div>
+        <button class="btn-gold" id="v-btn" onclick="document.getElementById('vision-portal').style.display='none'"></button>
     </div>
 </div>
 
-<div id="onboarding-portal" style="display:none;">
-    <div class="welcome-box">
-        <h2 id="p-title" style="color: var(--gold);"></h2>
-        <div style="text-align:left; background: rgba(255,255,255,0.05); padding: 25px; border-radius:10px; margin: 20px 0;">
-            <ul id="p-rules" style="line-height: 2;"></ul>
+<header>MBA-CONSULT | GLOBAL KMS V230</header>
+
+<div class="container" style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+    <div id="selection-interface">
+        <h2 id="s-title" style="text-align:center; font-family: 'Cinzel'; letter-spacing: 3px;"></h2>
+        <div class="sector-grid" id="sector-grid"></div>
+    </div>
+
+    <div id="audit-interface" style="background:white; padding:50px; border-radius:15px; box-shadow:0 20px 50px rgba(0,0,0,0.1);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <span id="audit-step" style="font-weight: 800; color: var(--gold); font-size: 1.2em;"></span>
+            <span id="live-rank" style="background: var(--navy); color: white; padding: 10px 25px; border-radius: 30px; font-weight: bold;"></span>
         </div>
-        <button class="btn-gold" id="p-btn" onclick="startApp()"></button>
-    </div>
-</div>
-
-<header>MBA-CONSULT | GLOBAL KMS</header>
-
-<div class="container">
-    <div id="selection-interface" class="section-card">
-        <h2 id="s-title" style="text-align:center; font-family: 'Cinzel';"></h2>
-        <div id="sector-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 25px;"></div>
-    </div>
-
-    <div id="audit-interface">
-        <div class="section-card" style="border-left: 8px solid var(--gold);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
-                <span id="audit-step" style="font-weight: 800; color: var(--gold);"></span>
-                <span id="audit-rank" style="background: var(--navy); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em;"></span>
-            </div>
-            <h2 id="q-text" style="font-size: 1.5em; line-height: 1.4;"></h2>
-            <div id="options-stack"></div>
-            <textarea id="analysis-input" class="analysis-box"></textarea>
-            <div style="text-align: right; margin-top: 20px;">
-                <button id="q-submit" onclick="nextPhase()" style="background:var(--navy); color:var(--gold); padding:15px 45px; border:none; cursor:pointer; font-weight:800;"></button>
-            </div>
+        <div id="job-badge" style="display:inline-block; background:var(--gold); color:var(--navy); padding:5px 15px; border-radius:5px; font-weight:800; margin-bottom:15px; font-size:0.8em;"></div>
+        <h2 id="q-text" style="font-size: 1.8em; line-height: 1.3;"></h2>
+        <div id="options-stack" style="margin: 30px 0;"></div>
+        <textarea id="analysis-input" class="analysis-box"></textarea>
+        <div style="text-align:right;">
+            <button class="btn-gold" id="q-submit" onclick="submitStep()"></button>
         </div>
     </div>
 
-    <div id="failure-screen" class="section-card" style="display:none; text-align:center;">
-        <h2 id="f-title" style="color: #c0392b;"></h2>
-        <p id="f-msg"></p>
+    <div id="failure-screen" style="display:none; text-align:center; padding:100px;">
+        <h1 id="f-title" style="color:#c0392b; font-size:3em;"></h1>
+        <p id="f-msg" style="font-size:1.5em;"></p>
         <button class="btn-gold" onclick="location.reload()" id="f-btn"></button>
     </div>
 </div>
@@ -104,141 +95,202 @@
 <div id="certificat-final">
     <div style="position: absolute; top: 40px; right: 60px; text-align: right;">
         <div style="font-family: 'Cinzel'; font-size: 22px; color: var(--gold);">MBA BOARD ALPHA</div>
-        <small>GLOBAL KMS V210</small>
+        <small>SECURE KMS IDENTIFICATION</small>
     </div>
-    <div style="font-family: 'Cinzel'; font-size: 45px; margin-top: 80px;">CERTIFICATE OF EXCELLENCE</div>
-    <p style="letter-spacing: 10px; font-weight: 800; color: var(--gold);">PROFESSIONAL ACCREDITATION</p>
-    <p id="c-txt" style="font-size: 1.4em; margin-top: 40px;"></p>
+    <div id="c-cert-title" style="font-family: 'Cinzel'; font-size: 45px; margin-top: 80px;">CERTIFICATE OF EXCELLENCE</div>
+    <p id="c-cert-sub" style="letter-spacing: 10px; font-weight: 800; color: var(--gold);">GLOBAL PROFESSIONAL ACCREDITATION</p>
+    <p id="c-confirm" style="font-size: 1.4em; margin-top: 50px;"></p>
     <div class="cert-name" id="c-name"></div>
-    <p id="c-exp" style="font-size: 1.4em;"></p>
-    <div id="c-job" style="font-size: 38px; font-weight: 900; color: var(--gold); text-transform: uppercase;"></div>
+    <p id="c-expert-text" style="font-size: 1.4em;"></p>
+    <div id="c-job" style="font-size: 38px; font-weight: 900; color: var(--gold); text-transform: uppercase; margin: 20px 0;"></div>
     
     <div style="display: flex; justify-content: center; gap: 40px; margin: 30px 0;">
-        <div style="background: var(--navy); color: white; padding: 12px 35px; border: 2px solid var(--gold); font-weight: bold;">SCORE: <span id="c-score"></span>%</div>
-        <div style="background: var(--gold); color: var(--navy); padding: 12px 35px; font-weight: 900;">RANK: <span id="c-rank"></span></div>
+        <div style="background: var(--navy); color: white; padding: 15px 40px; border: 2px solid var(--gold); font-size: 1.3em;">SCORE: <span id="c-score"></span>%</div>
+        <div style="background: var(--gold); color: var(--navy); padding: 15px 40px; font-weight: 900; font-size: 1.3em;">RANK: <span id="c-rank"></span></div>
     </div>
 
     <div style="margin-top: 60px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 40px;">
         <div style="text-align:left;">
-            <div id="c-sig" style="font-family: 'Amiri'; font-size: 35px; border-top: 2px solid #333; width: 300px; padding-top: 10px;"></div>
-            <small id="c-sig-lbl"></small>
+            <div id="c-sig" style="font-family: 'Amiri'; font-size: 35px; border-top: 2px solid #333; width: 350px; padding-top: 10px;"></div>
+            <small id="c-sig-label">Electronic Signature Verified</small>
         </div>
-        <img id="c-qr" src="" style="width: 110px;">
+        <img id="c-qr" src="" style="width: 120px;">
     </div>
-    <div style="position: absolute; bottom: 30px; left: 60px; font-family: monospace; font-size: 10px; color: #999;">HASH ID: <span id="c-hash"></span></div>
-    <button onclick="window.print()" class="no-print" style="margin-top:20px; padding: 15px 40px; background: var(--navy); color: var(--gold); cursor: pointer; font-weight: 800; border: 2px solid var(--gold);">GÉNÉRER PDF</button>
 </div>
 
 <script>
-    const DICT = {
-        fr: { vTag: "L'INTELLIGENCE AU SERVICE DE LA DÉCISION", vMsg: "Validez votre expertise métier par un audit IA global sans précédent.", vBtn: "ACCÉDER AU KMS", pTitle: "PROTOCOLE D'EXCELLENCE", pRules: ["Seuil requis : 80%", "IA Scraping : 1200 variations uniques", "Analyse métier obligatoire", "Classement mondial dynamique"], pBtn: "INITIALISER L'AUDIT", sTitle: "UNITÉS DE CERTIFICATION", sectors: ["Éducation", "Énergie", "Tourisme", "IA & Tech", "Agri-food", "Finance"], qSub: "VALIDER", fTitle: "ÉCHEC DE L'AUDIT", fMsg: "Score insuffisant (<80%). Excellence non atteinte.", fBtn: "RÉESSAYER", cTxt: "Ceci certifie que", cExp: "a démontré une expertise en", cSig: "Signature Électronique", rank: "Rang Global" },
-        en: { vTag: "INTELLIGENCE AT THE SERVICE OF DECISION", vMsg: "Validate your expertise through an unprecedented global AI audit.", vBtn: "ACCESS KMS", pTitle: "EXCELLENCE PROTOCOL", pRules: ["Required threshold: 80%", "AI Scraping: 1200 unique variations", "Mandatory business analysis", "Dynamic global ranking"], pBtn: "INITIALIZE AUDIT", sTitle: "CERTIFICATION UNITS", sectors: ["Education", "Energy", "Tourism", "AI & Tech", "Agri-food", "Finance"], qSub: "VALIDATE", fTitle: "AUDIT FAILED", fMsg: "Insufficient score (<80%). Excellence not met.", fBtn: "RETRY", cTxt: "This certifies that", cExp: "demonstrated expertise in", cSig: "Electronic Signature", rank: "Global Rank" },
-        ar: { vTag: "الذكاء في خدمة القرار", vMsg: "أثبت خبرتك المهنية من خلال تدقيق عالمي غير مسبوق بالذكاء الاصطناعي.", vBtn: "الدخول إلى النظام", pTitle: "بروتوكول التميز", pRules: ["الحد المطلوب: 80٪", "كشط ذكي: 1200 تباين فريد", "تحليل مهني إلزامي", "تصنيف عالمي ديناميكي"], pBtn: "بدء التدقيق", sTitle: "وحدات الشهادات", sectors: ["التعليم", "الطاقة", "السياحة", "الذكاء الاصطناعي", "الزراعة", "المالية"], qSub: "تأكيد", fTitle: "فشل التدقيق", fMsg: "الدرجة غير كافية (<80٪). لم يتم تحقيق التميز.", fBtn: "إعادة المحاولة", cTxt: "هذا يشهد بأن", cExp: "قد أظهر خبرة في", cSig: "توقيع إلكتروني معتمد", rank: "التصنيف العالمي" }
-    };
-
-    // MATRICE IA POUR QUESTIONS INFINIES
-    const IA_MATRIX = {
-        axes: {
-            fr: ["Stratégique", "Technologique", "Éthique/RSE", "Financier", "Opérationnel"],
-            en: ["Strategic", "Technological", "Ethical/CSR", "Financial", "Operational"],
-            ar: ["استراتيجي", "تكنولوجي", "أخلاقي", "مالي", "تشغيلي"]
+    const TRANSLATIONS = {
+        fr: {
+            vMsg: "<p>'Le monde ne récompense pas le savoir, il récompense la capacité à décider dans le chaos.'</p><p style='color: var(--gold); font-weight: 600;'>Bienvenue dans le KMS Global. Ici, chaque seconde d'audit teste votre légitimité de leader.</p>",
+            vVigilance: "⚠ ATTENTION : L'échec est définitif. Le seuil de 80% est une barrière infranchissable.",
+            vBtn: "ACCÉDER AU SYSTÈME",
+            sTitle: "UNITÉS DE CERTIFICATION D'ELITE",
+            qSubmit: "VALIDER LA DÉCISION",
+            fTitle: "ÉCHEC D'ACCRÉDITATION",
+            fMsg: "Le seuil d'excellence de 80% n'est pas négociable.",
+            fBtn: "RESAISIR UNE CHANCE",
+            cConfirm: "Ceci confirme officiellement que",
+            cExpert: "A démontré une expertise métier supérieure en qualité de :",
+            promptJob: "Choisissez votre spécialité :",
+            promptName: "NOM COMPLET POUR LE REGISTRE :",
+            rank: "RANG GLOBAL"
         },
-        crises: {
-            fr: ["Inflation galopante", "Cyber-attaque massive", "Nouvelle régulation restrictive", "Pénurie de talents", "Rupture de supply-chain"],
-            en: ["Rising inflation", "Massive cyber-attack", "New restrictive regulation", "Talent shortage", "Supply-chain disruption"],
-            ar: ["تضخم متسارع", "هجوم سيبراني واسع", "تشريعات جديدة مقيدة", "نقص في الكفاءات", "انقطاع سلاسل الإمداد"]
+        en: {
+            vMsg: "<p>'The world does not reward knowledge, it rewards the ability to decide in chaos.'</p><p style='color: var(--gold); font-weight: 600;'>Welcome to Global KMS. Every second of this audit tests your leadership legitimacy.</p>",
+            vVigilance: "⚠ WARNING: Failure is final. The 80% threshold is an impassable barrier.",
+            vBtn: "ACCESS THE SYSTEM",
+            sTitle: "ELITE CERTIFICATION UNITS",
+            qSubmit: "VALIDATE DECISION",
+            fTitle: "ACCREDITATION FAILED",
+            fMsg: "The 80% excellence threshold is non-negotiable.",
+            fBtn: "TRY AGAIN",
+            cConfirm: "This officially confirms that",
+            cExpert: "Has demonstrated superior professional expertise as:",
+            promptJob: "Choose your specialty:",
+            promptName: "FULL NAME FOR REGISTER:",
+            rank: "GLOBAL RANK"
+        },
+        ar: {
+            vMsg: "<p>'العالم لا يكافئ المعرفة، بل يكافئ القدرة على اتخاذ القرار في الفوضى.'</p><p style='color: var(--gold); font-weight: 600;'>مرحباً بكم في نظام إدارة المعرفة العالمي. كل ثانية هنا تختبر شرعيتك القيادية.</p>",
+            vVigilance: "⚠ تحذير: الفشل نهائي. عتبة 80٪ هي حاجز لا يمكن تجاوزه.",
+            vBtn: "الدخول إلى النظام",
+            sTitle: "وحدات الشهادات المتميزة",
+            qSubmit: "تأكيد القرار",
+            fTitle: "فشل الاعتماد",
+            fMsg: "عتبة التميز 80٪ غير قابلة للتفاوض.",
+            fBtn: "حاول مرة أخرى",
+            cConfirm: "هذا يؤكد رسمياً أن",
+            cExpert: "أظهر خبرة مهنية متفوقة بصفته:",
+            promptJob: "اختر تخصصك:",
+            promptName: "الاسم الكامل للسجل:",
+            rank: "التصنيف العالمي"
         }
     };
 
-    let L = 'fr', score = 0, step = 0, sector = "", job = "", usedQ = new Set();
+    const DB = {
+        fr: {
+            Finance: { logo: "🏦", jobs: ["Trader", "Analyste M&A", "Auditeur"], keys: ["produits dérivés", "liquidités", "Bâle III"] },
+            IA_Tech: { logo: "🤖", jobs: ["Ingénieur ML", "Architecte Cloud", "Cyber-expert"], keys: ["réseaux neurones", "chiffrement", "latence"] },
+            Agri: { logo: "🌾", jobs: ["Agronome", "Manager Supply-Chain", "Qualiticien"], keys: ["traçabilité", "rendements", "intrants"] },
+            Energie: { logo: "⚡", jobs: ["Ingénieur Forage", "Analyste Smart-Grid", "Expert Solaire"], keys: ["mégawatts", "intermittence", "décarbonation"] },
+            Tourisme: { logo: "🌍", jobs: ["Revenue Manager", "Directeur Resort", "E-réputation"], keys: ["yield management", "saisonnalité", "occupation"] },
+            Education: { logo: "🎓", jobs: ["Ingénieur Pédago", "Directeur", "Chercheur EdTech"], keys: ["andragogie", "E-learning", "curriculum"] }
+        },
+        en: {
+            Finance: { logo: "🏦", jobs: ["Trader", "M&A Analyst", "Auditor"], keys: ["derivatives", "liquidity", "Basel III"] },
+            IA_Tech: { logo: "🤖", jobs: ["ML Engineer", "Cloud Architect", "Cyber Expert"], keys: ["neural networks", "encryption", "latency"] },
+            Agri: { logo: "🌾", jobs: ["Agronomist", "Supply-Chain Manager", "Quality Lead"], keys: ["traceability", "yields", "inputs"] },
+            Energie: { logo: "⚡", jobs: ["Drilling Engineer", "Smart-Grid Analyst", "Solar Expert"], keys: ["megawatts", "intermittency", "decarbonization"] },
+            Tourisme: { logo: "🌍", jobs: ["Revenue Manager", "Resort Director", "E-reputation"], keys: ["yield management", "seasonality", "occupancy"] },
+            Education: { logo: "🎓", jobs: ["Instructional Designer", "Director", "EdTech Researcher"], keys: ["andragogy", "E-learning", "curriculum"] }
+        },
+        ar: {
+            Finance: { logo: "🏦", jobs: ["متداول", "محلل اندماج", "مدقق"], keys: ["المشتقات", "السيولة", "بازل 3"] },
+            IA_Tech: { logo: "🤖", jobs: ["مهندس ذكاء", "معماري سحابي", "خبير سيبراني"], keys: ["شبكات عصبية", "تشفير", "كمون"] },
+            Agri: { logo: "🌾", jobs: ["خبير زراعي", "مدير توريد", "مسؤول جودة"], keys: ["التتبع", "المحاصيل", "المدخلات"] },
+            Energie: { logo: "⚡", jobs: ["مهندس حفر", "محلل شبكات", "خبير شمسي"], keys: ["ميغاوات", "التقطع", "إزالة الكربون"] },
+            Tourisme: { logo: "🌍", jobs: ["مدير إيرادات", "مدير منتجع", "سمعة رقمية"], keys: ["إدارة العائد", "الموسمية", "الإشغال"] },
+            Education: { logo: "🎓", jobs: ["مصمم تعليمي", "مدير", "باحث تقني"], keys: ["أندراغوجيا", "التعلم الرقمي", "المناهج"] }
+        }
+    };
 
-    function setLanguage(lang) {
-        L = lang; document.body.className = lang === 'ar' ? 'rtl' : '';
-        const d = DICT[L];
-        document.getElementById('v-tag').innerText = d.vTag;
-        document.getElementById('v-msg').innerText = d.vMsg;
+    let lang = 'fr', score = 0, step = 0, currentSec = "", selectedJob = "";
+
+    function setLang(l) {
+        lang = l;
+        document.body.className = l === 'ar' ? 'rtl' : '';
+        const d = TRANSLATIONS[l];
+        document.getElementById('v-msg').innerHTML = d.vMsg;
+        document.getElementById('v-vigilance').innerText = d.vVigilance;
         document.getElementById('v-btn').innerText = d.vBtn;
-        document.getElementById('p-title').innerText = d.pTitle;
-        document.getElementById('p-btn').innerText = d.pBtn;
         document.getElementById('s-title').innerText = d.sTitle;
-        document.getElementById('q-submit').innerText = d.qSub;
+        document.getElementById('q-submit').innerText = d.qSubmit;
         document.getElementById('f-title').innerText = d.fTitle;
         document.getElementById('f-msg').innerText = d.fMsg;
         document.getElementById('f-btn').innerText = d.fBtn;
         
-        const r = document.getElementById('p-rules'); r.innerHTML = "";
-        d.pRules.forEach(rule => r.innerHTML += `<li>${rule}</li>`);
-        
-        const g = document.getElementById('sector-grid'); g.innerHTML = "";
-        d.sectors.forEach(s => g.innerHTML += `<div class="sector-box" style="padding:25px; border:2px solid #eee; cursor:pointer; text-align:center; font-weight:800; border-radius:10px;" onclick="initAudit('${s}')">${s}</div>`);
+        initSectors();
     }
 
-    function openProtocol() { document.getElementById('vision-portal').style.display='none'; document.getElementById('onboarding-portal').style.display='flex'; }
-    function startApp() { document.getElementById('onboarding-portal').style.display='none'; }
+    function initSectors() {
+        const grid = document.getElementById('sector-grid');
+        grid.innerHTML = "";
+        for (const [key, data] of Object.entries(DB[lang])) {
+            grid.innerHTML += `
+                <div class="sector-card" onclick="selectSector('${key}')">
+                    <span class="sector-logo">${data.logo}</span>
+                    <h3 style="font-family:'Cinzel';">${key.replace('_',' ')}</h3>
+                </div>
+            `;
+        }
+    }
 
-    function initAudit(s) {
-        sector = s; job = prompt(L==='ar'?'وظيفتك:':'Votre métier précisément:', 'Analyste Expert');
+    function selectSector(key) {
+        currentSec = key;
+        const jobs = DB[lang][key].jobs;
+        selectedJob = prompt(`${TRANSLATIONS[lang].promptJob}\n${jobs.join(" / ")}`) || jobs[0];
         document.getElementById('selection-interface').style.display = 'none';
         document.getElementById('audit-interface').style.display = 'block';
-        generateIAQuestion();
+        document.getElementById('job-badge').innerText = selectedJob.toUpperCase();
+        loadQ();
     }
 
-    function generateIAQuestion() {
-        if(step >= 10) { conclude(); return; }
+    function loadQ() {
+        if(step >= 10) { finish(); return; }
+        const keys = DB[lang][currentSec].keys;
+        const kw = keys[Math.floor(Math.random() * keys.length)];
         
-        // Scraping Intelligent : Mélange aléatoire des axes et crises pour éviter toute répétition
-        let axis = IA_MATRIX.axes[L][Math.floor(Math.random() * 5)];
-        let crisis = IA_MATRIX.crises[L][Math.floor(Math.random() * 5)];
-        let qKey = `${axis}-${crisis}`;
-        
-        if(usedQ.has(qKey)) { generateIAQuestion(); return; } // Sécurité anti-doublon
-        usedQ.add(qKey);
-
         document.getElementById('audit-step').innerText = `PHASE ${step+1}/10`;
-        document.getElementById('audit-rank').innerText = `${DICT[L].rank}: #${Math.floor(Math.random()*200)+50}`;
+        document.getElementById('live-rank').innerText = `${TRANSLATIONS[lang].rank}: #${Math.floor(Math.random()*400)+50}`;
         
         const qTemplates = {
-            fr: `[Audit ${axis}] Sous l'impact de : "${crisis}", en tant que ${job} dans le secteur ${sector}, quel arbitrage imposez-vous ?`,
-            en: `[${axis} Audit] Under the impact of: "${crisis}", as a ${job} in the ${sector} sector, what arbitrage do you impose?`,
-            ar: `[تدقيق ${axis}] تحت تأثير: "${crisis}"، بصفتك ${job} في قطاع ${sector}، ما هو القرار الذي تفرضه؟`
+            fr: `Audit : En tant que ${selectedJob}, comment gérez-vous une défaillance sur le volet "${kw}" ?`,
+            en: `Audit: As a ${selectedJob}, how do you manage a failure in the "${kw}" area?`,
+            ar: `تدقيق: بصفتك ${selectedJob}، كيف تدير فشلاً في جانب "${kw}"؟`
         };
-        document.getElementById('q-text').innerText = qTemplates[L];
+        
+        document.getElementById('q-text').innerText = qTemplates[lang];
         document.getElementById('options-stack').innerHTML = `
-            <button class="opt-button" onclick="sel(this,10)">A) Arbitrage Radical : Réalignement total.</button>
-            <button class="opt-button" onclick="sel(this,7)">B) Pivot Tactique : Résilience optimisée.</button>
-            <button class="opt-button" onclick="sel(this,4)">C) Analyse de Risque : Observation prudente.</button>
+            <button class="opt-button" onclick="setPts(this, 10)" style="display:block; width:100%; padding:20px; margin:10px 0; border:2px solid #eee; cursor:pointer; background:white; text-align:inherit; border-radius:8px;">A) Arbitrage Disruptif / Disruptive Action / قرار جذري</button>
+            <button class="opt-button" onclick="setPts(this, 7)" style="display:block; width:100%; padding:20px; margin:10px 0; border:2px solid #eee; cursor:pointer; background:white; text-align:inherit; border-radius:8px;">B) Optimisation Tactique / Tactical Pivot / تحسين تكتيكي</button>
+            <button class="opt-button" onclick="setPts(this, 4)" style="display:block; width:100%; padding:20px; margin:10px 0; border:2px solid #eee; cursor:pointer; background:white; text-align:inherit; border-radius:8px;">C) Audit de Risque / Risk Audit / تدقيق المخاطر</button>
         `;
-        document.getElementById('analysis-input').value = "";
+        tempPts = 0;
     }
 
-    let tmpPts = 0;
-    function sel(btn, p) { document.querySelectorAll('.opt-button').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); tmpPts = p; }
-
-    function nextPhase() {
-        if(!tmpPts || document.getElementById('analysis-input').value.length < 30) { alert("Analyse obligatoire (30 car.)"); return; }
-        score += tmpPts; step++; generateIAQuestion();
+    let tempPts = 0;
+    function setPts(btn, p) {
+        document.querySelectorAll('.opt-button').forEach(b => { b.style.borderColor = "#eee"; b.style.background = "white"; });
+        btn.style.borderColor = "#c5a021"; btn.style.background = "#fdfaf0";
+        tempPts = p;
     }
 
-    function conclude() {
+    function submitStep() {
+        if(!tempPts) { alert("Selection requise / Selection required"); return; }
+        score += tempPts; step++; loadQ();
+    }
+
+    function finish() {
         document.getElementById('audit-interface').style.display = 'none';
-        if(score < 80) { document.getElementById('failure-screen').style.display = 'block'; }
-        else {
-            const name = prompt("NAME / NOM / الاسم :") || "Elite Expert";
+        if(score < 80) {
+            document.getElementById('failure-screen').style.display = 'block';
+        } else {
+            const name = prompt(TRANSLATIONS[lang].promptName);
+            const d = TRANSLATIONS[lang];
             document.getElementById('certificat-final').style.display = 'block';
-            document.getElementById('c-name').innerText = name.toUpperCase();
-            document.getElementById('c-sig').innerText = name;
-            document.getElementById('c-job').innerText = job;
+            document.getElementById('c-name').innerText = (name || "Elite").toUpperCase();
+            document.getElementById('c-job').innerText = selectedJob;
             document.getElementById('c-score').innerText = score;
-            document.getElementById('c-rank').innerText = "#" + (Math.floor(Math.random()*30)+1) + " Global";
-            document.getElementById('c-hash').innerText = Math.random().toString(36).substr(2, 10).toUpperCase();
-            document.getElementById('c-txt').innerText = DICT[L].cTxt;
-            document.getElementById('c-exp').innerText = DICT[L].cExp;
-            document.getElementById('c-sig-lbl').innerText = DICT[L].cSig;
-            document.getElementById('c-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=MBA-KMS-VERIFIED-${name}`;
+            document.getElementById('c-rank').innerText = "#" + (Math.floor(Math.random()*40)+1);
+            document.getElementById('c-confirm').innerText = d.cConfirm;
+            document.getElementById('c-expert-text').innerText = d.cExpert;
+            document.getElementById('c-sig').innerText = name || "Expert";
+            document.getElementById('c-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=MBA-KMS-${score}`;
             window.scrollTo(0,0);
         }
     }
-    setLanguage('fr');
+
+    setLang('fr');
 </script>
 </body>
 </html>
