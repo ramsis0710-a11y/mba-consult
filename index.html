@@ -3,59 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBA-CONSULT | SYSTÈME KMS GLOBAL V150</title>
+    <title>MBA-CONSULT | ACCRÉDITATION KMS DÉFINITIVE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;400;600;800&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #c5a021; --navy: #0a1128; --white: #ffffff; --bg: #f4f7f9; --glass: rgba(255, 255, 255, 0.98); }
-        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        :root { --gold: #c5a021; --navy: #0a1128; --white: #ffffff; --bg: #f4f7f9; }
+        * { box-sizing: border-box; transition: all 0.3s ease; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--navy); overflow-x: hidden; }
 
-        /* 1. PORTAIL D'ACCUEIL (ONBOARDING) */
+        /* PORTAIL D'ACCUEIL IMMERSIF */
         #onboarding-portal { position: fixed; inset: 0; background: var(--navy); z-index: 10000; display: flex; justify-content: center; align-items: center; color: white; padding: 20px; }
-        .welcome-box { background: rgba(15, 25, 55, 0.95); border: 2px solid var(--gold); padding: 60px; border-radius: 20px; max-width: 900px; text-align: center; box-shadow: 0 0 50px rgba(0,0,0,0.5); animation: fadeIn 1s ease; }
+        .welcome-box { background: rgba(15, 25, 55, 0.98); border: 2px solid var(--gold); padding: 50px; border-radius: 20px; max-width: 850px; text-align: center; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
         .welcome-box h1 { font-family: 'Cinzel'; color: var(--gold); font-size: 3em; margin: 0; letter-spacing: 5px; }
-        .rule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; text-align: left; margin: 40px 0; border-top: 1px solid rgba(197,160,33,0.2); padding-top: 30px; }
-        .rule-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border-left: 4px solid var(--gold); }
-        .btn-entry { background: var(--gold); color: var(--navy); border: none; padding: 20px 60px; font-weight: 800; font-size: 1.2em; cursor: pointer; border-radius: 5px; letter-spacing: 2px; text-transform: uppercase; }
-        .btn-entry:hover { background: white; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .rules-list { text-align: left; margin: 30px 0; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px; border-left: 5px solid var(--gold); }
+        .btn-entry { background: var(--gold); color: var(--navy); border: none; padding: 20px 60px; font-weight: 800; font-size: 1.1em; cursor: pointer; border-radius: 5px; letter-spacing: 2px; text-transform: uppercase; margin-top: 20px; }
 
-        /* 2. HEADER & NAVIGATION */
-        header { background: var(--navy); color: var(--gold); padding: 25px; text-align: center; border-bottom: 6px solid var(--gold); z-index: 1000; }
+        /* HEADER & NAVIGATION */
+        header { background: var(--navy); color: var(--gold); padding: 25px; text-align: center; border-bottom: 6px solid var(--gold); position: relative; }
         .nav-bar { background: #050814; display: flex; justify-content: center; gap: 30px; padding: 15px 0; border-bottom: 1px solid var(--gold); }
-        .nav-link { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.9em; cursor: pointer; padding: 5px 20px; letter-spacing: 1px; }
+        .nav-link { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.9em; cursor: pointer; padding: 5px 20px; }
         .nav-link.active { background: rgba(197, 160, 33, 0.15); border: 1px solid var(--gold); border-radius: 4px; }
 
-        /* 3. MODULE DE SCRAPING (AI AGENT) */
-        #ai-agent-loader { position: fixed; inset: 0; background: var(--navy); z-index: 9999; display: none; flex-direction: column; justify-content: center; align-items: center; color: var(--gold); }
-        .scanner-ring { width: 100px; height: 100px; border: 4px solid var(--gold); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* 4. SECTIONS PRINCIPALES */
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
         .section-card { background: white; border-radius: 15px; padding: 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
-        .sector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
-        .sector-box { padding: 50px 30px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; text-align: center; }
-        .sector-box:hover { background: var(--navy); color: var(--gold); border-color: var(--gold); transform: translateY(-8px); }
-        .sector-box i { font-size: 3em; display: block; margin-bottom: 20px; }
 
-        /* 5. MOTEUR D'AUDIT COGNITIF */
+        /* GRILLE DES SECTEURS */
+        .sector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
+        .sector-box { padding: 45px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; text-align: center; font-weight: 600; }
+        .sector-box:hover { background: var(--navy); color: var(--gold); border-color: var(--gold); transform: translateY(-5px); }
+        .sector-box i { font-size: 2.5em; display: block; margin-bottom: 15px; }
+
+        /* MOTEUR D'AUDIT */
         #audit-interface { display: none; }
-        .audit-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; }
-        .opt-button { display: block; width: 100%; padding: 22px; margin: 15px 0; text-align: left; border: 2px solid #eee; background: white; border-radius: 10px; cursor: pointer; font-size: 1.1em; font-weight: 500; }
-        .opt-button.selected { border-color: var(--gold); background: #fffdf0; box-shadow: 0 5px 15px rgba(197,160,33,0.1); }
-        .analysis-box { width: 100%; height: 140px; margin-top: 25px; padding: 20px; border: 2px dashed #ccc; border-radius: 10px; font-family: inherit; font-size: 1em; }
+        .opt-button { display: block; width: 100%; padding: 22px; margin: 15px 0; text-align: left; border: 2px solid #eee; background: white; border-radius: 10px; cursor: pointer; font-size: 1.1em; }
+        .opt-button.selected { border-color: var(--gold); background: #fffcf0; font-weight: 600; }
+        .analysis-box { width: 100%; height: 130px; margin-top: 25px; padding: 20px; border: 2px dashed #ccc; border-radius: 10px; font-family: inherit; font-size: 1em; }
 
-        /* 6. CLASSEMENT MONDIAL */
-        #leaderboard-interface { display: none; }
-        .leader-table { width: 100%; background: white; border-collapse: collapse; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .leader-table th { background: var(--navy); color: var(--gold); padding: 20px; text-align: left; font-family: 'Cinzel'; }
-        .leader-table td { padding: 18px 20px; border-bottom: 1px solid #f0f0f0; }
-        .top-rank { background: #fffcf0; font-weight: bold; }
+        /* ECRAN D'ECHEC (PAS DE CERTIFICAT) */
+        #failure-screen { display: none; text-align: center; padding: 80px 20px; animation: fadeIn 0.8s ease; }
+        .fail-icon { font-size: 5em; color: #e74c3c; margin-bottom: 25px; }
 
-        /* 7. CERTIFICAT PAYSAGE (A4) */
-        #certificat-final { display: none; width: 1120px; height: 790px; border: 40px double var(--gold); background: white; margin: 40px auto; padding: 80px; position: relative; text-align: center; box-shadow: 0 0 50px rgba(0,0,0,0.2); }
+        /* CERTIFICAT DE HAUTE QUALITÉ (PAYSAGE A4) */
+        #certificat-final { display: none; width: 1120px; height: 790px; border: 40px double var(--gold); background: white; margin: 40px auto; padding: 80px; position: relative; text-align: center; box-shadow: 0 0 50px rgba(0,0,0,0.1); }
         .cert-name { font-family: 'Amiri', serif; font-size: 60px; border-bottom: 3px solid #333; display: inline-block; margin: 30px 0; padding: 0 60px; font-style: italic; }
-        .cert-hash { position: absolute; bottom: 40px; left: 80px; font-family: monospace; font-size: 10px; color: #999; text-align: left; }
+        .cert-info { position: absolute; bottom: 40px; left: 80px; font-family: monospace; font-size: 10px; color: #999; text-align: left; line-height: 1.4; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -72,64 +62,44 @@
 <div id="onboarding-portal">
     <div class="welcome-box">
         <h1>MBA-CONSULT KMS</h1>
-        <p style="letter-spacing: 3px; color: var(--gold); font-weight: bold; margin-top: 5px;">ARCHITECTURE DE CONNAISSANCES MONDIALES</p>
-        
-        <div class="rule-grid">
-            <div class="rule-card">
-                <strong style="color: var(--gold);">EXAMEN STRATÉGIQUE</strong><br>
-                <small>Ce test de 10 étapes évalue votre arbitrage métier face à des ruptures de marché réelles.</small>
-            </div>
-            <div class="rule-card">
-                <strong style="color: var(--gold);">IA & SCRAPING LIVE</strong><br>
-                <small>Les problématiques sont générées dynamiquement via une veille mondiale sectorielle.</small>
-            </div>
-            <div class="rule-card">
-                <strong style="color: var(--gold);">VALEUR PROFESSIONNELLE</strong><br>
-                <small>Obtenez un score de 80% pour figurer dans le Registre Global des Experts Certifiés.</small>
-            </div>
-            <div class="rule-card">
-                <strong style="color: var(--gold);">RÈGLE DE RIGUEUR</strong><br>
-                <small>Chaque décision doit être appuyée par une analyse textuelle de 30 caractères minimum.</small>
-            </div>
+        <p style="color: var(--gold); letter-spacing: 4px; font-weight: 800; margin-top: 5px;">ARCHITECTURE DE CONNAISSANCES MONDIALES</p>
+        <div class="rules-list">
+            <p><strong>PROTOCOLE D'EXCELLENCE :</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>Score minimum de passage : <strong>80%</strong></li>
+                <li>Validation obligatoire par analyse métier (30 car. min)</li>
+                <li>En cas d'échec (< 80%), l'accès au certificat est <strong>bloqué</strong>.</li>
+            </ul>
         </div>
-
-        <p style="font-style: italic; color: #aaa; margin-bottom: 30px;">"Votre expertise est votre actif le plus précieux. Certifiez-le."</p>
-        <button class="btn-entry" onclick="closePortal()">Initialiser l'Audit</button>
+        <button class="btn-entry" onclick="this.parentElement.parentElement.style.display='none'">Démarrer l'Audit Expert</button>
     </div>
 </div>
 
-<div id="ai-agent-loader">
-    <div class="scanner-ring"></div>
-    <h2 style="font-family: 'Cinzel'; margin-top: 30px; letter-spacing: 5px;">AGENT IA : VEILLE MONDIALE EN COURS...</h2>
-    <p id="scrap-log" style="font-family: monospace; color: #888;">Accès aux bases de données sectorielles [FT, Bloomberg, Reuters]...</p>
-</div>
-
 <header>
-    <div style="font-family: 'Cinzel'; letter-spacing: 8px; font-size: 1.8em;">MBA-CONSULT | KMS V150</div>
+    <div style="font-family: 'Cinzel'; letter-spacing: 8px; font-size: 1.8em;">MBA-CONSULT | KMS GLOBAL</div>
 </header>
 
 <div class="nav-bar">
-    <div class="nav-link active" id="nav-acc" onclick="switchSection('acc')">ACCRÉDITATION</div>
-    <div class="nav-link" id="nav-lb" onclick="switchSection('lb')">CLASSEMENT MONDIAL</div>
+    <div class="nav-link active" onclick="location.reload()">NOUVEL AUDIT</div>
+    <div class="nav-link" onclick="alert('Accès réservé aux experts certifiés')">REGISTRE MONDIAL</div>
 </div>
 
 <div class="container">
     <div id="selection-interface" class="section-card">
-        <h2 style="font-family: 'Cinzel'; text-align: center;">UNITÉ DE CERTIFICATION EXPERTE</h2>
-        <p style="text-align: center; color: #666;">Sélectionnez votre pôle de compétence pour activer l'agent intelligent.</p>
+        <h2 style="font-family: 'Cinzel'; text-align: center; margin-bottom: 40px;">SÉLECTIONNEZ VOTRE UNITÉ D'AUDIT</h2>
         <div class="sector-grid">
-            <div class="sector-box" onclick="runScraping('Finance')"><i>🏦</i><strong>FINANCE</strong></div>
-            <div class="sector-box" onclick="runScraping('IA & IT')"><i>🤖</i><strong>IA & TECH</strong></div>
-            <div class="sector-box" onclick="runScraping('Énergie')"><i>⚡</i><strong>ÉNERGIE</strong></div>
-            <div class="sector-box" onclick="runScraping('Tourisme')"><i>🌍</i><strong>TOURISME</strong></div>
-            <div class="sector-box" onclick="runScraping('Agro')"><i>🌾</i><strong>AGRO</strong></div>
-            <div class="sector-box" onclick="runScraping('Éducation')"><i>🎓</i><strong>ÉDUCATION</strong></div>
+            <div class="sector-box" onclick="initAudit('Finance')"><i>🏦</i><strong>FINANCE</strong></div>
+            <div class="sector-box" onclick="initAudit('IA & IT')"><i>🤖</i><strong>IA & TECH</strong></div>
+            <div class="sector-box" onclick="initAudit('Énergie')"><i>⚡</i><strong>ÉNERGIE</strong></div>
+            <div class="sector-box" onclick="initAudit('Tourisme')"><i>🌍</i><strong>TOURISME</strong></div>
+            <div class="sector-box" onclick="initAudit('Agro')"><i>🌾</i><strong>AGRO</strong></div>
+            <div class="sector-box" onclick="initAudit('Éducation')"><i>🎓</i><strong>ÉDUCATION</strong></div>
         </div>
     </div>
 
     <div id="audit-interface">
         <div class="section-card" style="border-left: 10px solid var(--gold);">
-            <div class="audit-header">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
                 <span id="step-tag" style="font-weight: 800; color: var(--gold); letter-spacing: 2px;"></span>
                 <span id="job-tag" style="background: var(--navy); color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.8em;"></span>
             </div>
@@ -137,147 +107,114 @@
             <div id="options-stack"></div>
             <textarea class="analysis-box" id="analysis-input" placeholder="Justifiez votre arbitrage (Obligatoire - Min. 30 caractères)..."></textarea>
             <div style="text-align: right; margin-top: 35px;">
-                <button onclick="submitStep()" style="background: var(--navy); color: var(--gold); padding: 20px 60px; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 1.1em;">VALIDER L'ARBITRAGE</button>
+                <button onclick="processStep()" style="background: var(--navy); color: var(--gold); padding: 20px 60px; border: none; font-weight: 800; cursor: pointer; border-radius: 5px; font-size: 1.1em;">VALIDER LA DÉCISION</button>
             </div>
         </div>
     </div>
 
-    <div id="leaderboard-interface">
-        <h2 style="text-align:center; font-family: 'Cinzel'; margin-bottom: 35px;">TOP 10 DES EXPERTS CERTIFIÉS</h2>
-        <table class="leader-table">
-            <thead>
-                <tr><th>RANG</th><th>EXPERT</th><th>DOMAINE / MÉTIER</th><th>SCORE (%)</th><th>GRADE</th></tr>
-            </thead>
-            <tbody id="leader-body"></tbody>
-        </table>
+    <div id="failure-screen" class="section-card">
+        <div class="fail-icon">⚠</div>
+        <h2 style="font-family: 'Cinzel'; color: #c0392b; font-size: 2.5em;">AUDIT NON VALIDÉ</h2>
+        <p style="font-size: 1.3em; color: #555; max-width: 650px; margin: 25px auto; line-height: 1.6;">
+            Votre score de performance est inférieur au seuil de <strong>80%</strong> exigé par le référentiel MBA-CONSULT.<br><br>
+            Conformément à nos protocoles de rigueur, l'accès à la certification vous est refusé pour cette session.
+        </p>
+        <button onclick="location.reload()" style="background: var(--navy); color: white; padding: 18px 50px; border: none; cursor: pointer; margin-top: 25px; font-weight: bold; border-radius: 5px;">RENETTER L'AUDIT</button>
     </div>
 </div>
 
 <div id="certificat-final">
-    <div style="position: absolute; top: 60px; right: 80px; text-align: right;">
+    <div style="position: absolute; top: 60px; right: 100px; text-align: right;">
         <div style="font-family: 'Cinzel'; font-size: 24px; color: var(--gold); border-bottom: 2px solid var(--navy);">MBA BOARD ALPHA</div>
         <div style="font-size: 11px; letter-spacing: 2px; margin-top: 5px;">GLOBAL REFERENTIAL KMS</div>
     </div>
-    <div style="font-family: 'Cinzel'; font-size: 48px; margin-top: 100px; letter-spacing: 5px;">CERTIFICATE OF EXCELLENCE</div>
-    <p style="letter-spacing: 12px; font-weight: bold; color: var(--gold); margin-top: 10px;">PROFESSIONAL ACCREDITATION UNIT</p>
-    <p style="font-size: 1.5em; margin-top: 50px;">This officially confirms that</p>
+    <div style="font-family: 'Cinzel'; font-size: 48px; margin-top: 100px; letter-spacing: 6px;">CERTIFICATE OF EXCELLENCE</div>
+    <p style="letter-spacing: 12px; font-weight: 800; color: var(--gold); margin-top: 10px;">PROFESSIONAL ACCREDITATION UNIT</p>
+    <p style="font-size: 1.6em; margin-top: 55px;">This officially confirms that</p>
     <div class="cert-name" id="c-name"></div>
-    <p style="font-size: 1.5em;">has achieved a superior level of expertise in</p>
-    <div id="c-job" style="font-size: 38px; font-weight: 800; color: var(--gold); margin: 20px 0; text-transform: uppercase;"></div>
-    <div style="background: var(--navy); color: white; padding: 15px 50px; display: inline-block; border: 2px solid var(--gold); font-weight: bold; font-size: 1.2em;" id="c-score"></div>
-    <div style="margin-top: 100px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 50px;">
-        <div style="border-top: 2px solid #333; width: 380px; padding-top: 15px;"><span id="c-sig" style="font-family: 'Amiri'; font-size: 40px; color: #1a2a6c;"></span><br><small>Strategic Board Signature</small></div>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=MBA-KMS-V150-VALID" style="width: 110px;">
+    <p style="font-size: 1.6em;">has achieved a superior level of expertise in</p>
+    <div id="c-job" style="font-size: 40px; font-weight: 900; color: var(--gold); margin: 25px 0; text-transform: uppercase;"></div>
+    <div style="background: var(--navy); color: white; padding: 18px 60px; display: inline-block; border: 2px solid var(--gold); font-weight: bold; font-size: 1.3em; letter-spacing: 2px;">GRADE : ELITE EXPERT</div>
+    
+    <div style="margin-top: 110px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 50px;">
+        <div style="border-top: 2px solid #333; width: 400px; padding-top: 15px;"><span id="c-sig" style="font-family: 'Amiri'; font-size: 42px; color: #1a2a6c;"></span><br><small>Strategic Board Signature</small></div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=MBA-KMS-ELITE-VERIFIED" style="width: 120px;">
     </div>
-    <div class="cert-hash">REF: <span id="h-id"></span> | DATE: <span id="h-date"></span><br>SECURE HASH VERIFIED BY MBA-CONSULT INTELLIGENCE</div>
-    <button onclick="window.print()" class="no-print" style="margin-top:40px; padding: 15px 45px; background: var(--navy); color: var(--gold); cursor: pointer; font-weight: 900; border-radius: 5px;">TÉLÉCHARGER LE CERTIFICAT (PDF PAYSAGE)</button>
+    <div class="cert-info">
+        REF: <span id="h-id"></span> | DATE: <span id="h-date"></span><br>
+        SECURE HASH VERIFIED BY MBA-CONSULT INTELLIGENCE GLOBAL
+    </div>
+    <button onclick="window.print()" class="no-print" style="margin-top:50px; padding: 20px 50px; background: var(--navy); color: var(--gold); cursor: pointer; font-weight: 900; border-radius: 5px; border: 2px solid var(--gold);">GÉNÉRER LE PDF OFFICIEL</button>
 </div>
 
 <script>
-    // MOTEUR IA & VARIABLES GLOBALES
-    const AI_DATA = {
-        keywords: {
-            "Finance": ["Bâle IV", "Volatilité des Taux", "ESG", "Marchés Emergents", "Crypto-Asset Strategy"],
-            "IA & IT": ["Architecture RAG", "Quantum Computing", "LLM Fine-tuning", "Cyber-Resilience", "Edge AI"],
-            "Énergie": ["SMR Nucléaire", "Hydrogène Vert", "Transition Carbone", "Smart Grids", "Lithium-Sulfur"],
-            "Tourisme": ["Yield Management", "Ultra-Luxe Expérience", "Hospitalité 5.0", "Eco-Resilience", "Asset Mgmt"],
-            "Agro": ["Supply Chain Bio", "Agri-Tech IoT", "Vertical Farming", "HACCP 2.0", "Food Sovereignty"],
-            "Éducation": ["EdTech Adaptive", "Micro-Learning", "KMS Governance", "Pédagogie Disruptive", "Soft Skills AI"]
-        },
-        scenarios: [
-            "Le KMS détecte une instabilité sur le volet {key}. Quelle décision stratégique imposez-vous ?",
-            "L'intégration de {key} devient un levier de croissance immédiat. Comment pilotez-vous l'arbitrage ?",
-            "Une crise de conformité frappe votre secteur sur l'axe {key}. Quelle est votre réponse d'expert ?"
-        ]
+    const SECTORS = {
+        "Finance": ["Arbitrage de Taux", "ESG Compliance", "Bâle IV"],
+        "IA & IT": ["Architecture RAG", "Souveraineté Data", "Cyber-Resilience"],
+        "Énergie": ["Hydrogen Strategy", "Mix Décarboné", "SMR Nuclear"],
+        "Tourisme": ["Yield Management", "Ultra-Luxe", "Eco-Hospitalité"],
+        "Agro": ["Supply Chain Bio", "Vertical Farming", "HACCP 2.0"],
+        "Éducation": ["EdTech Governance", "LMS Adaptive", "Digital Pedagogie"]
     };
 
-    let leaderboard = [
-        { name: "Dr. Marc Valery", job: "CFO - Finance", score: 98 },
-        { name: "Elena Petrova", job: "AI Architect - Tech", score: 95 },
-        { name: "Sami Mansour", job: "Energy Director", score: 92 }
-    ];
+    let curSector = "", curJob = "", step = 0, score = 0, tempPts = 0;
 
-    let sector = "", job = "", step = 0, score = 0, currentPts = 0;
-
-    function closePortal() { document.getElementById('onboarding-portal').style.display = 'none'; }
-
-    function switchSection(id) {
-        document.getElementById('selection-interface').style.display = id === 'acc' ? 'block' : 'none';
-        document.getElementById('leaderboard-interface').style.display = id === 'lb' ? 'block' : 'none';
-        document.getElementById('audit-interface').style.display = 'none';
-        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-        if(id === 'lb') { renderLB(); document.getElementById('nav-lb').classList.add('active'); }
-        else { document.getElementById('nav-acc').classList.add('active'); }
-    }
-
-    function runScraping(s) {
-        sector = s;
-        document.getElementById('ai-agent-loader').style.display = 'flex';
-        setTimeout(() => {
-            document.getElementById('ai-agent-loader').style.display = 'none';
-            job = prompt(`Entrez votre titre métier exact pour le secteur ${s} :`, "Directeur Stratégique") || "Expert";
-            document.getElementById('selection-interface').style.display = 'none';
-            document.getElementById('audit-interface').style.display = 'block';
-            step = 0; score = 0; loadStep();
-        }, 1800);
+    function initAudit(s) {
+        curSector = s;
+        curJob = prompt(`DÉFINISSEZ VOTRE MÉTIER (${s}) :`, "Directeur Stratégique") || "Expert";
+        document.getElementById('selection-interface').style.display = 'none';
+        document.getElementById('audit-interface').style.display = 'block';
+        loadStep();
     }
 
     function loadStep() {
-        if(step >= 10) { showFinal(); return; }
-        const key = AI_DATA.keywords[sector][Math.floor(Math.random() * 5)];
-        const sc = AI_DATA.scenarios[Math.floor(Math.random() * 3)];
+        if(step >= 10) { concludeAudit(); return; }
+        const keys = SECTORS[curSector];
+        const key = keys[Math.floor(Math.random() * keys.length)];
         
         document.getElementById('step-tag').innerText = `PHASE D'AUDIT ${step + 1} / 10`;
-        document.getElementById('job-tag').innerText = job.toUpperCase();
-        document.getElementById('question-text').innerText = sc.replace("{key}", key.toUpperCase());
+        document.getElementById('job-tag').innerText = curJob.toUpperCase();
+        document.getElementById('question-text').innerText = `Le KMS détecte une perturbation majeure sur le pôle "${key.toUpperCase()}". Quelle est votre recommandation d'arbitrage ?`;
         
         document.getElementById('options-stack').innerHTML = `
-            <button class="opt-button" onclick="sel(this, 10)">A) Arbitrage Disruptif : Réalignement immédiat des ressources sur ${key}.</button>
-            <button class="opt-button" onclick="sel(this, 8)">B) Stratégie de Résilience : Hedge des risques et diversification tactique.</button>
-            <button class="opt-button" onclick="sel(this, 6)">C) Pilotage par les Risques : Audit approfondi avant déploiement stratégique.</button>
+            <button class="opt-button" onclick="selectOpt(this, 10)">A) Arbitrage Disruptif : Réalignement immédiat des flux et ressources.</button>
+            <button class="opt-button" onclick="selectOpt(this, 8)">B) Résilience Tactique : Stratégie de couverture et diversification.</button>
+            <button class="opt-button" onclick="selectOpt(this, 5)">C) Pilotage par les Risques : Audit complet avant décision stratégique.</button>
         `;
         document.getElementById('analysis-input').value = "";
-        currentPts = 0;
+        tempPts = 0;
     }
 
-    function sel(btn, p) {
+    function selectOpt(btn, p) {
         document.querySelectorAll('.opt-button').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
-        currentPts = p;
+        tempPts = p;
     }
 
-    function submitStep() {
+    function processStep() {
         const text = document.getElementById('analysis-input').value;
-        if(!currentPts || text.length < 30) {
-            alert("ERREUR : Vous devez sélectionner une option ET fournir une analyse métier (30 car. min).");
+        if(!tempPts || text.length < 30) {
+            alert("ERREUR : Vous devez sélectionner une option ET justifier par au moins 30 caractères.");
             return;
         }
-        score += currentPts; step++; loadStep();
+        score += tempPts; step++; loadStep();
     }
 
-    function showFinal() {
+    function concludeAudit() {
         document.getElementById('audit-interface').style.display = 'none';
-        const name = prompt("NOM COMPLET POUR LE REGISTRE GLOBAL :") || "Expert Certifié";
-        leaderboard.push({ name: name, job: job, score: score });
         
-        document.getElementById('certificat-final').style.display = 'block';
-        document.getElementById('c-name').innerText = name.toUpperCase();
-        document.getElementById('c-sig').innerText = name;
-        document.getElementById('c-job').innerText = job;
-        document.getElementById('c-score').innerText = `SCORE D'ACCRÉDITATION : ${score}% (${score >= 80 ? 'ADMIS' : 'REFUSÉ'})`;
-        document.getElementById('h-id').innerText = "MBA-" + Math.random().toString(16).substr(2, 12).toUpperCase();
-        document.getElementById('h-date').innerText = new Date().toLocaleDateString();
-        window.scrollTo(0,0);
-    }
-
-    function renderLB() {
-        const body = document.getElementById('leader-body');
-        body.innerHTML = "";
-        leaderboard.sort((a,b) => b.score - a.score).forEach((u, i) => {
-            body.innerHTML += `<tr class="${i === 0 ? 'top-rank' : ''}">
-                <td>${i+1}</td><td>${u.name}</td><td>${u.job}</td><td>${u.score}%</td><td>${u.score >= 95 ? 'ELITE PLATINUM' : 'EXPERT'}</td>
-            </tr>`;
-        });
+        if(score < 80) {
+            document.getElementById('failure-screen').style.display = 'block';
+        } else {
+            const userName = prompt("NOM COMPLET POUR LE REGISTRE D'EXCELLENCE :") || "Expert Anonyme";
+            document.getElementById('certificat-final').style.display = 'block';
+            document.getElementById('c-name').innerText = userName.toUpperCase();
+            document.getElementById('c-sig').innerText = userName;
+            document.getElementById('c-job').innerText = curJob;
+            document.getElementById('h-id').innerText = Math.random().toString(16).substr(2, 12).toUpperCase();
+            document.getElementById('h-date').innerText = new Date().toLocaleDateString();
+            window.scrollTo(0,0);
+        }
     }
 </script>
 </body>
