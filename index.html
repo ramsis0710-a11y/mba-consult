@@ -2,236 +2,228 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>MBA-CONSULT KMS V390 ULTIMATE</title>
+    <title>KMS V390 OMNI-GENESIS</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root { --gold: #c5a021; --navy: #0a1128; --accent: #1a2a5e; }
-        body { font-family: 'Inter', sans-serif; background: #f0f2f5; margin: 0; transition: 0.4s; }
+        body { font-family: 'Inter', sans-serif; background: #f8f9fa; margin: 0; transition: 0.5s ease; }
         body.rtl { direction: rtl; font-family: 'Amiri', serif; }
 
-        /* TRANSLATION AGENT HUB */
-        #translation-agent { position: fixed; top: 15px; left: 15px; z-index: 10000; background: var(--navy); border: 1px solid var(--gold); padding: 5px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .lang-btn { background: none; border: 1px solid transparent; color: var(--gold); padding: 8px 15px; cursor: pointer; font-weight: 900; transition: 0.2s; }
+        /* AGENT DE TRADUCTION DÉDIÉ V390 */
+        #translation-hub { position: fixed; top: 15px; left: 15px; z-index: 10000; background: var(--navy); border: 1px solid var(--gold); padding: 5px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
+        .lang-btn { background: none; border: 1px solid transparent; color: var(--gold); padding: 8px 15px; cursor: pointer; font-weight: 900; }
         .lang-btn.active { border-color: var(--gold); background: var(--accent); }
 
-        /* HERO MOTIVATION V390 */
-        #hero-portal { position: fixed; inset: 0; background: var(--navy); z-index: 9000; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
-        .promo-container { border: 2px solid var(--gold); padding: 50px; border-radius: 20px; max-width: 800px; background: rgba(10, 17, 40, 0.9); }
+        /* MOTIVATION & OBJET DE L'APPLICATION */
+        #portal-motivation { position: fixed; inset: 0; background: var(--navy); z-index: 9000; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
+        .motive-card { border: 2px solid var(--gold); padding: 60px; border-radius: 25px; max-width: 850px; background: rgba(10, 17, 40, 0.95); box-shadow: 0 0 50px rgba(197, 160, 33, 0.2); }
 
-        /* CERTIFICAT V390 - PRECISION 5MM */
+        /* PDF ARCHITECTURE - QR & SIGNATURE POSITIONNÉS AU 5MM */
         #cert-canvas { width: 1120px; height: 790px; background: white; margin: 0 auto; position: relative; border: 30px double var(--gold); color: var(--navy); overflow: hidden; }
-        .qr-anchor { position: absolute; top: 19px; right: 19px; width: 140px; text-align: center; } /* 19px = 5mm approx */
-        .qr-anchor img { width: 120px; border: 1px solid #f0f0f0; }
+        .qr-master { position: absolute; top: 19px; right: 19px; width: 140px; text-align: center; z-index: 10; } /* 19px ≈ 5mm */
+        .qr-master img { width: 120px; }
 
-        /* SIGNATURES REHAUSSÉES */
-        .signature-row { position: absolute; bottom: 180px; left: 80px; right: 80px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .sig-line { border-bottom: 2px solid var(--navy); width: 250px; font-family: 'Amiri'; font-size: 26px; text-align: center; padding-bottom: 5px; }
+        .signature-zone { position: absolute; bottom: 200px; left: 80px; width: 300px; border-bottom: 2px solid var(--navy); text-align: center; font-family: 'Amiri'; font-size: 30px; }
 
-        /* AUDIT INTERFACE */
-        .audit-container { max-width: 900px; margin: 40px auto; background: white; padding: 45px; border-radius: 12px; box-shadow: 0 25px 60px rgba(0,0,0,0.1); display: none; }
-        .q-option { display: block; width: 100%; padding: 20px; margin: 12px 0; border: 1px solid #ddd; border-radius: 8px; text-align: left; cursor: pointer; font-weight: 600; transition: 0.3s; }
-        .q-option.selected { border-color: var(--gold); background: #fffdf2; border-width: 2px; }
-        #delta-expert-input { width: 100%; height: 130px; margin-top: 20px; border: 2px solid var(--gold); border-radius: 8px; padding: 15px; display: none; font-family: 'Inter'; }
+        /* AUDIT ENGINE */
+        .audit-box { max-width: 950px; margin: 40px auto; background: white; padding: 50px; border-radius: 15px; box-shadow: 0 30px 70px rgba(0,0,0,0.1); display: none; }
+        .opt-v390 { display: block; width: 100%; padding: 22px; margin: 15px 0; border: 1px solid #ddd; border-radius: 10px; text-align: left; cursor: pointer; font-weight: 700; transition: 0.3s; position: relative; }
+        .opt-v390:hover { border-color: var(--gold); background: #fcf9ee; }
+        .opt-v390.selected { border-color: var(--gold); background: #fffdf2; border-width: 2px; }
+        #expert-input { width: 100%; height: 140px; margin-top: 20px; border: 2px solid var(--gold); border-radius: 10px; padding: 15px; display: none; }
     </style>
 </head>
 <body>
 
-<div id="translation-agent">
-    <button class="lang-btn" onclick="KmsTranslator.apply('fr')">FR</button>
-    <button class="lang-btn" onclick="KmsTranslator.apply('ar')">AR</button>
-    <button class="lang-btn" onclick="KmsTranslator.apply('en')">EN</button>
+<div id="translation-hub">
+    <button class="lang-btn" onclick="AgentTranslator.set('fr')">FR</button>
+    <button class="lang-btn" onclick="AgentTranslator.set('ar')">AR</button>
+    <button class="lang-btn" onclick="AgentTranslator.set('en')">EN</button>
 </div>
 
-<div id="hero-portal">
-    <div class="promo-container">
-        <h1 style="font-family:'Cinzel'; color:var(--gold); font-size: 4em; margin:0;">V390 FINALE</h1>
-        <p id="motto-box" style="font-size: 1.4em; line-height: 1.8; margin: 30px 0; font-weight: 300;"></p>
-        <button onclick="document.getElementById('hero-portal').style.display='none'" id="launch-btn" style="background:var(--gold); color:var(--navy); border:none; padding:20px 60px; font-weight:900; cursor:pointer; font-size: 1.2em; border-radius: 5px;"></button>
+<div id="portal-motivation">
+    <div class="motive-card">
+        <h1 style="font-family:'Cinzel'; color:var(--gold); font-size: 3.8em; margin:0;">KMS V390</h1>
+        <p id="motive-text" style="font-size: 1.5em; line-height: 1.7; margin: 35px 0;"></p>
+        <button onclick="document.getElementById('portal-motivation').style.display='none'" id="start-btn" style="background:var(--gold); color:var(--navy); border:none; padding:22px 70px; font-weight:900; cursor:pointer; font-size: 1.2em; border-radius: 8px;"></button>
     </div>
 </div>
 
-<div id="sector-view" style="padding:60px 20px;">
-    <h2 id="sec-head" style="text-align:center; font-family:'Cinzel'; color:var(--navy); font-size: 2.5em; margin-bottom:40px;"></h2>
-    <div id="sector-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:25px; max-width:1200px; margin:0 auto;"></div>
+<div id="sector-screen" style="padding:70px 20px;">
+    <h2 id="sector-title" style="text-align:center; font-family:'Cinzel'; color:var(--navy); font-size: 2.8em;"></h2>
+    <div id="sector-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:30px; max-width:1250px; margin:50px auto;"></div>
 </div>
 
-<div id="job-view" style="display:none; padding:60px 20px;">
-    <h2 id="job-head" style="text-align:center; font-family:'Cinzel'; color:var(--navy);"></h2>
-    <div id="job-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap:15px; max-width:1200px; margin:0 auto;"></div>
+<div id="job-screen" style="display:none; padding:70px 20px;">
+    <h2 id="job-title" style="text-align:center; font-family:'Cinzel';"></h2>
+    <div id="job-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap:20px; max-width:1250px; margin:40px auto;"></div>
 </div>
 
-<div id="audit-engine" class="audit-container">
-    <div style="display:flex; justify-content:space-between; color:var(--gold); font-weight:900; font-size:1.2em; margin-bottom:30px;">
-        <span id="step-indicator"></span>
-        <span id="job-badge" style="text-transform:uppercase; letter-spacing:1px;"></span>
+<div id="audit-ui" class="audit-box">
+    <div style="display:flex; justify-content:space-between; color:var(--gold); font-weight:900; margin-bottom:30px; font-size:1.2em;">
+        <span id="q-counter"></span>
+        <span id="q-job-badge" style="background:var(--navy); padding:5px 15px; border-radius:20px;"></span>
     </div>
-    <h2 id="question-text" style="line-height:1.5; font-size:1.7em;"></h2>
-    <div id="options-v390"></div>
-    <textarea id="delta-expert-input"></textarea>
-    <button id="submit-btn" onclick="KmsEngine.validateStep()" style="width:100%; padding:22px; background:var(--gold); color:white; border:none; margin-top:25px; font-weight:900; cursor:pointer; font-size:1.1em; border-radius:6px;"></button>
+    <h2 id="q-main-text" style="line-height:1.4; font-size:1.8em;"></h2>
+    <div id="q-options"></div>
+    <textarea id="expert-input" placeholder="Analyse approfondie pour validation IA Delta..."></textarea>
+    <button id="next-btn" onclick="EngineV390.next()" style="width:100%; padding:25px; background:var(--gold); color:white; border:none; margin-top:30px; font-weight:900; cursor:pointer; font-size:1.2em; border-radius:10px;"></button>
 </div>
 
-<div id="result-view" style="display:none; text-align:center; padding:50px 0;">
-    <button onclick="KmsEngine.generatePDF()" id="pdf-trigger" style="padding:18px 50px; background:#27ae60; color:white; border:none; font-weight:900; cursor:pointer; margin-bottom:30px; border-radius:5px;"></button>
+<div id="cert-view" style="display:none; text-align:center; padding:60px 0;">
+    <button onclick="EngineV390.downloadPDF()" id="pdf-btn" style="padding:20px 60px; background:#2ecc71; color:white; border:none; font-weight:900; cursor:pointer; margin-bottom:40px; border-radius:10px; font-size:1.1em;"></button>
     <div id="cert-canvas">
-        <div class="qr-anchor">
-            <img id="final-qr" src="">
-            <div id="final-score-tag" style="font-weight:900; font-size:1.8em; margin-top:8px; color:var(--navy);"></div>
+        <div class="qr-master">
+            <img id="pdf-qr" src="">
+            <div id="pdf-score" style="font-weight:900; font-size:2em; color:var(--navy);"></div>
         </div>
-        <div style="margin-top:110px; text-align:center; font-family:'Cinzel';">
-            <h1 id="c-title" style="font-size:48px; margin:0;"></h1>
-            <div id="c-subtitle" style="letter-spacing:12px; color:var(--gold); font-weight:bold; font-size:14px; margin-top:5px;"></div>
-            <p id="c-intro" style="font-size:24px; margin-top:50px;"></p>
-            <div id="c-expert-name" style="font-family:'Amiri'; font-size:55px; border-bottom:4px solid var(--navy); display:inline-block; padding:0 40px; margin:25px 0;"></div>
-            <p id="c-desc" style="font-size:24px;"></p>
-            <div id="c-final-job" style="color:var(--gold); font-size:34px; font-weight:900; text-transform:uppercase;"></div>
+        <div style="margin-top:120px; text-align:center; font-family:'Cinzel';">
+            <h1 id="c-h1" style="font-size:50px; margin:0;"></h1>
+            <div id="c-h2" style="letter-spacing:15px; color:var(--gold); font-weight:bold; font-size:16px;"></div>
+            <p id="c-p1" style="font-size:26px; margin-top:60px;"></p>
+            <div id="c-user" style="font-family:'Amiri'; font-size:60px; border-bottom:5px solid var(--navy); display:inline-block; padding:0 50px; margin:30px 0;"></div>
+            <p id="c-p2" style="font-size:26px;"></p>
+            <div id="c-job" style="color:var(--gold); font-size:38px; font-weight:900; text-transform:uppercase;"></div>
         </div>
-        <div class="signature-row">
-            <div>
-                <div class="sig-line" id="sig-expert-val"></div>
-                <div id="sig-label-expert" style="color:var(--gold); font-weight:900; font-size:14px; margin-top:10px;"></div>
-            </div>
-            <div style="text-align:right;">
-                <div id="sig-board-val" style="color:var(--gold); font-weight:900; font-family:'Cinzel'; font-size:18px;"></div>
-                <div style="border-bottom:2px solid var(--navy); width:250px; margin-top:10px;"></div>
-            </div>
+        <div class="signature-zone" id="pdf-sig-name"></div>
+        <div style="position:absolute; bottom:170px; left:80px; color:var(--gold); font-weight:900;" id="c-sig-label"></div>
+        <div style="position:absolute; bottom:170px; right:80px; text-align:right;">
+            <div id="c-board" style="color:var(--gold); font-weight:900; font-family:'Cinzel'; font-size:20px;"></div>
+            <div style="border-bottom:3px solid var(--navy); width:300px; margin-top:15px;"></div>
         </div>
     </div>
 </div>
 
 <script>
-const KmsTranslator = {
-    current: 'fr',
-    map: {
+const AgentTranslator = {
+    lang: 'fr',
+    db: {
         fr: {
-            motto: "MBA-CONSULT V390 : L'outil de certification souverain conçu pour l'élite mondiale. Transformez vos acquis techniques en une accréditation stratégique certifiée par IA. Relevez le défi des 8 secteurs et validez votre expertise pour 2027.",
-            launch: "DÉPLOYER L'AUDIT", secH: "PÔLES D'EXCELLENCE", jobH: "MÉTIER CIBLE",
-            btn: "VALIDER L'ÉTAPE TECHNIQUE", step: "PHASE", delta: "Option Delta : Analyse de l'Expert (Interprétation IA)",
-            cTitle: "CERTIFICAT D'ACCRÉDITATION STRATÉGIQUE", cSub: "WORLDWIDE TECHNICAL STANDARD V390", cIntro: "Le Conseil certifie officiellement que l'expert",
-            cDesc: "A validé avec distinction les compétences requises pour le poste de :", cSig: "SIGNATURE ÉLECTRONIQUE SÉCURISÉE",
-            cBoard: "CHAIRMAN MBA-CONSULT", pdf: "GÉNÉRER LE CERTIFICAT OFFICIEL", fail: "CERTIFICATION ÉCHOUÉE : Score ≤ 80% ou validation IA Delta (3/5) non atteinte."
+            motto: "Le KMS V390 est le moteur décisionnel ultime qui propulse votre expertise vers les sommets du monde économique mondial. Plus qu'une certification, c'est un sésame technologique validé par IA pour diriger stratégiquement votre secteur en 2027. Relevez le défi, certifiez votre futur.",
+            start: "DÉPLOYER L'INTELLIGENCE", sec: "DOMAINES STRATÉGIQUES", job: "SÉLECTION DU MÉTIER",
+            next: "VALIDER LA DÉCISION", counter: "ÉVALUATION", delta: "Option Delta : Analyse de l'Expert (Validation IA requise)",
+            pdf: "TÉLÉCHARGER LE CERTIFICAT V390", fail: "ÉCHEC : Score insuffisant (≤80%) ou validation Delta rejetée par l'agent.",
+            c1: "CERTIFICAT D'ACCRÉDITATION SUPÉRIEURE", c2: "GLOBAL STRATEGIC STANDARD V390", cp1: "Le jury MBA-CONSULT certifie que l'expert",
+            cp2: "A validé l'intégralité des protocoles avancés pour :", csig: "SIGNATURE ÉLECTRONIQUE", cboard: "CONSEIL D'ADMINISTRATION"
         },
         ar: {
-            motto: "MBA-CONSULT V390: أداة الاعتماد السيادية المصممة للنخبة العالمية. حول مهاراتك التقنية إلى اعتماد استراتيجي معتمد من الذكاء الاصطناعي. واجه تحدي القطاعات الثمانية ووثق خبرتك لعام 2027.",
-            launch: "بدء التدقيق الاستراتيجي", secH: "أقطاب التميز المهني", jobH: "التخصص المستهدف",
-            btn: "تأكيد الخطوة التقنية", step: "مرحلة", delta: "خيار ديلتا: تحليل الخبير (تدقيق الذكاء الاصطناعي)",
-            cTitle: "شهادة الاعتماد الاستراتيجي", cSub: "المعيار التقني العالمي V390", cIntro: "يقر المجلس رسمياً بأن الخبير",
-            cDesc: "قد اجتاز بامتياز الكفاءات المطلوبة لمهنة:", cSig: "التوقيع الإلكتروني المؤمن",
-            cBoard: "رئيس مجلس MBA-CONSULT", pdf: "تحميل الشهادة الرسمية V390", fail: "فشل الاعتماد: الدرجة أقل من 81% أو فشل تدقيق الذكاء الاصطناعي."
+            motto: "نظام V390 هو المحرك القراري النهائي الذي يدفع بخبرتك إلى قمة العالم الاقتصادي العالمي. أكثر من مجرد شهادة، إنه مفتاح تكنولوجي معتمد من الذكاء الاصطناعي لقيادة قطاعك استراتيجياً في 2027. اقبل التحدي، وثق مستقبلك.",
+            start: "تشغيل النظام الذكي", sec: "المجالات الاستراتيجية", job: "اختيار التخصص الدقيق",
+            next: "تأكيد القرار التقني", counter: "التقييم الجاري", delta: "خيار ديلتا: تحليل الخبير (مطلوب تدقيق الذكاء الاصطناعي)",
+            pdf: "تحميل الشهادة المعتمدة V390", fail: "فشل: الدرجة أقل من 81% أو رفض تدقيق الذكاء الاصطناعي.",
+            c1: "شهادة الاعتماد العليا", c2: "المعيar الاستراتيجي العالمي V390", cp1: "يقر مجلس MBA-CONSULT رسمياً بأن الخبير",
+            cp2: "قد اجتاز جميع البروتوكولات المتقدمة لمهنة:", csig: "التوقيع الإلكتروني المؤمن", cboard: "مجلس الإدارة الأعلى"
         }
     },
-    apply(l) {
-        this.current = l; document.body.className = (l==='ar'?'rtl':'');
-        const d = this.map[l] || this.map['fr'];
-        document.getElementById('motto-box').innerText = d.motto;
-        document.getElementById('launch-btn').innerText = d.launch;
-        document.getElementById('sec-head').innerText = d.secH;
-        document.getElementById('job-head').innerText = d.jobH;
-        document.getElementById('submit-btn').innerText = d.btn;
-        document.getElementById('pdf-trigger').innerText = d.pdf;
-        KmsEngine.renderSectors();
+    set(l) {
+        this.lang = l; document.body.className = (l==='ar'?'rtl':'');
+        const d = this.db[l] || this.db['fr'];
+        document.getElementById('motive-text').innerText = d.motto;
+        document.getElementById('start-btn').innerText = d.start;
+        document.getElementById('sector-title').innerText = d.sec;
+        document.getElementById('job-title').innerText = d.job;
+        document.getElementById('next-btn').innerText = d.next;
+        document.getElementById('pdf-btn').innerText = d.pdf;
+        EngineV390.initSectors();
     }
 };
 
-const SECTOR_DATA = {
-    "Santé": { icon: "fa-vial-circle-check", jobs: ["Architecte Bio-Informatique", "Directeur Innovation Clinique", "Expert Télémédecine 2027", "Data Scientist Oncologie", "Auditeur Cyber-Santé", "Manager de Bio-Banque", "Ingénieur Prothèse Bionique", "Pharmacien Industriel 4.0", "Chef de Projet e-Santé", "Spécialiste IA Radiologique", "Consultant Épidémiologie", "Directeur Opérationnel Hôpital", "Expert Pharmacovigilance", "Généticien de Précision", "Responsable Dispositifs Médicaux"] },
-    "Commerce": { icon: "fa-cart-flatbed-suitcases", jobs: ["Directeur Supply Chain IA", "Expert Retail Omnicanal", "Analyste Pricing Dynamique", "Directeur Expérience Client", "Trade Marketing Manager", "Responsable Logistique Durable", "Category Manager Data", "Directeur Franchise Global", "Consultant E-commerce", "Growth Hacker B2B", "Manager Flux Internationaux", "Chef Achats Responsables", "Analyste BI Commerce", "Expert Blockchain Retail", "Directeur de Réseau Vente"] },
-    "Énergie": { icon: "fa-atom", jobs: ["Ingénieur Fusion Nucléaire", "Architecte Smart Grid", "Expert Hydrogène Vert", "Directeur SMR (Small Modular Reactors)", "Analyste Marché Carbone", "Ingénieur Stockage Énergie", "Consultant Décarbonation", "Expert Photovoltaïque 3.0", "Manager Éolien Offshore", "Auditeur Efficacité Énergétique", "Ingénieur Forage Géothermique", "Responsable HSE Énergie", "Directeur Infrastructures H2", "Analyste Réseaux Haute Tension", "Expert Économie Circulaire Énergie"] },
-    "Agri-Food": { icon: "fa-wheat-awn-circle-check", jobs: ["Ingénieur Agriculture Régénérative", "Directeur Vertical Farming", "Expert FoodTech Protéines", "Manager Agro-écologie", "Auditeur Sécurité Alimentaire", "Directeur R&D Nutrition", "Chef de Culture Précision", "Expert Packaging Bio-sourcé", "Analyste Supply Chain Agri", "Oenologue Conseil Digital", "Microbiologiste Industriel", "Technicien Agronome Senior", "Consultant AgTech 2027", "Directeur Usine Agro-Alimentaire", "Expert Traçabilité Blockchain Agri"] },
-    "Finance": { icon: "fa-money-bill-trend-up", jobs: ["Analyste M&A Quantitatif", "Risk Manager Actuariat", "Trader Algorithmique", "Directeur Financier CFO", "Auditeur Fraude IA", "Expert DeFi & Blockchain", "Trésorier de Groupe", "Analyste ESG Senior", "Conseiller Fiscalité Numérique", "Manager Asset Management"] },
-    "IT & IA": { icon: "fa-microchip", jobs: ["Architecte Solutions LLM", "Ingénieur ML Ops", "Expert Cyber SOC", "Lead Dev Rust/Go", "Data Architect Cloud", "Consultant Transformation IA", "Ingénieur Quantum Computing", "Product Owner GenAI", "Architecte Infrastructure Edge", "Responsable Gouvernance Data"] }
+const SECTORS = {
+    "Éducation": { icon: "fa-user-graduate", jobs: ["Designer d'Apprentissage Neuro-Adaptatif", "Architecte Meta-Campus VR", "Expert EdTech Blockchain", "Directeur de l'Innovation Pédagogique", "Data Scientist de l'Éducation", "Manager d'Université Numérique", "Spécialiste IA Tutorielle", "Consultant en Psychométrie Digitale", "Responsable Curriculum 2027", "Auditeur de Qualité Hybride", "Ingénieur Plateforme LMS", "Expert en Micro-Certifications", "Designer de Serious Games", "Chef de Projet Éducation Inclusive", "Directeur d'Institut de Recherche IA"] },
+    "Tourisme": { icon: "fa-map-location-dot", jobs: ["Directeur d'Expérience Immersive VR", "Expert en Tourisme Spatial", "Manager de Destinations Durables", "Analyste Revenue Management IA", "Architecte d'Hôtellerie Robotisée", "Spécialiste Écotourisme Data", "Chef de Produit Expérientiel", "Directeur Cruise Tech 4.0", "Expert Blockchain Voyage", "Consultant Mobilité Douce", "Directeur Marketing Territorial", "Manager d'Expédition High-Tech", "Auditeur Sécurité Touristique", "Analyste Comportemental Voyageur", "Responsable Patrimoine Numérique"] },
+    "Santé": { icon: "fa-heart-pulse", jobs: ["Architecte Bio-Informatique", "Directeur Innovation Clinique", "Expert Télémédecine 2027", "Data Scientist Oncologie", "Auditeur Cyber-Santé", "Manager Bio-Banque", "Ingénieur Prothèse Bionique", "Pharmacien Industriel 4.0", "Chef de Projet e-Santé", "Spécialiste IA Radiologique", "Consultant Épidémiologie", "Directeur Opérationnel Hôpital", "Expert Pharmacovigilance", "Généticien de Précision", "Responsable Dispositifs Médicaux"] },
+    "Commerce": { icon: "fa-cart-shopping", jobs: ["Directeur Supply Chain IA", "Expert Retail Omnicanal", "Analyste Pricing Dynamique", "Directeur Expérience Client", "Trade Marketing Manager", "Responsable Logistique Durable", "Category Manager Data", "Directeur Franchise Global", "Consultant E-commerce", "Growth Hacker B2B", "Manager Flux Internationaux", "Chef Achats Responsables", "Analyste BI Commerce", "Expert Blockchain Retail", "Directeur de Réseau Vente"] },
+    "Énergie": { icon: "fa-bolt", jobs: ["Ingénieur Fusion Nucléaire", "Architecte Smart Grid", "Expert Hydrogène Vert", "Directeur SMR", "Analyste Marché Carbone", "Ingénieur Stockage Énergie", "Consultant Décarbonation", "Expert Photovoltaïque 3.0", "Manager Éolien Offshore", "Auditeur Efficacité Énergétique", "Ingénieur Forage Géothermique", "Responsable HSE Énergie", "Directeur Infrastructures H2", "Analyste Réseaux Haute Tension", "Expert Économie Circulaire"] }
 };
 
-const SCRAPED_QUESTIONS = {
-    "Énergie": [
-        { q: "Comment l'IA de bord (Edge) optimise-t-elle la stabilité des micro-grids face à l'intermittence renouvelable ?", a: ["Alpha: Équilibrage de charge par prédiction neurale temps-réel (+10)", "Beta: Stockage massif sur batteries stationnaires (+7)", "Gamma: Délestage sélectif manuel des charges non prioritaires (+4)"] },
-        { q: "Quel est le verrou technologique majeur pour le déploiement des réacteurs SMR en 2027 ?", a: ["Alpha: Standardisation de la fabrication modulaire en usine (+10)", "Beta: Gestion thermique des cœurs haute densité (+7)", "Gamma: Recyclage intégral des combustibles usagés (+4)"] }
+const QUESTIONS_2027 = {
+    "Éducation": [
+        { q: "Comment coupler l'interface Cerveau-Machine (BCI) aux parcours LMS pour optimiser la rétention ?", a: ["Alpha: Ajustement de la charge cognitive en temps réel via EEG (+10)", "Beta: Utilisation de pauses subliminales auditives (+7)", "Gamma: Segmentation des modules par paliers de 15 min (+4)"] },
+        { q: "Quel protocole pour sécuriser les micro-certifications via NFT ?", a: ["Alpha: Smart Contract avec preuve d'apprentissage immuable (+10)", "Beta: QR codes dynamiques sur serveurs centralisés (+7)", "Gamma: Hachage des certificats PDF standards (+4)"] }
     ],
-    "Agri-Food": [
-        { q: "Optimisation du microbiote des sols : quel vecteur pour l'agriculture régénérative ?", a: ["Alpha: Bio-inoculants ciblés par analyse métagénomique (+10)", "Beta: Épandage massif de compost enrichi (+7)", "Gamma: Rotation triennale classique des cultures (+4)"] },
-        { q: "Architecture Vertical Farming : comment réduire l'OPEX énergétique de 40% ?", a: ["Alpha: Spectroscopie LED dynamique asservie à la croissance (+10)", "Beta: Isolation thermique par matériaux à changement de phase (+7)", "Gamma: Recouvrement par panneaux solaires en toiture (+4)"] }
+    "Tourisme": [
+        { q: "Hyper-personnalisation : comment prédire l'envie de voyage avant l'acte d'achat ?", a: ["Alpha: Analyse sémantique des interactions VR et biométriques (+10)", "Beta: Retargeting basé sur l'historique de recherche (+7)", "Gamma: Campagnes d'influence segmentées par âge (+4)"] },
+        { q: "Gestion de crise : Quel rôle pour les jumeaux numériques de destinations ?", a: ["Alpha: Simulation de flux en temps réel pour éviter le sur-tourisme (+10)", "Beta: Cartographie HD pour les guides touristiques (+7)", "Gamma: Préservation virtuelle des sites en cas de séisme (+4)"] }
     ]
 };
 
-const KmsEngine = {
-    pts: 0, step: 0, sector: "", job: "", deltaWins: 0, currentTemp: 0,
-    renderSectors() {
+const EngineV390 = {
+    score: 0, step: 0, sector: "", job: "", deltas: 0,
+    initSectors() {
         const g = document.getElementById('sector-grid'); g.innerHTML = "";
-        Object.keys(SECTOR_DATA).forEach(s => {
-            g.innerHTML += `<div class="card" onclick="KmsEngine.pickSec('${s}')" style="background:white; padding:35px; border-radius:15px; text-align:center; cursor:pointer; border:1px solid #eee; transition:0.3s;"><i class="fas ${SECTOR_DATA[s].icon}" style="font-size:3.5em; color:var(--gold);"></i><h3 style="margin-top:20px;">${s}</h3></div>`;
+        Object.keys(SECTORS).forEach(s => {
+            g.innerHTML += `<div class="opt-v390" onclick="EngineV390.setSec('${s}')" style="text-align:center;"><i class="fas ${SECTORS[s].icon}" style="font-size:2em; color:var(--gold);"></i><br>${s}</div>`;
         });
     },
-    pickSec(s) {
-        this.sector = s; document.getElementById('sector-view').style.display='none';
-        document.getElementById('job-view').style.display='block';
+    setSec(s) {
+        this.sector = s; document.getElementById('sector-screen').style.display='none';
+        document.getElementById('job-screen').style.display='block';
         const g = document.getElementById('job-grid'); g.innerHTML = "";
-        SECTOR_DATA[s].jobs.forEach(j => g.innerHTML += `<div onclick="KmsEngine.startAudit('${j}')" style="background:white; padding:18px; border-radius:8px; border:1px solid #ddd; cursor:pointer; font-weight:bold; transition:0.2s;">${j}</div>`);
+        SECTORS[s].jobs.forEach(j => g.innerHTML += `<div class="opt-v390" onclick="EngineV390.startAudit('${j}')">${j}</div>`);
     },
     startAudit(j) {
-        this.job = j; document.getElementById('job-view').style.display='none';
-        document.getElementById('audit-engine').style.display='block';
-        document.getElementById('job-badge').innerText = j; this.drawQ();
+        this.job = j; document.getElementById('job-screen').style.display='none';
+        document.getElementById('audit-ui').style.display='block';
+        document.getElementById('q-job-badge').innerText = j; this.showQ();
     },
-    drawQ() {
-        if(this.step >= 5) { this.finalize(); return; }
-        const d = KmsTranslator.map[KmsTranslator.current];
-        document.getElementById('step-indicator').innerText = `${d.step} ${this.step+1}/5`;
-        const qBank = SCRAPED_QUESTIONS[this.sector] || [{q:`Analyse stratégique ${this.sector} 2027`, a:["Alpha (+10)","Beta (+7)","Gamma (+4)"]}];
+    showQ() {
+        if(this.step >= 5) { this.finish(); return; }
+        const d = AgentTranslator.db[AgentTranslator.lang];
+        document.getElementById('q-counter').innerText = `${d.counter} ${this.step+1}/5`;
+        const qBank = QUESTIONS_2027[this.sector] || [{q:`Audit Technologique ${this.sector} 2027`, a:["Alpha (+10)","Beta (+7)","Gamma (+4)"]}];
         const qData = qBank[this.step % qBank.length];
-        document.getElementById('question-text').innerText = qData.q;
-        const optBox = document.getElementById('options-v390'); optBox.innerHTML = "";
-        qData.a.forEach((o, i) => optBox.innerHTML += `<button class="q-option" onclick="KmsEngine.selectOpt(this, ${[10,7,4][i]})">${o}</button>`);
-        optBox.innerHTML += `<button class="q-option" onclick="KmsEngine.toggleDelta(this)">${d.delta}</button>`;
-        document.getElementById('delta-expert-input').style.display = 'none';
+        document.getElementById('q-main-text').innerText = qData.q;
+        const cont = document.getElementById('q-options'); cont.innerHTML = "";
+        qData.a.forEach((o, i) => cont.innerHTML += `<button class="opt-v390" onclick="EngineV390.pick(this, ${[10,7,4][i]})">${o}</button>`);
+        cont.innerHTML += `<button class="opt-v390" onclick="EngineV390.pickDelta(this)">${d.delta}</button>`;
+        document.getElementById('expert-input').style.display = 'none';
     },
-    selectOpt(btn, p) {
-        document.querySelectorAll('.q-option').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected'); this.currentTemp = p; this.isDelta = false;
-        document.getElementById('delta-expert-input').style.display = 'none';
+    pick(btn, p) {
+        document.querySelectorAll('.opt-v390').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected'); this.temp = p; this.isDelta = false;
     },
-    toggleDelta(btn) {
-        document.querySelectorAll('.q-option').forEach(b => b.classList.remove('selected'));
+    pickDelta(btn) {
+        document.querySelectorAll('.opt-v390').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected'); this.isDelta = true;
-        document.getElementById('delta-expert-input').style.display = 'block';
+        document.getElementById('expert-input').style.display = 'block';
     },
-    validateStep() {
+    next() {
         if(this.isDelta) {
-            const val = document.getElementById('delta-expert-input').value;
-            if(val.length > 60) { this.currentTemp = 12; this.deltaWins++; } else { this.currentTemp = 3; }
-            document.getElementById('delta-expert-input').value = "";
+            if(document.getElementById('expert-input').value.length > 50) { this.temp = 12; this.deltas++; } else { this.temp = 2; }
+            document.getElementById('expert-input').value = "";
         }
-        if(this.currentTemp) { this.pts += this.currentTemp; this.step++; this.currentTemp = 0; this.drawQ(); }
+        if(this.temp) { this.score += this.temp; this.step++; this.temp = 0; this.showQ(); }
     },
-    finalize() {
-        const score = Math.round((this.pts/50)*100);
-        const d = KmsTranslator.map[KmsTranslator.current];
-        if(score <= 80 || this.deltaWins < 3) { alert(d.fail); location.reload(); return; }
-
-        document.getElementById('audit-engine').style.display = 'none';
-        const name = prompt("FULL NAME / الاسم الكامل") || "EXPERT";
-        document.getElementById('result-view').style.display = 'block';
-        document.getElementById('c-title').innerText = d.cTitle;
-        document.getElementById('c-subtitle').innerText = d.cSub;
-        document.getElementById('c-intro').innerText = d.cIntro;
-        document.getElementById('c-expert-name').innerText = name.toUpperCase();
-        document.getElementById('c-desc').innerText = d.cDesc;
-        document.getElementById('c-final-job').innerText = this.job;
-        document.getElementById('final-score-tag').innerText = score + "%";
-        document.getElementById('sig-expert-val').innerText = name;
-        document.getElementById('sig-label-expert').innerText = d.cSig;
-        document.getElementById('sig-board-val').innerText = d.cBoard;
-        document.getElementById('final-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=MBA-V390-SECURE-${score}-${name}`;
+    finish() {
+        const total = Math.round((this.score/50)*100);
+        const d = AgentTranslator.db[AgentTranslator.lang];
+        if(total <= 80 || this.deltas < 3) { alert(d.fail); location.reload(); return; }
+        
+        document.getElementById('audit-ui').style.display = 'none';
+        const name = prompt("NOM COMPLET / الاسم بالكامل").toUpperCase();
+        document.getElementById('cert-view').style.display = 'block';
+        document.getElementById('c-h1').innerText = d.c1;
+        document.getElementById('c-h2').innerText = d.c2;
+        document.getElementById('c-p1').innerText = d.cp1;
+        document.getElementById('c-user').innerText = name;
+        document.getElementById('c-p2').innerText = d.cp2;
+        document.getElementById('c-job').innerText = this.job;
+        document.getElementById('pdf-score').innerText = total + "%";
+        document.getElementById('pdf-sig-name').innerText = name;
+        document.getElementById('c-sig-label').innerText = d.csig;
+        document.getElementById('c-board').innerText = d.cboard;
+        document.getElementById('pdf-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=V390-OK-${total}-${name}`;
     },
-    generatePDF() {
-        const opt = { margin: 0, filename: 'MBA-V390-FINAL.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'px', format: [1120, 790], orientation: 'landscape' } };
+    downloadPDF() {
+        const opt = { margin: 0, filename: 'KMS-V390-CERT.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'px', format: [1120, 790], orientation: 'landscape' } };
         html2pdf().set(opt).from(document.getElementById('cert-canvas')).save();
     }
 };
 
-KmsTranslator.apply('fr');
+AgentTranslator.set('fr');
 </script>
 </body>
 </html>
