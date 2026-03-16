@@ -12,6 +12,10 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--white); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
         
+        /* LOGO SCELLÉ CSS */
+        .omni-logo { width: 45px; height: 45px; filter: drop-shadow(0 0 5px rgba(212,175,55,0.4)); }
+        .logo-cert { width: 120px; height: 120px; position: absolute; top: 60px; left: 80px; }
+
         /* FULLSCREEN MOBILE INTERFACE */
         #nav-header { height: 70px; background: rgba(1,4,10,0.98); border-bottom: 1px solid var(--gold); display: flex; align-items: center; justify-content: space-between; padding: 0 15px; z-index: 1000; flex-shrink: 0; }
         .btn-nav { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 15px; cursor: pointer; border-radius: 4px; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
@@ -33,18 +37,36 @@
 
         /* CERTIFICAT GÉOMÉTRIE (SCELLÉ) */
         #cert-container { width: 1122px; height: 793px; background: #FFF; color: #000; position: relative; border: 35px double var(--gold); display: none; box-sizing: border-box; }
-        #pdf-qr { position: absolute; top: 5mm; right: 5mm; width: 140px; height: 140px; background: #FFF; padding: 5px; border: 1px solid #000; }
+        #pdf-qr { position: absolute; top: 15mm; right: 15mm; width: 140px; height: 140px; background: #FFF; padding: 5px; border: 1px solid #000; }
         #pdf-sig { position: absolute; bottom: 25mm; left: 50%; transform: translateX(-50%); width: 600px; text-align: center; border-top: 2px solid #000; padding-top: 15px; font-weight: bold; font-size: 1.4rem; font-family: serif; }
-        .pdf-inner { padding: 100px 80px; text-align: center; }
+        .pdf-inner { padding: 120px 80px 80px 80px; text-align: center; }
 
         @media (max-width: 600px) { h1 { font-size: 1.8rem !important; } .grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body>
 
+<svg id="svg-logo-source" style="display:none" viewBox="0 0 100 100">
+    <defs>
+        <linearGradient id="gradMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#FBF5B7;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#AA8A2E;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    <path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="none" stroke="url(#gradMetal)" stroke-width="3"/>
+    <circle cx="50" cy="50" r="12" fill="url(#gradMetal)"/>
+    <ellipse cx="50" cy="50" rx="30" ry="10" fill="none" stroke="url(#gradMetal)" stroke-width="1.5" transform="rotate(45 50 50)"/>
+    <ellipse cx="50" cy="50" rx="30" ry="10" fill="none" stroke="url(#gradMetal)" stroke-width="1.5" transform="rotate(-45 50 50)"/>
+    <path d="M50 20 L50 80 M20 50 L80 50" stroke="url(#gradMetal)" stroke-width="1" stroke-dasharray="2,2"/>
+</svg>
+
 <header id="nav-header">
     <button class="btn-nav" onclick="KMS.back()"><i class="fas fa-chevron-left"></i></button>
-    <div style="color:var(--gold); font-weight:900; letter-spacing:2px; font-size:0.8rem;">V390 TITANIUM</div>
+    <div style="color:var(--gold); font-weight:900; letter-spacing:2px; font-size:0.8rem; display:flex; align-items:center; gap:10px;">
+        V390 TITANIUM 
+        <svg class="omni-logo"><use href="#svg-logo-source"/></svg>
+    </div>
     <div id="lang-switch">
         <button class="btn-nav" onclick="KMS.setLang('fr')">FR</button>
         <button class="btn-nav" onclick="KMS.setLang('en')">EN</button>
@@ -94,6 +116,7 @@
     <button id="btn-dl" class="btn-nav" style="display:none; padding:25px;" onclick="KMS.exportPDF()" data-key="btn_download"></button>
 
     <div id="cert-container">
+        <svg class="logo-cert"><use href="#svg-logo-source"/></svg>
         <div id="pdf-qr"></div>
         <div class="pdf-inner">
             <h1 style="font-size:55px; font-family:serif; letter-spacing:2px;">CERTIFICATE OF EXPERTISE</h1>
@@ -101,7 +124,7 @@
             <h2 id="pdf-name" style="font-size:52px; border-bottom:5px solid #D4AF37; display:inline-block; padding:0 50px;"></h2>
             <p style="font-size:28px; margin-top:50px;" data-key="pdf_rank"></p>
             <h3 id="pdf-job" style="font-size:45px; color:#D4AF37; margin-top:10px;"></h3>
-            <div style="margin-top:120px; display:flex; justify-content:space-around; font-size:22px; font-weight:bold; color:#555;">
+            <div style="margin-top:100px; display:flex; justify-content:space-around; font-size:22px; font-weight:bold; color:#555;">
                 <span id="pdf-id"></span>
                 <span id="pdf-date"></span>
                 <span id="pdf-final-score"></span>
@@ -112,7 +135,7 @@
 </div>
 
 <script>
-/** * BASE DE DONNÉES INTÉGRALE V390 - 600 QUESTIONS SIMULÉES (STRUCTURE FUSIONNÉE)
+/** * BASE DE DONNÉES INTÉGRALE V390
  */
 const DATA = {
     sectors: {
@@ -229,7 +252,6 @@ const KMS = {
         document.getElementById('delta-input').value = this.responses[this.step]?.txt || '';
     },
 
-    // SCORING SÉMANTIQUE IA - COMPARAISON DES VECTEURS
     semanticScore(txt, key) {
         if(!txt || txt.length < 25) return 0;
         let hits = 0;
@@ -243,17 +265,14 @@ const KMS = {
         const q = this.questions[this.step];
         const txt = document.getElementById('delta-input').value;
         let pts = (this.tempIdx === q.correct) ? 20 : 0;
-
         if(this.tempIdx === 3) {
             const match = this.semanticScore(txt, q.key);
             pts = (match / 100) * 20;
             if(match >= 50) this.deltaValid++;
         }
-
         this.responses[this.step] = { idx: this.tempIdx ?? this.responses[this.step].idx, txt: txt, score: pts };
         this.score = Math.round(this.responses.reduce((a,b) => a + b.score, 0));
         document.getElementById('audit-score-realtime').innerText = `${DICT[this.lang].score_label} : ${this.score}%`;
-
         if(this.step < 4) { this.step++; this.tempIdx = undefined; this.loadQ(); }
         else { this.finish(); }
     },
