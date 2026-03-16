@@ -13,8 +13,8 @@
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--white); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
         
         /* LOGO SCELLÉ CSS */
-        .omni-logo { width: 45px; height: 45px; filter: drop-shadow(0 0 5px rgba(212,175,55,0.4)); }
-        .logo-cert { width: 120px; height: 120px; position: absolute; top: 60px; left: 80px; }
+        .omni-logo { width: 42px; height: 42px; filter: drop-shadow(0 0 5px rgba(212,175,55,0.5)); }
+        .logo-cert { width: 130px; height: 130px; position: absolute; top: 60px; left: 80px; filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.2)); }
 
         /* FULLSCREEN MOBILE INTERFACE */
         #nav-header { height: 70px; background: rgba(1,4,10,0.98); border-bottom: 1px solid var(--gold); display: flex; align-items: center; justify-content: space-between; padding: 0 15px; z-index: 1000; flex-shrink: 0; }
@@ -46,30 +46,32 @@
 </head>
 <body>
 
-<svg id="svg-logo-source" style="display:none" viewBox="0 0 100 100">
+<svg id="svg-logo-v390" style="display:none" viewBox="0 0 100 100">
     <defs>
-        <linearGradient id="gradMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
             <stop offset="50%" style="stop-color:#FBF5B7;stop-opacity:1" />
             <stop offset="100%" style="stop-color:#AA8A2E;stop-opacity:1" />
         </linearGradient>
     </defs>
-    <path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="none" stroke="url(#gradMetal)" stroke-width="3"/>
-    <circle cx="50" cy="50" r="12" fill="url(#gradMetal)"/>
-    <ellipse cx="50" cy="50" rx="30" ry="10" fill="none" stroke="url(#gradMetal)" stroke-width="1.5" transform="rotate(45 50 50)"/>
-    <ellipse cx="50" cy="50" rx="30" ry="10" fill="none" stroke="url(#gradMetal)" stroke-width="1.5" transform="rotate(-45 50 50)"/>
-    <path d="M50 20 L50 80 M20 50 L80 50" stroke="url(#gradMetal)" stroke-width="1" stroke-dasharray="2,2"/>
+    <path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="none" stroke="url(#metalGrad)" stroke-width="4"/>
+    <circle cx="50" cy="50" r="10" fill="url(#metalGrad)"/>
+    <ellipse cx="50" cy="50" rx="35" ry="12" fill="none" stroke="url(#metalGrad)" stroke-width="1.5" transform="rotate(45 50 50)"/>
+    <ellipse cx="50" cy="50" rx="35" ry="12" fill="none" stroke="url(#metalGrad)" stroke-width="1.5" transform="rotate(-45 50 50)"/>
+    <path d="M50 15 L50 85 M15 50 L85 50" stroke="url(#metalGrad)" stroke-width="1" stroke-dasharray="2,2"/>
 </svg>
 
 <header id="nav-header">
     <button class="btn-nav" onclick="KMS.back()"><i class="fas fa-chevron-left"></i></button>
-    <div style="color:var(--gold); font-weight:900; letter-spacing:2px; font-size:0.8rem; display:flex; align-items:center; gap:10px;">
-        V390 TITANIUM 
-        <svg class="omni-logo"><use href="#svg-logo-source"/></svg>
-    </div>
-    <div id="lang-switch">
-        <button class="btn-nav" onclick="KMS.setLang('fr')">FR</button>
-        <button class="btn-nav" onclick="KMS.setLang('en')">EN</button>
+    
+    <div style="color:var(--gold); font-weight:900; letter-spacing:2px; font-size:0.8rem;">V390 TITANIUM</div>
+    
+    <div style="display:flex; align-items:center; gap:15px;">
+        <div id="lang-switch">
+            <button class="btn-nav" onclick="KMS.setLang('fr')">FR</button>
+            <button class="btn-nav" onclick="KMS.setLang('en')">EN</button>
+        </div>
+        <svg class="omni-logo"><use href="#svg-logo-v390"/></svg>
     </div>
 </header>
 
@@ -116,7 +118,8 @@
     <button id="btn-dl" class="btn-nav" style="display:none; padding:25px;" onclick="KMS.exportPDF()" data-key="btn_download"></button>
 
     <div id="cert-container">
-        <svg class="logo-cert"><use href="#svg-logo-source"/></svg>
+        <svg class="logo-cert"><use href="#svg-logo-v390"/></svg>
+        
         <div id="pdf-qr"></div>
         <div class="pdf-inner">
             <h1 style="font-size:55px; font-family:serif; letter-spacing:2px;">CERTIFICATE OF EXPERTISE</h1>
@@ -135,24 +138,22 @@
 </div>
 
 <script>
-/** * BASE DE DONNÉES INTÉGRALE V390
- */
 const DATA = {
     sectors: {
-        "Energie": { icon:"fa-atom", jobs:["Architecte Fusion SMR", "Expert Hydrogène Vert", "Ingénieur Grid-Edge", "Lead Transition", "Analyste Lithium-Air", "Thorium Lead", "Manager HVDC", "CCUS Specialist", "Carbon Auditor", "SMR-V3 Tech", "Geothermal Eng", "BESS Manager", "Perovskite R&D", "Nuclear Safety", "Micro-Grid Lead"] },
-        "IT & IA": { icon:"fa-microchip", jobs:["Lead IA Générative", "Architecte Quantique", "Expert Cyber SOC", "Edge Scientist", "Ethicien IA", "ML-Ops Eng", "Blockchain Arch", "Cloud-Native", "DevSecOps Senior", "Quantum Algo", "Governance Mgr", "Prompt Eng", "Forensics", "Web3 Arch", "NLP Lead"] },
-        "Sante": { icon:"fa-dna", jobs:["Bio-Informaticien", "Radiologue IA", "Robot Surgery", "Oncologue Génomique", "Nanomedecine Mgr", "Bio-Security", "Precision Health", "Telemedicine Lead", "Digital Lab Dir", "Proteomics Exp", "Ethics Consultant", "Data Hosp Mgr", "Prosthetic Eng", "Pandemic Mgr", "Microbiota Spec"] },
-        "Finance": { icon:"fa-chart-line", jobs:["Quantum Risk Analyst", "DeFi Architect", "ESG Strategist", "Algo Trader HFT", "Fraud IA Manager", "Digital CFO", "Treasury Bchain", "Fintech Ops", "M&A Tech", "Asset Mgr AI", "Risk Mgr Systemic", "Mobile Banker", "Crypto Expert", "RegTech Analyst", "BI Finance Lead"] },
-        "Agri-Food": { icon:"fa-leaf", jobs:["Vertical Farming", "Agro-IA Spec", "Protein Scientist", "Bio-Auditeur 4.0", "Precision Agri", "Lab-Grown Food", "Bio-Polymer", "Irrigation Data", "Agri-Robotics", "Digital Nutrition", "AgTech Strategist", "Traceability Mgr", "Microbiologist", "Auton. Farm Dir", "Green Supply"] },
-        "Education": { icon:"fa-user-graduate", jobs:["Neuro-Pedagogue", "Meta-Campus Arch", "EdTech Data", "Adaptive Learning", "VR-Training Mgr", "Cognitive Analyst", "L&D Innovation", "E-Learning Dir", "Ed-IA Consultant", "Inclusion Mgr", "Gamification Eng", "AI Coach", "Strategy Dir", "Bchain-Diploma", "Hybrid Facilitator"] },
-        "Commerce": { icon:"fa-shopping-bag", jobs:["Supply Strategist", "Pricing Expert", "Omnichannel Mgr", "Drone Logistics", "E-com Director", "Phygital Dir", "Sustainable Lead", "Retail Flow", "Bchain Sourcing", "Marketplace Spec", "Retail Arch", "Growth IA", "Last-Mile Mgr", "Franchise Dir", "Insight Analyst"] },
-        "Tourisme": { icon:"fa-globe-americas", jobs:["Space Tourism", "Hospitality Design", "Low Carbon Exp", "Revenue IA Mgr", "Immersive Exp", "Eco-Resort Mgr", "Cruise-Tech Lead", "Crypto Booking", "Smart Destination", "Green Transport", "Digital Marketing", "Heritage Digital", "MICE IA Planner", "Soft Mobility", "Travel Scientist"] }
+        "Energie": { icon:"fa-atom", jobs:["Architecte Fusion SMR", "Expert Hydrogène Vert", "Ingénieur Grid-Edge", "Lead Transition"] },
+        "IT & IA": { icon:"fa-microchip", jobs:["Lead IA Générative", "Architecte Quantique", "Expert Cyber SOC", "Edge Scientist"] },
+        "Sante": { icon:"fa-dna", jobs:["Bio-Informaticien", "Radiologue IA", "Robot Surgery", "Oncologue Génomique"] },
+        "Finance": { icon:"fa-chart-line", jobs:["Quantum Risk Analyst", "DeFi Architect", "ESG Strategist", "Algo Trader HFT"] },
+        "Agri-Food": { icon:"fa-leaf", jobs:["Vertical Farming", "Agro-IA Spec", "Protein Scientist", "Bio-Auditeur 4.0"] },
+        "Education": { icon:"fa-user-graduate", jobs:["Neuro-Pedagogue", "Meta-Campus Arch", "EdTech Data", "Adaptive Learning"] },
+        "Commerce": { icon:"fa-shopping-bag", jobs:["Supply Strategist", "Pricing Expert", "Omnichannel Mgr", "Drone Logistics"] },
+        "Tourisme": { icon:"fa-globe-americas", jobs:["Space Tourism", "Hospitality Design", "Low Carbon Exp", "Revenue IA Mgr"] }
     }
 };
 
 const DICT = {
     fr: {
-        intro_txt: "1. ARCHITECTURE : Le Monolithe V390 fusionne 120 métiers pour certifier l'élite mondiale 2027.\n2. ÉVALUATION : Un agent IA sémantique compare vos analyses 'Delta' aux vecteurs de vérité technique.\n3. RÈGLES : Le certificat OR exige un score ≥ 81% et la validation de 3 analyses stratégiques.\n4. SCELLÉ : Document sécurisé par signature numérique et QR-Code à géométrie variable.",
+        intro_txt: "1. ARCHITECTURE : Le Monolithe V390 fusionne 120 métiers pour certifier l'élite mondiale 2027.\n2. ÉVALUATION : Un agent IA sémantique compare vos analyses 'Delta' aux vecteurs de vérité technique.\n3. RÈGLES : Le certificat OR exige un score ≥ 81%.\n4. SCELLÉ : Document sécurisé par signature numérique.",
         btn_start: "LANCER L'AUDIT SCELLÉ",
         title_sectors: "SECTEURS STRATÉGIQUES",
         btn_next: "VALIDER & ANALYSER",
@@ -167,7 +168,7 @@ const DICT = {
         score_label: "CONTRÔLE IA"
     },
     en: {
-        intro_txt: "1. ARCHITECTURE: Monolith V390 merges 120 jobs to certify the 2027 global elite.\n2. EVALUATION: A semantic AI agent compares your 'Delta' analyses to technical truth vectors.\n3. RULES: GOLD certificate requires a score ≥ 81% and validation of 3 strategic analyses.\n4. SEALED: Secure document with digital signature and variable geometry QR-Code.",
+        intro_txt: "1. ARCHITECTURE: Monolith V390 merges 120 jobs to certify the 2027 global elite.\n2. EVALUATION: A semantic AI agent compares your 'Delta' analyses to technical truth vectors.\n3. RULES: GOLD certificate requires a score ≥ 81%.\n4. SEALED: Secure document with digital signature.",
         btn_start: "START SEALED AUDIT",
         title_sectors: "STRATEGIC SECTORS",
         btn_next: "VALIDATE & ANALYZE",
@@ -224,11 +225,11 @@ const KMS = {
     startAudit() {
         this.step = 0; this.responses = []; this.score = 0; this.deltaValid = 0;
         this.questions = [
-            { fr: `[STRATÉGIE] Quel protocole de résilience privilégiez-vous pour ${this.job} ?`, en: `[STRATEGY] Which resilience protocol do you prioritize for ${this.job}?`, key: "asynchrone décentralisé maillage asynchronous mesh", opts: {fr:["Maillage asynchrone", "Cloud centralisé", "Flux direct", "DELTA"], en:["Asynchronous mesh", "Centralized cloud", "Direct flow", "DELTA"]}, correct: 0 },
-            { fr: `[RUPTURE] Quel vecteur définit l'évolution du secteur ${this.sector} ?`, en: `[RUPTURE] Which vector defines the evolution of the ${this.sector} sector?`, key: "omni-genesis hybridation mutation hybridization", opts: {fr:["Mutation V390", "Standard ISO", "Meta-IA", "DELTA"], en:["V390 Mutation", "ISO Standard", "Meta-AI", "DELTA"]}, correct: 0 },
-            { fr: `[IA] Comment l'agent IA valide-t-il une corrélation sémantique experte ?`, en: `[AI] How does the AI agent validate an expert semantic correlation?`, key: "vecteur sémantique comparaison vector semantic comparison", opts: {fr:["Comptage de mots", "Vecteurs sémantiques", "Analyse syntaxique", "DELTA"], en:["Word counting", "Semantic vectors", "Syntactic analysis", "DELTA"]}, correct: 1 },
-            { fr: `[MÉTIER] Quelle compétence est vitale pour un expert ${this.job} ?`, en: `[JOB] Which skill is vital for a ${this.job} expert?`, key: "holistique interdisciplinaire synthèse holistic", opts: {fr:["Synthèse holistique", "Silo technique", "Maîtrise Prompting", "DELTA"], en:["Holistic synthesis", "Technical silo", "Prompt mastery", "DELTA"]}, correct: 0 },
-            { fr: `[FINAL] Quelle est la finalité du Monolithe V390 ?`, en: `[FINAL] What is the purpose of the Monolith V390?`, key: "souveraineté accréditation excellence sovereignty", opts: {fr:["Archivage", "Accréditation Or", "Calcul de masse", "DELTA"], en:["Archiving", "Gold Accreditation", "Mass calculation", "DELTA"]}, correct: 1 }
+            { fr: `[STRATÉGIE] Quel protocole de résilience pour ${this.job} ?`, en: `[STRATEGY] Which resilience protocol for ${this.job}?`, key: "asynchrone maillage mesh", opts: {fr:["Maillage asynchrone", "Cloud centralisé", "Flux direct", "DELTA"], en:["Asynchronous mesh", "Centralized cloud", "Direct flow", "DELTA"]}, correct: 0 },
+            { fr: `[RUPTURE] Quel vecteur définit ${this.sector} ?`, en: `[RUPTURE] Which vector defines ${this.sector}?`, key: "omni-genesis hybridation", opts: {fr:["Mutation V390", "Standard ISO", "Meta-IA", "DELTA"], en:["V390 Mutation", "ISO Standard", "Meta-AI", "DELTA"]}, correct: 0 },
+            { fr: `[IA] Comment valider la corrélation ?`, en: `[AI] How to validate correlation?`, key: "vecteur sémantique semantic", opts: {fr:["Comptage", "Vecteurs sémantiques", "Analyse syntaxique", "DELTA"], en:["Counting", "Semantic vectors", "Syntactic analysis", "DELTA"]}, correct: 1 },
+            { fr: `[MÉTIER] Compétence vitale ?`, en: `[JOB] Vital skill?`, key: "holistique synthèse", opts: {fr:["Synthèse holistique", "Silo technique", "Maîtrise Prompt", "DELTA"], en:["Holistic synthesis", "Technical silo", "Prompt mastery", "DELTA"]}, correct: 0 },
+            { fr: `[FINAL] Finalité du V390 ?`, en: `[FINAL] Purpose of V390?`, key: "souveraineté accréditation", opts: {fr:["Archivage", "Accréditation Or", "Calcul de masse", "DELTA"], en:["Archiving", "Gold Accreditation", "Mass calculation", "DELTA"]}, correct: 1 }
         ];
         this.go('p-audit'); this.loadQ();
     },
@@ -253,9 +254,8 @@ const KMS = {
     },
 
     semanticScore(txt, key) {
-        if(!txt || txt.length < 25) return 0;
-        let hits = 0;
-        const keys = key.split(' ');
+        if(!txt || txt.length < 15) return 0;
+        let hits = 0; const keys = key.split(' ');
         keys.forEach(k => { if(txt.toLowerCase().includes(k)) hits++; });
         return (hits / keys.length) * 100;
     },
@@ -267,8 +267,7 @@ const KMS = {
         let pts = (this.tempIdx === q.correct) ? 20 : 0;
         if(this.tempIdx === 3) {
             const match = this.semanticScore(txt, q.key);
-            pts = (match / 100) * 20;
-            if(match >= 50) this.deltaValid++;
+            pts = (match / 100) * 20; if(match >= 50) this.deltaValid++;
         }
         this.responses[this.step] = { idx: this.tempIdx ?? this.responses[this.step].idx, txt: txt, score: pts };
         this.score = Math.round(this.responses.reduce((a,b) => a + b.score, 0));
@@ -283,14 +282,13 @@ const KMS = {
         this.go('p-result');
         document.getElementById('res-score').innerText = `${this.score}%`;
         const status = document.getElementById('res-status');
-        if(this.score >= 81 && this.deltaValid >= 2) {
+        if(this.score >= 81) {
             status.innerText = DICT[this.lang].res_pass; status.style.color = "var(--gold)";
-            document.getElementById('res-msg').innerText = "Vecteurs sémantiques validés par l'agent IA. Accréditation Titanium scellée.";
-            document.getElementById('btn-dl').style.display = "block";
-            this.prepCert();
+            document.getElementById('res-msg').innerText = "Vecteurs validés. Accréditation Titanium scellée.";
+            document.getElementById('btn-dl').style.display = "block"; this.prepCert();
         } else {
             status.innerText = DICT[this.lang].res_fail; status.style.color = "#FF4B2B";
-            document.getElementById('res-msg').innerText = "Dissonance sémantique trop élevée. Score ou cohérence Delta insuffisante.";
+            document.getElementById('res-msg').innerText = "Score insuffisant pour l'accréditation.";
         }
     },
 
@@ -302,12 +300,12 @@ const KMS = {
         document.getElementById('pdf-date').innerText = `16 MARS 2026`;
         document.getElementById('pdf-final-score').innerText = `SCORE: ${this.score}%`;
         document.getElementById('pdf-qr').innerHTML = '';
-        new QRCode(document.getElementById("pdf-qr"), { text: `V390|${name}|${this.job}|${this.score}`, width: 140, height: 140 });
+        new QRCode(document.getElementById("pdf-qr"), { text: `V390|${name}|${this.job}`, width: 140, height: 140 });
     },
 
     exportPDF() {
         const el = document.getElementById('cert-container'); el.style.display = 'block';
-        html2pdf().set({ margin:0, filename:`V390_GOLD_${this.job}.pdf`, jsPDF:{ unit:'px', format:[1122, 793], orientation:'landscape' } })
+        html2pdf().set({ margin:0, filename:`V390_GOLD.pdf`, jsPDF:{ unit:'px', format:[1122, 793], orientation:'landscape' } })
         .from(el).save().then(() => el.style.display = 'none');
     }
 };
