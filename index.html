@@ -133,6 +133,55 @@
 </div>
 
 <script>
+/* MODULE DE GÉNÉRATION SÉMANTIQUE V390 - 600 QUESTIONS */
+const AUDIT_ENGINE = {
+    questions_bank: {
+        "Energie": {
+            "Architecte Fusion SMR": [
+                { fr: "[THERMODYNAMIQUE] Optimisation du cycle de Brayton en milieu SMR ?", en: "[THERMODYNAMICS] Brayton cycle optimization in SMR environment?", opts: {fr:["Maillage Brayton-S", "Cycle Rankine simple", "Convection passive", "DELTA"], en:["Brayton-S Mesh", "Simple Rankine cycle", "Passive convection", "DELTA"]}, correct: 0 },
+                { fr: "[SÛRETÉ] Protocole de confinement passif post-critique ?", en: "[SAFETY] Post-critical passive containment protocol?", opts: {fr:["Puits de chaleur infini", "Injection bore active", "Vannes manuelles", "DELTA"], en:["Infinite heat sink", "Active boron injection", "Manual valves", "DELTA"]}, correct: 0 },
+                { fr: "[NEUTRONIQUE] Gestion du poison neutronique en régime stationnaire ?", en: "[NEUTRONICS] Neutron poison management in steady state?", opts: {fr:["Compensation OMNI", "Absorption fixe", "Modération eau", "DELTA"], en:["OMNI Compensation", "Fixed absorption", "Water moderation", "DELTA"]}, correct: 0 },
+                { fr: "[MATÉRIAUX] Résistance thermique des alliages sous flux alpha ?", en: "[MATERIALS] Thermal resistance of alloys under alpha flux?", opts: {fr:["Structure cristalline V390", "Acier standard", "Plomb", "DELTA"], en:["V390 Crystal structure", "Standard steel", "Lead", "DELTA"]}, correct: 0 },
+                { fr: "[STRATÉGIE] Déploiement décentralisé vs Réseau national ?", en: "[STRATEGY] Decentralized deployment vs National grid?", opts: {fr:["Micro-grid hybride", "Connexion mono-point", "Silo énergétique", "DELTA"], en:["Hybrid micro-grid", "Single-point connection", "Energy silo", "DELTA"]}, correct: 0 }
+            ],
+            "Expert Hydrogène Vert": [
+                { fr: "[ELECTROLYSE] Densité de courant optimale pour membrane PEM ?", en: "[ELECTROLYSIS] Optimal current density for PEM membrane?", opts: {fr:["Vecteur PEM-H2", "Électrolyse alcaline", "Stase ionique", "DELTA"], en:["PEM-H2 Vector", "Alkaline electrolysis", "Ionic stasis", "DELTA"]}, correct: 0 },
+                { fr: "[LOGISTIQUE] Stockage solide par hydrures réversibles ?", en: "[LOGISTICS] Solid storage by reversible hydrides?", opts: {fr:["Adsorption cinétique", "Compression 700 bar", "Liquéfaction cryo", "DELTA"], en:["Kinetic adsorption", "700 bar compression", "Cryo liquefaction", "DELTA"]}, correct: 0 },
+                { fr: "[PURETÉ] Analyse sémantique de la contamination par O2 ?", en: "[PURITY] Semantic analysis of O2 contamination?", opts: {fr:["Capteur OMNI-S", "Filtration papier", "Catalyse simple", "DELTA"], en:["OMNI-S Sensor", "Paper filtration", "Simple catalysis", "DELTA"]}, correct: 0 },
+                { fr: "[EFFICACITÉ] Coefficient de performance du craquage ammoniac ?", en: "[EFFICIENCY] Ammonia cracking performance coefficient?", opts: {fr:["Rendement Titanium", "Perte thermique", "Combustion", "DELTA"], en:["Titanium yield", "Thermal loss", "Combustion", "DELTA"]}, correct: 0 },
+                { fr: "[MARCHÉ] Corrélation LCOH et EnR intermittentes ?", en: "[MARKET] LCOH and intermittent RE correlation?", opts: {fr:["Algorithme prédictif", "Prix fixe", "Achat spot", "DELTA"], en:["Predictive algorithm", "Fixed price", "Spot purchase", "DELTA"]}, correct: 0 }
+            ]
+        },
+        "IT & IA": {
+            "Architecte Quantique": [
+                { fr: "[DÉCOHÉRENCE] Algorithme de correction Surface Code ?", en: "[DECOHERENCE] Surface Code correction algorithm?", opts: {fr:["Syndrome de correction Q", "Porte de Toffoli simple", "Bit-flip basique", "DELTA"], en:["Q-Correction syndrome", "Simple Toffoli gate", "Basic bit-flip", "DELTA"]}, correct: 0 },
+                { fr: "[SUPRÉMATIE] Avantage du Quantum Approximate Optimization ?", en: "[SUPREMACY] Advantage of Quantum Approximate Optimization?", opts: {fr:["Heuristique hybride", "Calcul binaire", "Brute force", "DELTA"], en:["Hybrid heuristic", "Binary calculation", "Brute force", "DELTA"]}, correct: 0 },
+                { fr: "[INTRICATION] État de Bell et téléportation de qubits ?", en: "[ENTANGLEMENT] Bell state and qubit teleportation?", opts: {fr:["Protocole OMNI-Q", "Signal radio", "Câble fibre", "DELTA"], en:["OMNI-Q Protocol", "Radio signal", "Fiber cable", "DELTA"]}, correct: 0 },
+                { fr: "[SÉCURITÉ] Résistance aux algorithmes de Shor ?", en: "[SECURITY] Resistance to Shor's algorithms?", opts: {fr:["Cryptographie Post-Q", "RSA 2048", "AES 256", "DELTA"], en:["Post-Q Cryptography", "RSA 2048", "AES 256", "DELTA"]}, correct: 0 },
+                { fr: "[MATÉRIEL] Cryogénie et jonction Josephson ?", en: "[HARDWARE] Cryogenics and Josephson junction?", opts: {fr:["Supraconductivité V390", "Semi-conducteur", "Cuivre", "DELTA"], en:["V390 Superconductivity", "Semiconductor", "Copper", "DELTA"]}, correct: 0 }
+            ]
+        }
+    },
+
+    generateQuestions(sector, job) {
+        if (this.questions_bank[sector] && this.questions_bank[sector][job]) {
+            return this.questions_bank[sector][job];
+        }
+        const axes = ["STRATÉGIE", "MUTATION", "IA", "COMPÉTENCE", "FINALITÉ"];
+        return axes.map((axis, i) => {
+            return {
+                fr: `[${axis}] Analyse multidisciplinaire du vecteur ${job} ?`,
+                en: `[${axis}] Multidisciplinary analysis of the ${job} vector?`,
+                opts: {
+                    fr: ["Synthèse V390", "Approche standard", "Méthode obsolète", "DELTA"],
+                    en: ["V390 Synthesis", "Standard approach", "Obsolete method", "DELTA"]
+                },
+                correct: 0
+            };
+        });
+    }
+};
+
 const DATA = {
     sectors: {
         "Energie": { icon:"fa-atom", jobs:["Architecte Fusion SMR", "Expert Hydrogène Vert", "Ingénieur Grid-Edge", "Lead Transition", "Analyste Lithium-Air", "Thorium Lead", "Manager HVDC", "CCUS Specialist", "Carbon Auditor", "SMR-V3 Tech", "Geothermal Eng", "BESS Manager", "Perovskite R&D", "Nuclear Safety", "Oil&Gas API Expert"] },
@@ -219,13 +268,8 @@ const KMS = {
 
     startAudit() {
         this.step = 0; this.responses = []; this.score = 0;
-        this.questions = [
-            { fr: `[STRATÉGIE] Résilience pour ${this.job} ?`, en: `[STRATEGY] Resilience for ${this.job}?`, key: "asynchrone maillage", opts: {fr:["Maillage asynchrone", "Cloud centralisé", "Flux direct", "DELTA"], en:["Asynchronous mesh", "Centralized cloud", "Direct flow", "DELTA"]}, correct: 0 },
-            { fr: `[MUTATION] Vecteur pour ${this.sector} ?`, en: `[MUTATION] Vector for ${this.sector}?`, key: "hybridation", opts: {fr:["Mutation V390", "Standard ISO", "Meta-IA", "DELTA"], en:["V390 Mutation", "ISO Standard", "Meta-AI", "DELTA"]}, correct: 0 },
-            { fr: `[IA] Validation sémantique ?`, en: `[AI] Semantic validation?`, key: "vecteur sémantique", opts: {fr:["Comptage", "Vecteurs sémantiques", "Syntaxe", "DELTA"], en:["Counting", "Semantic vectors", "Syntax", "DELTA"]}, correct: 1 },
-            { fr: `[EXPERTISE] Compétence vitale ?`, en: `[EXPERTISE] Vital skill?`, key: "holistique synthèse", opts: {fr:["Synthèse holistique", "Silo technique", "Prompting", "DELTA"], en:["Holistic synthesis", "Technical silo", "Prompting", "DELTA"]}, correct: 0 },
-            { fr: `[FINAL] Finalité V390 ?`, en: `[FINAL] V390 Purpose?`, key: "souveraineté accréditation", opts: {fr:["Archivage", "Accréditation Or", "Calcul", "DELTA"], en:["Archiving", "Gold Accreditation", "Calculation", "DELTA"]}, correct: 1 }
-        ];
+        // FUSION : Appel du moteur de sélection multidisciplinaire V390
+        this.questions = AUDIT_ENGINE.generateQuestions(this.sector, this.job);
         this.go('p-audit'); this.loadQ();
     },
 
@@ -251,7 +295,7 @@ const KMS = {
         if(this.tempIdx === undefined && !this.responses[this.step]) return;
         const q = this.questions[this.step];
         let pts = (this.tempIdx === q.correct) ? 20 : 0;
-        if(this.tempIdx === 3) pts = 15; // Analyse simplifiée pour cet exemple
+        if(this.tempIdx === 3) pts = 18; // Pondération Delta Expert
         this.responses[this.step] = { idx: this.tempIdx ?? this.responses[this.step].idx, score: pts };
         this.score = Math.round(this.responses.reduce((a,b) => a + b.score, 0));
         document.getElementById('audit-score-realtime').innerText = `${DICT[this.lang].score_label} : ${this.score}%`;
@@ -280,15 +324,15 @@ const KMS = {
         document.getElementById('pdf-name').innerText = name.toUpperCase();
         document.getElementById('pdf-job').innerText = this.job.toUpperCase();
         document.getElementById('pdf-id').innerText = `ID: V390-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
-        document.getElementById('pdf-date').innerText = `17 MARS 2026`;
+        document.getElementById('pdf-date').innerText = `16 AVRIL 2026`;
         document.getElementById('pdf-final-score').innerText = `SCORE: ${this.score}%`;
         document.getElementById('pdf-qr').innerHTML = '';
-        new QRCode(document.getElementById("pdf-qr"), { text: `V390|${name}|${this.job}`, width: 140, height: 140 });
+        new QRCode(document.getElementById("pdf-qr"), { text: `V390|${name}|${this.job}|SCELLÉ`, width: 140, height: 140 });
     },
 
     exportPDF() {
         const el = document.getElementById('cert-container'); el.style.display = 'block';
-        html2pdf().set({ margin:0, filename:`V390_GOLD.pdf`, jsPDF:{ unit:'px', format:[1122, 793], orientation:'landscape' } })
+        html2pdf().set({ margin:0, filename:`V390_GOLD_CERT.pdf`, jsPDF:{ unit:'px', format:[1122, 793], orientation:'landscape' } })
         .from(el).save().then(() => el.style.display = 'none');
     }
 };
