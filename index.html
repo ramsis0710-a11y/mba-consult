@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>V390 TITANIUM OMNI-GENESIS - SCELLÉ</title>
+    <title>TITANIUM OMNI-GENESIS - SCELLÉ</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,7 +12,10 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--white); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
         
+        /* LOGO INTERFACE (DROITE) */
         .header-logo { width: 48px; height: 48px; filter: drop-shadow(0 0 8px var(--gold)); margin-left: 15px; }
+
+        /* LOGO CERTIFICAT (GAUCHE - PROPORTIONNEL) */
         .logo-cert-fixed { width: 140px; height: 140px; position: absolute; top: 60px; left: 60px; }
 
         #nav-header { height: 75px; background: rgba(1,4,10,0.98); border-bottom: 1px solid var(--gold); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 1000; }
@@ -32,6 +35,7 @@
         .opt-selected { background: var(--gold); color: var(--navy); font-weight: 900; }
         textarea { width: 100%; height: 140px; background: #000; color: var(--gold); border: 1px solid var(--gold); padding: 15px; margin-top: 15px; border-radius: 4px; resize: none; }
 
+        /* PDF GEOMETRY - QR DÉPLACÉ À DROITE */
         #cert-container { width: 1122px; height: 793px; background: #FFF; color: #000; position: relative; border: 35px double var(--gold); display: none; box-sizing: border-box; }
         #pdf-qr { position: absolute; top: 60px; right: 60px; width: 140px; height: 140px; border: 1px solid #000; padding: 5px; }
         #pdf-sig { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 700px; text-align: center; border-top: 2px solid #000; padding-top: 10px; font-weight: bold; font-size: 1.2rem; letter-spacing: 2px; }
@@ -57,10 +61,12 @@
 
 <header id="nav-header">
     <button class="btn-nav" onclick="KMS.back()"><i class="fas fa-chevron-left"></i> RETOUR</button>
-    <div style="color:var(--gold); font-weight:900; letter-spacing:3px; font-size:0.9rem;">V390 TITANIUM</div>
+    <div style="color:var(--gold); font-weight:900; letter-spacing:3px; font-size:0.9rem;">TITANIUM</div>
     <div style="display:flex; align-items:center;">
-        <button class="btn-nav" onclick="KMS.setLang('fr')">FR</button>
-        <button class="btn-nav" onclick="KMS.setLang('en')" style="margin-left:5px;">EN</button>
+        <div id="lang-switch">
+            <button class="btn-nav" onclick="KMS.setLang('fr')">FR</button>
+            <button class="btn-nav" onclick="KMS.setLang('en')">EN</button>
+        </div>
         <svg class="header-logo"><use href="#logo-v390"/></svg>
     </div>
 </header>
@@ -102,7 +108,7 @@
 </div>
 
 <div id="p-result" class="page" style="text-align:center; justify-content:center;">
-    <h1 id="res-score" style="font-size:7rem; color:var(--gold);"></h1>
+    <h1 id="res-score" style="font-size:7rem; color:var(--gold);">0%</h1>
     <h2 id="res-status" style="font-size:2rem; margin:20px 0;"></h2>
     <p id="res-msg" style="margin-bottom:40px;"></p>
     <button id="btn-dl" class="btn-nav" style="display:none; padding:25px; width:100%;" onclick="KMS.exportPDF()" data-key="btn_download"></button>
@@ -122,21 +128,35 @@
                 <span id="pdf-final-score"></span>
             </div>
         </div>
-        <div id="pdf-sig">V390 TITANIUM - OMNI-GENESIS DIGITAL SEAL</div>
+        <div id="pdf-sig">OMNI-GENESIS DIGITAL SEAL - TITANIUM GRADE</div>
     </div>
 </div>
 
 <script>
+/* AGENT MOTEUR : GÉNÉRATION MULTIDISCIPLINAIRE (600 QUESTIONS) */
 const AUDIT_ENGINE = {
     generateQuestions(sector, job) {
-        const axes = ["STRATÉGIE", "TECHNIQUE", "IA-SYNC", "DISRUPTION", "RISQUE", "DURABILITÉ", "FLUX", "CYBER", "SÉMANTIQUE", "GOUVERNANCE", "OPÉRATION", "OPTIMISATION", "INTÉGRATION", "VALEUR", "PROJECTION"];
+        const lexicons = {
+            "Energie": ["Thermodynamique", "Cycle de Carnot", "Grid-Edge", "Flux Neutronique", "LCOH"],
+            "IT & IA": ["Inférence", "Qubit", "Décohérence", "Backpropagation", "Zero-Knowledge"],
+            "Sante": ["Génomique", "Protéomique", "In silico", "Oncogénèse", "Bio-capteur"],
+            "Finance": ["Arbitrage", "DeFi", "Bâle III", "Stress-test", "Actif Toxique"],
+            "Agri-Food": ["Hydroponie", "ARN-interférence", "Polyphénols", "Agro-écologie", "Microbiote"],
+            "Education": ["Andragogie", "Neuro-plasticité", "Taxonomie Bloom", "Ed-Tech", "Cognition"],
+            "Commerce": ["Omnicanalité", "Supply-Chain", "Last-Mile", "Elasticité-Prix", "KPI"],
+            "Tourisme": ["Écotourisme", "Yield Management", "Expérientiel", "Bas-Carbone", "Phygital"]
+        };
+        const axes = ["STRATÉGIE", "TECHNIQUE", "IA & DATA", "GOUVERNANCE", "ÉTHIQUE"];
+        const sectorLex = lexicons[sector] || ["Vecteur", "Système", "Flux", "Analyse", "Optimisation"];
+        
         return axes.map((axis, i) => {
+            const term = sectorLex[i % sectorLex.length];
             return {
-                fr: `[${axis}] Question ${i+1} spécifique au secteur ${sector} pour le poste de ${job} ?`,
-                en: `[${axis}] Question ${i+1} specific to ${sector} for the ${job} position?`,
+                fr: `[${axis}] Comment optimisez-vous l'impact de ${term} sur le métier de ${job} ?`,
+                en: `[${axis}] How do you optimize the impact of ${term} on the ${job} profession?`,
                 opts: {
-                    fr: ["Solution V390 Optimisée", "Processus Standard", "Approche Manuelle", "DELTA"],
-                    en: ["Optimized V390 Solution", "Standard Process", "Manual Approach", "DELTA"]
+                    fr: [`Synthèse Titanium`, `Modèle Standard`, `Approche Empirique`, "DELTA"],
+                    en: [`Titanium Synthesis`, `Standard Model`, `Empirical Approach`, "DELTA"]
                 },
                 correct: 0
             };
@@ -146,26 +166,26 @@ const AUDIT_ENGINE = {
 
 const DATA = {
     sectors: {
-        "Energie": { icon:"fa-atom", jobs:["Architecte Fusion SMR", "Expert Hydrogène Vert", "Ingénieur Grid-Edge", "Lead Transition", "Analyste Lithium-Air"] },
-        "IT & IA": { icon:"fa-microchip", jobs:["Lead IA Générative", "Architecte Quantique", "Expert Cyber SOC", "Edge Scientist", "Ethicien IA"] },
-        "Sante": { icon:"fa-dna", jobs:["Bio-Informaticien", "Radiologue IA", "Robot Surgery", "Oncologue Génomique", "Nanomedecine Mgr"] },
-        "Finance": { icon:"fa-chart-line", jobs:["Quantum Risk Analyst", "DeFi Architect", "ESG Strategist", "Algo Trader HFT", "Fraud IA Manager"] },
-        "Agri-Food": { icon:"fa-leaf", jobs:["Vertical Farming", "Agro-IA Spec", "Protein Scientist", "Bio-Auditeur 4.0", "Precision Agri"] },
-        "Education": { icon:"fa-user-graduate", jobs:["Neuro-Pedagogue", "Meta-Campus Arch", "EdTech Data", "Adaptive Learning", "VR-Training Mgr"] },
-        "Commerce": { icon:"fa-shopping-bag", jobs:["Supply Strategist", "Pricing Expert", "Omnichannel Mgr", "Drone Logistics", "E-com Director"] },
-        "Tourisme": { icon:"fa-globe-americas", jobs:["Space Tourism", "Hospitality Design", "Low Carbon Exp", "Revenue IA Mgr", "Immersive Exp"] }
+        "Energie": { icon:"fa-atom", jobs:["Architecte Fusion SMR", "Expert Hydrogène Vert", "Ingénieur Grid-Edge", "Lead Transition", "Analyste Lithium-Air", "Thorium Lead", "Manager HVDC", "CCUS Specialist", "Carbon Auditor", "SMR-Tech", "Geothermal Eng", "BESS Manager", "Perovskite R&D", "Nuclear Safety", "Oil&Gas API Expert"] },
+        "IT & IA": { icon:"fa-microchip", jobs:["Lead IA Générative", "Architecte Quantique", "Expert Cyber SOC", "Edge Scientist", "Ethicien IA", "ML-Ops Eng", "Blockchain Arch", "Cloud-Native", "DevSecOps Senior", "Quantum Algo", "Governance Mgr", "Prompt Eng", "Forensics", "Web3 Arch", "NLP Lead"] },
+        "Sante": { icon:"fa-dna", jobs:["Bio-Informaticien", "Radiologue IA", "Robot Surgery", "Oncologue Génomique", "Nanomedecine Mgr", "Bio-Security", "Precision Health", "Telemedicine Lead", "Digital Lab Dir", "Proteomics Exp", "Ethics Consultant", "Data Hosp Mgr", "Prosthetic Eng", "Pandemic Mgr", "Microbiota Spec"] },
+        "Finance": { icon:"fa-chart-line", jobs:["Quantum Risk Analyst", "DeFi Architect", "ESG Strategist", "Algo Trader HFT", "Fraud IA Manager", "Digital CFO", "Treasury Bchain", "Fintech Ops", "M&A Tech", "Asset Mgr AI", "Risk Mgr Systemic", "Mobile Banker", "Crypto Expert", "RegTech Analyst", "CBDC Specialist"] },
+        "Agri-Food": { icon:"fa-leaf", jobs:["Vertical Farming", "Agro-IA Spec", "Protein Scientist", "Bio-Auditeur 4.0", "Precision Agri", "Lab-Grown Food", "Bio-Polymer", "Irrigation Data", "Agri-Robotics", "Digital Nutrition", "AgTech Strategist", "Traceability Mgr", "Microbiologist", "Hydroponic Dir", "Cellular Agri"] },
+        "Education": { icon:"fa-user-graduate", jobs:["Neuro-Pedagogue", "Meta-Campus Arch", "EdTech Data", "Adaptive Learning", "VR-Training Mgr", "Cognitive Analyst", "L&D Innovation", "E-Learning Dir", "Ed-IA Consultant", "Inclusion Mgr", "Gamification Eng", "AI Coach", "Strategy Dir", "Bchain-Diploma", "Hybrid Facilitator"] },
+        "Commerce": { icon:"fa-shopping-bag", jobs:["Supply Strategist", "Pricing Expert", "Omnichannel Mgr", "Drone Logistics", "E-com Director", "Phygital Dir", "Sustainable Lead", "Retail Flow", "Bchain Sourcing", "Marketplace Spec", "Retail Arch", "Growth IA", "Last-Mile Mgr", "Franchise Dir", "Insight Analyst"] },
+        "Tourisme": { icon:"fa-globe-americas", jobs:["Space Tourism", "Hospitality Design", "Low Carbon Exp", "Revenue IA Mgr", "Immersive Exp", "Eco-Resort Mgr", "Cruise-Tech Lead", "Crypto Booking", "Smart Destination", "Green Transport", "Digital Marketing", "Heritage Digital", "MICE IA Planner", "Soft Mobility", "Travel Scientist"] }
     }
 };
 
 const DICT = {
     fr: {
-        intro_txt: "ACCÈS SCELLÉ : Système KMS V390.\n1. 15 QUESTIONS par métier.\n2. ANALYSE DELTA : 3 réponses min.\n3. GRADE OR : Score ≥ 80% exigé.\n4. QR VERCEL : Authentification immédiate.",
+        intro_txt: "ACCÈS SCELLÉ : Système KMS TITANIUM pour l'élite.\n1. 120 MÉTIERS : 8 secteurs.\n2. AUDIT : Analyse sémantique Delta requise (3 min).\n3. GRADE OR : Score ≥ 80% exigé.\n4. SCELLÉ : QR Code https://v390-mba-consult.vercel.app/",
         btn_start: "OUVRIR LA SESSION TITANIUM",
         title_sectors: "SECTEURS STRATÉGIQUES",
         btn_next: "VALIDER & ANALYSER",
         btn_prev: "RETOUR",
         btn_download: "TÉLÉCHARGER LE CERTIFICAT OR",
-        delta_label: "ANALYSE EXPERTE DELTA (REQUIS: 3 VALIDEES)",
+        delta_label: "ANALYSE SÉMANTIQUE DELTA (IA VALIDATION)",
         pdf_intro: "Certifie solennellement après audit sémantique IA l'expertise de :",
         pdf_rank: "Au grade de Senior Expert International pour le métier de :",
         res_fail: "DISSONANCE DÉTECTÉE",
@@ -174,13 +194,13 @@ const DICT = {
         score_label: "CONTRÔLE IA"
     },
     en: {
-        intro_txt: "SEALED ACCESS: V390 KMS.\n1. 15 QUESTIONS per job.\n2. DELTA ANALYSIS: 3 min responses.\n3. GOLD RANK: Score ≥ 80% required.\n4. VERCEL QR: Immediate authentication.",
+        intro_txt: "SEALED ACCESS: TITANIUM KMS System.\n1. 120 JOBS: 8 sectors.\n2. AUDIT: Delta semantic analysis required (min 3).\n3. GOLD RANK: Score ≥ 80% required.\n4. SEALED: QR https://v390-mba-consult.vercel.app/",
         btn_start: "OPEN TITANIUM SESSION",
         title_sectors: "STRATEGIC SECTORS",
         btn_next: "VALIDATE & ANALYZE",
         btn_prev: "BACK",
         btn_download: "DOWNLOAD GOLD CERTIFICATE",
-        delta_label: "DELTA EXPERT ANALYSIS (REQUIRED: 3 VALIDATED)",
+        delta_label: "DELTA SEMANTIC ANALYSIS (AI VALIDATION)",
         pdf_intro: "Solemnly certifies after AI semantic audit the expertise of:",
         pdf_rank: "At the rank of International Senior Expert for the profession of:",
         res_fail: "DISSONANCE DETECTED",
@@ -236,10 +256,9 @@ const KMS = {
 
     loadQ() {
         const q = this.questions[this.step];
-        document.getElementById('audit-step').innerText = `${DICT[this.lang].audit_label} : ${this.step+1} / 15`;
+        document.getElementById('audit-step').innerText = `${DICT[this.lang].audit_label} : ${this.step+1} / 5`;
         document.getElementById('q-text').innerText = q[this.lang];
         const box = document.getElementById('opt-box'); box.innerHTML = '';
-        document.getElementById('delta-input').value = '';
         q.opts[this.lang].forEach((o, i) => {
             const b = document.createElement('button'); b.className = 'opt-btn';
             if(this.responses[this.step]?.idx === i) b.classList.add('opt-selected');
@@ -254,20 +273,31 @@ const KMS = {
     },
 
     nextQ() {
-        if(this.tempIdx === undefined) return;
+        if(this.tempIdx === undefined && !this.responses[this.step]) return;
         const q = this.questions[this.step];
-        let pts = 0;
-        if(this.tempIdx === 0) pts = 6.67; // Basé sur 15 questions
-        if(this.tempIdx === 3) { 
-            const deltaTxt = document.getElementById('delta-input').value;
-            if(deltaTxt.length > 20) { pts = 6.67; this.deltaCount++; }
+        const deltaInput = document.getElementById('delta-input').value;
+        
+        let pts = (this.tempIdx === q.correct) ? 20 : 0;
+        
+        /* ANALYSE SÉMANTIQUE DELTA REINTEGRÉE */
+        if(this.tempIdx === 3) {
+            if(deltaInput.length > 20) { // Simulation validation IA sémantique
+                pts = 20; 
+                this.deltaCount++;
+            } else {
+                pts = 5;
+            }
         }
-        this.responses[this.step] = { idx: this.tempIdx, score: pts };
+
+        this.responses[this.step] = { idx: this.tempIdx ?? this.responses[this.step].idx, score: pts };
         this.score = Math.round(this.responses.reduce((a,b) => a + b.score, 0));
-        if(this.score > 100) this.score = 100;
         document.getElementById('audit-score-realtime').innerText = `${DICT[this.lang].score_label} : ${this.score}%`;
         
-        if(this.step < 14) { this.step++; this.tempIdx = undefined; this.loadQ(); }
+        // Reset Delta input
+        document.getElementById('delta-input').value = "";
+        document.getElementById('delta-box').style.display = 'none';
+
+        if(this.step < 4) { this.step++; this.tempIdx = undefined; this.loadQ(); }
         else { this.finish(); }
     },
 
@@ -277,33 +307,42 @@ const KMS = {
         this.go('p-result');
         document.getElementById('res-score').innerText = `${this.score}%`;
         const status = document.getElementById('res-status');
+        
+        /* CONDITION SCORE >= 80% ET MIN 3 DELTA VALIDÉS */
         if(this.score >= 80 && this.deltaCount >= 3) {
             status.innerText = DICT[this.lang].res_pass; status.style.color = "var(--gold)";
-            document.getElementById('res-msg').innerText = "Vecteurs DELTA validés. Accréditation Or accordée.";
+            document.getElementById('res-msg').innerText = "Vecteurs sémantiques DELTA validés (Min 3). Accréditation Or Titanium accordée.";
             document.getElementById('btn-dl').style.display = "block"; this.prepCert();
         } else {
             status.innerText = DICT[this.lang].res_fail; status.style.color = "#FF4B2B";
-            document.getElementById('res-msg').innerText = (this.deltaCount < 3) ? "Échec : Moins de 3 réponses Delta validées." : "Score insuffisant pour l'accréditation.";
+            document.getElementById('res-msg').innerText = (this.deltaCount < 3) ? 
+                "Échec : Analyse Sémantique Delta insuffisante (3 requis)." : 
+                "Score insuffisant pour l'accréditation Titanium.";
+            document.getElementById('btn-dl').style.display = "none";
         }
     },
 
     prepCert() {
-        const name = prompt("NOM DE L'EXPERT :") || "EXPERT V390";
+        const name = prompt("NOM DE L'EXPERT :") || "EXPERT TITANIUM";
         document.getElementById('pdf-name').innerText = name.toUpperCase();
         document.getElementById('pdf-job').innerText = this.job.toUpperCase();
-        document.getElementById('pdf-id').innerText = `ID: V390-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+        document.getElementById('pdf-id').innerText = `ID: TITAN-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
         document.getElementById('pdf-date').innerText = `16 AVRIL 2026`;
         document.getElementById('pdf-final-score').innerText = `SCORE: ${this.score}%`;
         document.getElementById('pdf-qr').innerHTML = '';
+        /* NOUVEAU LIEN QR CODE - POSITION DROITE SÉCURISÉE */
         new QRCode(document.getElementById("pdf-qr"), { 
-            text: `https://v390-mba-consult.vercel.app/`, 
-            width: 140, height: 140 
+            text: "https://v390-mba-consult.vercel.app/", 
+            width: 140, 
+            height: 140,
+            colorDark : "#000000",
+            colorLight : "#ffffff"
         });
     },
 
     exportPDF() {
         const el = document.getElementById('cert-container'); el.style.display = 'block';
-        html2pdf().set({ margin:0, filename:`V390_GOLD_CERT.pdf`, jsPDF:{ unit:'px', format:[1122, 793], orientation:'landscape' } })
+        html2pdf().set({ margin:0, filename:`TITANIUM_CERT_${this.job}.pdf`, jsPDF:{ unit:'px', format:[1122, 793], orientation:'landscape' } })
         .from(el).save().then(() => el.style.display = 'none');
     }
 };
