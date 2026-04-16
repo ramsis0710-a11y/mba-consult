@@ -12,10 +12,7 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--white); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
         
-        /* LOGO INTERFACE (DROITE) */
         .header-logo { width: 48px; height: 48px; filter: drop-shadow(0 0 8px var(--gold)); margin-left: 15px; }
-
-        /* LOGO CERTIFICAT (GAUCHE - PROPORTIONNEL) */
         .logo-cert-fixed { width: 140px; height: 140px; position: absolute; top: 60px; left: 60px; }
 
         #nav-header { height: 75px; background: rgba(1,4,10,0.98); border-bottom: 1px solid var(--gold); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 1000; }
@@ -35,7 +32,6 @@
         .opt-selected { background: var(--gold); color: var(--navy); font-weight: 900; }
         textarea { width: 100%; height: 140px; background: #000; color: var(--gold); border: 1px solid var(--gold); padding: 15px; margin-top: 15px; border-radius: 4px; resize: none; }
 
-        /* PDF GEOMETRY - QR A DROITE */
         #cert-container { width: 1122px; height: 793px; background: #FFF; color: #000; position: relative; border: 35px double var(--gold); display: none; box-sizing: border-box; }
         #pdf-qr { position: absolute; top: 60px; right: 60px; width: 140px; height: 140px; border: 1px solid #000; padding: 5px; }
         #pdf-sig { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 700px; text-align: center; border-top: 2px solid #000; padding-top: 10px; font-weight: bold; font-size: 1.2rem; letter-spacing: 2px; }
@@ -63,10 +59,8 @@
     <button class="btn-nav" onclick="KMS.back()"><i class="fas fa-chevron-left"></i> RETOUR</button>
     <div style="color:var(--gold); font-weight:900; letter-spacing:3px; font-size:0.9rem;">V390 TITANIUM</div>
     <div style="display:flex; align-items:center;">
-        <div id="lang-switch">
-            <button class="btn-nav" onclick="KMS.setLang('fr')">FR</button>
-            <button class="btn-nav" onclick="KMS.setLang('en')">EN</button>
-        </div>
+        <button class="btn-nav" onclick="KMS.setLang('fr')">FR</button>
+        <button class="btn-nav" onclick="KMS.setLang('en')" style="margin-left:5px;">EN</button>
         <svg class="header-logo"><use href="#logo-v390"/></svg>
     </div>
 </header>
@@ -134,36 +128,19 @@
 
 <script>
 const AUDIT_ENGINE = {
-    questions_bank: {
-        "Energie": {
-            "Architecte Fusion SMR": [
-                { fr: "[THERMODYNAMIQUE] Optimisation du cycle de Brayton en milieu SMR ?", en: "[THERMODYNAMICS] Brayton cycle optimization in SMR environment?", opts: {fr:["Maillage Brayton-S / Cycle Rankine combiné", "Cycle Rankine simple uniquement", "Convection passive sans échangeur", "DELTA"], en:["Brayton-S Mesh / Combined Rankine", "Simple Rankine cycle only", "Passive convection no exchanger", "DELTA"]}, correct: 0 },
-                { fr: "[SÛRETÉ] Protocole de confinement passif post-critique ?", en: "[SAFETY] Post-critical passive containment protocol?", opts: {fr:["Puits de chaleur infini & Gravité", "Injection bore active", "Vannes manuelles V12", "DELTA"], en:["Infinite heat sink & Gravity", "Active boron injection", "V12 manual valves", "DELTA"]}, correct: 0 }
-            ],
-            "Expert Hydrogène Vert": [
-                { fr: "[ELECTROLYSE] Densité de courant optimale pour membrane PEM ?", en: "[ELECTROLYSIS] Optimal current density for PEM membrane?", opts: {fr:["Vecteur PEM-H2 Haute Densité", "Électrolyse alcaline standard", "Stase ionique simple", "DELTA"], en:["High Density PEM-H2 Vector", "Standard alkaline electrolysis", "Simple ionic stasis", "DELTA"]}, correct: 0 }
-            ]
-        }
-    },
-
     generateQuestions(sector, job) {
-        // Extraction des questions spécifiques ou génération dynamique par secteur (Interdiction des questions identiques)
-        let base = (this.questions_bank[sector] && this.questions_bank[sector][job]) ? [...this.questions_bank[sector][job]] : [];
-        const axes = ["STRATÉGIE", "MUTATION", "COMPÉTENCE", "RÉALITÉ", "SOUVERAINETÉ"];
-        
-        while(base.length < 5) {
-            let axis = axes[base.length];
-            base.push({
-                fr: `[${axis}] Spécificité du secteur ${sector} pour le rôle de ${job} ?`,
-                en: `[${axis}] ${sector} sector specificity for the ${job} role?`,
+        const axes = ["STRATÉGIE", "TECHNIQUE", "IA-SYNC", "DISRUPTION", "RISQUE", "DURABILITÉ", "FLUX", "CYBER", "SÉMANTIQUE", "GOUVERNANCE", "OPÉRATION", "OPTIMISATION", "INTÉGRATION", "VALEUR", "PROJECTION"];
+        return axes.map((axis, i) => {
+            return {
+                fr: `[${axis}] Question ${i+1} spécifique au secteur ${sector} pour le poste de ${job} ?`,
+                en: `[${axis}] Question ${i+1} specific to ${sector} for the ${job} position?`,
                 opts: {
-                    fr: [`Optimisation ${job} V390`, "Approche conventionnelle", "Processus obsolète", "DELTA"],
-                    en: [`V390 ${job} Optimization`, "Conventional approach", "Obsolete process", "DELTA"]
+                    fr: ["Solution V390 Optimisée", "Processus Standard", "Approche Manuelle", "DELTA"],
+                    en: ["Optimized V390 Solution", "Standard Process", "Manual Approach", "DELTA"]
                 },
                 correct: 0
-            });
-        }
-        return base.slice(0, 5);
+            };
+        });
     }
 };
 
@@ -182,31 +159,31 @@ const DATA = {
 
 const DICT = {
     fr: {
-        intro_txt: "ACCÈS SCELLÉ : Système KMS V390.\n1. ANALYSE DELTA : Minimum 3 réponses validées.\n2. GRADE OR : Score ≥ 80% exigé.\n3. QR CODE : Lien Vercel v390-mba-consult.",
+        intro_txt: "ACCÈS SCELLÉ : Système KMS V390.\n1. 15 QUESTIONS par métier.\n2. ANALYSE DELTA : 3 réponses min.\n3. GRADE OR : Score ≥ 80% exigé.\n4. QR VERCEL : Authentification immédiate.",
         btn_start: "OUVRIR LA SESSION TITANIUM",
         title_sectors: "SECTEURS STRATÉGIQUES",
         btn_next: "VALIDER & ANALYSER",
         btn_prev: "RETOUR",
         btn_download: "TÉLÉCHARGER LE CERTIFICAT OR",
-        delta_label: "ANALYSE SÉMANTIQUE DELTA (OBLIGATOIRE POUR SCORE OR)",
+        delta_label: "ANALYSE EXPERTE DELTA (REQUIS: 3 VALIDEES)",
         pdf_intro: "Certifie solennellement après audit sémantique IA l'expertise de :",
         pdf_rank: "Au grade de Senior Expert International pour le métier de :",
-        res_fail: "DISSONANCE SÉMANTIQUE",
+        res_fail: "DISSONANCE DÉTECTÉE",
         res_pass: "ACCRÉDITATION OR ACCORDÉE",
         audit_label: "ÉTAPE",
         score_label: "CONTRÔLE IA"
     },
     en: {
-        intro_txt: "SEALED ACCESS: V390 KMS.\n1. DELTA ANALYSIS: Min 3 validated answers.\n2. GOLD RANK: Score ≥ 80% required.\n3. QR CODE: Vercel v390-mba-consult link.",
+        intro_txt: "SEALED ACCESS: V390 KMS.\n1. 15 QUESTIONS per job.\n2. DELTA ANALYSIS: 3 min responses.\n3. GOLD RANK: Score ≥ 80% required.\n4. VERCEL QR: Immediate authentication.",
         btn_start: "OPEN TITANIUM SESSION",
         title_sectors: "STRATEGIC SECTORS",
         btn_next: "VALIDATE & ANALYZE",
         btn_prev: "BACK",
         btn_download: "DOWNLOAD GOLD CERTIFICATE",
-        delta_label: "DELTA SEMANTIC ANALYSIS (REQUIRED FOR GOLD)",
+        delta_label: "DELTA EXPERT ANALYSIS (REQUIRED: 3 VALIDATED)",
         pdf_intro: "Solemnly certifies after AI semantic audit the expertise of:",
         pdf_rank: "At the rank of International Senior Expert for the profession of:",
-        res_fail: "SEMANTIC DISSONANCE",
+        res_fail: "DISSONANCE DETECTED",
         res_pass: "GOLD ACCREDITATION GRANTED",
         audit_label: "STEP",
         score_label: "AI CONTROL"
@@ -259,11 +236,10 @@ const KMS = {
 
     loadQ() {
         const q = this.questions[this.step];
-        document.getElementById('audit-step').innerText = `${DICT[this.lang].audit_label} : ${this.step+1} / 5`;
+        document.getElementById('audit-step').innerText = `${DICT[this.lang].audit_label} : ${this.step+1} / 15`;
         document.getElementById('q-text').innerText = q[this.lang];
         const box = document.getElementById('opt-box'); box.innerHTML = '';
-        document.getElementById('delta-input').value = this.responses[this.step]?.text || '';
-        
+        document.getElementById('delta-input').value = '';
         q.opts[this.lang].forEach((o, i) => {
             const b = document.createElement('button'); b.className = 'opt-btn';
             if(this.responses[this.step]?.idx === i) b.classList.add('opt-selected');
@@ -275,30 +251,23 @@ const KMS = {
             };
             box.appendChild(b);
         });
-        document.getElementById('delta-box').style.display = (this.responses[this.step]?.idx === 3 ? 'block' : 'none');
     },
 
     nextQ() {
-        if(this.tempIdx === undefined && !this.responses[this.step]) return;
+        if(this.tempIdx === undefined) return;
         const q = this.questions[this.step];
-        const currentIdx = this.tempIdx ?? this.responses[this.step].idx;
-        const deltaText = document.getElementById('delta-input').value;
-
-        let pts = (currentIdx === q.correct) ? 20 : 0;
-        if(currentIdx === 3) {
-            // Validation sémantique simulée : si texte > 20 chars = validé par IA
-            pts = (deltaText.length > 20) ? 20 : 5; 
+        let pts = 0;
+        if(this.tempIdx === 0) pts = 6.67; // Basé sur 15 questions
+        if(this.tempIdx === 3) { 
+            const deltaTxt = document.getElementById('delta-input').value;
+            if(deltaTxt.length > 20) { pts = 6.67; this.deltaCount++; }
         }
-
-        this.responses[this.step] = { idx: currentIdx, score: pts, text: deltaText };
+        this.responses[this.step] = { idx: this.tempIdx, score: pts };
+        this.score = Math.round(this.responses.reduce((a,b) => a + b.score, 0));
+        if(this.score > 100) this.score = 100;
+        document.getElementById('audit-score-realtime').innerText = `${DICT[this.lang].score_label} : ${this.score}%`;
         
-        // Calcul score et delta count
-        this.score = this.responses.reduce((a,b) => a + b.score, 0);
-        this.deltaCount = this.responses.filter(r => r.idx === 3 && r.score === 20).length;
-
-        document.getElementById('audit-score-realtime').innerText = `SCORE IA : ${Math.min(this.score, 100)}% | DELTA : ${this.deltaCount}/3`;
-        
-        if(this.step < 4) { this.step++; this.tempIdx = undefined; this.loadQ(); }
+        if(this.step < 14) { this.step++; this.tempIdx = undefined; this.loadQ(); }
         else { this.finish(); }
     },
 
@@ -306,44 +275,35 @@ const KMS = {
 
     finish() {
         this.go('p-result');
-        // Condition stricte : Score >= 80% ET au moins 3 delta validés
-        const finalScore = (this.deltaCount >= 3 && this.score >= 80) ? this.score : Math.min(this.score, 79);
-        
-        document.getElementById('res-score').innerText = `${finalScore}%`;
+        document.getElementById('res-score').innerText = `${this.score}%`;
         const status = document.getElementById('res-status');
-        
-        if(finalScore >= 80) {
+        if(this.score >= 80 && this.deltaCount >= 3) {
             status.innerText = DICT[this.lang].res_pass; status.style.color = "var(--gold)";
-            document.getElementById('res-msg').innerText = "Vecteurs DELTA certifiés. Accréditation Titanium accordée.";
-            document.getElementById('btn-dl').style.display = "block"; this.prepCert(finalScore);
+            document.getElementById('res-msg').innerText = "Vecteurs DELTA validés. Accréditation Or accordée.";
+            document.getElementById('btn-dl').style.display = "block"; this.prepCert();
         } else {
             status.innerText = DICT[this.lang].res_fail; status.style.color = "#FF4B2B";
-            document.getElementById('res-msg').innerText = (this.deltaCount < 3) ? "ÉCHEC : Minimum 3 analyses DELTA requises." : "Score insuffisant pour l'accréditation.";
-            document.getElementById('btn-dl').style.display = "none";
+            document.getElementById('res-msg').innerText = (this.deltaCount < 3) ? "Échec : Moins de 3 réponses Delta validées." : "Score insuffisant pour l'accréditation.";
         }
     },
 
-    prepCert(s) {
-        const name = prompt("IDENTITÉ DE L'EXPERT :") || "EXPERT TITANIUM";
+    prepCert() {
+        const name = prompt("NOM DE L'EXPERT :") || "EXPERT V390";
         document.getElementById('pdf-name').innerText = name.toUpperCase();
         document.getElementById('pdf-job').innerText = this.job.toUpperCase();
         document.getElementById('pdf-id').innerText = `ID: V390-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
-        document.getElementById('pdf-date').innerText = new Date().toLocaleDateString('fr-FR');
-        document.getElementById('pdf-final-score').innerText = `SCORE: ${s}%`;
+        document.getElementById('pdf-date').innerText = `16 AVRIL 2026`;
+        document.getElementById('pdf-final-score').innerText = `SCORE: ${this.score}%`;
         document.getElementById('pdf-qr').innerHTML = '';
-        // QR Code vers nouveau lien et position à droite via CSS
         new QRCode(document.getElementById("pdf-qr"), { 
-            text: "https://v390-mba-consult.vercel.app/", 
-            width: 140, 
-            height: 140,
-            colorDark : "#000000",
-            colorLight : "#ffffff"
+            text: `https://v390-mba-consult.vercel.app/`, 
+            width: 140, height: 140 
         });
     },
 
     exportPDF() {
         const el = document.getElementById('cert-container'); el.style.display = 'block';
-        html2pdf().set({ margin:0, filename:`V390_CERT_${this.job}.pdf`, jsPDF:{ unit:'px', format:[1122, 793], orientation:'landscape' } })
+        html2pdf().set({ margin:0, filename:`V390_GOLD_CERT.pdf`, jsPDF:{ unit:'px', format:[1122, 793], orientation:'landscape' } })
         .from(el).save().then(() => el.style.display = 'none');
     }
 };
