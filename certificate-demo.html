@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Preview</title>
+    <style>
+        body {
+            background-image: url('logo.jpg');
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            color: #333;
+        }
+        .certificate {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 50px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 100px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .details {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        .qr-code {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+        }
+        .download-btn {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate">
+        <h1>CERTIFICATE OF EXPERTISE</h1>
+        <div class="details">
+            <p>Expert Name: John Doe</p>
+            <p>Job Title: Senior Developer</p>
+            <p>ID: 123456</p>
+            <p>Date: 2026-04-17</p>
+            <p>Score: 95%</p>
+        </div>
+        <img class="qr-code" src="path/to/qr-code.png" alt="QR Code">
+        <br>
+        <a href="path/to/certificate.pdf" class="download-btn">Download PDF</a>
+    </div>
+</body>
+</html>
