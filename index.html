@@ -1,4 +1,197 @@
 <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBA-Consult | Strategic KMS & Business Development</title>
+    <meta name="description" content="Expertise en Knowledge Management Systems (KMS) et développement stratégique en Tunisie et à l'international.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #003366; 
+            --accent: #00A8E8; 
+            --bg: #f4f7f9;
+            --text: #2c3e50;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #001a33 100%);
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .expertise-section {
+            background: var(--white);
+            max-width: 1000px;
+            margin: -30px auto 40px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 8px solid var(--accent);
+        }
+
+        .expertise-section h2 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        .expertise-text {
+            font-size: 1.1rem;
+            text-align: justify;
+            color: #444;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+        }
+
+        .location-tag {
+            display: inline-block;
+            background: #e1effe;
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: #eee;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .expertise-section { margin: -20px 20px 30px; padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>MBA-CONSULT</h1>
+    <p>Intelligence Commerciale & Global Business Development</p>
+</header>
+
+<div class="container">
+    <section class="expertise-section">
+        <h2>Expertise Stratégique & Vision KMS</h2>
+        <div class="expertise-text">
+            Spécialiste du déploiement de <strong>Knowledge Management Systems (KMS)</strong> de nouvelle génération, MBA-Consult accompagne les organisations vers un leadership économique et commercial durable. Basé en Tunisie, notre cabinet rayonne à l'échelle internationale pour transformer l'information brute en un avantage stratégique décisif. Nous concevons des écosystèmes numériques capables de diriger intelligemment la prise de décision, en intégrant des outils d'analyse financière et de gestion de flux optimisés. Notre mission est d'offrir une agilité commerciale sans précédent, permettant à nos partenaires, en Afrique comme partout dans le monde, de maîtriser les complexités des marchés modernes grâce à une architecture de savoir centralisée et performante.
+        </div>
+    </section>
+
+    <div class="grid">
+        <div class="card">
+            <div>
+                <span class="location-tag">PORTAIL GLOBAL</span>
+                <h3>Dashboard Business</h3>
+                <p>Interface unifiée pour le pilotage de vos projets stratégiques et le suivi des indicateurs de performance en temps réel.</p>
+            </div>
+            <a href="https://v390-mba-consult.vercel.app/" class="btn" target="_blank">Ouvrir le Dashboard</a>
+        </div>
+
+        <div class="card">
+            <div>
+                <span class="location-tag">ANALYSE TUNISIE & MONDE</span>
+                <h3>MBA Finance</h3>
+                <p>Outils d'intelligence économique et de modélisation financière pour sécuriser vos investissements et optimiser votre rentabilité.</p>
+            </div>
+            <a href="https://mba-consult-finance.streamlit.app/" class="btn" target="_blank">Lancer MBA Finance</a>
+        </div>
+
+        <div class="card">
+            <div>
+                <span class="location-tag">SOLUTIONS KMS</span>
+                <h3>QP Generator</h3>
+                <p>Système automatisé de génération de flux et de solutions pour une gestion opérationnelle fluide et sans compromis.</p>
+            </div>
+            <a href="https://mba-consult-qp-generator.streamlit.app/" class="btn" target="_blank">Accéder au QP Generator</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <strong>MBA-CONSULT TUNISIA</strong><br>
+    Expertise locale, Vision mondiale.<br>
+    &copy; 2026 - Tous droits réservés.
+</footer>
+
+</body>
+</html>
+<!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
