@@ -33,54 +33,6 @@
             overflow-x: hidden;
         }
 
-        /* --- NOUVELLE ENTÊTE DEMANDÉE --- */
-        .header-top-branding {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--navy);
-            padding: 20px 40px;
-            border-bottom: 3px solid var(--gold);
-            gap: 20px;
-        }
-        .header-top-branding .brand-logo { max-height: 120px; width: auto; order: 1; }
-        .header-top-branding .brand-photo { max-height: 120px; border-radius: 10px; border: 2px solid var(--gold); order: 3; }
-        .app-visuals-center { 
-            display: flex; 
-            gap: 15px; 
-            order: 2; 
-            flex-grow: 1; 
-            justify-content: center;
-        }
-        .app-visuals-center img {
-            height: 80px;
-            width: 120px;
-            object-fit: cover;
-            border: 1px solid rgba(212,175,55,0.3);
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .app-visuals-center img:hover { transform: scale(1.1); border-color: var(--gold); }
-
-        /* --- INFOGRAPHIE DE SYNTHÈSE DES APPLICATIONS --- */
-        .concept-summary {
-            background: linear-gradient(135deg, var(--navy), #001a33);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            margin: 20px auto;
-            text-align: center;
-            border: 1px solid var(--gold);
-        }
-        .concept-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 25px;
-        }
-        .concept-item { padding: 15px; border: 1px dashed var(--gold); border-radius: 8px; background: rgba(255,255,255,0.05); }
-        .concept-item i { color: var(--gold); margin-bottom: 10px; }
-
         /* --- PORTAL STYLES --- */
         .top-banner { background: var(--navy); padding: 10px 0; text-align: center; border-bottom: 2px solid var(--gold); }
         .top-banner img { max-height: 80px; width: auto; }
@@ -88,16 +40,35 @@
         header.main-header {
             background: linear-gradient(rgba(0, 51, 102, 0.9), rgba(0, 26, 51, 0.9)), 
                         url('1777385318883.png') center/cover;
-            color: white; padding: 5rem 1rem; text-align: center; position: relative;
+            color: white; padding: 3rem 1rem; text-align: center; position: relative;
+            display: flex; align-items: center; justify-content: space-between;
         }
+
+        /* Mise en page demandée : Logo Gauche, Images Milieu, Photo Droite */
+        .header-left { flex: 1; text-align: left; padding-left: 20px; }
+        .header-center { flex: 2; display: flex; flex-direction: column; align-items: center; }
+        .header-right { flex: 1; text-align: right; padding-right: 20px; }
+        
+        .logo-main { max-height: 120px; filter: drop-shadow(0 0 10px rgba(212,175,55,0.3)); }
 
         .profile-img {
             width: 150px; height: 150px; border-radius: 50%;
-            border: 4px solid var(--gold); margin-bottom: 20px;
+            border: 4px solid var(--gold);
             object-fit: cover; box-shadow: 0 0 20px rgba(212,175,55,0.5);
         }
 
-        header.main-header h1 { margin: 10px 0; font-size: 3rem; letter-spacing: 5px; font-weight: 900; }
+        header.main-header h1 { margin: 10px 0; font-size: 2.5rem; letter-spacing: 5px; font-weight: 900; }
+
+        /* Style de l'infographie de l'apport des 3 apps */
+        .app-synergy-viz {
+            width: 100%; background: var(--navy); padding: 30px; border-radius: 15px;
+            margin: 20px 0; display: flex; justify-content: space-around; align-items: center;
+            border: 1px solid var(--gold); position: relative; overflow: hidden;
+        }
+        .app-node { text-align: center; color: var(--gold); z-index: 2; flex: 1; }
+        .app-node i { font-size: 2.5rem; margin-bottom: 10px; display: block; }
+        .app-node span { font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
+        .synergy-line { position: absolute; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); width: 80%; top: 50%; z-index: 1; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
@@ -129,7 +100,7 @@
         }
         .btn-gold-p { background: var(--gold); color: var(--navy); }
 
-        /* --- TITANIUM INTERFACE STYLES --- */
+        /* --- TITANIUM INTERFACE STYLES (AS PROVIDED) --- */
         #titanium-root {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: var(--bg); color: var(--white); z-index: 10000; flex-direction: column;
@@ -156,6 +127,7 @@
         .opt-selected { background: var(--gold); color: var(--navy); font-weight: 900; }
         textarea { width: 100%; height: 140px; background: #000; color: var(--gold); border: 1px solid var(--gold); padding: 15px; margin-top: 15px; border-radius: 4px; resize: none; }
  
+        /* PDF GEOMETRY */
         #cert-container { width: 1122px; height: 793px; background: #FFF url('logo.png') no-repeat center; background-size: contain; color: #000; position: absolute; left:-9999px; border: 35px double var(--gold); display: block; box-sizing: border-box; }
         #pdf-qr { position: absolute; top: 60px; right: 60px; width: 140px; height: 140px; border: 1px solid #000; padding: 5px; }
         #pdf-sig { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 700px; text-align: center; border-top: 2px solid #000; padding-top: 10px; font-weight: bold; font-size: 1.2rem; letter-spacing: 2px; }
@@ -163,16 +135,6 @@
     </style>
 </head>
 <body>
-
-<div class="header-top-branding">
-    <img src="logo.png" class="brand-logo" alt="Logo MBA-Consult">
-    <div class="app-visuals-center">
-        <img src="5cc14985-1a06-4df7-a1a6-bb68c2d1f7e6.jpeg" alt="QP Generator">
-        <img src="1777385318883.png" alt="Risk Analysis">
-        <img src="7522aad7-0e48-4501-9251-410dcb21a0e8-QR-CODE.jpeg" alt="Accreditation">
-    </div>
-    <img src="Mohamed BenAbdallah.jpeg" class="brand-photo" alt="Mohamed Ben Abdallah">
-</div>
 
 <svg id="logo-v390" style="display:none" viewBox="0 0 100 100">
     <defs>
@@ -190,33 +152,47 @@
 </svg>
 
 <div id="portal-view">
+    <div class="top-banner">
+        <svg style="height:60px; width:60px;"><use href="#logo-v390"/></svg>
+    </div>
+
     <header class="main-header">
-        <img src="Mohamed BenAbdallah.jpeg" class="profile-img" alt="Mohamed Ben Abdallah">
-        <h1>MBA-CONSULT</h1>
-        <p style="font-size: 1.4rem; color: var(--gold); font-weight: 600;">Intelligence Commerciale & Global Business Development</p>
-        <p>Expertise de 33 ans | Oil, Gas & Banking | Lead Architect Semantic IA</p>
+        <div class="header-left">
+            <img src="logo.png" class="logo-main" alt="MBA-CONSULT LOGO">
+        </div>
+        
+        <div class="header-center">
+            <div style="display:flex; gap:15px; margin-bottom: 20px;">
+                <img src="5cc14985-1a06-4df7-a1a6-bb68c2d1f7e6.jpeg" style="height:60px; border:1px solid var(--gold);" alt="KMS 1">
+                <img src="1777385318883.png" style="height:60px; border:1px solid var(--gold);" alt="KMS 2">
+                <img src="7522aad7-0e48-4501-9251-410dcb21a0e8-QR-CODE.jpeg" style="height:60px; border:1px solid var(--gold);" alt="KMS 3">
+            </div>
+            <h1>MBA-CONSULT</h1>
+            <p style="font-size: 1.1rem; color: var(--gold); font-weight: 600;">Intelligence Commerciale & Global Business Development</p>
+        </div>
+
+        <div class="header-right">
+            <img src="Mohamed BenAbdallah.jpeg" class="profile-img" alt="Mohamed Ben Abdallah">
+        </div>
     </header>
 
     <div class="container">
-        <div class="concept-summary">
-            <h2 style="color: var(--gold); border-bottom: 2px solid var(--gold); display: inline-block; padding-bottom: 5px;">Convergence Titanium V390</h2>
-            <p style="margin-top: 15px; opacity: 0.9;">L'unification de trois piliers technologiques pour la suprématie décisionnelle.</p>
-            <div class="concept-grid">
-                <div class="concept-item">
-                    <i class="fas fa-file-shield fa-2x"></i>
-                    <h4>QP GENERATOR</h4>
-                    <p style="font-size: 0.8rem;">Vecteurs sémantiques & Normes API Industrielles.</p>
-                </div>
-                <div class="concept-item">
-                    <i class="fas fa-chart-radar fa-2x"></i>
-                    <h4>RISK MANAGEMENT</h4>
-                    <p style="font-size: 0.8rem;">Analyse Delta & Impact Stratégique Global.</p>
-                </div>
-                <div class="concept-item">
-                    <i class="fas fa-certificate fa-2x"></i>
-                    <h4>TITANIUM AUDIT</h4>
-                    <p style="font-size: 0.8rem;">Accréditation Elite & Scellé Numérique.</p>
-                </div>
+        <div class="app-synergy-viz">
+            <div class="synergy-line"></div>
+            <div class="app-node">
+                <i class="fas fa-file-signature"></i>
+                <span>QP Generator</span>
+                <p style="font-size:0.7rem; color:white;">Conformité Industrielle</p>
+            </div>
+            <div class="app-node">
+                <i class="fas fa-chart-pie"></i>
+                <span>Risk Dashboard</span>
+                <p style="font-size:0.7rem; color:white;">Analyse Delta / Finance</p>
+            </div>
+            <div class="app-node">
+                <i class="fas fa-award"></i>
+                <span>Elite Accreditation</span>
+                <p style="font-size:0.7rem; color:white;">Certification Sémantique</p>
             </div>
         </div>
 
