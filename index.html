@@ -81,6 +81,63 @@
         }
         .btn-gold-p { background: var(--gold); color: var(--navy); }
 
+        /* --- ADDED SYNERGY SECTION --- */
+        .synergy-container {
+            background: var(--navy);
+            color: white;
+            padding: 60px 20px;
+            margin-top: 40px;
+            border-top: 2px solid var(--gold);
+        }
+        .synergy-layout {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .synergy-logo-side { flex: 1; text-align: left; }
+        .synergy-logo-side img { max-width: 180px; filter: drop-shadow(0 0 10px var(--gold)); }
+        
+        .synergy-center { 
+            flex: 2; 
+            text-align: center; 
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--gold);
+        }
+        .synergy-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .synergy-gallery img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+        }
+        .synergy-photo-side { flex: 1; text-align: right; }
+        .synergy-photo-side img { 
+            width: 180px; 
+            height: 180px; 
+            border-radius: 15px; 
+            border: 3px solid var(--gold);
+            object-fit: cover;
+        }
+        .synergy-summary {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         /* --- TITANIUM INTERFACE STYLES (AS PROVIDED) --- */
         #titanium-root {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
@@ -191,6 +248,29 @@
             </div>
         </div>
     </div>
+
+    <section class="synergy-container">
+        <div class="synergy-layout">
+            <div class="synergy-logo-side">
+                <img src="logo.png" alt="Logo MBA Consult">
+            </div>
+            <div class="synergy-center">
+                <h2 style="color:var(--gold); margin-bottom:15px; font-size:1.8rem;">SYNERGIE ÉCOSYSTÈME OMNI-GENESIS</h2>
+                <div class="synergy-summary">
+                    Audit de Risque (Delta) + Certification Agile (QP) + Ingénierie Décisionnelle (V390)
+                </div>
+                <div class="synergy-gallery">
+                    <img src="5cc14985-1a06-4df7-a1a6-bb68c2d1f7e6.jpeg" alt="KMS Pillar 1">
+                    <img src="1777385318883.png" alt="KMS Pillar 2">
+                    <img src="7522aad7-0e48-4501-9251-410dcb21a0e8-QR-CODE.jpeg" alt="KMS Pillar 3">
+                </div>
+                <p style="margin-top:20px; font-size:0.9rem; font-style:italic; opacity:0.8;">Fusion de l'expertise industrielle et de l'intelligence sémantique pour une gouvernance infaillible.</p>
+            </div>
+            <div class="synergy-photo-side">
+                <img src="Mohamed BenAbdallah.jpeg" alt="Mohamed Ben Abdallah - Dirigeant">
+            </div>
+        </div>
+    </section>
 
     <footer style="text-align: center; padding: 60px; background: var(--navy); color: white; border-top: 4px solid var(--gold);">
         <svg style="height:50px; width:50px; margin-bottom:10px;"><use href="#logo-v390"/></svg><br>
