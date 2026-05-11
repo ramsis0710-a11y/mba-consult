@@ -42,7 +42,6 @@
             overflow-x: hidden;
         }
 
-        /* --- AJOUT STRUCTURE HEADER IMAGES --- */
         .header-identity {
             display: flex;
             justify-content: space-between;
@@ -60,8 +59,8 @@
             box-shadow: 0 0 15px rgba(212,175,55,0.3);
         }
 
-        .header-identity .logo-left { border-radius: 8px; } /* Logo MBA */
-        .header-identity .photo-right { border-radius: 50%; } /* Photo Mohamed */
+        .header-identity .logo-left { border-radius: 8px; }
+        .header-identity .photo-right { border-radius: 50%; }
         
         .central-apps-summary {
             flex: 1;
@@ -154,18 +153,25 @@
         #pdf-sig { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 700px; text-align: center; border-top: 2px solid #000; padding-top: 10px; font-weight: bold; font-size: 1.2rem; letter-spacing: 2px; }
         .pdf-inner { padding: 80px; text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100%; position: relative; z-index: 2; }
 
-        /* MODAL PAIEMENT */
+        /* Style spécifique pour la barrière de paiement */
         #payment-gate {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 20000; justify-content: center; align-items: center;
-        }
-        .gate-content {
-            background: var(--navy); border: 2px solid var(--gold); padding: 40px; border-radius: 15px;
-            max-width: 500px; text-align: center; color: white;
+            background: rgba(212,175,55,0.05);
+            border: 2px dashed var(--gold);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
         }
         .access-input {
-            width: 100%; padding: 15px; margin: 20px 0; border: 1px solid var(--gold);
-            background: #000; color: var(--gold); text-align: center; font-size: 1.5rem; letter-spacing: 5px;
+            width: 250px;
+            padding: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+            letter-spacing: 5px;
+            background: #000;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -185,20 +191,6 @@
     <ellipse cx="50" cy="50" rx="35" ry="12" fill="none" stroke="url(#gGrad)" stroke-width="1.5" transform="rotate(-45 50 50)"/>
     <path d="M50 15 L50 85 M15 50 L85 50" stroke="url(#gGrad)" stroke-width="1" stroke-dasharray="2,2"/>
 </svg>
-
-<div id="payment-gate">
-    <div class="gate-content">
-        <i class="fas fa-lock fa-3x" style="color:var(--gold); margin-bottom:20px;"></i>
-        <h2 style="color:var(--gold)">ACCÈS SÉCURISÉ REQUIS</h2>
-        <p style="margin-top:15px; font-size:0.9rem;">Pour obtenir votre certificat officiel, veuillez saisir votre code d'accès valide.</p>
-        <input type="text" id="access-code" class="access-input" placeholder="CODE V390">
-        <button class="btn-p btn-gold-p" style="width:100%" onclick="KMS.verifyCode()">DÉBLOQUER LE PDF</button>
-        <hr style="margin:20px 0; border:0; border-top:1px solid rgba(212,175,55,0.3)">
-        <p style="font-size:0.8rem; margin-bottom:15px;">Pas encore de code ? Payez via notre module officiel :</p>
-        <a href="https://mba-consult-qp-generator.streamlit.app/" target="_blank" class="btn-p" style="width:100%; background:#fff; color:#000;">ACCÉDER AU MODULE DE PAIEMENT (PLAN 0)</a>
-        <button class="btn-nav" style="margin-top:20px; border:none;" onclick="document.getElementById('payment-gate').style.display='none'">ANNULER</button>
-    </div>
-</div>
 
 <div id="portal-view">
     <div class="header-identity">
@@ -340,7 +332,18 @@
         <h1 id="res-score" style="font-size:7rem; color:var(--gold);">0%</h1>
         <h2 id="res-status" style="font-size:2rem; margin:20px 0;"></h2>
         <p id="res-msg" style="margin-bottom:40px;"></p>
-        <button id="btn-dl" class="btn-nav" style="display:none; padding:25px; width:100%;" onclick="KMS.exportPDF()" data-key="btn_download"></button>
+        
+        <div id="payment-gate" style="display:none;">
+            <p style="color:var(--gold); font-weight:bold;">ACCÈS AU PDF SÉCURISÉ</p>
+            <p style="font-size:0.8rem;">Veuillez entrer votre code d'accès pour générer le certificat.</p>
+            <input type="text" id="access-code" class="access-input" placeholder="CODE-V390">
+            <br>
+            <button class="btn-nav" style="background:var(--gold); color:var(--navy); padding:15px 30px; margin-bottom:10px;" onclick="KMS.verifyCode()">VALIDER ET OBTENIR LE PDF</button>
+            <p style="font-size:0.7rem; margin-top:10px;">Pas de code ?</p>
+            <a href="https://mba-consult-qp-generator.streamlit.app/" target="_blank" class="btn-nav" style="display:inline-block; font-size:0.7rem; text-decoration:none;">OBTENIR UN CODE SUR LE MODULE DE PAIEMENT</a>
+        </div>
+
+        <button id="btn-dl" class="btn-nav" style="display:none; padding:25px; width:100%;" onclick="KMS.showPaymentGate()" data-key="btn_download"></button>
      
         <div id="cert-container">
             <svg class="logo-cert-fixed"><use href="#logo-v390"/></svg>
@@ -409,7 +412,7 @@
             "Agri-Food": { icon:"fa-leaf", jobs:["Vertical Farming", "Agro-IA Spec", "Protein Scientist", "Bio-Auditeur 4.0", "Precision Agri", "Lab-Grown Food", "Bio-Polymer", "Irrigation Data", "Agri-Robotics", "Digital Nutrition", "AgTech Strategist", "Traceability Mgr", "Microbiologist", "Hydroponic Dir", "Cellular Agri"] },
             "Education": { icon:"fa-user-graduate", jobs:["Neuro-Pedagogue", "Meta-Campus Arch", "EdTech Data", "Adaptive Learning", "VR-Training Mgr", "Cognitive Analyst", "L&D Innovation", "E-Learning Dir", "Ed-IA Consultant", "Inclusion Mgr", "Gamification Eng", "AI Coach", "Strategy Dir", "Bchain-Diploma", "Hybrid Facilitator"] },
             "Commerce": { icon:"fa-shopping-bag", jobs:["Supply Strategist", "Pricing Expert", "Omnichannel Mgr", "Drone Logistics", "E-com Director", "Phygital Dir", "Sustainable Lead", "Retail Flow", "Bchain Sourcing", "Marketplace Spec", "Retail Arch", "Growth IA", "Last-Mile Mgr", "Franchise Dir", "Insight Analyst"] },
-            "Tourisme": { icon:"fa-globe-americas", jobs:["Space Tourism", "Hospitality Design", "Low Carbon Exp", "Revenue IA Mgr", "Immersive Exp", "Eco-Resort Mgr", "Cruise-Tech Lead", "Crypto Booking", "Smart Destination", "Green Transport", "Digital Marketing", "Heritage Digital", "MICE IA Planner", "Soft Mobility", "Travel Scientist"] }
+            "Tourisme": { icon:"fa-globe-americas", jobs:["Space Tourism", "Hospitality Design", "Low Carbon Exp", "Revenue IA Mgr", "Immersive Exp", "Eco-Resort Mgr", "Cruise-Tech Lead", "Cruise-Tech Lead", "Crypto Booking", "Smart Destination", "Green Transport", "Digital Marketing", "Heritage Digital", "MICE IA Planner", "Soft Mobility", "Travel Scientist"] }
         }
     };
      
@@ -420,7 +423,7 @@
             title_sectors: "SECTEURS STRATÉGIQUES",
             btn_next: "VALIDER & ANALYSER",
             btn_prev: "RETOUR",
-            btn_download: "TÉLÉCHARGER LE CERTIFICAT OR",
+            btn_download: "ACCÉDER AU CERTIFICAT OR",
             delta_label: "ANALYSE SÉMANTIQUE DELTA (IA VALIDATION)",
             pdf_intro: "Certifie solennellement après audit sémantique IA l'expertise de :",
             pdf_rank: "Au grade de Senior Expert International pour le métier de :",
@@ -435,7 +438,7 @@
             title_sectors: "STRATEGIC SECTORS",
             btn_next: "VALIDATE & ANALYZE",
             btn_prev: "BACK",
-            btn_download: "DOWNLOAD GOLD CERTIFICATE",
+            btn_download: "ACCESS GOLD CERTIFICATE",
             delta_label: "DELTA SEMANTIC ANALYSIS (AI VALIDATION)",
             pdf_intro: "Solemnly certifies after AI semantic audit the expertise of:",
             pdf_rank: "At the rank of International Senior Expert for the profession of:",
@@ -447,7 +450,7 @@
     };
      
     const KMS = {
-        lang: 'fr', sector: '', job: '', step: 0, score: 0, deltaCount: 0, responses: [], questions: [], history: ['p-intro'], accessGranted: false,
+        lang: 'fr', sector: '', job: '', step: 0, score: 0, deltaCount: 0, responses: [], questions: [], history: ['p-intro'],
      
         setLang(l) {
             this.lang = l;
@@ -517,7 +520,10 @@
             this.responses[this.step] = { idx: this.tempIdx, delta: deltaVal };
             
             if(this.tempIdx === 0) this.score += 20;
-            if(this.tempIdx === 3 && deltaVal.length > 20) this.score += 20;
+            if(this.tempIdx === 3 && deltaVal.length > 20) {
+                this.score += 20;
+                this.deltaCount++;
+            }
 
             document.getElementById('audit-score-realtime').innerText = `SCORE IA : ${this.score}%`;
             document.getElementById('delta-input').value = '';
@@ -531,11 +537,35 @@
         finish() {
             this.go('p-result');
             const resScore = document.getElementById('res-score');
-            resScore.innerText = this.score + "%";
-            document.getElementById('res-status').innerText = this.score >= 80 ? DICT[this.lang].res_pass : DICT[this.lang].res_fail;
-            if(this.score >= 80) {
-                document.getElementById('btn-dl').style.display = 'block';
-                this.prepPDF();
+            
+            // EXIGENCE : MINIMUM 3 RÉPONSES DELTA
+            if(this.deltaCount < 3) {
+                this.score = Math.min(this.score, 50); // Pénalité si pas assez de Delta
+                document.getElementById('res-status').innerText = "AUDIT INCOMPLET (DELTA MIN 3)";
+                document.getElementById('res-msg').innerText = "L'intelligence sémantique exige au moins 3 analyses détaillées (Option DELTA).";
+                resScore.innerText = this.score + "%";
+            } else {
+                resScore.innerText = this.score + "%";
+                document.getElementById('res-status').innerText = this.score >= 80 ? DICT[this.lang].res_pass : DICT[this.lang].res_fail;
+                if(this.score >= 80) {
+                    document.getElementById('btn-dl').style.display = 'block';
+                    this.prepPDF();
+                }
+            }
+        },
+
+        showPaymentGate() {
+            document.getElementById('btn-dl').style.display = 'none';
+            document.getElementById('payment-gate').style.display = 'block';
+        },
+
+        verifyCode() {
+            const code = document.getElementById('access-code').value.trim();
+            // Verification sémantique du code (Simulée ici, à lier à votre DB si besoin)
+            if(code.length >= 6) {
+                this.exportPDF();
+            } else {
+                alert("Code d'accès invalide ou expiré.");
             }
         },
 
@@ -545,32 +575,10 @@
             document.getElementById('pdf-id').innerText = "ID: V390-" + Math.random().toString(36).substr(2, 9).toUpperCase();
             document.getElementById('pdf-date').innerText = new Date().toLocaleDateString();
             document.getElementById('pdf-final-score').innerText = "SCORE: " + this.score + "%";
-            const qrDiv = document.getElementById("pdf-qr");
-            qrDiv.innerHTML = "";
-            new QRCode(qrDiv, { text: "https://v390-mba-consult.vercel.app/", width: 130, height: 130 });
-        },
-
-        verifyCode() {
-            const code = document.getElementById('access-code').value.trim();
-            // Logique de vérification simplifiée (à adapter selon vos codes générés en Plan 0)
-            if(code.length >= 4) { 
-                this.accessGranted = true;
-                document.getElementById('payment-gate').style.display = 'none';
-                this.executeExport();
-            } else {
-                alert("CODE INVALIDE. Veuillez passer par le module de paiement.");
-            }
+            new QRCode(document.getElementById("pdf-qr"), { text: "https://v390-mba-consult.vercel.app/", width: 130, height: 130 });
         },
 
         exportPDF() {
-            if(!this.accessGranted) {
-                document.getElementById('payment-gate').style.display = 'flex';
-                return;
-            }
-            this.executeExport();
-        },
-
-        executeExport() {
             const el = document.getElementById('cert-container');
             const opt = { margin: 0, filename: 'TITANIUM_CERTIFICATE.pdf', image: { type: 'jpeg', quality: 1 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'px', format: [1122, 793], orientation: 'landscape' } };
             html2pdf().set(opt).from(el).save();
