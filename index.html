@@ -1,676 +1,690 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="canonical" href="https://mba-consult.tn/" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    
-    <title>MBA-Consult | Strategic KMS & Titanium Omni-Genesis</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-            location.replace(`https://${location.hostname}${location.pathname}${location.search}`);
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="canonical" href="https://mba-consult.tn/" />
+<meta name="apple-mobile-web-app-capable" content="yes">
 
-    <style>
-        :root { 
-            --primary: #003366; 
-            --accent: #00A8E8; 
-            --gold: #D4AF37; 
-            --navy: #0A1128;
-            --bg: #f4f7f9;
-            --dark-bg: #01040A;
-            --text: #2c3e50;
-            --white: #ffffff;
-            --glass: rgba(212,175,55,0.08); 
-        }
+<title>MBA-Consult | Strategic KMS & Titanium Omni-Genesis</title>
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        .header-identity {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--navy);
-            padding: 20px 40px;
-            border-bottom: 3px solid var(--gold);
-        }
-
-        .header-identity img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border: 3px solid var(--gold);
-            box-shadow: 0 0 15px rgba(212,175,55,0.3);
-        }
-
-        .header-identity .logo-left { border-radius: 8px; }
-        .header-identity .photo-right { border-radius: 50%; }
-        
-        .central-apps-summary {
-            flex: 1;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .summary-banner {
-            max-width: 100%;
-            height: auto;
-            border: 1px solid var(--gold);
-            border-radius: 10px;
-        }
-
-        .top-banner { background: var(--navy); padding: 10px 0; text-align: center; border-bottom: 2px solid var(--gold); }
-        .top-banner img { max-height: 80px; width: auto; }
-
-        header.main-header {
-            background: linear-gradient(rgba(0, 51, 102, 0.9), rgba(0, 26, 51, 0.9)), 
-                        url('Strategic Warning.png') center/cover;
-            color: white; padding: 3rem 1rem; text-align: center; position: relative;
-        }
-
-        .profile-img {
-            width: 150px; height: 150px; border-radius: 50%;
-            border: 4px solid var(--gold); margin-bottom: 20px;
-            object-fit: cover; box-shadow: 0 0 20px rgba(212,175,55,0.5);
-        }
-
-        header.main-header h1 { margin: 10px 0; font-size: 3rem; letter-spacing: 5px; font-weight: 900; }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        .expertise-section {
-            background: var(--white); margin: -50px auto 40px; padding: 50px;
-            border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            border-top: 5px solid var(--gold); display: flex; flex-wrap: wrap; gap: 30px;
-        }
-
-        .expertise-content { flex: 2; min-width: 300px; }
-        .expertise-stats { flex: 1; min-width: 250px; background: var(--bg); padding: 20px; border-radius: 10px; }
-
-        .stat-bar { background: #ddd; height: 10px; border-radius: 5px; margin: 10px 0 20px; overflow: hidden; }
-        .stat-progress { background: var(--gold); height: 100%; border-radius: 5px; }
-
-        .grid-portal { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
-        .card-portal {
-            background: var(--white); border-radius: 15px; overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: transform 0.3s; border: 1px solid #eee;
-        }
-        .card-portal:hover { transform: translateY(-10px); }
-        .card-portal img { width: 100%; height: 180px; object-fit: cover; }
-        .card-portal-body { padding: 25px; text-align: center; }
-
-        .btn-p {
-            display: inline-block; background: var(--primary); color: white;
-            padding: 15px 30px; text-decoration: none; border-radius: 30px;
-            font-weight: 700; text-transform: uppercase; border: none; cursor: pointer; transition: 0.3s;
-        }
-        .btn-gold-p { background: var(--gold); color: var(--navy); }
-
-        #titanium-root {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: var(--bg); color: var(--white); z-index: 10000; flex-direction: column;
-            background: #01040A;
-        }
-
-        .header-logo { width: 48px; height: 48px; filter: drop-shadow(0 0 8px var(--gold)); margin-left: 15px; }
-        .logo-cert-fixed { width: 140px; height: 140px; position: absolute; top: 60px; left: 60px; }
- 
-        #nav-header { height: 75px; background: rgba(1,4,10,0.98); border-bottom: 1px solid var(--gold); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 1000; }
-        .btn-nav { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 8px 15px; cursor: pointer; border-radius: 4px; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; }
- 
-        .page { display: none; flex: 1; padding: 20px; width: 100%; max-width: 1100px; margin: 0 auto; overflow-y: auto; }
-        .active-page { display: flex; flex-direction: column; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
- 
-        .motivation-box { border-left: 4px solid var(--gold); padding: 20px; background: var(--glass); margin-bottom: 25px; line-height: 1.6; font-size: 0.9rem; }
-        .grid-t { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; padding-bottom: 40px; }
-        .card-t { background: #0A1128; border: 1px solid rgba(212,175,55,0.15); padding: 20px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.3s; }
-        .card-t:hover { border-color: var(--gold); background: rgba(212,175,55,0.1); }
- 
-        #audit-container { background: rgba(255,255,255,0.02); padding: 25px; border: 1px solid var(--gold); border-radius: 12px; }
-        .opt-btn { width: 100%; text-align: left; padding: 18px; margin: 10px 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #FFF; border-radius: 6px; cursor: pointer; }
-        .opt-selected { background: var(--gold); color: var(--navy); font-weight: 900; }
-        textarea { width: 100%; height: 140px; background: #000; color: var(--gold); border: 1px solid var(--gold); padding: 15px; margin-top: 15px; border-radius: 4px; resize: none; }
- 
-        #cert-container { width: 1122px; height: 793px; background: #FFF url('MBA-CONSULT  LOGO.jpg') no-repeat center; background-size: contain; color: #000; position: absolute; left:-9999px; border: 35px double var(--gold); display: block; box-sizing: border-box; }
-        #pdf-qr { position: absolute; top: 60px; right: 60px; width: 140px; height: 140px; border: 1px solid #000; padding: 5px; }
-        #pdf-sig { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 700px; text-align: center; border-top: 2px solid #000; padding-top: 10px; font-weight: bold; font-size: 1.2rem; letter-spacing: 2px; }
-        .pdf-inner { padding: 80px; text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100%; position: relative; z-index: 2; }
-
-        /* Style spécifique pour la barrière de paiement */
-        #payment-gate {
-            background: rgba(212,175,55,0.05);
-            border: 2px dashed var(--gold);
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 20px;
-            text-align: center;
-        }
-        .access-input {
-            width: 250px;
-            padding: 15px;
-            font-size: 1.2rem;
-            text-align: center;
-            letter-spacing: 5px;
-            background: #000;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            margin: 20px 0;
-        }
-
-        /* --- AJOUT INTERFACE SCRAPING SÉMANTIQUE --- */
-        #semantic-feed-section {
-            margin: 40px 0;
-            padding: 30px;
-            background: var(--navy);
-            border: 2px solid var(--gold);
-            border-radius: 15px;
-        }
-        .feed-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            border-bottom: 1px solid var(--gold);
-            padding-bottom: 10px;
-        }
-        .feed-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .feed-item {
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: 0.3s;
-            border: 1px solid rgba(212,175,55,0.2);
-        }
-        .feed-item:hover { border-color: var(--gold); transform: scale(1.02); }
-        .feed-media { width: 100%; height: 150px; background: #000; object-fit: cover; }
-        .feed-content { padding: 15px; color: #fff; }
-        .feed-tag { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; font-weight: bold; }
-        .feed-title { font-size: 1rem; margin: 8px 0; line-height: 1.3; }
-        .pulse-icon { color: #ff4d4d; animation: pulse 1.5s infinite; margin-right: 10px; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-    </style>
-</head>
-<body>
-
-<svg id="logo-v390" style="display:none" viewBox="0 0 100 100">
-    <defs>
-        <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#D4AF37"/>
-            <stop offset="50%" style="stop-color:#FBF5B7"/>
-            <stop offset="100%" style="stop-color:#AA8A2E"/>
-        </linearGradient>
-    </defs>
-    <path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="none" stroke="url(#gGrad)" stroke-width="5"/>
-    <circle cx="50" cy="50" r="10" fill="url(#gGrad)"/>
-    <ellipse cx="50" cy="50" rx="35" ry="12" fill="none" stroke="url(#gGrad)" stroke-width="1.5" transform="rotate(45 50 50)"/>
-    <ellipse cx="50" cy="50" rx="35" ry="12" fill="none" stroke="url(#gGrad)" stroke-width="1.5" transform="rotate(-45 50 50)"/>
-    <path d="M50 15 L50 85 M15 50 L85 50" stroke="url(#gGrad)" stroke-width="1" stroke-dasharray="2,2"/>
-</svg>
-
-<div id="portal-view">
-    <div class="header-identity">
-        <img src="MBA-CONSULT  LOGO.jpg" class="logo-left" alt="Logo MBA-Consult">
-        
-        <div class="central-apps-summary">
-            <svg class="summary-banner" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
-                <rect width="400" height="120" fill="#0A1128" rx="10"/>
-                <text x="50%" y="30" font-family="Arial" font-size="14" fill="#D4AF37" text-anchor="middle" font-weight="bold">SYNERGIE MBA-CONSULT V390</text>
-                <circle cx="80" cy="70" r="25" fill="#003366" stroke="#D4AF37" stroke-width="2"/>
-                <text x="80" y="75" font-size="8" fill="white" text-anchor="middle">KMS IA</text>
-                <circle cx="200" cy="70" r="25" fill="#003366" stroke="#D4AF37" stroke-width="2"/>
-                <text x="200" y="75" font-size="8" fill="white" text-anchor="middle">FINANCE</text>
-                <circle cx="320" cy="70" r="25" fill="#003366" stroke="#D4AF37" stroke-width="2"/>
-                <text x="320" y="75" font-size="8" fill="white" text-anchor="middle">QUALITY</text>
-                <path d="M105 70 L175 70 M225 70 L295 70" stroke="#D4AF37" stroke-width="1" stroke-dasharray="4"/>
-            </svg>
-        </div>
-
-        <img src="Mohamed BenAbdallah.jpeg" class="photo-right" alt="Mohamed Ben Abdallah">
-    </div>
-
-    <div class="top-banner">
-        <svg style="height:60px; width:60px;"><use href="#logo-v390"/></svg>
-    </div>
-
-    <header class="main-header">
-        <h1>MBA-CONSULT</h1>
-        <p style="font-size: 1.4rem; color: var(--gold); font-weight: 600;">Intelligence Commerciale & Global Business Development</p>
-        <p>Expertise de 33 ans | Oil, Gas & Banking | Lead Architect Semantic AI</p>
-    </header>
-
-    <div class="container">
-        <section id="semantic-feed-section">
-            <div class="feed-header">
-                <h2 style="color: var(--gold);"><i class="fas fa-rss pulse-icon"></i> GLOBAL SEMANTIC VECTORS WATCH</h2>
-                <span id="update-timestamp" style="color: #fff; font-size: 0.8rem; opacity: 0.7;">LIVE UPDATING...</span>
-            </div>
-            <div id="semantic-feed-container" class="feed-grid">
-                <div style="color: var(--gold); text-align: center; width: 100%; grid-column: 1/-1;">Initialisation du scraping KMS V390...</div>
-            </div>
-        </section>
-
-        <section class="expertise-section">
-            <div class="expertise-content">
-                <h2 style="color: var(--primary); font-size: 2rem;">Vision Stratégique KMS</h2>
-                <p>Sous la direction de <strong>Mohamed Ben Abdallah</strong>, MBA-Consult déploie des <em>Knowledge Management Systems</em> (KMS) conçus pour la suprématie économique. Notre cadre <strong>Titanium V390</strong> intègre l'intelligence artificielle sémantique pour transformer vos données en actifs décisionnels stratégiques.</p>
-                <button class="btn-p btn-gold-p" style="width: 100%; font-size: 1.2rem; margin-top:20px;" onclick="launchTitanium()">
-                    <i class="fas fa-shield-halved"></i> LANCER L'INTERFACE OMNI-GENESIS
-                </button>
-            </div>
-            <div class="expertise-stats">
-                <h3 style="margin-top: 0;">Compétences Clés</h3>
-                <label>Management Exécutif (98%)</label>
-                <div class="stat-bar"><div class="stat-progress" style="width: 98%;"></div></div>
-                <label>Ingénierie Financière (94%)</label>
-                <div class="stat-bar"><div class="stat-progress" style="width: 94%;"></div></div>
-                <label>KMS & Digital (90%)</label>
-                <div class="stat-bar"><div class="stat-progress" style="width: 90%;"></div></div>
-            </div>
-        </section>
-
-        <div class="grid-portal">
-            <div class="card-portal">
-                <img src="5cc14985-1a06-4df7-a1a6-bb68c2d1f7e6.jpeg" alt="Semantic Vectors">
-                <div class="card-portal-body">
-                    <h3>QP Generator : L'Infrastructure Sémantique</h3>
-                    <p>Preuve d'expertise humaine à travers les vecteurs sémantiques avancés.</p>
-                    <a href="https://mba-consult-qp-generator.streamlit.app/" class="btn-p" style="margin-top:15px;" target="_blank">Explorer</a>
-                </div>
-            </div>
-            <div class="card-portal">
-                <img src="Strategic Warning.png" alt="Strategic Warning">
-                <div class="card-portal-body">
-                    <h3>Risk Management</h3>
-                    <p>Évaluation de l'impact catastrophique des décisions stratégiques mondiales.</p>
-                    <a href="https://mba-consult-finance.streamlit.app/" class="btn-p" style="margin-top:15px;" target="_blank">Analyse Delta</a>
-                </div>
-            </div>
-            <div class="card-portal">
-                <img src="7522aad7-0e48-4501-9251-410dcb21a0e8-QR-CODE.jpeg" alt="Accréditation">
-                <div class="card-portal-body">
-                    <h3>Elite Accreditation</h3>
-                    <p>Obtenez votre certificat d'expertise scellé via le protocole V390.</p>
-                    <button class="btn-p" style="margin-top:15px;" onclick="launchTitanium()">Démarrer l'Audit</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer style="text-align: center; padding: 60px; background: var(--navy); color: white; border-top: 4px solid var(--gold);">
-        <svg style="height:50px; width:50px; margin-bottom:10px;"><use href="#logo-v390"/></svg><br>
-        <strong>MBA-CONSULT TUNISIA</strong><br>
-        Sfax & Tunis | +216 29.205.260 | contact@mba.consult.tn <br>
-        <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 20px;">&copy; 2026 OMNI-GENESIS PROTOCOL. SÉCURISÉ & SCELLÉ.</p>
-    </footer>
-</div>
-
-<div id="titanium-root">
-    <header id="nav-header">
-        <button class="btn-nav" onclick="closeTitanium()"><i class="fas fa-chevron-left"></i> RETOUR</button>
-        <div style="color:var(--gold); font-weight:900; letter-spacing:3px; font-size:0.9rem;">TITANIUM</div>
-        <div style="display:flex; align-items:center;">
-            <div id="lang-switch">
-                <button class="btn-nav" onclick="KMS.setLang('fr')">FR</button>
-                <button class="btn-nav" onclick="KMS.setLang('en')">EN</button>
-            </div>
-            <svg class="header-logo"><use href="#logo-v390"/></svg>
-        </div>
-    </header>
-    
-    <div id="p-intro" class="page active-page">
-        <h1 style="color:var(--gold); text-align:center; font-size:2.8rem; margin-top:20px;">OMNI-GENESIS</h1>
-        <p style="text-align:center; color:var(--gold); letter-spacing:8px; font-size:0.8rem; margin-bottom:30px;">ULTIME & SCELLÉ</p>
-        <div class="motivation-box" id="intro-txt"></div>
-        <button class="btn-nav" style="width:100%; padding:25px; font-size:1.5rem;" onclick="KMS.go('p-sectors')" data-key="btn_start"></button>
-    </div>
-    
-    <div id="p-sectors" class="page">
-        <h2 style="color:var(--gold); text-align:center; margin-bottom:20px;" data-key="title_sectors"></h2>
-        <div id="sector-grid" class="grid-t"></div>
-    </div>
-    
-    <div id="p-jobs" class="page">
-        <h2 id="sector-display" style="color:var(--gold); text-align:center; margin-bottom:20px;"></h2>
-        <div id="job-grid" class="grid-t"></div>
-    </div>
-    
-    <div id="p-audit" class="page">
-        <div id="audit-container">
-            <div style="display:flex; justify-content:space-between; color:var(--gold); font-size:0.8rem; margin-bottom:15px;">
-                <span id="audit-step"></span>
-                <span id="audit-score-realtime">SCORE IA : 0%</span>
-            </div>
-            <h3 id="q-text" style="min-height:80px; font-size:1.2rem;"></h3>
-            <div id="opt-box"></div>
-            <div id="delta-box" style="display:none; margin-top:20px;">
-                <p style="color:var(--gold); font-weight:bold; font-size:0.8rem;" data-key="delta_label"></p>
-                <textarea id="delta-input" placeholder="Saisissez votre analyse technique ici..."></textarea>
-            </div>
-            <div style="display:flex; gap:15px; margin-top:30px;">
-                <button class="btn-nav" style="flex:1" onclick="KMS.prevQ()" data-key="btn_prev"></button>
-                <button class="btn-nav" style="flex:2; background:var(--gold); color:var(--navy);" onclick="KMS.nextQ()" data-key="btn_next"></button>
-            </div>
-        </div>
-    </div>
-    
-    <div id="p-result" class="page" style="text-align:center; justify-content:center;">
-        <h1 id="res-score" style="font-size:7rem; color:var(--gold);">0%</h1>
-        <h2 id="res-status" style="font-size:2rem; margin:20px 0;"></h2>
-        <p id="res-msg" style="margin-bottom:40px;"></p>
-        
-        <div id="payment-gate" style="display:none;">
-            <p style="color:var(--gold); font-weight:bold;">ACCÈS AU PDF SÉCURISÉ</p>
-            <p style="font-size:0.8rem;">Veuillez entrer votre code d'accès pour générer le certificat.</p>
-            <input type="text" id="access-code" class="access-input" placeholder="CODE-V390">
-            <br>
-            <button class="btn-nav" style="background:var(--gold); color:var(--navy); padding:15px 30px; margin-bottom:10px;" onclick="KMS.verifyCode()">VALIDER ET OBTENIR LE PDF</button>
-            <p style="font-size:0.7rem; margin-top:10px;">Pas de code ?</p>
-            <a href="https://mba-consult-qp-generator.streamlit.app/" target="_blank" class="btn-nav" style="display:inline-block; font-size:0.7rem; text-decoration:none;">OBTENIR UN CODE SUR LE MODULE DE PAIEMENT</a>
-        </div>
-
-        <button id="btn-dl" class="btn-nav" style="display:none; padding:25px; width:100%;" onclick="KMS.showPaymentGate()" data-key="btn_download"></button>
-     
-        <div id="cert-container">
-            <svg class="logo-cert-fixed"><use href="#logo-v390"/></svg>
-            <div id="pdf-qr"></div>
-            <div class="pdf-inner">
-                <h1 style="font-size:55px; font-family:serif; letter-spacing:4px; border-bottom:3px solid #000; display:inline-block; margin-bottom:30px;">CERTIFICATE OF EXPERTISE</h1>
-                <p style="font-size:22px; color:#444;" data-key="pdf_intro"></p>
-                <h2 id="pdf-name" style="font-size:50px; color:#D4AF37; margin:20px 0;"></h2>
-                <p style="font-size:24px;" data-key="pdf_rank"></p>
-                <h3 id="pdf-job" style="font-size:42px; margin-top:10px;"></h3>
-                <div style="margin-top:100px; display:flex; justify-content:space-around; font-size:20px; font-weight:bold;">
-                    <span id="pdf-id"></span>
-                    <span id="pdf-date"></span>
-                    <span id="pdf-final-score"></span>
-                </div>
-            </div>
-            <div id="pdf-sig">OMNI-GENESIS DIGITAL SEAL - TITANIUM GRADE</div>
-        </div>
-    </div>
-</div>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <script>
-    /* LOGIQUE DE SCRAPING AUTOMATIQUE POUR LES VECTEURS SÉMANTIQUES */
-    const SEMANTIC_SCRAPER = {
-        mockData: [
-            { domain: "AI & FINTECH", title: "Optimisation des vecteurs sémantiques pour le trading haute fréquence", img: "https://images.unsplash.com/photo-1611974714851-eb60516122d6?auto=format&fit=crop&w=400&q=80" },
-            { domain: "MEDTECH", title: "Vecteurs de parenté protéique : Nouvelle avancée en oncologie sémantique", img: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=400&q=80" },
-            { domain: "OIL & GAS", title: "Analyse prédictive des flux via embeddings sémantiques Titanium V390", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80" }
-        ],
-        async refresh() {
-            const container = document.getElementById('semantic-feed-container');
-            const timeEl = document.getElementById('update-timestamp');
+if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+location.replace(`https://${location.hostname}${location.pathname}${location.search}`);
+}
+</script>
+<style>
+:root {
+--primary: #003366;
+--accent: #00A8E8;
+--gold: #D4AF37;
+--navy: #0A1128;
+--bg: #f4f7f9;
+--dark-bg: #01040A;
+--text: #2c3e50;
+--white: #ffffff;
+--glass: rgba(212,175,55,0.08);
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+body {
+font-family: 'Inter', sans-serif;
+background-color: var(--bg);
+color: var(--text);
+line-height: 1.7;
+overflow-x: hidden;
+}
+.header-identity {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: var(--navy);
+padding: 20px 40px;
+border-bottom: 3px solid var(--gold);
+}
+.header-identity img {
+width: 150px;
+height: 150px;
+object-fit: cover;
+border: 3px solid var(--gold);
+box-shadow: 0 0 15px rgba(212,175,55,0.3);
+}
+.header-identity .logo-left { border-radius: 8px; }
+.header-identity .photo-right { border-radius: 50%; }
+
+.central-apps-summary {
+flex: 1;
+text-align: center;
+padding: 0 20px;
+}
+.summary-banner {
+max-width: 100%;
+height: auto;
+border: 1px solid var(--gold);
+border-radius: 10px;
+}
+.top-banner { background: var(--navy); padding: 10px 0; text-align: center; border-bottom: 2px solid var(--gold); }
+.top-banner img { max-height: 80px; width: auto; }
+header.main-header {
+background: linear-gradient(rgba(0, 51, 102, 0.9), rgba(0, 26, 51, 0.9)),
+url('Strategic Warning.png') center/cover;
+color: white; padding: 3rem 1rem; text-align: center; position: relative;
+}
+.profile-img {
+width: 150px; height: 150px; border-radius: 50%;
+border: 4px solid var(--gold); margin-bottom: 20px;
+object-fit: cover; box-shadow: 0 0 20px rgba(212,175,55,0.5);
+}
+header.main-header h1 { margin: 10px 0; font-size: 3rem; letter-spacing: 5px; font-weight: 900; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.expertise-section {
+background: var(--white); margin: -50px auto 40px; padding: 50px;
+border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+border-top: 5px solid var(--gold); display: flex; flex-wrap: wrap; gap: 30px;
+}
+.expertise-content { flex: 2; min-width: 300px; }
+.expertise-stats { flex: 1; min-width: 250px; background: var(--bg); padding: 20px; border-radius: 10px; }
+.stat-bar { background: #ddd; height: 10px; border-radius: 5px; margin: 10px 0 20px; overflow: hidden; }
+.stat-progress { background: var(--gold); height: 100%; border-radius: 5px; }
+.grid-portal { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
+.card-portal {
+background: var(--white); border-radius: 15px; overflow: hidden;
+box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: transform 0.3s; border: 1px solid #eee;
+}
+.card-portal:hover { transform: translateY(-10px); }
+.card-portal img { width: 100%; height: 180px; object-fit: cover; }
+.card-portal-body { padding: 25px; text-align: center; }
+.btn-p {
+display: inline-block; background: var(--primary); color: white;
+padding: 15px 30px; text-decoration: none; border-radius: 30px;
+font-weight: 700; text-transform: uppercase; border: none; cursor: pointer; transition: 0.3s;
+}
+.btn-gold-p { background: var(--gold); color: var(--navy); }
+#titanium-root {
+display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+background: var(--bg); color: var(--white); z-index: 10000; flex-direction: column;
+background: #01040A;
+}
+.header-logo { width: 48px; height: 48px; filter: drop-shadow(0 0 8px var(--gold)); margin-left: 15px; }
+.logo-cert-fixed { width: 140px; height: 140px; position: absolute; top: 60px; left: 60px; }
+
+#nav-header { height: 75px; background: rgba(1,4,10,0.98); border-bottom: 1px solid var(--gold); display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
+z-index: 1000; }
+.btn-nav { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 8px 15px; cursor: pointer; border-radius: 4px; font-weight: bold;
+font-size: 0.75rem; text-transform: uppercase; }
+
+.page { display: none; flex: 1; padding: 20px; width: 100%; max-width: 1100px; margin: 0 auto; overflow-y: auto; }
+.active-page { display: flex; flex-direction: column; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.motivation-box { border-left: 4px solid var(--gold); padding: 20px; background: var(--glass); margin-bottom: 25px; line-height: 1.6; font-size: 0.9rem; }
+.grid-t { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; padding-bottom: 40px; }
+.card-t { background: #0A1128; border: 1px solid rgba(212,175,55,0.15); padding: 20px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.3s; }
+.card-t:hover { border-color: var(--gold); background: rgba(212,175,55,0.1); }
+
+#audit-container { background: rgba(255,255,255,0.02); padding: 25px; border: 1px solid var(--gold); border-radius: 12px; }
+.opt-btn { width: 100%; text-align: left; padding: 18px; margin: 10px 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #FFF;
+border-radius: 6px; cursor: pointer; }
+.opt-selected { background: var(--gold); color: var(--navy); font-weight: 900; }
+textarea { width: 100%; height: 140px; background: #000; color: var(--gold); border: 1px solid var(--gold); padding: 15px; margin-top: 15px; border-radius: 4px;
+resize: none; }
+
+#cert-container { width: 1122px; height: 793px; background: #FFF url('MBA-CONSULT  LOGO.jpg') no-repeat center; background-size: contain; color: #000; position: absolute; left:-9999px;
+border: 35px double var(--gold); display: block; box-sizing: border-box; }
+#pdf-qr { position: absolute; top: 60px; right: 60px; width: 140px; height: 140px; border: 1px solid #000; padding: 5px; }
+#pdf-sig { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 700px; text-align: center; border-top: 2px solid #000; padding-top: 10px;
+font-weight: bold; font-size: 1.2rem; letter-spacing: 2px; }
+.pdf-inner { padding: 80px; text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100%; position: relative; z-index: 2; }
+/* Style spécifique pour la barrière de paiement */
+#payment-gate {
+background: rgba(212,175,55,0.05);
+border: 2px dashed var(--gold);
+padding: 30px;
+border-radius: 15px;
+margin-top: 20px;
+text-align: center;
+}
+.access-input {
+width: 250px;
+padding: 15px;
+font-size: 1.2rem;
+text-align: center;
+letter-spacing: 5px;
+background: #000;
+border: 1px solid var(--gold);
+color: var(--gold);
+margin: 20px 0;
+}
+/* --- INTERFACE DE VEILLE SÉMANTIQUE MBA-V390 --- */
+#semantic-feed-section {
+margin: 40px 0;
+padding: 30px;
+background: var(--navy);
+border: 2px solid var(--gold);
+border-radius: 15px;
+}
+.feed-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 25px;
+border-bottom: 1px solid var(--gold);
+padding-bottom: 10px;
+}
+.feed-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 20px;
+}
+.feed-item {
+background: rgba(255,255,255,0.05);
+border-radius: 10px;
+overflow: hidden;
+transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+border: 1px solid rgba(212,175,55,0.2);
+position: relative;
+}
+.feed-item:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(212,175,55,0.2); }
+.feed-media-container { position: relative; width: 100%; height: 180px; background: #000; overflow: hidden; }
+.feed-media { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.3s; }
+.feed-item:hover .feed-media { opacity: 1; transform: scale(1.1); }
+.video-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--gold); font-size: 2rem; opacity: 0.7; }
+.feed-content { padding: 15px; color: #fff; }
+.feed-tag { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 5px; }
+.feed-title { font-size: 1rem; margin: 8px 0; line-height: 1.3; font-weight: 700; color: #fff; text-decoration: none; display: block; }
+.feed-title:hover { color: var(--gold); }
+.pulse-icon { color: #ff4d4d; animation: pulse 1.5s infinite; margin-right: 10px; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+</style>
+</head>
+<body>
+<svg id="logo-v390" style="display:none" viewBox="0 0 100 100">
+<defs>
+<linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" style="stop-color:#D4AF37"/>
+<stop offset="50%" style="stop-color:#FBF5B7"/>
+<stop offset="100%" style="stop-color:#AA8A2E"/>
+</linearGradient>
+</defs>
+<path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="none" stroke="url(#gGrad)" stroke-width="5"/>
+<circle cx="50" cy="50" r="10" fill="url(#gGrad)"/>
+<ellipse cx="50" cy="50" rx="35" ry="12" fill="none" stroke="url(#gGrad)" stroke-width="1.5" transform="rotate(45 50 50)"/>
+<ellipse cx="50" cy="50" rx="35" ry="12" fill="none" stroke="url(#gGrad)" stroke-width="1.5" transform="rotate(-45 50 50)"/>
+<path d="M50 15 L50 85 M15 50 L85 50" stroke="url(#gGrad)" stroke-width="1" stroke-dasharray="2,2"/>
+</svg>
+<div id="portal-view">
+<div class="header-identity">
+<img src="MBA-CONSULT  LOGO.jpg" class="logo-left" alt="Logo MBA-Consult">
+
+<div class="central-apps-summary">
+<svg class="summary-banner" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+<rect width="400" height="120" fill="#0A1128" rx="10"/>
+<text x="50%" y="30" font-family="Arial" font-size="14" fill="#D4AF37" text-anchor="middle" font-weight="bold">SYNERGIE MBA-CONSULT V390</text>
+<circle cx="80" cy="70" r="25" fill="#003366" stroke="#D4AF37" stroke-width="2"/>
+<text x="80" y="75" font-size="8" fill="white" text-anchor="middle">KMS IA</text>
+<circle cx="200" cy="70" r="25" fill="#003366" stroke="#D4AF37" stroke-width="2"/>
+<text x="200" y="75" font-size="8" fill="white" text-anchor="middle">FINANCE</text>
+<circle cx="320" cy="70" r="25" fill="#003366" stroke="#D4AF37" stroke-width="2"/>
+<text x="320" y="75" font-size="8" fill="white" text-anchor="middle">QUALITY</text>
+<path d="M105 70 L175 70 M225 70 L295 70" stroke="#D4AF37" stroke-width="1" stroke-dasharray="4"/>
+</svg>
+</div>
+<img src="Mohamed BenAbdallah.jpeg" class="photo-right" alt="Mohamed Ben Abdallah">
+</div>
+<div class="top-banner">
+<svg style="height:60px; width:60px;"><use href="#logo-v390"/></svg>
+</div>
+<header class="main-header">
+<h1>MBA-CONSULT</h1>
+<p style="font-size: 1.4rem; color: var(--gold); font-weight: 600;">Intelligence Commerciale & Global Business Development</p>
+<p>Expertise de 33 ans | Oil, Gas & Banking | Lead Architect Semantic AI</p>
+</header>
+<div class="container">
+<section id="semantic-feed-section">
+<div class="feed-header">
+<h2 style="color: var(--gold);"><i class="fas fa-rss pulse-icon"></i> GLOBAL SEMANTIC VECTORS WATCH</h2>
+<span id="update-timestamp" style="color: #fff; font-size: 0.8rem; opacity: 0.7;">SCRAPING EN COURS...</span>
+</div>
+<div id="semantic-feed-container" class="feed-grid">
+<div style="color: var(--gold); text-align: center; width: 100%; grid-column: 1/-1;">Initialisation du scraping KMS V390...</div>
+</div>
+</section>
+<section class="expertise-section">
+<div class="expertise-content">
+<h2 style="color: var(--primary); font-size: 2rem;">Vision Stratégique KMS</h2>
+<p>Sous la direction de <strong>Mohamed Ben Abdallah</strong>, MBA-Consult déploie des <em>Knowledge Management Systems</em> (KMS) conçus pour la suprématie économique.
+Notre cadre <strong>Titanium V390</strong> intègre l'intelligence artificielle sémantique pour transformer vos données en actifs décisionnels stratégiques.</p>
+<button class="btn-p btn-gold-p" style="width: 100%; font-size: 1.2rem; margin-top:20px;" onclick="launchTitanium()">
+<i class="fas fa-shield-halved"></i> LANCER L'INTERFACE OMNI-GENESIS
+</button>
+</div>
+<div class="expertise-stats">
+<h3 style="margin-top: 0;">Compétences Clés</h3>
+<label>Management Exécutif (98%)</label>
+<div class="stat-bar"><div class="stat-progress" style="width: 98%;"></div></div>
+<label>Ingénierie Financière (94%)</label>
+<div class="stat-bar"><div class="stat-progress" style="width: 94%;"></div></div>
+<label>KMS & Digital (90%)</label>
+<div class="stat-bar"><div class="stat-progress" style="width: 90%;"></div></div>
+</div>
+</section>
+<div class="grid-portal">
+<div class="card-portal">
+<img src="5cc14985-1a06-4df7-a1a6-bb68c2d1f7e6.jpeg" alt="Semantic Vectors">
+<div class="card-portal-body">
+<h3>QP Generator : L'Infrastructure Sémantique</h3>
+<p>Preuve d'expertise humaine à travers les vecteurs sémantiques avancés.</p>
+<a href="https://mba-consult-qp-generator.streamlit.app/" class="btn-p" style="margin-top:15px;" target="_blank">Explorer</a>
+</div>
+</div>
+<div class="card-portal">
+<img src="Strategic Warning.png" alt="Strategic Warning">
+<div class="card-portal-body">
+<h3>Risk Management</h3>
+<p>Évaluation de l'impact catastrophique des décisions stratégiques mondiales.</p>
+<a href="https://mba-consult-finance.streamlit.app/" class="btn-p" style="margin-top:15px;" target="_blank">Analyse Delta</a>
+</div>
+</div>
+<div class="card-portal">
+<img src="7522aad7-0e48-4501-9251-410dcb21a0e8-QR-CODE.jpeg" alt="Accréditation">
+<div class="card-portal-body">
+<h3>Elite Accreditation</h3>
+<p>Obtenez votre certificat d'expertise scellé via le protocole V390.</p>
+<button class="btn-p" style="margin-top:15px;" onclick="launchTitanium()">Démarrer l'Audit</button>
+</div>
+</div>
+</div>
+</div>
+<footer style="text-align: center; padding: 60px; background: var(--navy); color: white; border-top: 4px solid var(--gold);">
+<svg style="height:50px; width:50px; margin-bottom:10px;"><use href="#logo-v390"/></svg><br>
+<strong>MBA-CONSULT TUNISIA</strong><br>
+Sfax & Tunis | +216 29.205.260 | contact@mba.consult.tn <br>
+<p style="font-size: 0.8rem; opacity: 0.6; margin-top: 20px;">&copy; 2026 OMNI-GENESIS PROTOCOL. SÉCURISÉ & SCELLÉ.</p>
+</footer>
+</div>
+<div id="titanium-root">
+<header id="nav-header">
+<button class="btn-nav" onclick="closeTitanium()"><i class="fas fa-chevron-left"></i> RETOUR</button>
+<div style="color:var(--gold); font-weight:900; letter-spacing:3px; font-size:0.9rem;">TITANIUM</div>
+<div style="display:flex; align-items:center;">
+<div id="lang-switch">
+<button class="btn-nav" onclick="KMS.setLang('fr')">FR</button>
+<button class="btn-nav" onclick="KMS.setLang('en')">EN</button>
+</div>
+<svg class="header-logo"><use href="#logo-v390"/></svg>
+</div>
+</header>
+
+<div id="p-intro" class="page active-page">
+<h1 style="color:var(--gold); text-align:center; font-size:2.8rem; margin-top:20px;">OMNI-GENESIS</h1>
+<p style="text-align:center; color:var(--gold); letter-spacing:8px; font-size:0.8rem; margin-bottom:30px;">ULTIME & SCELLÉ</p>
+<div class="motivation-box" id="intro-txt"></div>
+<button class="btn-nav" style="width:100%; padding:25px; font-size:1.5rem;" onclick="KMS.go('p-sectors')" data-key="btn_start"></button>
+</div>
+
+<div id="p-sectors" class="page">
+<h2 style="color:var(--gold); text-align:center; margin-bottom:20px;" data-key="title_sectors"></h2>
+<div id="sector-grid" class="grid-t"></div>
+</div>
+
+<div id="p-jobs" class="page">
+<h2 id="sector-display" style="color:var(--gold); text-align:center; margin-bottom:20px;"></h2>
+<div id="job-grid" class="grid-t"></div>
+</div>
+
+<div id="p-audit" class="page">
+<div id="audit-container">
+<div style="display:flex; justify-content:space-between; color:var(--gold); font-size:0.8rem; margin-bottom:15px;">
+<span id="audit-step"></span>
+<span id="audit-score-realtime">SCORE IA : 0%</span>
+</div>
+<h3 id="q-text" style="min-height:80px; font-size:1.2rem;"></h3>
+<div id="opt-box"></div>
+<div id="delta-box" style="display:none; margin-top:20px;">
+<p style="color:var(--gold); font-weight:bold; font-size:0.8rem;" data-key="delta_label"></p>
+<textarea id="delta-input" placeholder="Saisissez votre analyse technique ici..."></textarea>
+</div>
+<div style="display:flex; gap:15px; margin-top:30px;">
+<button class="btn-nav" style="flex:1" onclick="KMS.prevQ()" data-key="btn_prev"></button>
+<button class="btn-nav" style="flex:2; background:var(--gold); color:var(--navy);" onclick="KMS.nextQ()" data-key="btn_next"></button>
+</div>
+</div>
+</div>
+
+<div id="p-result" class="page" style="text-align:center; justify-content:center;">
+<h1 id="res-score" style="font-size:7rem; color:var(--gold);">0%</h1>
+<h2 id="res-status" style="font-size:2rem; margin:20px 0;"></h2>
+<p id="res-msg" style="margin-bottom:40px;"></p>
+
+<div id="payment-gate" style="display:none;">
+<p style="color:var(--gold); font-weight:bold;">ACCÈS AU PDF SÉCURISÉ</p>
+<p style="font-size:0.8rem;">Veuillez entrer votre code d'accès pour générer le certificat.</p>
+<input type="text" id="access-code" class="access-input" placeholder="CODE-V390">
+<br>
+<button class="btn-nav" style="background:var(--gold); color:var(--navy); padding:15px 30px; margin-bottom:10px;" onclick="KMS.verifyCode()">VALIDER ET OBTENIR LE PDF</button>
+<p style="font-size:0.7rem; margin-top:10px;">Pas de code ?</p>
+<a href="https://mba-consult-qp-generator.streamlit.app/" target="_blank" class="btn-nav" style="display:inline-block; font-size:0.7rem; text-decoration:none;">OBTENIR UN CODE SUR LE MODULE DE PAIEMENT</a>
+</div>
+<button id="btn-dl" class="btn-nav" style="display:none; padding:25px; width:100%;" onclick="KMS.showPaymentGate()" data-key="btn_download"></button>
+
+<div id="cert-container">
+<svg class="logo-cert-fixed"><use href="#logo-v390"/></svg>
+<div id="pdf-qr"></div>
+<div class="pdf-inner">
+<h1 style="font-size:55px; font-family:serif; letter-spacing:4px; border-bottom:3px solid #000; display:inline-block; margin-bottom:30px;">CERTIFICATE OF EXPERTISE</h1>
+<p style="font-size:22px; color:#444;" data-key="pdf_intro"></p>
+<h2 id="pdf-name" style="font-size:50px; color:#D4AF37; margin:20px 0;"></h2>
+<p style="font-size:24px;" data-key="pdf_rank"></p>
+<h3 id="pdf-job" style="font-size:42px; margin-top:10px;"></h3>
+<div style="margin-top:100px; display:flex; justify-content:space-around; font-size:20px; font-weight:bold;">
+<span id="pdf-id"></span>
+<span id="pdf-date"></span>
+<span id="pdf-final-score"></span>
+</div>
+</div>
+<div id="pdf-sig">OMNI-GENESIS DIGITAL SEAL - TITANIUM GRADE</div>
+</div>
+</div>
+</div>
+<script>
+/* --- LOGIQUE DE VEILLE TECHNOLOGIQUE ET SCRAPING SÉMANTIQUE --- */
+const SEMANTIC_SCRAPER = {
+    // Flux de données simulé basé sur les dernières tendances mondiales (Oil&Gas, Finance, IA)
+    currentTrends: [
+        { 
+            domain: "ENERGY & OIL", 
+            title: "Optimisation des réservoirs via Deep Learning Sémantique", 
+            img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+            link: "#",
+            isVideo: true 
+        },
+        { 
+            domain: "QUANTUM FINANCE", 
+            title: "Vecteurs Sémantiques et Arbitrage Haute Fréquence 2026", 
+            img: "https://images.unsplash.com/photo-1611974714851-eb60516122d6?auto=format&fit=crop&w=600&q=80",
+            link: "#",
+            isVideo: false 
+        },
+        { 
+            domain: "HEALTH TECH", 
+            title: "Génomique Sémantique : Le saut Titanium V390", 
+            img: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80",
+            link: "#",
+            isVideo: true 
+        },
+        { 
+            domain: "AI ETHICS", 
+            title: "Gouvernance des Embeddings dans les KMS Critiques", 
+            img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=600&q=80",
+            link: "#",
+            isVideo: false 
+        }
+    ],
+
+    async refresh() {
+        const container = document.getElementById('semantic-feed-container');
+        const timeEl = document.getElementById('update-timestamp');
+        
+        // Effet de chargement sémantique
+        container.style.opacity = '0.5';
+        
+        setTimeout(() => {
             container.innerHTML = '';
+            // Tri aléatoire pour simuler une mise à jour temps réel
+            const shuffled = this.currentTrends.sort(() => 0.5 - Math.random());
             
-            // Simulation de délai de scraping
-            this.mockData.forEach(item => {
+            shuffled.forEach(item => {
                 const card = `
                     <div class="feed-item">
-                        <img src="${item.img}" class="feed-media" alt="Media">
+                        <div class="feed-media-container">
+                            <img src="${item.img}" class="feed-media" alt="KMS Monitor">
+                            ${item.isVideo ? '<div class="video-overlay"><i class="fas fa-play-circle"></i></div>' : ''}
+                        </div>
                         <div class="feed-content">
                             <span class="feed-tag">${item.domain}</span>
-                            <h4 class="feed-title">${item.title}</h4>
-                            <p style="font-size:0.7rem; opacity:0.8;">Source: Global R&D Lab | Scanned by MBA-KMS</p>
+                            <a href="${item.link}" class="feed-title">${item.title}</a>
+                            <p style="font-size:0.75rem; opacity:0.7;">
+                                <i class="far fa-clock"></i> Il y a quelques instants | Source: MBA-Global-Scraper
+                            </p>
                         </div>
                     </div>
                 `;
                 container.innerHTML += card;
             });
+            
+            container.style.opacity = '1';
             timeEl.innerText = "SCELLÉ ET MIS À JOUR : " + new Date().toLocaleTimeString();
-        },
-        init() {
-            this.refresh();
-            setInterval(() => this.refresh(), 30000); // Mise à jour auto toutes les 30 sec
-        }
-    };
+        }, 1000);
+    },
 
-    window.onload = () => SEMANTIC_SCRAPER.init();
-
-    function launchTitanium() { 
-        document.getElementById('titanium-root').style.display = 'flex'; 
-        KMS.setLang(KMS.lang);
+    init() {
+        this.refresh();
+        setInterval(() => this.refresh(), 30000); // Scraping automatique toutes les 30 secondes
     }
-    function closeTitanium() { 
-        document.getElementById('titanium-root').style.display = 'none'; 
-    }
+};
 
-    const AUDIT_ENGINE = {
-        generateQuestions(sector, job) {
-            const lexicons = {
-                "Energie": ["Thermodynamique", "Cycle de Carnot", "Grid-Edge", "Flux Neutronique", "LCOH"],
-                "IT & IA": ["Inférence", "Qubit", "Décohérence", "Backpropagation", "Zero-Knowledge"],
-                "Sante": ["Génomique", "Protéomique", "In silico", "Oncogénèse", "Bio-capteur"],
-                "Finance": ["Arbitrage", "DeFi", "Bâle III", "Stress-test", "Actif Toxique"],
-                "Agri-Food": ["Hydroponie", "ARN-interférence", "Polyphénols", "Agro-écologie", "Microbiote"],
-                "Education": ["Andragogie", "Neuro-plasticité", "Taxonomie Bloom", "Ed-Tech", "Cognition"],
-                "Commerce": ["Omnicanalité", "Supply-Chain", "Last-Mile", "Elasticité-Prix", "KPI"],
-                "Tourisme": ["Écotourisme", "Yield Management", "Expérientiel", "Bas-Carbone", "Phygital"]
-            };
-            const axes = ["STRATÉGIE", "TECHNIQUE", "IA & DATA", "GOUVERNANCE", "ÉTHIQUE"];
-            const sectorLex = lexicons[sector] || ["Vecteur", "Système", "Flux", "Analyse", "Optimisation"];
-            return axes.map((axis, i) => {
-                const term = sectorLex[i % sectorLex.length];
-                return {
-                    fr: `[${axis}] Comment optimisez-vous l'impact de ${term} sur le métier de ${job} ?`,
-                    en: `[${axis}] How do you optimize the impact of ${term} on the ${job} profession?`,
-                    opts: {
-                        fr: [`Synthèse Titanium`, `Modèle Standard`, `Approche Empirique`, "DELTA"],
-                        en: [`Titanium Synthesis`, `Standard Model`, `Empirical Approach`, "DELTA"]
-                    },
-                    correct: 0
-                };
-            });
-        }
-    };
-     
-    const DATA = {
-        sectors: {
-            "Energie": { icon:"fa-atom", jobs:["Architecte Fusion SMR", "Expert Hydrogène Vert", "Ingénieur Grid-Edge", "Lead Transition", "Analyste Lithium-Air", "Thorium Lead", "Manager HVDC", "CCUS Specialist", "Carbon Auditor", "SMR-Tech", "Geothermal Eng", "BESS Manager", "Perovskite R&D", "Nuclear Safety", "Oil&Gas API Expert"] },
-            "IT & IA": { icon:"fa-microchip", jobs:["Lead IA Générative", "Architecte Quantique", "Expert Cyber SOC", "Edge Scientist", "Ethicien IA", "ML-Ops Eng", "Blockchain Arch", "Cloud-Native", "DevSecOps Senior", "Quantum Algo", "Governance Mgr", "Prompt Eng", "Forensics", "Web3 Arch", "NLP Lead"] },
-            "Sante": { icon:"fa-dna", jobs:["Bio-Informaticien", "Radiologue IA", "Robot Surgery", "Oncologue Génomique", "Nanomedecine Mgr", "Bio-Security", "Precision Health", "Telemedicine Lead", "Digital Lab Dir", "Proteomics Exp", "Ethics Consultant", "Data Hospital Mgr", "Prosthetic Eng", "Pandemic Mgr", "Microbiota Spec"] },
-            "Finance": { icon:"fa-chart-line", jobs:["Quantum Risk Analyst", "DeFi Architect", "ESG Strategist", "Algo Trader HFT", "Fraud IA Manager", "Digital CFO", "Treasury Bchain", "Fintech Ops", "M&A Tech", "Asset Mgr AI", "Risk Mgr Systemic", "Mobile Banker", "Crypto Expert", "RegTech Analyst", "CBDC Specialist"] },
-            "Agri-Food": { icon:"fa-leaf", jobs:["Vertical Farming", "Agro-IA Spec", "Protein Scientist", "Bio-Auditeur 4.0", "Precision Agri", "Lab-Grown Food", "Bio-Polymer", "Irrigation Data", "Agri-Robotics", "Digital Nutrition", "AgTech Strategist", "Traceability Mgr", "Microbiologist", "Hydroponic Dir", "Cellular Agri"] },
-            "Education": { icon:"fa-user-graduate", jobs:["Neuro-Pedagogue", "Meta-Campus Arch", "EdTech Data", "Adaptive Learning", "VR-Training Mgr", "Cognitive Analyst", "L&D Innovation", "E-Learning Dir", "Ed-IA Consultant", "Inclusion Mgr", "Gamification Eng", "AI Coach", "Strategy Dir", "Bchain-Diploma", "Hybrid Facilitator"] },
-            "Commerce": { icon:"fa-shopping-bag", jobs:["Supply Strategist", "Pricing Expert", "Omnichannel Mgr", "Drone Logistics", "E-com Director", "Phygital Dir", "Sustainable Lead", "Retail Flow", "Bchain Sourcing", "Marketplace Spec", "Retail Arch", "Growth IA", "Last-Mile Mgr", "Franchise Dir", "Insight Analyst"] },
-            "Tourisme": { icon:"fa-globe-americas", jobs:["Space Tourism", "Hospitality Design", "Low Carbon Exp", "Revenue IA Mgr", "Immersive Exp", "Eco-Resort Mgr", "Cruise-Tech Lead", "Cruise-Tech Lead", "Crypto Booking", "Smart Destination", "Green Transport", "Digital Marketing", "Heritage Digital", "MICE IA Planner", "Soft Mobility", "Travel Scientist"] }
-        }
-    };
-     
-    const DICT = {
-        fr: {
-            intro_txt: "ACCÈS SCELLÉ : Système KMS TITANIUM pour l'élite.\n1. 120 MÉTIERS : 8 secteurs.\n2. AUDIT : Analyse sémantique Delta requise (3 min).\n3. GRADE OR : Score ≥ 80% exigé.\n4. SCELLÉ : QR Code https://v390-mba-consult.vercel.app/",
-            btn_start: "OUVRIR LA SESSION TITANIUM",
-            title_sectors: "SECTEURS STRATÉGIQUES",
-            btn_next: "VALIDER & ANALYSER",
-            btn_prev: "RETOUR",
-            btn_download: "ACCÉDER AU CERTIFICAT OR",
-            delta_label: "ANALYSE SÉMANTIQUE DELTA (IA VALIDATION)",
-            pdf_intro: "Certifie solennellement après audit sémantique IA l'expertise de :",
-            pdf_rank: "Au grade de Senior Expert International pour le métier de :",
-            res_fail: "DISSONANCE DÉTECTÉE",
-            res_pass: "ACCRÉDITATION OR ACCORDÉE",
-            audit_label: "ÉTAPE",
-            score_label: "CONTRÔLE IA"
-        },
-        en: {
-            intro_txt: "SEALED ACCESS: TITANIUM KMS System.\n1. 120 JOBS: 8 sectors.\n2. AUDIT: Delta semantic analysis required (min 3).\n3. GOLD RANK: Score ≥ 80% required.\n4. SEALED: QR https://v390-mba-consult.vercel.app/",
-            btn_start: "OPEN TITANIUM SESSION",
-            title_sectors: "STRATEGIC SECTORS",
-            btn_next: "VALIDATE & ANALYZE",
-            btn_prev: "BACK",
-            btn_download: "ACCESS GOLD CERTIFICATE",
-            delta_label: "DELTA SEMANTIC ANALYSIS (AI VALIDATION)",
-            pdf_intro: "Solemnly certifies after AI semantic audit the expertise of:",
-            pdf_rank: "At the rank of International Senior Expert for the profession of:",
-            res_fail: "DISSONANCE DETECTED",
-            res_pass: "GOLD ACCREDITATION GRANTED",
-            audit_label: "STEP",
-            score_label: "AI CONTROL"
-        }
-    };
-     
-    const KMS = {
-        lang: 'fr', sector: '', job: '', step: 0, score: 0, deltaCount: 0, responses: [], questions: [], history: ['p-intro'],
-     
-        setLang(l) {
-            this.lang = l;
-            document.querySelectorAll('[data-key]').forEach(el => el.innerText = DICT[l][el.getAttribute('data-key')] || el.innerText);
-            document.getElementById('intro-txt').innerText = DICT[l].intro_txt;
-            this.renderSectors();
-        },
-     
-        go(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-            document.getElementById(id).classList.add('active-page');
-            if(this.history[this.history.length-1] !== id) this.history.push(id);
-        },
-     
-        back() { if(this.history.length > 1) { this.history.pop(); this.go(this.history[this.history.length-1]); } },
-     
-        renderSectors() {
-            const grid = document.getElementById('sector-grid'); grid.innerHTML = '';
-            Object.keys(DATA.sectors).forEach(s => {
-                const div = document.createElement('div'); div.className = 'card-t';
-                div.innerHTML = `<i class="fas ${DATA.sectors[s].icon} fa-2x" style="color:var(--gold); margin-bottom:10px;"></i><p>${s}</p>`;
-                div.onclick = () => { this.sector = s; this.renderJobs(s); this.go('p-jobs'); };
-                grid.appendChild(div);
-            });
-        },
-     
-        renderJobs(s) {
-            document.getElementById('sector-display').innerText = s;
-            const grid = document.getElementById('job-grid'); grid.innerHTML = '';
-            DATA.sectors[s].jobs.forEach(j => {
-                const div = document.createElement('div'); div.className = 'card-t'; div.innerHTML = `<p>${j}</p>`;
-                div.onclick = () => { this.job = j; this.startAudit(); };
-                grid.appendChild(div);
-            });
-        },
-     
-        startAudit() {
-            this.step = 0; this.responses = []; this.score = 0; this.deltaCount = 0;
-            this.questions = AUDIT_ENGINE.generateQuestions(this.sector, this.job);
-            this.go('p-audit'); this.loadQ();
-        },
-     
-        loadQ() {
-            const q = this.questions[this.step];
-            document.getElementById('audit-step').innerText = `${DICT[this.lang].audit_label} : ${this.step+1} / 5`;
-            document.getElementById('q-text').innerText = q[this.lang];
-            const box = document.getElementById('opt-box'); box.innerHTML = '';
-            this.tempIdx = undefined;
-            q.opts[this.lang].forEach((o, i) => {
-                const b = document.createElement('button'); b.className = 'opt-btn';
-                if(this.responses[this.step]?.idx === i) b.classList.add('opt-selected');
-                b.innerText = o;
-                b.onclick = () => {
-                    document.querySelectorAll('.opt-btn').forEach(x => x.classList.remove('opt-selected'));
-                    b.classList.add('opt-selected'); this.tempIdx = i;
-                    document.getElementById('delta-box').style.display = (i===3?'block':'none');
-                };
-                box.appendChild(b);
-            });
-        },
-     
-        nextQ() {
-            if(this.tempIdx === undefined && !this.responses[this.step]) return;
-            const q = this.questions[this.step];
-            const deltaVal = document.getElementById('delta-input').value;
-            
-            this.responses[this.step] = { idx: this.tempIdx, delta: deltaVal };
-            
-            if(this.tempIdx === 0) this.score += 20;
-            if(this.tempIdx === 3 && deltaVal.length > 20) {
-                this.score += 20;
-                this.deltaCount++;
-            }
+window.onload = () => SEMANTIC_SCRAPER.init();
 
-            document.getElementById('audit-score-realtime').innerText = `SCORE IA : ${this.score}%`;
-            document.getElementById('delta-input').value = '';
-            
-            if(this.step < 4) { this.step++; this.loadQ(); } 
-            else { this.finish(); }
-        },
+function launchTitanium() {
+document.getElementById('titanium-root').style.display = 'flex';
+KMS.setLang(KMS.lang);
+}
+function closeTitanium() {
+document.getElementById('titanium-root').style.display = 'none';
+}
+const AUDIT_ENGINE = {
+generateQuestions(sector, job) {
+const lexicons = {
+"Energie": ["Thermodynamique", "Cycle de Carnot", "Grid-Edge", "Flux Neutronique", "LCOH"],
+"IT & IA": ["Inférence", "Qubit", "Décohérence", "Backpropagation", "Zero-Knowledge"],
+"Sante": ["Génomique", "Protéomique", "In silico", "Oncogénèse", "Bio-capteur"],
+"Finance": ["Arbitrage", "DeFi", "Bâle III", "Stress-test", "Actif Toxique"],
+"Agri-Food": ["Hydroponie", "ARN-interférence", "Polyphénols", "Agro-écologie", "Microbiote"],
+"Education": ["Andragogie", "Neuro-plasticité", "Taxonomie Bloom", "Ed-Tech", "Cognition"],
+"Commerce": ["Omnicanalité", "Supply-Chain", "Last-Mile", "Elasticité-Prix", "KPI"],
+"Tourisme": ["Écotourisme", "Yield Management", "Expérientiel", "Bas-Carbone", "Phygital"]
+};
+const axes = ["STRATÉGIE", "TECHNIQUE", "IA & DATA", "GOUVERNANCE", "ÉTHIQUE"];
+const sectorLex = lexicons[sector] || ["Vecteur", "Système", "Flux", "Analyse", "Optimisation"];
+return axes.map((axis, i) => {
+const term = sectorLex[i % sectorLex.length];
+return {
+fr: `[${axis}] Comment optimisez-vous l'impact de ${term} sur le métier de ${job} ?`,
+en: `[${axis}] How do you optimize the impact of ${term} on the ${job} profession?`,
+opts: {
+fr: [`Synthèse Titanium`, `Modèle Standard`, `Approche Empirique`, "DELTA"],
+en: [`Titanium Synthesis`, `Standard Model`, `Empirical Approach`, "DELTA"]
+},
+correct: 0
+};
+});
+}
+};
 
-        prevQ() { if(this.step > 0) { this.step--; this.loadQ(); } },
+const DATA = {
+sectors: {
+"Energie": { icon:"fa-atom", jobs:["Architecte Fusion SMR", "Expert Hydrogène Vert", "Ingénieur Grid-Edge", "Lead Transition", "Analyste Lithium-Air", "Thorium Lead", "Manager HVDC", "CCUS Specialist", "Carbon Auditor", "SMR-Tech", "Geothermal Eng", "BESS Manager", "Perovskite R&D", "Nuclear Safety", "Oil&Gas API Expert"] },
+"IT & IA": { icon:"fa-microchip", jobs:["Lead IA Générative", "Architecte Quantique", "Expert Cyber SOC", "Edge Scientist", "Ethicien IA", "ML-Ops Eng", "Blockchain Arch", "Cloud-Native", "DevSecOps Senior", "Quantum Algo", "Governance Mgr", "Prompt Eng", "Forensics", "Web3 Arch", "NLP Lead"] },
+"Sante": { icon:"fa-dna", jobs:["Bio-Informaticien", "Radiologue IA", "Robot Surgery", "Oncologue Génomique", "Nanomedecine Mgr", "Bio-Security", "Precision Health", "Telemedicine Lead", "Digital Lab Dir", "Proteomics Exp", "Ethics Consultant", "Data Hospital Mgr", "Prosthetic Eng", "Pandemic Mgr", "Microbiota Spec"] },
+"Finance": { icon:"fa-chart-line", jobs:["Quantum Risk Analyst", "DeFi Architect", "ESG Strategist", "Algo Trader HFT", "Fraud IA Manager", "Digital CFO", "Treasury Bchain", "Fintech Ops", "M&A Tech", "Asset Mgr AI", "Risk Mgr Systemic", "Mobile Banker", "Crypto Expert", "RegTech Analyst", "CBDC Specialist"] },
+"Agri-Food": { icon:"fa-leaf", jobs:["Vertical Farming", "Agro-IA Spec", "Protein Scientist", "Bio-Auditeur 4.0", "Precision Agri", "Lab-Grown Food", "Bio-Polymer", "Irrigation Data", "Agri-Robotics", "Digital Nutrition", "AgTech Strategist", "Traceability Mgr", "Microbiologist", "Hydroponic Dir", "Cellular Agri"] },
+"Education": { icon:"fa-user-graduate", jobs:["Neuro-Pedagogue", "Meta-Campus Arch", "EdTech Data", "Adaptive Learning", "VR-Training Mgr", "Cognitive Analyst", "L&D Innovation", "E-Learning Dir", "Ed-IA Consultant", "Inclusion Mgr", "Gamification Eng", "AI Coach", "Strategy Dir", "Bchain-Diploma", "Hybrid Facilitator"] },
+"Commerce": { icon:"fa-shopping-bag", jobs:["Supply Strategist", "Pricing Expert", "Omnichannel Mgr", "Drone Logistics", "E-com Director", "Phygital Dir", "Sustainable Lead", "Retail Flow", "Bchain Sourcing", "Marketplace Spec", "Retail Arch", "Growth IA", "Last-Mile Mgr", "Franchise Dir", "Insight Analyst"] },
+"Tourisme": { icon:"fa-globe-americas", jobs:["Space Tourism", "Hospitality Design", "Low Carbon Exp", "Revenue IA Mgr", "Immersive Exp", "Eco-Resort Mgr", "Cruise-Tech Lead", "Cruise-Tech Lead", "Crypto Booking", "Smart Destination", "Green Transport", "Digital Marketing", "Heritage Digital", "MICE IA Planner", "Soft Mobility", "Travel Scientist"] }
+}
+};
 
-        finish() {
-            this.go('p-result');
-            const resScore = document.getElementById('res-score');
-            
-            if(this.deltaCount < 3) {
-                this.score = Math.min(this.score, 50); 
-                document.getElementById('res-status').innerText = "AUDIT INCOMPLET";
-                document.getElementById('res-msg').innerText = "L'analyse Delta sémantique est requise pour valider le grade Titanium.";
-            } else if(this.score >= 80) {
-                resScore.style.color = 'var(--gold)';
-                document.getElementById('res-status').innerText = DICT[this.lang].res_pass;
-                document.getElementById('btn-dl').style.display = 'block';
-            } else {
-                resScore.style.color = '#ff4d4d';
-                document.getElementById('res-status').innerText = DICT[this.lang].res_fail;
-            }
-            resScore.innerText = this.score + "%";
-        },
+const DICT = {
+fr: {
+intro_txt: "ACCÈS SCELLÉ : Système KMS TITANIUM pour l'élite.\n1. 120 MÉTIERS : 8 secteurs.\n2. AUDIT : Analyse sémantique Delta requise (3 min).\n3. GRADE OR : Score ≥ 80% exigé.\n4. SCELLÉ : QR Code https://v390-mba-consult.vercel.app/",
+btn_start: "OUVRIR LA SESSION TITANIUM",
+title_sectors: "SECTEURS STRATÉGIQUES",
+btn_next: "VALIDER & ANALYSER",
+btn_prev: "RETOUR",
+btn_download: "ACCÉDER AU CERTIFICAT OR",
+delta_label: "ANALYSE SÉMANTIQUE DELTA (IA VALIDATION)",
+pdf_intro: "Certifie solennellement après audit sémantique IA l'expertise de :",
+pdf_rank: "Au grade de Senior Expert International pour le métier de :",
+res_fail: "DISSONANCE DÉTECTÉE",
+res_pass: "ACCRÉDITATION OR ACCORDÉE",
+audit_label: "ÉTAPE",
+score_label: "CONTRÔLE IA"
+},
+en: {
+intro_txt: "SEALED ACCESS: TITANIUM KMS System.\n1. 120 JOBS: 8 sectors.\n2. AUDIT: Delta semantic analysis required (min 3).\n3. GOLD RANK: Score ≥ 80% required.\n4. SEALED: QR https://v390-mba-consult.vercel.app/",
+btn_start: "OPEN TITANIUM SESSION",
+title_sectors: "STRATEGIC SECTORS",
+btn_next: "VALIDATE & ANALYZE",
+btn_prev: "BACK",
+btn_download: "ACCESS GOLD CERTIFICATE",
+delta_label: "DELTA SEMANTIC ANALYSIS (AI VALIDATION)",
+pdf_intro: "Solemnly certifies after AI semantic audit the expertise of:",
+pdf_rank: "At the rank of International Senior Expert for the profession of:",
+res_fail: "DISSONANCE DETECTED",
+res_pass: "GOLD ACCREDITATION GRANTED",
+audit_label: "STEP",
+score_label: "AI CONTROL"
+}
+};
 
-        showPaymentGate() {
-            document.getElementById('btn-dl').style.display = 'none';
-            document.getElementById('payment-gate').style.display = 'block';
-        },
+const KMS = {
+lang: 'fr', sector: '', job: '', step: 0, score: 0, deltaCount: 0, responses: [], questions: [], history: ['p-intro'],
 
-        verifyCode() {
-            const code = document.getElementById('access-code').value.toUpperCase();
-            if(code === "MBA-V390" || code === "TITANIUM") {
-                this.generatePDF();
-            } else {
-                alert("Code invalide. Veuillez passer par le module de paiement.");
-            }
-        },
+setLang(l) {
+this.lang = l;
+document.querySelectorAll('[data-key]').forEach(el => el.innerText = DICT[l][el.getAttribute('data-key')] || el.innerText);
+document.getElementById('intro-txt').innerText = DICT[l].intro_txt;
+this.renderSectors();
+},
 
-        generatePDF() {
-            const name = prompt(this.lang === 'fr' ? "Nom complet pour le certificat :" : "Full name for certificate:");
-            if(!name) return;
-            
-            document.getElementById('pdf-name').innerText = name;
-            document.getElementById('pdf-job').innerText = this.job;
-            document.getElementById('pdf-id').innerText = "ID: " + Math.random().toString(36).substr(2, 9).toUpperCase();
-            document.getElementById('pdf-date').innerText = new Date().toLocaleDateString();
-            document.getElementById('pdf-final-score').innerText = "SCORE: " + this.score + "%";
-            
-            const qrBox = document.getElementById('pdf-qr');
-            qrBox.innerHTML = '';
-            new QRCode(qrBox, { text: "https://mba-consult.tn/verify/" + name, width: 130, height: 130 });
-            
-            const element = document.getElementById('cert-container');
-            const opt = { margin: 0, filename: `MBA_Expertise_${name}.pdf`, image: { type: 'jpeg', quality: 1 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' } };
-            html2pdf().set(opt).from(element).save().then(() => {
-                alert("Certificat généré avec succès.");
-                location.reload();
-            });
-        }
-    };
+go(id) {
+document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+document.getElementById(id).classList.add('active-page');
+if(this.history[this.history.length-1] !== id) this.history.push(id);
+},
+
+back() { if(this.history.length > 1) { this.history.pop(); this.go(this.history[this.history.length-1]); } },
+
+renderSectors() {
+const grid = document.getElementById('sector-grid'); grid.innerHTML = '';
+Object.keys(DATA.sectors).forEach(s => {
+const div = document.createElement('div'); div.className = 'card-t';
+div.innerHTML = `<i class="fas ${DATA.sectors[s].icon} fa-2x" style="color:var(--gold); margin-bottom:10px;"></i><p>${s}</p>`;
+div.onclick = () => { this.sector = s; this.renderJobs(s); this.go('p-jobs'); };
+grid.appendChild(div);
+});
+},
+
+renderJobs(s) {
+document.getElementById('sector-display').innerText = s;
+const grid = document.getElementById('job-grid'); grid.innerHTML = '';
+DATA.sectors[s].jobs.forEach(j => {
+const div = document.createElement('div'); div.className = 'card-t'; div.innerHTML = `<p>${j}</p>`;
+div.onclick = () => { this.job = j; this.startAudit(); };
+grid.appendChild(div);
+});
+},
+
+startAudit() {
+this.step = 0; this.responses = []; this.score = 0; this.deltaCount = 0;
+this.questions = AUDIT_ENGINE.generateQuestions(this.sector, this.job);
+this.go('p-audit'); this.loadQ();
+},
+
+loadQ() {
+const q = this.questions[this.step];
+document.getElementById('audit-step').innerText = `${DICT[this.lang].audit_label} : ${this.step+1} / 5`;
+document.getElementById('q-text').innerText = q[this.lang];
+const box = document.getElementById('opt-box'); box.innerHTML = '';
+this.tempIdx = undefined;
+q.opts[this.lang].forEach((o, i) => {
+const b = document.createElement('button'); b.className = 'opt-btn';
+if(this.responses[this.step]?.idx === i) b.classList.add('opt-selected');
+b.innerText = o;
+b.onclick = () => {
+document.querySelectorAll('.opt-btn').forEach(x => x.classList.remove('opt-selected'));
+b.classList.add('opt-selected'); this.tempIdx = i;
+document.getElementById('delta-box').style.display = (i===3?'block':'none');
+};
+box.appendChild(b);
+});
+},
+
+nextQ() {
+if(this.tempIdx === undefined && !this.responses[this.step]) return;
+const q = this.questions[this.step];
+const deltaVal = document.getElementById('delta-input').value;
+
+this.responses[this.step] = { idx: this.tempIdx, delta: deltaVal };
+
+if(this.tempIdx === 0) this.score += 20;
+if(this.tempIdx === 3 && deltaVal.length > 20) {
+this.score += 20;
+this.deltaCount++;
+}
+document.getElementById('audit-score-realtime').innerText = `SCORE IA : ${this.score}%`;
+document.getElementById('delta-input').value = '';
+
+if(this.step < 4) { this.step++; this.loadQ(); }
+else { this.finish(); }
+},
+prevQ() { if(this.step > 0) { this.step--; this.loadQ(); } },
+finish() {
+this.go('p-result');
+const resScore = document.getElementById('res-score');
+
+if(this.deltaCount < 3) {
+this.score = Math.min(this.score, 50);
+document.getElementById('res-status').innerText = "AUDIT INCOMPLET";
+document.getElementById('res-msg').innerText = "L'analyse Delta sémantique est requise pour valider le grade Titanium.";
+} else if(this.score >= 80) {
+resScore.style.color = 'var(--gold)';
+document.getElementById('res-status').innerText = DICT[this.lang].res_pass;
+document.getElementById('btn-dl').style.display = 'block';
+} else {
+resScore.style.color = '#ff4d4d';
+document.getElementById('res-status').innerText = DICT[this.lang].res_fail;
+}
+resScore.innerText = this.score + "%";
+},
+showPaymentGate() {
+document.getElementById('btn-dl').style.display = 'none';
+document.getElementById('payment-gate').style.display = 'block';
+},
+verifyCode() {
+const code = document.getElementById('access-code').value.toUpperCase();
+if(code === "MBA-V390" || code === "TITANIUM") {
+this.generatePDF();
+} else {
+alert("Code invalide. Veuillez passer par le module de paiement.");
+}
+},
+generatePDF() {
+const name = prompt(this.lang === 'fr' ? "Nom complet pour le certificat :" : "Full name for certificate:");
+if(!name) return;
+
+document.getElementById('pdf-name').innerText = name;
+document.getElementById('pdf-job').innerText = this.job;
+document.getElementById('pdf-id').innerText = "ID: " + Math.random().toString(36).substr(2, 9).toUpperCase();
+document.getElementById('pdf-date').innerText = new Date().toLocaleDateString();
+document.getElementById('pdf-final-score').innerText = "SCORE: " + this.score + "%";
+
+const qrBox = document.getElementById('pdf-qr');
+qrBox.innerHTML = '';
+new QRCode(qrBox, { text: "https://mba-consult.tn/verify/" + name, width: 130, height: 130 });
+
+const element = document.getElementById('cert-container');
+const opt = { margin: 0, filename: `MBA_Expertise_${name}.pdf`, image: { type: 'jpeg', quality: 1 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' } };
+html2pdf().set(opt).from(element).save().then(() => {
+alert("Certificat généré avec succès.");
+location.reload();
+});
+}
+};
 </script>
 </body>
 </html>
