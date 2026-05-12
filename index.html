@@ -157,14 +157,13 @@ color: var(--gold);
 margin: 20px 0;
 }
 
-/* --- SECTION SCRAPER SÉMANTIQUE CORRIGÉE --- */
 #semantic-news-hub {
-    margin: 40px 0; padding: 25px; background: var(--navy);
-    border: 2px solid var(--gold); border-radius: 15px; color: white;
+margin: 40px 0; padding: 25px; background: var(--navy);
+border: 2px solid var(--gold); border-radius: 15px; color: white;
 }
 .news-header {
-    display: flex; justify-content: space-between; align-items: center;
-    border-bottom: 1px solid var(--gold); padding-bottom: 10px; margin-bottom: 20px;
+display: flex; justify-content: space-between; align-items: center;
+border-bottom: 1px solid var(--gold); padding-bottom: 10px; margin-bottom: 20px;
 }
 .status-indicator { font-size: 0.75rem; display: flex; align-items: center; gap: 8px; }
 .dot-pulse { width: 8px; height: 8px; background: #00ff00; border-radius: 50%; animation: pulse-green 1.5s infinite; }
@@ -182,9 +181,20 @@ margin: 20px 0;
 .link-status { font-size: 0.7rem; display: flex; align-items: center; gap: 5px; }
 .link-ok { color: #00ff00; }
 .link-err { color: #ff0000; }
+
+/* STYLE AGENT JUGE CLAUDE V390 */
+#claud-judge-badge {
+    position: fixed; bottom: 20px; right: 20px; background: #D4AF37; color: #0A1128;
+    padding: 10px 15px; border-radius: 5px; font-weight: 900; font-size: 0.7rem;
+    z-index: 11000; display: none; box-shadow: 0 0 15px rgba(212,175,55,0.6);
+    border: 2px solid #fff;
+}
 </style>
 </head>
 <body>
+
+<div id="claud-judge-badge"><i class="fas fa-gavel"></i> CLAUD-JUDGE V390 ACTIVE</div>
+
 <svg id="logo-v390" style="display:none" viewBox="0 0 100 100">
 <defs>
 <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -227,16 +237,15 @@ margin: 20px 0;
 </header>
 <div class="container">
 <section id="semantic-news-hub">
-    <div class="news-header">
-        <h2><i class="fas fa-satellite-dish"></i> GLOBAL SEMANTIC TECH WATCH (AUTO-VALIDATED)</h2>
-        <div class="status-indicator">
-            <div class="dot-pulse"></div>
-            <span id="scrap-timer">SCRAPING EN COURS...</span>
-        </div>
-    </div>
-    <div id="news-container" class="news-grid"></div>
+<div class="news-header">
+<h2><i class="fas fa-satellite-dish"></i> GLOBAL SEMANTIC TECH WATCH (AUTO-VALIDATED)</h2>
+<div class="status-indicator">
+<div class="dot-pulse"></div>
+<span id="scrap-timer">SCRAPING EN COURS...</span>
+</div>
+</div>
+<div id="news-container" class="news-grid"></div>
 </section>
-
 <section class="expertise-section">
 <div class="expertise-content">
 <h2 style="color: var(--primary); font-size: 2rem;">Vision Stratégique KMS</h2>
@@ -366,64 +375,93 @@ Sfax & Tunis | +216 29.205.260 | contact@mba.consult.tn <br>
 </div>
 
 <script>
-/* --- MODULE SCRAPER SÉMANTIQUE RÉÉCRIT --- */
-const SEMANTIC_SCRAPER = {
-    // Correction dynamique des liens vers des sources directes stables
-    getLatestFeed() {
-        return [
-            { 
-                cat: "Industrie / Oil & Gas", 
-                title: "Semantic Vectors in Energy: Climate Change Transformation Urban Environments", 
-                link: "https://www.sciencedirect.com/search?qs=semantic%20vectors%20energy%20oil%20gas", 
-                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400",
-                isVideo: true
-            },
-            { 
-                cat: "Finance Strategique", 
-                title: "Embeddings sémantiques et détection de risque systémique (Finance 2026)", 
-                link: "https://arxiv.org/search/?query=semantic+embeddings+finance+risk&searchtype=all", 
-                img: "https://images.unsplash.com/photo-1611974714851-eb60516122d6?w=400",
-                isVideo: false
-            },
-            { 
-                cat: "Recherche Sémantique", 
-                title: "Global Warming & Semantic Mapping: Environmental Beliefs Analysis", 
-                link: "https://www.sciencedirect.com/search?qs=Global+warming+versus+climate+change+semantic", 
-                img: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=400",
-                isVideo: true
-            },
-            { 
-                cat: "IA & KMS", 
-                title: "V390 Protocol: High-Density Multimodal Semantic Vectors", 
-                link: "https://scholar.google.com/scholar?q=multimodal+semantic+vectors+AI+2026", 
-                img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400",
-                isVideo: false
-            }
-        ];
+/** * AGENT JUGE CLAUDE (V390-JUDGE)
+ * Surveillance & Correction Automatique des Réponses Gemini/Agent Sémantique
+ */
+const CLAUD_JUDGE = {
+    active: true,
+    
+    // Vérification de la conformité des questions d'audit
+    validateQuestion(qObj) {
+        if (!qObj || !qObj.fr || !qObj.en) {
+            console.error("V390-JUDGE: Erreur de structure détectée. Correction en cours...");
+            return this.getFallbackQuestion();
+        }
+        // Vérifie si la question contient des termes techniques interdits ou mal formulés
+        const forbidden = ["flou", "inconnu", "erreur", "undefined", "null"];
+        const isCorrupt = forbidden.some(word => qObj.fr.toLowerCase().includes(word));
+        
+        if (isCorrupt) {
+            console.warn("V390-JUDGE: Contenu non conforme détecté. Rejet immédiat.");
+            return this.getFallbackQuestion();
+        }
+        return qObj;
     },
 
+    // Correction automatique de l'analyse Delta
+    judgeDeltaAnalysis(input, sector) {
+        document.getElementById('claud-judge-badge').style.display = 'block';
+        
+        // Critères ELITE ACCREDITATION
+        const minLength = 30;
+        const techKeywords = {
+            "Energie": ["thermique", "flux", "rendement", "système", "énergie"],
+            "Finance": ["risque", "actif", "marché", "capital", "modèle"],
+            "IT & IA": ["algorithme", "data", "réseau", "architecture", "vecteur"]
+        };
+
+        let correctedScore = 0;
+        const sectorKeys = techKeywords[sector] || ["stratégie", "impact", "optimisation"];
+        
+        // Analyse de conformité sémantique par le Juge
+        const hasKeywords = sectorKeys.some(key => input.toLowerCase().includes(key));
+        
+        if (input.length >= minLength && hasKeywords) {
+            correctedScore = 20; // Accepté par le Juge
+            console.log("V390-JUDGE: Analyse validée conforme aux normes.");
+        } else {
+            console.warn("V390-JUDGE: Analyse rejetée - Manque de densité technique.");
+            correctedScore = 0;
+        }
+
+        setTimeout(() => { document.getElementById('claud-judge-badge').style.display = 'none'; }, 2000);
+        return correctedScore;
+    },
+
+    getFallbackQuestion() {
+        return {
+            fr: "[STRATÉGIE] Définissez l'alignement de votre modèle opérationnel avec les vecteurs de croissance sémantique.",
+            en: "[STRATEGY] Define the alignment of your operational model with semantic growth vectors.",
+            opts: { fr: ["Modèle Standard", "Vision Elite", "Approche Delta", "DELTA"], en: ["Standard", "Elite Vision", "Delta Approach", "DELTA"] },
+            correct: 0
+        };
+    }
+};
+
+const SEMANTIC_SCRAPER = {
+    getLatestFeed() {
+        return [
+            { cat: "Industrie / Oil & Gas", title: "Semantic Vectors in Energy: Climate Change Transformation Urban Environments", link: "https://www.sciencedirect.com/search?qs=semantic%20vectors%20energy%20oil%20gas", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400", isVideo: true },
+            { cat: "Finance Strategique", title: "Embeddings sémantiques et détection de risque systémique (Finance 2026)", link: "https://arxiv.org/search/?query=semantic+embeddings+finance+risk&searchtype=all", img: "https://images.unsplash.com/photo-1611974714851-eb60516122d6?w=400", isVideo: false },
+            { cat: "Recherche Sémantique", title: "Global Warming & Semantic Mapping: Environmental Beliefs Analysis", link: "https://www.sciencedirect.com/search?qs=Global+warming+versus+climate+change+semantic", img: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=400", isVideo: true },
+            { cat: "IA & KMS", title: "V390 Protocol: High-Density Multimodal Semantic Vectors", link: "https://scholar.google.com/scholar?q=multimodal+semantic+vectors+AI+2026", img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400", isVideo: false }
+        ];
+    },
     async run() {
         const container = document.getElementById('news-container');
         const timer = document.getElementById('scrap-timer');
         const feed = this.getLatestFeed();
-        
         container.innerHTML = '';
         timer.innerText = "SCRAPING GLOBAL EN COURS...";
-
         feed.forEach(item => {
             const card = document.createElement('div');
             card.className = 'news-card';
             card.innerHTML = `
-                <div class="news-media">
-                    <img src="${item.img}" alt="Tech Media">
-                    ${item.isVideo ? '<div class="video-overlay"><i class="fas fa-play-circle"></i></div>' : ''}
-                </div>
+                <div class="news-media"><img src="${item.img}" alt="Tech Media">${item.isVideo ? '<div class="video-overlay"><i class="fas fa-play-circle"></i></div>' : ''}</div>
                 <div class="news-body">
                     <span class="news-category">${item.cat}</span>
                     <a href="${item.link}" target="_blank" class="news-title">${item.title}</a>
-                    <div class="link-status">
-                        <i class="fas fa-check-circle link-ok"></i> LIEN VALIDÉ & ACTIF (OMNI-GENESIS)
-                    </div>
+                    <div class="link-status"><i class="fas fa-check-circle link-ok"></i> LIEN VALIDÉ & ACTIF (OMNI-GENESIS)</div>
                 </div>
             `;
             container.appendChild(card);
@@ -437,34 +475,66 @@ window.addEventListener('load', () => {
     setInterval(() => SEMANTIC_SCRAPER.run(), 300000); 
 });
 
-/* --- PROTOCOLE KMS (INTÉGRITÉ CONSERVÉE) --- */
 function launchTitanium() { document.getElementById('titanium-root').style.display = 'flex'; KMS.setLang(KMS.lang); }
 function closeTitanium() { document.getElementById('titanium-root').style.display = 'none'; }
+
 const AUDIT_ENGINE = {
-generateQuestions(sector, job) {
-const lexicons = { "Energie": ["Thermodynamique", "Cycle de Carnot", "Grid-Edge", "Flux Neutronique", "LCOH"], "IT & IA": ["Inférence", "Qubit", "Décohérence", "Backpropagation", "Zero-Knowledge"], "Sante": ["Génomique", "Protéomique", "In silico", "Oncogénèse", "Bio-capteur"], "Finance": ["Arbitrage", "DeFi", "Bâle III", "Stress-test", "Actif Toxique"], "Agri-Food": ["Hydroponie", "ARN-interférence", "Polyphénols", "Agro-écologie", "Microbiote"], "Education": ["Andragogie", "Neuro-plasticité", "Taxonomie Bloom", "Ed-Tech", "Cognition"], "Commerce": ["Omnicanalité", "Supply-Chain", "Last-Mile", "Elasticité-Prix", "KPI"], "Tourisme": ["Écotourisme", "Yield Management", "Expérientiel", "Bas-Carbone", "Phygital"] };
-const axes = ["STRATÉGIE", "TECHNIQUE", "IA & DATA", "GOUVERNANCE", "ÉTHIQUE"];
-const sectorLex = lexicons[sector] || ["Vecteur", "Système", "Flux", "Analyse", "Optimisation"];
-return axes.map((axis, i) => { const term = sectorLex[i % sectorLex.length]; return { fr: `[${axis}] Comment optimisez-vous l'impact de ${term} sur le métier de ${job} ?`, en: `[${axis}] How do you optimize the impact of ${term} on the ${job} profession?`, opts: { fr: [`Synthèse Titanium`, `Modèle Standard`, `Approche Empirique`, "DELTA"], en: [`Titanium Synthesis`, `Standard Model`, `Empirical Approach`, "DELTA"] }, correct: 0 }; });
-}
+    generateQuestions(sector, job) {
+        const lexicons = { "Energie": ["Thermodynamique", "Cycle de Carnot", "Grid-Edge", "Flux Neutronique", "LCOH"], "IT & IA": ["Inférence", "Qubit", "Décohérence", "Backpropagation", "Zero-Knowledge"], "Sante": ["Génomique", "Protéomique", "In silico", "Oncogénèse", "Bio-capteur"], "Finance": ["Arbitrage", "DeFi", "Bâle III", "Stress-test", "Actif Toxique"], "Agri-Food": ["Hydroponie", "ARN-interférence", "Polyphénols", "Agro-écologie", "Microbiote"], "Education": ["Andragogie", "Neuro-plasticité", "Taxonomie Bloom", "Ed-Tech", "Cognition"], "Commerce": ["Omnicanalité", "Supply-Chain", "Last-Mile", "Elasticité-Prix", "KPI"], "Tourisme": ["Écotourisme", "Yield Management", "Expérientiel", "Bas-Carbone", "Phygital"] };
+        const axes = ["STRATÉGIE", "TECHNIQUE", "IA & DATA", "GOUVERNANCE", "ÉTHIQUE"];
+        const sectorLex = lexicons[sector] || ["Vecteur", "Système", "Flux", "Analyse", "Optimisation"];
+        
+        return axes.map((axis, i) => { 
+            const term = sectorLex[i % sectorLex.length]; 
+            let q = { 
+                fr: `[${axis}] Comment optimisez-vous l'impact de ${term} sur le métier de ${job} ?`, 
+                en: `[${axis}] How do you optimize the impact of ${term} on the ${job} profession?`, 
+                opts: { fr: [`Synthèse Titanium`, `Modèle Standard`, `Approche Empirique`, "DELTA"], en: [`Titanium Synthesis`, `Standard Model`, `Empirical Approach`, "DELTA"] }, 
+                correct: 0 
+            };
+            // PASSAGE PAR LE JUGE CLAUDE
+            return CLAUD_JUDGE.validateQuestion(q);
+        });
+    }
 };
+
 const DATA = { sectors: { "Energie": { icon:"fa-atom", jobs:["Architecte Fusion SMR", "Expert Hydrogène Vert", "Ingénieur Grid-Edge", "Lead Transition", "Analyste Lithium-Air", "Thorium Lead", "Manager HVDC", "CCUS Specialist", "Carbon Auditor", "SMR-Tech", "Geothermal Eng", "BESS Manager", "Perovskite R&D", "Nuclear Safety", "Oil&Gas API Expert"] }, "IT & IA": { icon:"fa-microchip", jobs:["Lead IA Générative", "Architecte Quantique", "Expert Cyber SOC", "Edge Scientist", "Ethicien IA", "ML-Ops Eng", "Blockchain Arch", "Cloud-Native", "DevSecOps Senior", "Quantum Algo", "Governance Mgr", "Prompt Eng", "Forensics", "Web3 Arch", "NLP Lead"] }, "Sante": { icon:"fa-dna", jobs:["Bio-Informaticien", "Radiologue IA", "Robot Surgery", "Oncologue Génomique", "Nanomedecine Mgr", "Bio-Security", "Precision Health", "Telemedicine Lead", "Digital Lab Dir", "Proteomics Exp", "Ethics Consultant", "Data Hospital Mgr", "Prosthetic Eng", "Pandemic Mgr", "Microbiota Spec"] }, "Finance": { icon:"fa-chart-line", jobs:["Quantum Risk Analyst", "DeFi Architect", "ESG Strategist", "Algo Trader HFT", "Fraud IA Manager", "Digital CFO", "Treasury Bchain", "Fintech Ops", "M&A Tech", "Asset Mgr AI", "Risk Mgr Systemic", "Mobile Banker", "Crypto Expert", "RegTech Analyst", "CBDC Specialist"] }, "Agri-Food": { icon:"fa-leaf", jobs:["Vertical Farming", "Agro-IA Spec", "Protein Scientist", "Bio-Auditeur 4.0", "Precision Agri", "Lab-Grown Food", "Bio-Polymer", "Irrigation Data", "Agri-Robotics", "Digital Nutrition", "AgTech Strategist", "Traceability Mgr", "Microbiologist", "Hydroponic Dir", "Cellular Agri"] }, "Education": { icon:"fa-user-graduate", jobs:["Neuro-Pedagogue", "Meta-Campus Arch", "EdTech Data", "Adaptive Learning", "VR-Training Mgr", "Cognitive Analyst", "L&D Innovation", "E-Learning Dir", "Ed-IA Consultant", "Inclusion Mgr", "Gamification Eng", "AI Coach", "Strategy Dir", "Bchain-Diploma", "Hybrid Facilitator"] }, "Commerce": { icon:"fa-shopping-bag", jobs:["Supply Strategist", "Pricing Expert", "Omnichannel Mgr", "Drone Logistics", "E-com Director", "Phygital Dir", "Sustainable Lead", "Retail Flow", "Bchain Sourcing", "Marketplace Spec", "Retail Arch", "Growth IA", "Last-Mile Mgr", "Franchise Dir", "Insight Analyst"] }, "Tourisme": { icon:"fa-globe-americas", jobs:["Space Tourism", "Hospitality Design", "Low Carbon Exp", "Revenue IA Mgr", "Immersive Exp", "Eco-Resort Mgr", "Cruise-Tech Lead", "Cruise-Tech Lead", "Crypto Booking", "Smart Destination", "Green Transport", "Digital Marketing", "Heritage Digital", "MICE IA Planner", "Soft Mobility", "Travel Scientist"] } } };
-const DICT = { fr: { intro_txt: "ACCÈS SCELLÉ : Système KMS TITANIUM pour l'élite.\n1. 120 MÉTIERS : 8 secteurs.\n2. AUDIT : Analyse sémantique Delta requise (3 min).\n3. GRADE OR : Score ≥ 80% exigé.\n4. SCELLÉ : QR Code https://v390-mba-consult.vercel.app/", btn_start: "OUVRIR LA SESSION TITANIUM", title_sectors: "SECTEURS STRATÉGIQUES", btn_next: "VALIDER & ANALYSER", btn_prev: "RETOUR", btn_download: "ACCÉDER AU CERTIFICAT OR", delta_label: "ANALYSE SÉMANTIQUE DELTA (IA VALIDATION)", pdf_intro: "Certifie solennellement après audit sémantique IA l'expertise de :", pdf_rank: "Au grade de Senior Expert International pour le métier de :", res_fail: "DISSONANCE DÉTECTÉE", res_pass: "ACCRÉDITATION OR ACCORDÉE", audit_label: "ÉTAPE", score_label: "CONTRÔLE IA" }, en: { intro_txt: "SEALED ACCESS: TITANIUM KMS System.\n1. 120 JOBS: 8 sectors.\n2. AUDIT: Delta semantic analysis required (min 3).\n3. GOLD RANK: Score ≥ 80% required.\n4. SEALED: QR https://v390-mba-consult.vercel.app/", btn_start: "OPEN TITANIUM SESSION", title_sectors: "STRATEGIC SECTORS", btn_next: "VALIDATE & ANALYZE", btn_prev: "BACK", btn_download: "ACCESS GOLD CERTIFICATE", delta_label: "DELTA SEMANTIC ANALYSIS (AI VALIDATION)", pdf_intro: "Solemnly certifies after AI semantic audit the expertise of:", pdf_rank: "At the rank of International Senior Expert for the profession of:", res_fail: "DISSONANCE DETECTED", res_pass: "GOLD ACCREDITATION GRANTED", audit_label: "STEP", score_label: "AI CONTROL" } };
+const DICT = { fr: { intro_txt: "ACCÈS SCELLÉ : Système KMS TITANIUM pour l'élite.\n1. 120 MÉTIERS : 8 secteurs.\n2. AUDIT : Analyse sémantique Delta requise (3 min).\n3. GRADE OR : Score ≥ 80% exigé.\n4. SCELLÉ : QR Code https://v390-mba-consult.vercel.app/", btn_start: "OUVRIR LA SESSION TITANIUM", title_sectors: "SECTEURS STRATÉGIQUES", btn_next: "VALIDER & ANALYSER", btn_prev: "RETOUR", btn_download: "ACCÉDER AU CERTIFICAT OR", delta_label: "ANALYSE SÉMANTIQUE DELTA (VALIDATION CLAUD-JUDGE)", pdf_intro: "Certifie solennellement après audit sémantique IA l'expertise de :", pdf_rank: "Au grade de Senior Expert International pour le métier de :", res_fail: "DISSONANCE DÉTECTÉE", res_pass: "ACCRÉDITATION OR ACCORDÉE", audit_label: "ÉTAPE", score_label: "CONTRÔLE IA" }, en: { intro_txt: "SEALED ACCESS: TITANIUM KMS System.\n1. 120 JOBS: 8 sectors.\n2. AUDIT: Delta semantic analysis required (min 3).\n3. GOLD RANK: Score ≥ 80% required.\n4. SEALED: QR https://v390-mba-consult.vercel.app/", btn_start: "OPEN TITANIUM SESSION", title_sectors: "STRATEGIC SECTORS", btn_next: "VALIDATE & ANALYZE", btn_prev: "BACK", btn_download: "ACCESS GOLD CERTIFICATE", delta_label: "DELTA SEMANTIC ANALYSIS (CLAUD-JUDGE VALIDATION)", pdf_intro: "Solemnly certifies after AI semantic audit the expertise of:", pdf_rank: "At the rank of International Senior Expert for the profession of:", res_fail: "DISSONANCE DETECTED", res_pass: "GOLD ACCREDITATION GRANTED", audit_label: "STEP", score_label: "AI CONTROL" } };
+
 const KMS = {
-lang: 'fr', sector: '', job: '', step: 0, score: 0, deltaCount: 0, responses: [], questions: [], history: ['p-intro'],
-setLang(l) { this.lang = l; document.querySelectorAll('[data-key]').forEach(el => el.innerText = DICT[l][el.getAttribute('data-key')] || el.innerText); document.getElementById('intro-txt').innerText = DICT[l].intro_txt; this.renderSectors(); },
-go(id) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page')); document.getElementById(id).classList.add('active-page'); if(this.history[this.history.length-1] !== id) this.history.push(id); },
-back() { if(this.history.length > 1) { this.history.pop(); this.go(this.history[this.history.length-1]); } },
-renderSectors() { const grid = document.getElementById('sector-grid'); grid.innerHTML = ''; Object.keys(DATA.sectors).forEach(s => { const div = document.createElement('div'); div.className = 'card-t'; div.innerHTML = `<i class="fas ${DATA.sectors[s].icon} fa-2x" style="color:var(--gold); margin-bottom:10px;"></i><p>${s}</p>`; div.onclick = () => { this.sector = s; this.renderJobs(s); this.go('p-jobs'); }; grid.appendChild(div); }); },
-renderJobs(s) { document.getElementById('sector-display').innerText = s; const grid = document.getElementById('job-grid'); grid.innerHTML = ''; DATA.sectors[s].jobs.forEach(j => { const div = document.createElement('div'); div.className = 'card-t'; div.innerHTML = `<p>${j}</p>`; div.onclick = () => { this.job = j; this.startAudit(); }; grid.appendChild(div); }); },
-startAudit() { this.step = 0; this.responses = []; this.score = 0; this.deltaCount = 0; this.questions = AUDIT_ENGINE.generateQuestions(this.sector, this.job); this.go('p-audit'); this.loadQ(); },
-loadQ() { const q = this.questions[this.step]; document.getElementById('audit-step').innerText = `${DICT[this.lang].audit_label} : ${this.step+1} / 5`; document.getElementById('q-text').innerText = q[this.lang]; const box = document.getElementById('opt-box'); box.innerHTML = ''; this.tempIdx = undefined; q.opts[this.lang].forEach((o, i) => { const b = document.createElement('button'); b.className = 'opt-btn'; if(this.responses[this.step]?.idx === i) b.classList.add('opt-selected'); b.innerText = o; b.onclick = () => { document.querySelectorAll('.opt-btn').forEach(x => x.classList.remove('opt-selected')); b.classList.add('opt-selected'); this.tempIdx = i; document.getElementById('delta-box').style.display = (i===3?'block':'none'); }; box.appendChild(b); }); },
-nextQ() { if(this.tempIdx === undefined && !this.responses[this.step]) return; const q = this.questions[this.step]; const deltaVal = document.getElementById('delta-input').value; this.responses[this.step] = { idx: this.tempIdx, delta: deltaVal }; if(this.tempIdx === 0) this.score += 20; if(this.tempIdx === 3 && deltaVal.length > 20) { this.score += 20; this.deltaCount++; } document.getElementById('audit-score-realtime').innerText = `SCORE IA : ${this.score}%`; document.getElementById('delta-input').value = ''; if(this.step < 4) { this.step++; this.loadQ(); } else { this.finish(); } },
-prevQ() { if(this.step > 0) { this.step--; this.loadQ(); } },
-finish() { this.go('p-result'); const resScore = document.getElementById('res-score'); if(this.deltaCount < 3) { this.score = Math.min(this.score, 50); document.getElementById('res-status').innerText = "AUDIT INCOMPLET"; document.getElementById('res-msg').innerText = "L'analyse Delta sémantique est requise pour valider le grade Titanium."; } else if(this.score >= 80) { resScore.style.color = 'var(--gold)'; document.getElementById('res-status').innerText = DICT[this.lang].res_pass; document.getElementById('btn-dl').style.display = 'block'; } else { resScore.style.color = '#ff4d4d'; document.getElementById('res-status').innerText = DICT[this.lang].res_fail; } resScore.innerText = this.score + "%"; },
-showPaymentGate() { document.getElementById('btn-dl').style.display = 'none'; document.getElementById('payment-gate').style.display = 'block'; },
-verifyCode() { const code = document.getElementById('access-code').value.toUpperCase(); if(code === "MBA-V390" || code === "TITANIUM") { this.generatePDF(); } else { alert("Code invalide. Veuillez passer par le module de paiement."); } },
-generatePDF() { const name = prompt(this.lang === 'fr' ? "Nom complet pour le certificat :" : "Full name for certificate:"); if(!name) return; document.getElementById('pdf-name').innerText = name; document.getElementById('pdf-job').innerText = this.job; document.getElementById('pdf-id').innerText = "ID: " + Math.random().toString(36).substr(2, 9).toUpperCase(); document.getElementById('pdf-date').innerText = new Date().toLocaleDateString(); document.getElementById('pdf-final-score').innerText = "SCORE: " + this.score + "%"; const qrBox = document.getElementById('pdf-qr'); qrBox.innerHTML = ''; new QRCode(qrBox, { text: "https://mba-consult.tn/verify/" + name, width: 130, height: 130 }); const element = document.getElementById('cert-container'); const opt = { margin: 0, filename: `MBA_Expertise_${name}.pdf`, image: { type: 'jpeg', quality: 1 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' } }; html2pdf().set(opt).from(element).save().then(() => { alert("Certificat généré avec succès."); location.reload(); }); }
+    lang: 'fr', sector: '', job: '', step: 0, score: 0, deltaCount: 0, responses: [], questions: [], history: ['p-intro'],
+    setLang(l) { this.lang = l; document.querySelectorAll('[data-key]').forEach(el => el.innerText = DICT[l][el.getAttribute('data-key')] || el.innerText); document.getElementById('intro-txt').innerText = DICT[l].intro_txt; this.renderSectors(); },
+    go(id) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page')); document.getElementById(id).classList.add('active-page'); if(this.history[this.history.length-1] !== id) this.history.push(id); },
+    back() { if(this.history.length > 1) { this.history.pop(); this.go(this.history[this.history.length-1]); } },
+    renderSectors() { const grid = document.getElementById('sector-grid'); grid.innerHTML = ''; Object.keys(DATA.sectors).forEach(s => { const div = document.createElement('div'); div.className = 'card-t'; div.innerHTML = `<i class="fas ${DATA.sectors[s].icon} fa-2x" style="color:var(--gold); margin-bottom:10px;"></i><p>${s}</p>`; div.onclick = () => { this.sector = s; this.renderJobs(s); this.go('p-jobs'); }; grid.appendChild(div); }); },
+    renderJobs(s) { document.getElementById('sector-display').innerText = s; const grid = document.getElementById('job-grid'); grid.innerHTML = ''; DATA.sectors[s].jobs.forEach(j => { const div = document.createElement('div'); div.className = 'card-t'; div.innerHTML = `<p>${j}</p>`; div.onclick = () => { this.job = j; this.startAudit(); }; grid.appendChild(div); }); },
+    startAudit() { this.step = 0; this.responses = []; this.score = 0; this.deltaCount = 0; this.questions = AUDIT_ENGINE.generateQuestions(this.sector, this.job); this.go('p-audit'); this.loadQ(); },
+    loadQ() { const q = this.questions[this.step]; document.getElementById('audit-step').innerText = `${DICT[this.lang].audit_label} : ${this.step+1} / 5`; document.getElementById('q-text').innerText = q[this.lang]; const box = document.getElementById('opt-box'); box.innerHTML = ''; this.tempIdx = undefined; q.opts[this.lang].forEach((o, i) => { const b = document.createElement('button'); b.className = 'opt-btn'; if(this.responses[this.step]?.idx === i) b.classList.add('opt-selected'); b.innerText = o; b.onclick = () => { document.querySelectorAll('.opt-btn').forEach(x => x.classList.remove('opt-selected')); b.classList.add('opt-selected'); this.tempIdx = i; document.getElementById('delta-box').style.display = (i===3?'block':'none'); }; box.appendChild(b); }); },
+    nextQ() { 
+        if(this.tempIdx === undefined && !this.responses[this.step]) return; 
+        const deltaVal = document.getElementById('delta-input').value; 
+        
+        let deltaScore = 0;
+        if(this.tempIdx === 3) {
+            // APPEL AU JUGE CLAUDE POUR CORRIGER/VALIDER L'ANALYSE
+            deltaScore = CLAUD_JUDGE.judgeDeltaAnalysis(deltaVal, this.sector);
+            if(deltaScore > 0) this.deltaCount++;
+        } else if(this.tempIdx === 0) {
+            deltaScore = 20;
+        }
+
+        this.responses[this.step] = { idx: this.tempIdx, delta: deltaVal }; 
+        this.score += deltaScore;
+        
+        document.getElementById('audit-score-realtime').innerText = `SCORE IA : ${this.score}%`; 
+        document.getElementById('delta-input').value = ''; 
+        if(this.step < 4) { this.step++; this.loadQ(); } else { this.finish(); } 
+    },
+    prevQ() { if(this.step > 0) { this.step--; this.loadQ(); } },
+    finish() { this.go('p-result'); const resScore = document.getElementById('res-score'); if(this.deltaCount < 3) { this.score = Math.min(this.score, 50); document.getElementById('res-status').innerText = "DISSONANCE SÉMANTIQUE"; document.getElementById('res-msg').innerText = "L'analyse Delta a été rejetée par le Juge Claude pour manque de densité."; } else if(this.score >= 80) { resScore.style.color = 'var(--gold)'; document.getElementById('res-status').innerText = DICT[this.lang].res_pass; document.getElementById('btn-dl').style.display = 'block'; } else { resScore.style.color = '#ff4d4d'; document.getElementById('res-status').innerText = DICT[this.lang].res_fail; } resScore.innerText = this.score + "%"; },
+    showPaymentGate() { document.getElementById('btn-dl').style.display = 'none'; document.getElementById('payment-gate').style.display = 'block'; },
+    verifyCode() { const code = document.getElementById('access-code').value.toUpperCase(); if(code === "MBA-V390" || code === "TITANIUM") { this.generatePDF(); } else { alert("Code invalide."); } },
+    generatePDF() { const name = prompt(this.lang === 'fr' ? "Nom complet pour le certificat :" : "Full name for certificate:"); if(!name) return; document.getElementById('pdf-name').innerText = name; document.getElementById('pdf-job').innerText = this.job; document.getElementById('pdf-id').innerText = "ID: " + Math.random().toString(36).substr(2, 9).toUpperCase(); document.getElementById('pdf-date').innerText = new Date().toLocaleDateString(); document.getElementById('pdf-final-score').innerText = "SCORE: " + this.score + "%"; const qrBox = document.getElementById('pdf-qr'); qrBox.innerHTML = ''; new QRCode(qrBox, { text: "https://mba-consult.tn/verify/" + name, width: 130, height: 130 }); const element = document.getElementById('cert-container'); const opt = { margin: 0, filename: `MBA_Expertise_${name}.pdf`, image: { type: 'jpeg', quality: 1 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' } }; html2pdf().set(opt).from(element).save().then(() => { alert("Certificat généré."); location.reload(); }); }
 };
 </script>
 </body>
