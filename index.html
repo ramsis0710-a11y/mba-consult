@@ -449,13 +449,38 @@ const CLAUD_JUDGE = {
 
 const SEMANTIC_SCRAPER = {
     getLatestFeed() {
-        return [
-{ cat: "Industrie / Oil & Gas", title: "Semantic Vectors in Energy...", link: "...", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=500&h=300&auto=format&fit=crop" },
-{ cat: "Finance Strategique", title: "Embeddings sémantiques...", link: "...", img: "https://images.unsplash.com/photo-1543286386-2e659306cd6c?q=80&w=500&h=300&auto=format&fit=crop" },
-{ cat: "Recherche Sémantique", title: "Global Warming...", link: "...", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&h=300&fit=crop" },
-{ cat: "IA & KMS", title: "V390 Protocol...", link: "...", img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&h=300&fit=crop", isVideo: true }
+               return [
+            { 
+                cat: "Industrie / Oil & Gas", 
+                title: "Semantic Vectors in Energy: Climate Change Transformation Urban Environments", 
+                link: "https://www.sciencedirect.com/search?qs=semantic%20vectors%20energy%20oil%20gas", 
+                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400",
+                isVideo: true
+            },
+            { 
+                cat: "Finance Strategique", 
+                title: "Embeddings sémantiques et détection de risque systémique (Finance 2026)", 
+                link: "https://arxiv.org/search/?query=semantic+embeddings+finance+risk&searchtype=all", 
+                img: "https://images.unsplash.com/photo-1611974714851-eb60516122d6?w=400",
+                isVideo: false
+            },
+            { 
+                cat: "Recherche Sémantique", 
+                title: "Global Warming & Semantic Mapping: Environmental Beliefs Analysis", 
+                link: "https://www.sciencedirect.com/search?qs=Global+warming+versus+climate+change+semantic", 
+                img: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=400",
+                isVideo: true
+            },
+            { 
+                cat: "IA & KMS", 
+                title: "V390 Protocol: High-Density Multimodal Semantic Vectors", 
+                link: "https://scholar.google.com/scholar?q=multimodal+semantic+vectors+AI+2026", 
+                img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400",
+                isVideo: false
+            }
         ];
     },
+
     async run() {
         const container = document.getElementById('news-container');
         const timer = document.getElementById('scrap-timer');
